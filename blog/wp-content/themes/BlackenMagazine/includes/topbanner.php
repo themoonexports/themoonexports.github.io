@@ -1,1 +1,0 @@
-<a href="<?php $hlink = get_option('swt_hlink'); echo $hlink; ?>"><img src="<?php $hbanner = get_option('swt_hbannerblacken'); echo $hbanner; ?>" class="adv" alt="advertisement" /></a>  
