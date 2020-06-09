@@ -44,7 +44,7 @@ h4#myModalLabel {
 width:100%;
 }
 .frontblock.serviceb {
-  background-image: url("../images/services.jpg");
+  background-image: url("../images/services.html");
   height: 300px;
   color: #fff;
 }
@@ -57,17 +57,17 @@ width:100%;
 margin-top:40px;
 }
 .frontblock.contactb {
-  background-image: url("../images/workshop.jpg");
+  background-image: url("../images/workshop.html");
   height: 300px;
   color: #fff;
 }
 .frontblock.workshopb {
-  background-image: url("../images/workshop.jpg");
+  background-image: url("../images/workshop.html");
   height: 300px;
   color: #fff;
 }
 .frontblock.homeb {
-  background-image: url("../images/home.jpg");
+  background-image: url("../images/home.html");
   height: 400px;
     margin-bottom: 0;
   color: #fff;
@@ -135,7 +135,7 @@ footer.footer-bottom h4 {
   border-color: #447712;
 }
 .homecta {
-  background-image: url("../images/ctaback.jpg");
+  background-image: url("../images/ctaback.html");
   padding-top: 15px;
   padding-bottom: 15px;
   opacity: .9;
