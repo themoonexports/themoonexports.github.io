@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#e8c1e4">
   <meta name="format-detection" content="telephone=no">
   <link rel="shortcut icon" href="" type="image/png">
-  <title>Contact | Pearl Pugh</title>
+  <title>Booking | Pearl Pugh</title>
   <link href="files/theme.scss.css" rel="stylesheet" type="text/css" media="all">
 
   <script>
@@ -398,39 +398,73 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 offset-lg-3 contect-tect">
-                  <h2>Let's Interact!</h2>
+                  <h2>Booking Information</h2>
                 </div>
               </div>
-              <form class="gform pure-form pure-form-stacked contact-form" method="POST" data-email="example@email.net" action="https://script.google.com/macros/s/AKfycbyaLk9zBNbvNnVLUZo3_81xSLXJxmOan9H9x1fbtak-Tv7by1A5/exec">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Name</label>
-                    <input id="name" name="name" placeholder="Name" class="form-control" required="">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Email</label>
-                    <input id="email" name="email" type="email" value="" required="" class="form-control" placeholder="Email Address">
-                    </div>
-
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Message" class="form-control" required=""></textarea>
-                    </div>
-                  </div>
-                 
-                  
+              <form class="gform pure-form pure-form-stacked" method="POST" data-email="example@email.net" action="https://script.google.com/macros/s/AKfycbxjcYt4WWM8qQO4fuVupQo4K4HdBHj3zVjlqRFRvA/exec" _lpchecked="1">
+                
+                <div class="form-group">
+                  <label for="name">Your Name: </label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="name" required="" >
                 </div>
-                <div class="col-md-6 " id="button-form-submit">
-                  <input class="site-btn btn-line mr-4 mb-2" type="submit" id="pearl-btn-submit" value="Send">
+                
+                <div class="form-group">
+                  <label for="email">Your Email Address:</label>
+                  <input type="email" class="form-control" id="email" name="email" required="" placeholder="example@example.com">
                 </div>
+            
+                <div class="form-group">
+                  <label for="phone">Your Phone Number: </label>
+                  <input id="phone" class="form-control" name="phone" placeholder="9876543210" type="tel" required="" minlength="10">
+                </div>
+            
+                <div class="form-group">
+                  <label for="address">Address: </label>
+                  <textarea id="address" class="form-control" name="address" rows="5" placeholder="Please enter your addres with zipcode" spellcheck="false"></textarea>
+                </div>
+              
+                <div class="form-group">
+                  <label for="website">Host Website: </label>
+                  <input id="website" class="form-control" name="website" placeholder="Website" type="text">
+                </div>
+            
+                <div class="form-group">
+                  <label for="socialmedia">Host Social Media: </label>
+                  <input id="socialmedia" class="form-control" name="socialmedia" placeholder="Social Media" type="text">
+                </div>
+        
+                <h3>Event Information</h3>
+        
+                <div class="form-group">
+                  <label for="startdate">Start Date: </label>
+                  <input id="startdate" class="form-control" name="startdate" placeholder="Event Start Date " type="date" required="">
+                </div>
+                
+                <div class="form-group">
+                  <label for="enddate">End Date: </label>
+                  <input id="enddate" class="form-control" name="enddate" placeholder="Event End Date" type="date" required="">
+                </div>
+          
+                <div class="form-check">
+                  <input type="checkbox" name="pearl-table" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Can Pearl have a product table?</label>
+                </div>
+                <br>      
+                
+                <div class="form-group">
+                  <label for="additional-details">Additional Event Details: </label>
+                  <textarea id="additional-details" class="form-control" name="additional-details" rows="5" placeholder="Please enter any Additional Event Details" spellcheck="false"></textarea>
+                </div>
+                <br>
+        
              
+                <div class="col-md-6" id="button-form-submit">
+                       <input type="submit" class="site-btn btn-line mr-4 mb-2" value="Send">
+                </div>
+              
               </form>
             </div>
+
 
           </div>
 
