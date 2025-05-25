@@ -1,9 +1,3 @@
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' maxcdn.bootstrapcdn.com cdn.ywxi.net translate.google.com www.google-analytics.com ajax.googleapis.com mc.yandex.ru zc1.maillist-manage.in oss.maxcdn.com www.googletagmanager.com code.jquery.com cdnjs.cloudflare.com platform.twitter.com cdn.trustedsite.com; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com webfonts.zohostatic.in themes.googleusercontent.com; img-src 'self' data: upload.wikimedia.org www.paypalobjects.com mc.yandex.ru i.creativecommons.org rosssimmonds.com *.google.com *.google.co.in *.gstatic.com; font-src 'self' maxcdn.bootstrapcdn.com webfonts.zohostatic.in themes.googleusercontent.com; connect-src 'self' mc.yandex.ru www.google-analytics.com stats.g.doubleclick.net cdn.ywxi.net translate.googleapis.com; frame-src 'self' zc1.maillist-manage.in docs.google.com www.google.com;"
-</IfModule>
 
 RewriteEngine on
 RewriteCond %{HTTP_HOST} themoonexports\.com [NC]
