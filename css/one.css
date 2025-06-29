@@ -318,13 +318,17 @@ div#navbar {
 height: 140px;
 }
 ul.dropdown-menu img {
-  position: absolute;
-  margin: 10px;
+  position: static;
+  display: block;
+  margin: 10px auto;
   width: 160px;
-  
 }
-ul.dropdown-menu li {
-  padding-left: 200px;
+ul.dropdown-menu li:first-child {
+  text-align: center;
+  padding-left: 0;
+}
+ul.dropdown-menu li:not(:first-child) {
+  padding-left: 20px;
 }
  
 
@@ -498,3 +502,20 @@ div#google_translate_element {
     position: absolute;
     right: 35%;
 }
+
+/* Fix dropdown hover behavior */
+.navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Font Awesome fallbacks for social media icons */
+.socialm .fab:before {
+    font-family: "Font Awesome 6 Brands", FontAwesome, sans-serif !important;
+}
+
+/* Fallback when Font Awesome fails to load */
+.socialm a .fab.fa-facebook-f:before { content: "f"; }
+.socialm a .fab.fa-twitter:before { content: "t"; }
+.socialm a .fab.fa-instagram:before { content: "i"; }
+.socialm a .fab.fa-pinterest-p:before { content: "p"; }
+.socialm a .fab.fa-linkedin-in:before { content: "in"; }
