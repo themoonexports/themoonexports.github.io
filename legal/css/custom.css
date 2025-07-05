@@ -1,8 +1,18 @@
+/**
+ * Custom Styles for The Moon Exports Website (Legal Pages)
+ * 
+ * This file contains custom CSS styles specific to The Moon Exports
+ * legal pages including terms, privacy policy, and imprint.
+ * 
+ * @version 1.0.0
+ * @author The Moon Exports Team
+ */
+
 body {
-font-family: sans-serif;
-  padding-top: 75px;
-    background-color: #191919;
-	   color: #D3D3D3;
+	font-family: sans-serif;
+	padding-top: 75px;
+	background-color: #191919;
+	color: #D3D3D3;
 }
 .masthead {
 padding-top: 35px;

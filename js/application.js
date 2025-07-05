@@ -1,10 +1,21 @@
+/**
+ * The Moon Exports Website Application JavaScript
+ * 
+ * This file contains the main JavaScript functionality for The Moon Exports
+ * website including navigation effects, page interactions, and UI enhancements.
+ * 
+ * @version 1.0.0
+ * @author The Moon Exports Team
+ * @requires jQuery
+ */
+
 $(function(){
-    window.prettyPrint && prettyPrint();
+	window.prettyPrint && prettyPrint();
 }(window.jQuery));
 
 jQuery(document).ready(function($) {
 
-	//Download Link Highlight
+	// Download Link Highlight
 	if($("body").data("page")==="frontpage"){
 		$(window).scroll(function(){
 			var scrolled = $(window).scrollTop();
