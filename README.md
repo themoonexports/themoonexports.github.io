@@ -17,19 +17,77 @@ The Moon Exports is committed to promoting sustainable and ethical practices. We
 
 ## Project Structure
 
-Here's a brief overview of the key files and directories in this project:
+Here's a comprehensive overview of the organized file structure:
 
-*   **`index.html`**: The main landing page of the website.
-*   **`about.html`**: Contains information about The Moon Exports company.
-*   **`products.html`**: Showcases the various products offered.
-*   **`css/`**: This directory holds all the Cascading Style Sheets (CSS) files used for styling the website. This includes frameworks like Bootstrap and custom stylesheets.
-*   **`js/`**: Contains JavaScript files responsible for the website's interactivity and dynamic features.
-*   **`images/`**: Stores all the images used throughout the website, including product photos and design elements.
-*   **`de/`**: This directory contains a German version of the website, allowing for internationalization. It mirrors the structure of the main site (e.g., `de/index.html`, `de/css/`, etc.).
+```
+├── assets/                     # Shared assets across the website
+│   ├── css/                   # Shared CSS files (Bootstrap, themes)
+│   ├── js/                    # Shared JavaScript libraries
+│   └── fonts/                 # Web fonts
+├── css/                       # Page-specific CSS files
+│   ├── custom.css             # Custom site-wide styles
+│   └── theme.css              # Theme and visual styling
+├── js/                        # Page-specific JavaScript files
+├── images/                    # Website images and media assets
+├── german/                    # German language version of the website
+├── instagram-tools/           # Instagram tools and utilities section
+├── legal/                     # Legal pages (terms, privacy, imprint)
+├── buffalo-horn-plates-assets/ # Assets for buffalo horn plates page
+├── *.html                     # Main website pages
+├── CONTRIBUTING.md            # Developer guidelines and coding standards
+└── .editorconfig             # Code formatting configuration
+```
+
+### Key Pages
+*   **`index.html`**: The main landing page showcasing products and company
+*   **`about.html`**: Detailed information about The Moon Exports company
+*   **`products.html`**: Overview of all product categories
+*   **`horn-crafts.html`**: Buffalo horn handicrafts showcase
+*   **`wooden-crafts.html`**: Wooden handicrafts collection
+*   **`resin.html`**: Resin products and crafts
+*   **`contact.html`**: Contact information and inquiry form
+
+### Multi-language Support
+*   **`german/`**: Complete German translation of the website
+
+## Development Guidelines
+
+### Prerequisites
+- A modern web browser for testing
+- Basic knowledge of HTML, CSS, and JavaScript
+- Code editor with EditorConfig support (recommended)
+
+### Coding Standards
+This project follows established coding standards for maintainability:
+
+- **File Naming**: Use kebab-case for HTML, CSS, and JS files
+- **Code Style**: 2-space indentation, meaningful variable names
+- **Documentation**: Comprehensive comments in CSS and JavaScript files
+- **Organization**: Shared assets in `assets/`, page-specific files in respective directories
+
+For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### File Organization
+- **Shared Bootstrap files**: Located in `assets/css/` and `assets/js/`
+- **Custom styles**: `assets/css/custom.css` for global styles
+- **Theme styles**: `assets/css/theme.css` for visual theming
+- **Page-specific assets**: Organized by functionality
 
 ## Running the Website Locally
 
-To view the website, simply open the `index.html` file located in the root directory of this project in your preferred web browser.
+To view the website, simply open the `index.html` file located in the root directory of this project in your preferred web browser. No build process is required for basic development.
+
+For development with live reloading:
+```bash
+# If you have Node.js installed, you can use a simple server
+npx http-server . -p 8080
+
+# Or using Python 3
+python -m http.server 8080
+
+# Or using PHP
+php -S localhost:8080
+```
 
 ## Technologies Used
 
@@ -42,12 +100,30 @@ This website is built using the following technologies:
 
 ## Contributing
 
-We welcome contributions to enhance the The Moon Exports website. If you have suggestions for new features, improvements, or bug fixes, please follow these steps:
+We welcome contributions to enhance the The Moon Exports website! Whether you're fixing bugs, improving documentation, or adding new features, your help is appreciated.
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Make your modifications, ensuring clear and concise commit messages.
-4. Submit a pull request for review.
+### Quick Start
+1. Fork the repository
+2. Create a descriptive branch name (`feature/new-gallery` or `fix/navigation-bug`)
+3. Follow the coding standards outlined in [CONTRIBUTING.md](CONTRIBUTING.md)
+4. Test your changes locally
+5. Submit a pull request with a clear description
+
+### Coding Standards
+- Use semantic HTML5 elements
+- Follow the established naming conventions (kebab-case for files)
+- Add meaningful comments to CSS and JavaScript
+- Maintain the organized file structure
+- Test across different browsers when possible
+
+For detailed guidelines, please read our [Contributing Guide](CONTRIBUTING.md).
+
+### Reporting Issues
+If you find bugs or have suggestions for improvements:
+1. Check existing issues to avoid duplicates
+2. Create a new issue with a clear description
+3. Include steps to reproduce (for bugs)
+4. Add screenshots for UI-related issues
 
 ## License
 
