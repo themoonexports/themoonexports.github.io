@@ -116,7 +116,10 @@ We welcome contributions to enhance the The Moon Exports website! Whether you're
 - Maintain the organized file structure
 - Test across different browsers when possible
 
-For detailed guidelines, please read our [Contributing Guide](CONTRIBUTING.md).
+For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### File Organization
+Quick reference: [File Structure Guide](docs/FILE_STRUCTURE.md)
 
 ### Reporting Issues
 If you find bugs or have suggestions for improvements:
