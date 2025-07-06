@@ -67,3 +67,45 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# AI Agent Context and Organization
+# Temporary files that clutter AI agent experience
+*.tmp
+*.backup
+*.bak
+*~
+*.old
+
+# Personal files (not for public repository)
+*.vcf
+/personal/
+
+# Data exports and temporary data
+*.csv
+/data/
+/temp/
+/backup/
+
+# AI analysis output
+/tmp/ai-*.txt
+
+# IDE and editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Development and testing artifacts
+/dist/
+/build/
+/test-results/

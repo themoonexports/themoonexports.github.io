@@ -1,7 +1,30 @@
 User-agent: *
+Allow: /
 Disallow: /calendar/
 Disallow: /junk/
 Disallow: /*.pdf$
+Disallow: /backup/
+Disallow: /temp/
+Disallow: /data/
+Disallow: /personal/
 
-
+# Search Engine Optimization
 Sitemap: https://www.themoonexports.com/sitemap.xml
+
+# Crawl-delay for specific bots (optional)
+User-agent: Bingbot
+Crawl-delay: 1
+
+User-agent: Googlebot
+Crawl-delay: 1
+
+# Allow access to CSS and JS for better rendering
+User-agent: Googlebot
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /css/
+Allow: /js/
+Allow: /images/
