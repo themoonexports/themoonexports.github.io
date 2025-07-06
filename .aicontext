@@ -1,0 +1,224 @@
+# AI Agent Context File
+# The Moon Exports Website - AI Agent Navigation Guide
+# Version: 1.0
+# Purpose: Provide comprehensive context and file prioritization for AI agents working on this project
+
+## Project Overview
+project_name: "The Moon Exports"
+project_type: "Static Website - E-commerce Handicrafts"
+primary_language: "HTML/CSS/JavaScript"
+deployment: "Firebase Hosting + GitHub Pages"
+domain: "themoonexports.com"
+
+## Critical Production Files (Priority: CRITICAL)
+# These files directly impact live website functionality
+production_critical:
+  - index.html                    # Main landing page - PRIMARY ENTRY POINT
+  - about.html                    # Company information
+  - products.html                 # Product catalog
+  - contact.html                  # Contact form and information
+  - sitemap.xml                   # SEO sitemap - SEARCH ENGINE CRITICAL
+  - robots.txt                    # Search engine directives
+  - firebase.json                 # Hosting configuration with security headers
+  - .htaccess                     # Server configuration
+  - 404.html                      # Error page
+  - CNAME                         # Domain configuration
+
+## SEO and Analytics Files (Priority: HIGH)
+# Files critical for search engine optimization and tracking
+seo_analytics:
+  - sitemap.xml                   # XML sitemap for search engines
+  - robots.txt                    # Search crawler instructions  
+  - BingSiteAuth.xml              # Bing Webmaster Tools verification
+  - legal/privacy.html            # GDPR compliance - REQUIRED
+  - legal/terms.html              # Terms of service
+  - legal/imprint.html            # Legal imprint (German law compliance)
+
+## Documentation and Planning (Priority: MEDIUM)
+# Files for development planning and documentation
+documentation:
+  - README.md                     # Project overview and setup
+  - PRODUCTION_READINESS_SUMMARY.md  # Production deployment status
+  - PRODUCTION_READINESS_ASSESSMENT.md  # Detailed assessment
+  - TESTING_PLAN.md               # Testing strategy
+  - SECURITY_CHECKLIST.md         # Security validation
+  - .aicontext                    # This file - AI agent guidance
+
+## Configuration Files (Priority: MEDIUM)
+# Project setup and dependency management
+configuration:
+  - package.json                  # Node.js dependencies and scripts
+  - package-lock.json             # Dependency lock file
+  - database.rules.json           # Firebase database rules
+  - .firebaserc                   # Firebase project configuration
+  - .gitignore                    # Git ignore rules
+
+## Development Tools (Priority: MEDIUM)
+# Scripts and tools for development workflow
+development_tools:
+  - check-production-readiness.sh # Automated validation script
+  - .vscode/settings.json         # IDE configuration
+  - .idx/dev.nix                  # Development environment setup
+
+## Content Directories (Priority: HIGH when working on specific features)
+# Organized by function - HIGH priority when working on related tasks
+content_directories:
+  css/:                           # Stylesheets - HIGH for design tasks
+    - bootstrap.min.css           # Framework styles
+    - one.css                     # Custom styles
+  js/:                            # JavaScript files - HIGH for functionality tasks
+    - bootstrap.min.js            # Framework scripts
+    - custom scripts              # Site-specific functionality
+  images/:                        # Media assets - MEDIUM for content tasks
+    - product photos              # Product imagery
+    - logos and branding          # Brand assets
+  de/:                            # German localization - HIGH for i18n tasks
+    - index.html                  # German homepage
+    - localized content           # Translated pages
+
+## Product Pages (Priority: HIGH for e-commerce tasks)
+product_pages:
+  - horn-crafts.html              # Buffalo horn products
+  - wooden-crafts.html            # Wood handicrafts  
+  - resin.html                    # Resin products
+  - buffalo-horn-plates.html      # Specific product category
+  - buffalo-horn-bowls.html       # Specific product category
+  - horn-decor.html               # Decorative items
+
+## Temporary/Backup Files (Priority: LOW - DECLUTTER TARGETS)
+# These files should be moved to .gitignore or cleaned up
+temporary_files:
+  - "*.backup"                    # Backup files
+  - "*.tmp"                       # Temporary files
+  - "*.old"                       # Old versions
+  - "Buffalo Horn Plates filtered_files"  # Likely temporary data
+  - fruugo.csv                    # Export data - move to data folder
+  - placeholder.gif               # Development placeholder
+  - Kamran-Khan.vcf               # Personal contact file
+
+## Task-Specific File Priorities
+
+### SEO Enhancement Tasks
+seo_task_priorities:
+  critical:
+    - sitemap.xml                 # Primary SEO asset
+    - robots.txt                  # Crawler directives
+    - index.html                  # Meta tags and structured data
+    - .htaccess                   # URL redirects and SEO headers
+  high:
+    - All HTML pages              # Meta descriptions, titles, schema markup
+    - BingSiteAuth.xml            # Search console verification
+  medium:
+    - firebase.json               # SEO-related headers
+    - legal/privacy.html          # GDPR compliance for international SEO
+
+### Performance Optimization Tasks  
+performance_task_priorities:
+  critical:
+    - css/                        # Style optimization
+    - js/                         # Script optimization  
+    - images/                     # Image compression
+    - firebase.json               # Caching headers
+  high:
+    - All HTML pages              # Critical rendering path
+    - package.json                # Dependency optimization
+
+### Security Enhancement Tasks
+security_task_priorities:
+  critical:
+    - firebase.json               # Security headers configuration
+    - .htaccess                   # Server-level security
+    - package.json                # Dependency security
+  high:
+    - All HTML pages              # XSS prevention, CSP compliance
+    - SECURITY_CHECKLIST.md       # Security validation tracking
+
+### Content Management Tasks
+content_task_priorities:
+  critical:
+    - Product pages (horn-crafts.html, wooden-crafts.html, etc.)
+    - images/ directory           # Product photography
+  high:
+    - about.html                  # Company information
+    - contact.html                # Contact details
+    - index.html                  # Homepage content
+
+### Internationalization Tasks
+i18n_task_priorities:
+  critical:
+    - de/ directory               # German localization
+    - sitemap.xml                 # Hreflang implementation
+  high:
+    - All main HTML pages         # Lang attributes, meta tags
+
+## File Organization Recommendations
+
+### Immediate Cleanup Actions
+cleanup_actions:
+  1. "Move fruugo.csv to data/ directory"
+  2. "Remove or .gitignore temporary files with extensions: .backup, .tmp, .old"
+  3. "Consolidate 'Buffalo Horn Plates filtered_files' into proper directory structure"
+  4. "Move Kamran-Khan.vcf to personal/ or remove from repository"
+  5. "Create tools/ directory for development scripts"
+
+### Suggested Directory Structure Improvements
+improved_structure:
+  /data/                          # Data files and exports
+  /tools/                         # Development and build scripts
+  /docs/                          # Documentation files
+  /backup/                        # Backup files (gitignored)
+  /temp/                          # Temporary files (gitignored)
+
+## AI Agent Usage Guidelines
+
+### When Starting a New Task:
+1. **Read this .aicontext file first** to understand project structure
+2. **Identify task type** (SEO, performance, security, content, etc.)
+3. **Focus on task-specific priority files** listed above  
+4. **Ignore low-priority/temporary files** unless specifically needed
+5. **Use documentation files** for context but don't modify unnecessarily
+
+### File Modification Best Practices:
+1. **Always backup critical production files** before major changes
+2. **Test changes locally** using Firebase serve
+3. **Validate SEO changes** with tools before deployment
+4. **Check cross-browser compatibility** for HTML/CSS changes
+5. **Update documentation** when making structural changes
+
+### Common Workflows by Task Type:
+
+#### SEO Enhancement Workflow:
+1. sitemap.xml → robots.txt → meta tags in HTML pages → structured data
+2. Validate with Google Search Console and Bing Webmaster Tools
+3. Test pagespeed and core web vitals
+
+#### Performance Optimization Workflow:
+1. Audit current performance with Lighthouse
+2. Optimize images/ directory  
+3. Minify CSS and JS files
+4. Update firebase.json caching headers
+5. Test and measure improvements
+
+#### Security Enhancement Workflow:
+1. Review SECURITY_CHECKLIST.md
+2. Update firebase.json security headers
+3. Audit dependencies in package.json
+4. Scan HTML pages for vulnerabilities
+5. Run check-production-readiness.sh
+
+## Integration with Development Tools
+development_integration:
+  linting: "No specific linter configured - use standard web linting tools"
+  building: "Static site - no build process required"
+  testing: "Manual testing recommended - see TESTING_PLAN.md"
+  deployment: "Firebase hosting via 'firebase deploy'"
+
+## Historical Context
+- **Created**: 2015 by Kamran Khan
+- **Purpose**: Handicrafts manufacturer and exporter website
+- **Recent Work**: Major security and performance improvements completed
+- **Production Status**: Ready for deployment with minor optimizations pending
+
+---
+This file should be the first reference for any AI agent working on The Moon Exports website. 
+It provides the essential context needed to navigate the 50+ files efficiently and focus on what matters most for each type of task.
