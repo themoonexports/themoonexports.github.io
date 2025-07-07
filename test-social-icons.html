@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Media Icons Test</title>
+    
+    <!-- Multiple Font Awesome CDN sources for testing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Fallback CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    
+    <!-- Bootstrap for styling -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/one.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            padding: 20px; 
+            font-family: Arial, sans-serif; 
+        }
+        .test-section { 
+            margin: 20px 0; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        }
+        .socialm a { 
+            padding: 8px; 
+            margin-right: 10px; 
+            font-size: 20px; 
+            background-color: #000; 
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .icon-test {
+            font-size: 24px;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Media Icons Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Current Implementation (fab classes)</h2>
+        <div class="socialm">
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
+            <a href="#" target="_blank"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: Alternative Classes</h2>
+        <div class="socialm">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" target="_blank"><i class="fab fa-pinterest"></i> Pinterest</a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: Font Awesome Icons Direct</h2>
+        <div class="icon-test">
+            <i class="fab fa-facebook-f" style="color: #1877f2;"></i>
+            <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+            <i class="fab fa-instagram" style="color: #e4405f;"></i>
+            <i class="fab fa-pinterest-p" style="color: #bd081c;"></i>
+            <i class="fab fa-linkedin-in" style="color: #0077b5;"></i>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 4: Console Log Check</h2>
+        <p>Open browser console (F12) to see Font Awesome loading status</p>
+    </div>
+    
+    <script>
+        // Check if Font Awesome is loaded
+        window.addEventListener('load', function() {
+            console.log('Font Awesome CSS loaded:', !!window.getComputedStyle);
+            
+            // Test if Font Awesome classes are working
+            const testIcon = document.createElement('i');
+            testIcon.className = 'fab fa-facebook-f';
+            document.body.appendChild(testIcon);
+            
+            const styles = window.getComputedStyle(testIcon, ':before');
+            console.log('Font Awesome icon content:', styles.content);
+            console.log('Font Family:', styles.fontFamily);
+            
+            document.body.removeChild(testIcon);
+        });
+    </script>
+</body>
+</html>

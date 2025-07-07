@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Caret Test - The Moon Exports</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    
+    <!-- Custom CSS -->
+    <link href="css/one.css" rel="stylesheet">
+    
+    <style>
+        body { padding-top: 120px; background: #f8f9fa; }
+        .test-section { margin: 40px 0; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-title { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px; }
+        .caret-showcase { font-size: 20px; margin: 10px; }
+        .debug-info { background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0; }
+        .navbar { margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar with Dropdown Test -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#test-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Dropdown Test</a>
+        </div>
+        
+        <div id="test-navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                        Test Dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                        Products <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Horn Crafts</a></li>
+                        <li><a href="#">Wooden Crafts</a></li>
+                        <li><a href="#">Resin Products</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    
+    <!-- Caret Showcase Section -->
+    <div class="test-section">
+        <h2 class="test-title">Bootstrap Caret Display Test</h2>
+        
+        <div class="debug-info">
+            <strong>Expected Behavior:</strong> Bootstrap carets should display as small triangular arrows pointing down.
+            <br><strong>Problem:</strong> If Font Awesome CSS is conflicting, carets may show as squares or disappear.
+        </div>
+        
+        <h3>Direct Caret Tests:</h3>
+        
+        <div class="caret-showcase">
+            <span>Plain caret: </span><span class="caret"></span>
+        </div>
+        
+        <div class="caret-showcase">
+            <span>Caret in link: </span><a href="#">Dropdown <span class="caret"></span></a>
+        </div>
+        
+        <div class="caret-showcase">
+            <span>Caret in button: </span>
+            <button class="btn btn-default">Button <span class="caret"></span></button>
+        </div>
+        
+        <h3>Dropdown Menu Tests:</h3>
+        
+        <!-- Standard Bootstrap Dropdown -->
+        <div class="dropdown caret-showcase">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                Standard Dropdown <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Option 1</a></li>
+                <li><a href="#">Option 2</a></li>
+                <li><a href="#">Option 3</a></li>
+            </ul>
+        </div>
+        
+        <!-- Dropdown with Hover (like navbar) -->
+        <div class="dropdown caret-showcase hover-dropdown">
+            <a href="#" class="dropdown-toggle">
+                Hover Dropdown <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Hover Option 1</a></li>
+                <li><a href="#">Hover Option 2</a></li>
+                <li><a href="#">Hover Option 3</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Social Media Icons Test -->
+    <div class="test-section">
+        <h2 class="test-title">Social Media Icons Test</h2>
+        
+        <div class="debug-info">
+            <strong>Expected Behavior:</strong> Social media icons should display as recognizable brand symbols.
+            <br><strong>Problem:</strong> Icons may show as squares if Font Awesome CSS fails to load.
+        </div>
+        
+        <div class="socialm">
+            <a href="#" style="color: #fff; display: inline-block;">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                <span style="display:none;">Facebook</span>
+            </a>
+            <a href="#" style="color: #fff; display: inline-block;">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+                <span style="display:none;">Twitter</span>
+            </a>
+            <a href="#" style="color: #fff; display: inline-block;">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+                <span style="display:none;">Instagram</span>
+            </a>
+            <a href="#" style="color: #fff; display: inline-block;">
+                <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                <span style="display:none;">Pinterest</span>
+            </a>
+            <a href="#" style="color: #fff; display: inline-block;">
+                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                <span style="display:none;">LinkedIn</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Font Loading Diagnostics -->
+    <div class="test-section">
+        <h2 class="test-title">Font Loading Diagnostics</h2>
+        
+        <div class="debug-info">
+            <strong>Check Browser Console:</strong> Look for any 404 errors or CORS issues with Font Awesome loading.
+            <br><strong>Network Tab:</strong> Verify Font Awesome CSS and font files are loading successfully.
+        </div>
+        
+        <h3>Font Family Tests:</h3>
+        <div style="font-family: 'Font Awesome 6 Brands';">Font Awesome 6 Brands: </div>
+        <div style="font-family: 'Font Awesome 6 Free';">Font Awesome 6 Free: </div>
+        <div style="font-family: FontAwesome;">FontAwesome (Legacy): </div>
+        
+        <h3>Unicode Tests:</h3>
+        <div>Facebook Unicode (&#xf09a;): <span style="font-family: 'Font Awesome 6 Brands';">&#xf09a;</span></div>
+        <div>Twitter Unicode (&#xf099;): <span style="font-family: 'Font Awesome 6 Brands';">&#xf099;</span></div>
+        <div>Caret Down Unicode (&#xf0d7;): <span style="font-family: 'Font Awesome 6 Free';">&#xf0d7;</span></div>
+    </div>
+    
+</div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Enable dropdown hover functionality
+    $('.navbar-default .navbar-nav > li.dropdown').hover(function() {
+        $('ul.dropdown-menu', this).stop(true, true).slideDown('fast');
+        $(this).addClass('open');
+    }, function() {
+        $('ul.dropdown-menu', this).stop(true, true).slideUp('fast');
+        $(this).removeClass('open');
+    });
+    
+    // Enable hover for test dropdowns
+    $('.hover-dropdown').hover(function() {
+        $('ul.dropdown-menu', this).stop(true, true).slideDown('fast');
+        $(this).addClass('open');
+    }, function() {
+        $('ul.dropdown-menu', this).stop(true, true).slideUp('fast');
+        $(this).removeClass('open');
+    });
+    
+    // Font loading diagnostics
+    console.log('=== Font Loading Diagnostics ===');
+    
+    // Check if Font Awesome CSS is loaded
+    var faLoaded = false;
+    for (var i = 0; i < document.styleSheets.length; i++) {
+        var sheet = document.styleSheets[i];
+        if (sheet.href && sheet.href.includes('font-awesome')) {
+            faLoaded = true;
+            console.log('Font Awesome CSS found:', sheet.href);
+        }
+    }
+    
+    if (!faLoaded) {
+        console.error('Font Awesome CSS not detected!');
+    }
+    
+    // Check if Bootstrap CSS is loaded
+    var bootstrapLoaded = false;
+    for (var i = 0; i < document.styleSheets.length; i++) {
+        var sheet = document.styleSheets[i];
+        if (sheet.href && sheet.href.includes('bootstrap')) {
+            bootstrapLoaded = true;
+            console.log('Bootstrap CSS found:', sheet.href);
+        }
+    }
+    
+    if (!bootstrapLoaded) {
+        console.error('Bootstrap CSS not detected!');
+    }
+    
+    // Test font availability
+    function testFont(fontFamily) {
+        var testString = "abcdefghijklmnopqrstuvwxyz";
+        var fontSize = 72;
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        
+        context.font = fontSize + 'px serif';
+        var serifWidth = context.measureText(testString).width;
+        
+        context.font = fontSize + 'px ' + fontFamily + ', serif';
+        var testWidth = context.measureText(testString).width;
+        
+        return testWidth !== serifWidth;
+    }
+    
+    console.log('Font Awesome 6 Brands available:', testFont('Font Awesome 6 Brands'));
+    console.log('Font Awesome 6 Free available:', testFont('Font Awesome 6 Free'));
+    console.log('FontAwesome (legacy) available:', testFont('FontAwesome'));
+});
+</script>
+
+</body>
+</html>

@@ -17,15 +17,31 @@ The Moon Exports is committed to promoting sustainable and ethical practices. We
 
 ## Project Structure
 
-Here's a brief overview of the key files and directories in this project:
+The project is now organized into a clean, maintainable structure. For detailed information, see [`docs/DIRECTORY_STRUCTURE.md`](docs/DIRECTORY_STRUCTURE.md).
 
-*   **`index.html`**: The main landing page of the website.
-*   **`about.html`**: Contains information about The Moon Exports company.
-*   **`products.html`**: Showcases the various products offered.
-*   **`css/`**: This directory holds all the Cascading Style Sheets (CSS) files used for styling the website. This includes frameworks like Bootstrap and custom stylesheets.
-*   **`js/`**: Contains JavaScript files responsible for the website's interactivity and dynamic features.
-*   **`images/`**: Stores all the images used throughout the website, including product photos and design elements.
-*   **`de/`**: This directory contains a German version of the website, allowing for internationalization. It mirrors the structure of the main site (e.g., `de/index.html`, `de/css/`, etc.).
+### Production Files (Root Level)
+*   **`index.html`**: Main landing page - PRIMARY ENTRY POINT
+*   **`about.html`**: Company information
+*   **`products.html`**: Product catalog
+*   **`contact.html`**: Contact form and information
+*   **Product pages**: `horn-crafts.html`, `wooden-crafts.html`, `resin.html`, etc.
+*   **SEO files**: `sitemap.xml`, `robots.txt`, `BingSiteAuth.xml`
+*   **Configuration**: `firebase.json`, `.htaccess`, `package.json`
+
+### Content Directories
+*   **`css/`**: Stylesheets (Bootstrap + custom styles)
+*   **`js/`**: JavaScript files and libraries
+*   **`images/`**: Product photos, logos, and design elements
+*   **`fonts/`**: Web fonts and typography assets
+*   **`de/`**: German localization (complete translated site)
+*   **`legal/`**: Legal pages (privacy, terms, imprint)
+
+### Organizational Directories
+*   **`docs/`**: Documentation and development guides
+*   **`tools/`**: Development scripts and utilities
+*   **`data/`**: Data files and exports
+*   **`backup/`**: Archived files and backups
+*   **`temp/`**: Temporary development files
 
 ## Running the Website Locally
 

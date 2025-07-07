@@ -17,10 +17,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/one.css" rel="stylesheet">
-    <!-- Font Awesome 6.5.0 with integrity -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Font Awesome fallback -->
+    <!-- Font Awesome 6.5.0 - Multiple CDN Sources for Reliability -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome fallback sources -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/6.5.0/css/font-awesome.min.css" crossorigin="anonymous" />
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -329,7 +330,7 @@
             </table>
         </div>
         <div class="copyright">
-            <span class="pull-left">COPYRIGHT © THEMOONEXPORTS.COM</span>
+            <span class="pull-left">COPYRIGHT © {{CURRENT_YEAR}} THEMOONEXPORTS.COM</span>
         </div>
     </div>
 </footer>
@@ -338,6 +339,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
 <!-- Fallback block removed as the CDN link is reliable -->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/auto-year-update.js"></script>
 <script>
 $(document).ready(function() {
     $('.navbar-default .navbar-nav > li.dropdown').hover(function() {

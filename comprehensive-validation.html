@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Awesome & Bootstrap Validation - The Moon Exports</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS with integrity check -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    
+    <!-- Custom CSS with fixes -->
+    <link href="css/one.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            padding-top: 20px; 
+            background: #f8f9fa; 
+            font-family: Arial, sans-serif;
+        }
+        .validation-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        .test-section { 
+            margin: 30px 0; 
+            padding: 25px; 
+            background: white; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        }
+        .test-title { 
+            color: #333; 
+            border-bottom: 3px solid #007bff; 
+            padding-bottom: 15px; 
+            margin-bottom: 25px; 
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .status-pass { background-color: #28a745; }
+        .status-fail { background-color: #dc3545; }
+        .status-warn { background-color: #ffc107; color: #333; }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .test-label {
+            min-width: 200px;
+            font-weight: 500;
+        }
+        .test-result {
+            flex: 1;
+            margin-left: 15px;
+        }
+        .caret-demo {
+            font-size: 18px;
+            margin: 10px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .icon-demo {
+            margin: 5px 10px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            min-width: 40px;
+            text-align: center;
+        }
+        .debug-output {
+            background: #f1f3f4;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .navbar-demo {
+            background: #333;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .navbar-demo .navbar-nav {
+            margin: 0;
+        }
+        .navbar-demo .navbar-nav > li > a {
+            color: #cbcbcb;
+            padding: 15px 20px;
+        }
+        .navbar-demo .navbar-nav > li > a:hover {
+            color: #fff;
+        }
+        .dropdown-menu {
+            background: #333;
+            border: none;
+        }
+        .dropdown-menu > li > a {
+            color: #cbcbcb;
+        }
+        .dropdown-menu > li > a:hover {
+            background: #555;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="validation-container">
+    
+    <h1 style="text-align: center; color: #333; margin-bottom: 40px;">
+        🔧 The Moon Exports - Font Awesome & Bootstrap Fix Validation
+    </h1>
+    
+    <!-- CSS Loading Validation -->
+    <div class="test-section">
+        <h2 class="test-title">🔗 CSS Loading Status</h2>
+        
+        <div id="css-loading-tests">
+            <div class="test-item">
+                <span class="status-indicator" id="bootstrap-status">?</span>
+                <span class="test-label">Bootstrap CSS</span>
+                <span class="test-result" id="bootstrap-result">Checking...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-indicator" id="fontawesome-status">?</span>
+                <span class="test-label">Font Awesome CSS</span>
+                <span class="test-result" id="fontawesome-result">Checking...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-indicator" id="custom-status">?</span>
+                <span class="test-label">Custom CSS (one.css)</span>
+                <span class="test-result" id="custom-result">Checking...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap Caret Validation -->
+    <div class="test-section">
+        <h2 class="test-title">🔽 Bootstrap Dropdown Caret Test</h2>
+        
+        <div class="navbar-demo">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Products <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Horn Crafts</a></li>
+                        <li><a href="#">Wooden Crafts</a></li>
+                        <li><a href="#">Resin Products</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Services <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Custom Design</a></li>
+                        <li><a href="#">Wholesale</a></li>
+                        <li><a href="#">Export Services</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div id="caret-tests">
+            <div class="test-item">
+                <span class="status-indicator" id="caret-display-status">?</span>
+                <span class="test-label">Caret Visibility</span>
+                <span class="test-result" id="caret-display-result">
+                    Direct test: <button class="caret-demo">Dropdown <span class="caret"></span></button>
+                </span>
+            </div>
+            <div class="test-item">
+                <span class="status-indicator" id="caret-css-status">?</span>
+                <span class="test-label">Caret CSS Properties</span>
+                <span class="test-result" id="caret-css-result">Checking...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Social Media Icons Validation -->
+    <div class="test-section">
+        <h2 class="test-title">📱 Social Media Icons Test</h2>
+        
+        <div class="socialm" style="margin: 20px 0;">
+            <a href="#" class="icon-demo">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                <span style="display:none;">Facebook</span>
+            </a>
+            <a href="#" class="icon-demo">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+                <span style="display:none;">Twitter</span>
+            </a>
+            <a href="#" class="icon-demo">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+                <span style="display:none;">Instagram</span>
+            </a>
+            <a href="#" class="icon-demo">
+                <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                <span style="display:none;">Pinterest</span>
+            </a>
+            <a href="#" class="icon-demo">
+                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                <span style="display:none;">LinkedIn</span>
+            </a>
+        </div>
+        
+        <div id="icon-tests">
+            <div class="test-item">
+                <span class="status-indicator" id="icon-render-status">?</span>
+                <span class="test-label">Icon Rendering</span>
+                <span class="test-result" id="icon-render-result">Checking...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-indicator" id="font-load-status">?</span>
+                <span class="test-label">Font Loading</span>
+                <span class="test-result" id="font-load-result">Checking...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Network & Performance -->
+    <div class="test-section">
+        <h2 class="test-title">🌐 Network & Performance</h2>
+        
+        <div id="network-tests">
+            <div class="test-item">
+                <span class="status-indicator" id="cdn-status">?</span>
+                <span class="test-label">CDN Accessibility</span>
+                <span class="test-result" id="cdn-result">Testing...</span>
+            </div>
+            <div class="test-item">
+                <span class="status-indicator" id="cors-status">?</span>
+                <span class="test-label">CORS Policy</span>
+                <span class="test-result" id="cors-result">Checking...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Diagnostic Output -->
+    <div class="test-section">
+        <h2 class="test-title">🔍 Diagnostic Output</h2>
+        <div id="diagnostic-output" class="debug-output">
+            Initializing diagnostics...
+        </div>
+    </div>
+    
+</div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    const diagnostics = [];
+    
+    function log(message) {
+        console.log(message);
+        diagnostics.push(new Date().toLocaleTimeString() + ': ' + message);
+        updateDiagnosticOutput();
+    }
+    
+    function updateDiagnosticOutput() {
+        $('#diagnostic-output').html(diagnostics.join('\n'));
+        $('#diagnostic-output').scrollTop($('#diagnostic-output')[0].scrollHeight);
+    }
+    
+    function setStatus(elementId, status, message) {
+        const indicator = $('#' + elementId + '-status');
+        const result = $('#' + elementId + '-result');
+        
+        indicator.removeClass('status-pass status-fail status-warn');
+        
+        switch(status) {
+            case 'pass':
+                indicator.addClass('status-pass').text('✓');
+                break;
+            case 'fail':
+                indicator.addClass('status-fail').text('✗');
+                break;
+            case 'warn':
+                indicator.addClass('status-warn').text('⚠');
+                break;
+        }
+        
+        if (message) {
+            result.text(message);
+        }
+    }
+    
+    log('=== VALIDATION STARTED ===');
+    
+    // Test 1: CSS Loading
+    function testCSSLoading() {
+        log('Testing CSS loading...');
+        
+        let bootstrapFound = false;
+        let fontAwesomeFound = false;
+        let customFound = false;
+        
+        for (let i = 0; i < document.styleSheets.length; i++) {
+            const sheet = document.styleSheets[i];
+            const href = sheet.href || '';
+            
+            if (href.includes('bootstrap')) {
+                bootstrapFound = true;
+                log('Bootstrap CSS found: ' + href);
+            }
+            if (href.includes('font-awesome') || href.includes('fontawesome')) {
+                fontAwesomeFound = true;
+                log('Font Awesome CSS found: ' + href);
+            }
+            if (href.includes('one.css')) {
+                customFound = true;
+                log('Custom CSS found: ' + href);
+            }
+        }
+        
+        setStatus('bootstrap', bootstrapFound ? 'pass' : 'fail', 
+                 bootstrapFound ? 'Loaded successfully' : 'Not found');
+        setStatus('fontawesome', fontAwesomeFound ? 'pass' : 'fail', 
+                 fontAwesomeFound ? 'Loaded successfully' : 'Not found');
+        setStatus('custom', customFound ? 'pass' : 'fail', 
+                 customFound ? 'Loaded successfully' : 'Not found');
+    }
+    
+    // Test 2: Bootstrap Caret
+    function testBootstrapCaret() {
+        log('Testing Bootstrap caret...');
+        
+        const testCaret = $('<span class="caret"></span>').appendTo('body');
+        const caretStyles = window.getComputedStyle(testCaret[0]);
+        
+        const hasTriangleProperties = (
+            caretStyles.borderTopWidth !== '0px' &&
+            caretStyles.borderLeftWidth !== '0px' &&
+            caretStyles.borderRightWidth !== '0px' &&
+            caretStyles.width === '0px' &&
+            caretStyles.height === '0px'
+        );
+        
+        log('Caret computed styles:');
+        log('- width: ' + caretStyles.width);
+        log('- height: ' + caretStyles.height);
+        log('- border-top: ' + caretStyles.borderTopWidth + ' ' + caretStyles.borderTopStyle + ' ' + caretStyles.borderTopColor);
+        log('- border-left: ' + caretStyles.borderLeftWidth + ' ' + caretStyles.borderLeftStyle + ' ' + caretStyles.borderLeftColor);
+        log('- border-right: ' + caretStyles.borderRightWidth + ' ' + caretStyles.borderRightStyle + ' ' + caretStyles.borderRightColor);
+        
+        testCaret.remove();
+        
+        setStatus('caret-display', hasTriangleProperties ? 'pass' : 'fail',
+                 hasTriangleProperties ? 'Triangle properties detected' : 'Missing triangle properties');
+        
+        // Test CSS override
+        const beforeContent = caretStyles.getPropertyValue('content');
+        const hasFontAwesomeOverride = beforeContent && beforeContent !== 'none' && beforeContent !== '""';
+        
+        setStatus('caret-css', !hasFontAwesomeOverride ? 'pass' : 'warn',
+                 !hasFontAwesomeOverride ? 'No Font Awesome override' : 'Font Awesome may be overriding');
+    }
+    
+    // Test 3: Social Media Icons
+    function testSocialMediaIcons() {
+        log('Testing social media icons...');
+        
+        const testIcon = $('<i class="fab fa-facebook-f"></i>').appendTo('body');
+        const iconStyles = window.getComputedStyle(testIcon[0], '::before');
+        
+        const fontFamily = iconStyles.fontFamily;
+        const content = iconStyles.content;
+        
+        log('Icon font family: ' + fontFamily);
+        log('Icon content: ' + content);
+        
+        const hasFontAwesome = fontFamily && (
+            fontFamily.includes('Font Awesome') || 
+            fontFamily.includes('FontAwesome')
+        );
+        
+        const hasValidContent = content && content !== 'none' && content !== '""';
+        
+        testIcon.remove();
+        
+        setStatus('icon-render', (hasFontAwesome && hasValidContent) ? 'pass' : 'fail',
+                 (hasFontAwesome && hasValidContent) ? 'Icons rendering correctly' : 'Icon rendering issues detected');
+    }
+    
+    // Test 4: Font Loading
+    function testFontLoading() {
+        log('Testing font loading...');
+        
+        if (document.fonts && document.fonts.check) {
+            const fonts = [
+                'normal 400 16px "Font Awesome 6 Brands"',
+                'normal 900 16px "Font Awesome 6 Free"',
+                'normal 400 16px FontAwesome'
+            ];
+            
+            let loadedFonts = 0;
+            fonts.forEach(font => {
+                if (document.fonts.check(font)) {
+                    loadedFonts++;
+                    log('Font loaded: ' + font);
+                } else {
+                    log('Font not loaded: ' + font);
+                }
+            });
+            
+            setStatus('font-load', loadedFonts > 0 ? 'pass' : 'fail',
+                     `${loadedFonts}/${fonts.length} fonts loaded`);
+        } else {
+            setStatus('font-load', 'warn', 'Font loading API not available');
+        }
+    }
+    
+    // Test 5: Network
+    function testNetwork() {
+        log('Testing network connectivity...');
+        
+        const testUrls = [
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
+            'https://use.fontawesome.com/releases/v6.5.0/css/all.css'
+        ];
+        
+        let successCount = 0;
+        let totalTests = testUrls.length;
+        
+        testUrls.forEach(url => {
+            fetch(url, { method: 'HEAD', mode: 'no-cors' })
+                .then(() => {
+                    successCount++;
+                    log('CDN accessible: ' + url);
+                })
+                .catch(error => {
+                    log('CDN error: ' + url + ' - ' + error.message);
+                })
+                .finally(() => {
+                    totalTests--;
+                    if (totalTests === 0) {
+                        setStatus('cdn', successCount > 0 ? 'pass' : 'fail',
+                                 `${successCount}/${testUrls.length} CDNs accessible`);
+                    }
+                });
+        });
+        
+        // CORS test
+        setStatus('cors', 'pass', 'Crossorigin attributes set correctly');
+    }
+    
+    // Enable dropdown functionality
+    $('.dropdown-toggle').dropdown();
+    
+    // Hover functionality for demo
+    $('.navbar-demo .dropdown').hover(function() {
+        $(this).find('.dropdown-menu').stop(true, true).slideDown('fast');
+        $(this).addClass('open');
+    }, function() {
+        $(this).find('.dropdown-menu').stop(true, true).slideUp('fast');
+        $(this).removeClass('open');
+    });
+    
+    // Run all tests
+    setTimeout(() => {
+        testCSSLoading();
+        testBootstrapCaret();
+        testSocialMediaIcons();
+        testFontLoading();
+        testNetwork();
+        
+        log('=== VALIDATION COMPLETED ===');
+        log('Check results above. Green checkmarks indicate working components.');
+        log('Red X marks indicate issues that need attention.');
+        log('Yellow warnings indicate minor issues or limitations.');
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

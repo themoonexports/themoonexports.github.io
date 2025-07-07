@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Fix Test - The Moon Exports</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    
+    <!-- Custom CSS -->
+    <link href="css/one.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            padding: 20px; 
+            background: #f8f9fa; 
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+        }
+        .test-section h3 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar-test {
+            background: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .navbar-test .nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .navbar-test .nav > li {
+            margin-right: 20px;
+            position: relative;
+        }
+        .navbar-test .nav > li > a {
+            color: #cbcbcb;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        .navbar-test .nav > li > a:hover {
+            color: #fff;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #444;
+            min-width: 160px;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        .dropdown-menu li {
+            list-style: none;
+        }
+        .dropdown-menu li a {
+            color: #cbcbcb;
+            padding: 8px 15px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu li a:hover {
+            background: #555;
+            color: #fff;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .socialm a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 15px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        .result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .result.pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .result.fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .caret-preview {
+            font-size: 24px;
+            padding: 10px;
+            margin: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="test-container">
+    <h1 style="text-align: center; color: #333;">🔧 Real-Time Fix Verification</h1>
+    <p style="text-align: center; color: #666;">Testing Font Awesome and Bootstrap integration</p>
+    
+    <!-- Dropdown Caret Test -->
+    <div class="test-section">
+        <h3>📋 Dropdown Caret Test</h3>
+        
+        <div class="navbar-test">
+            <ul class="nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        Products <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Horn Crafts</a></li>
+                        <li><a href="#">Wooden Crafts</a></li>
+                        <li><a href="#">Resin Products</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        Services <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Custom Design</a></li>
+                        <li><a href="#">Wholesale</a></li>
+                        <li><a href="#">Export</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <p><strong>Direct Caret Test:</strong></p>
+        <button class="caret-preview">Dropdown <span class="caret"></span></button>
+        <button class="caret-preview">Menu <span class="caret"></span></button>
+        
+        <div id="caret-result" class="result">Checking caret visibility...</div>
+    </div>
+    
+    <!-- Social Media Icons Test -->
+    <div class="test-section">
+        <h3>📱 Social Media Icons Test</h3>
+        
+        <div class="socialm">
+            <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+            <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        </div>
+        
+        <div id="icons-result" class="result">Checking icon rendering...</div>
+    </div>
+    
+    <!-- Font Loading Test -->
+    <div class="test-section">
+        <h3>🔤 Font Loading Test</h3>
+        
+        <div id="font-info">
+            <p><strong>Font Awesome Test Characters:</strong></p>
+            <div style="font-family: 'Font Awesome 6 Brands'; font-size: 24px; margin: 10px 0;">
+                &#xf09a; &#xf099; &#xf16d; &#xf0d2; &#xf08c;
+            </div>
+            <p><strong>Bootstrap Caret Test:</strong></p>
+            <div style="border: 2px solid #333; padding: 10px; display: inline-block;">
+                <span class="caret" style="border-top-color: #333;"></span>
+            </div>
+        </div>
+        
+        <div id="font-result" class="result">Analyzing font loading...</div>
+    </div>
+    
+    <!-- CSS Override Test -->
+    <div class="test-section">
+        <h3>⚙️ CSS Override Analysis</h3>
+        <div id="css-analysis">Analyzing CSS conflicts...</div>
+    </div>
+    
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Test 1: Caret Visibility
+    function testCarets() {
+        const caret = $('.caret').first();
+        if (caret.length > 0) {
+            const styles = window.getComputedStyle(caret[0]);
+            const width = styles.width;
+            const height = styles.height;
+            const borderTop = styles.borderTopWidth;
+            const borderLeft = styles.borderLeftWidth;
+            const borderRight = styles.borderRightWidth;
+            
+            console.log('Caret styles:', {
+                width, height, borderTop, borderLeft, borderRight,
+                fontFamily: styles.fontFamily,
+                content: styles.content
+            });
+            
+            const isTriangle = (
+                width === '0px' && 
+                height === '0px' && 
+                borderTop !== '0px' && 
+                borderLeft !== '0px' && 
+                borderRight !== '0px'
+            );
+            
+            if (isTriangle) {
+                $('#caret-result').removeClass('fail').addClass('pass')
+                    .text('✅ Carets displaying correctly as triangles');
+            } else {
+                $('#caret-result').removeClass('pass').addClass('fail')
+                    .text('❌ Carets not displaying correctly - ' + 
+                          `width: ${width}, height: ${height}, borders: ${borderTop}/${borderLeft}/${borderRight}`);
+            }
+        } else {
+            $('#caret-result').removeClass('pass').addClass('fail')
+                .text('❌ No caret elements found');
+        }
+    }
+    
+    // Test 2: Icon Rendering
+    function testIcons() {
+        const icon = $('.fab').first();
+        if (icon.length > 0) {
+            const styles = window.getComputedStyle(icon[0], '::before');
+            const fontFamily = styles.fontFamily;
+            const content = styles.content;
+            
+            console.log('Icon styles:', {
+                fontFamily, content,
+                display: styles.display,
+                fontSize: styles.fontSize
+            });
+            
+            const hasFontAwesome = fontFamily && (
+                fontFamily.includes('Font Awesome') || 
+                fontFamily.includes('FontAwesome')
+            );
+            const hasContent = content && content !== 'none' && content !== '""';
+            
+            if (hasFontAwesome && hasContent) {
+                $('#icons-result').removeClass('fail').addClass('pass')
+                    .text('✅ Social media icons rendering correctly');
+            } else {
+                $('#icons-result').removeClass('pass').addClass('fail')
+                    .text('❌ Icons not rendering - Font: ' + fontFamily + ', Content: ' + content);
+            }
+        } else {
+            $('#icons-result').removeClass('pass').addClass('fail')
+                .text('❌ No social media icons found');
+        }
+    }
+    
+    // Test 3: Font Loading
+    function testFonts() {
+        const results = [];
+        
+        if (document.fonts && document.fonts.check) {
+            const fontsToTest = [
+                'normal 400 16px "Font Awesome 6 Brands"',
+                'normal 900 16px "Font Awesome 6 Free"',
+                'normal 400 16px FontAwesome'
+            ];
+            
+            fontsToTest.forEach(font => {
+                const loaded = document.fonts.check(font);
+                results.push(`${font}: ${loaded ? '✅' : '❌'}`);
+            });
+            
+            const loadedCount = results.filter(r => r.includes('✅')).length;
+            
+            if (loadedCount > 0) {
+                $('#font-result').removeClass('fail').addClass('pass')
+                    .text(`✅ ${loadedCount}/${fontsToTest.length} fonts loaded successfully`);
+            } else {
+                $('#font-result').removeClass('pass').addClass('fail')
+                    .text('❌ No Font Awesome fonts loaded');
+            }
+        } else {
+            $('#font-result').removeClass('pass fail').addClass('result')
+                .text('⚠️ Font loading API not supported in this browser');
+        }
+    }
+    
+    // Test 4: CSS Analysis
+    function analyzeCSSConflicts() {
+        let analysis = '';
+        
+        // Check if Font Awesome CSS is loaded
+        let faFound = false;
+        let bootstrapFound = false;
+        let customFound = false;
+        
+        for (let i = 0; i < document.styleSheets.length; i++) {
+            const sheet = document.styleSheets[i];
+            const href = sheet.href || '';
+            
+            if (href.includes('font-awesome') || href.includes('fontawesome')) {
+                faFound = true;
+                analysis += '✅ Font Awesome CSS loaded<br>';
+            }
+            if (href.includes('bootstrap')) {
+                bootstrapFound = true;
+                analysis += '✅ Bootstrap CSS loaded<br>';
+            }
+            if (href.includes('one.css')) {
+                customFound = true;
+                analysis += '✅ Custom CSS (with fixes) loaded<br>';
+            }
+        }
+        
+        if (!faFound) analysis += '❌ Font Awesome CSS not found<br>';
+        if (!bootstrapFound) analysis += '❌ Bootstrap CSS not found<br>';
+        if (!customFound) analysis += '❌ Custom CSS not found<br>';
+        
+        // Check for caret override
+        const testCaret = $('<span class="caret"></span>').appendTo('body');
+        const caretStyles = window.getComputedStyle(testCaret[0]);
+        const beforeStyles = window.getComputedStyle(testCaret[0], '::before');
+        
+        analysis += '<br><strong>Caret Analysis:</strong><br>';
+        analysis += `Width: ${caretStyles.width}<br>`;
+        analysis += `Height: ${caretStyles.height}<br>`;
+        analysis += `Border Top: ${caretStyles.borderTopWidth}<br>`;
+        analysis += `Before Content: ${beforeStyles.content}<br>`;
+        analysis += `Font Family: ${caretStyles.fontFamily}<br>`;
+        
+        testCaret.remove();
+        
+        $('#css-analysis').html(analysis);
+    }
+    
+    // Run all tests
+    setTimeout(() => {
+        testCarets();
+        testIcons();
+        testFonts();
+        analyzeCSSConflicts();
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

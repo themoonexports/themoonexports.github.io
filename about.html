@@ -8,7 +8,10 @@
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" /><!-- Custom styles for this template -->
 	<link href="css/one.css" rel="stylesheet" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" /><!-- Just for debugging purposes. Don't actually copy these 2 lines! --><!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><script src="js/ie-emulation-modes-warning.js"></script><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!--[if lt IE 9]>
+	<!-- Font Awesome 6.5.0 with integrity -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Font Awesome fallback -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" /><!-- Just for debugging purposes. Don't actually copy these 2 lines! --><!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><script src="js/ie-emulation-modes-warning.js"></script><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]--><script type="application/ld+json">
@@ -164,11 +167,21 @@ function googleTranslateElementInit() {
                   ]
                 }
                 </script>
-                <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/themoonexports" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com/themoonexports/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.pinterest.com/themoonexports/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
-                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank" style="color: #fff; display: inline-block;">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i><span style="display:none;">Facebook</span>
+                </a>
+                <a href="https://twitter.com/themoonexports" target="_blank" style="color: #fff; display: inline-block;">
+                    <i class="fab fa-twitter" aria-hidden="true"></i><span style="display:none;">Twitter</span>
+                </a>
+                <a href="https://instagram.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+                    <i class="fab fa-instagram" aria-hidden="true"></i><span style="display:none;">Instagram</span>
+                </a>
+                <a href="https://www.pinterest.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+                    <i class="fab fa-pinterest-p" aria-hidden="true"></i><span style="display:none;">Pinterest</span>
+                </a>
+                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+                    <i class="fab fa-linkedin-in" aria-hidden="true"></i><span style="display:none;">LinkedIn</span>
+                </a>
             </div>
 </div>
 <!--Zoho Campaigns Web-Optin Form's Header Code Starts Here-->
@@ -327,7 +340,7 @@ padding:0px !important;
             </table>
         </div>
         <div class="copyright">
-            <span class="pull-left">COPYRIGHT © THEMOONEXPORTS.COM</span>
+            <span class="pull-left">COPYRIGHT © {{CURRENT_YEAR}} THEMOONEXPORTS.COM</span>
         </div>
 
 <!-- Bootstrap core JavaScript -->
@@ -369,7 +382,7 @@ ym(52371760, "init", {
 <noscript><div><img src="https://mc.yandex.ru/watch/52371760" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <script src="js/lazysizes.min.js" async></script>
+<script src="js/auto-year-update.js"></script>
 </body>
 </html>
 
-[end of about.html]

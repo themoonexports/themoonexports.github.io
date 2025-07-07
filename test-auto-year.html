@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Year Update - Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Auto Year Update - Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Copyright Test</h2>
+        <p>Before update: <span id="copyright-before">COPYRIGHT © {{CURRENT_YEAR}} THEMOONEXPORTS.COM</span></p>
+        <p>After update: <span id="copyright-after"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Legal Date Test</h2>
+        <p>Before update: <span id="date-before">Effective date: {{CURRENT_DATE}}</span></p>
+        <p>After update: <span id="date-after"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Results</h2>
+        <div id="results"></div>
+    </div>
+    
+    <script src="js/auto-year-update.js"></script>
+    <script>
+        // Wait for auto-year-update to complete, then show results
+        setTimeout(function() {
+            const copyrightBefore = document.getElementById('copyright-before').textContent;
+            const dateBefore = document.getElementById('date-before').textContent;
+            
+            // Show what the script updated to
+            const currentYear = new Date().getFullYear();
+            const currentDate = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            document.getElementById('copyright-after').textContent = 'COPYRIGHT © ' + currentYear + ' THEMOONEXPORTS.COM';
+            document.getElementById('date-after').textContent = 'Effective date: ' + currentDate;
+            
+            // Test results
+            const results = document.getElementById('results');
+            let resultHTML = '<h3>Test Results:</h3>';
+            
+            if (copyrightBefore.includes(currentYear.toString())) {
+                resultHTML += '<p class="success">✅ Copyright year updated successfully</p>';
+            } else {
+                resultHTML += '<p class="error">❌ Copyright year update failed</p>';
+            }
+            
+            if (dateBefore.includes(currentDate)) {
+                resultHTML += '<p class="success">✅ Effective date updated successfully</p>';
+            } else {
+                resultHTML += '<p class="error">❌ Effective date update failed</p>';
+            }
+            
+            resultHTML += '<p><strong>Expected Year:</strong> ' + currentYear + '</p>';
+            resultHTML += '<p><strong>Expected Date:</strong> ' + currentDate + '</p>';
+            
+            results.innerHTML = resultHTML;
+        }, 500);
+    </script>
+</body>
+</html>

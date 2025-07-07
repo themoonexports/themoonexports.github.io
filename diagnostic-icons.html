@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Font Awesome Diagnostic</title>
+    
+    <!-- Same Font Awesome setup as about.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous" />
+    <link href="css/one.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            padding: 20px; 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6;
+        }
+        .test-box { 
+            border: 2px solid #333; 
+            margin: 20px 0; 
+            padding: 15px; 
+            background: #f9f9f9;
+        }
+        .icon-large { 
+            font-size: 32px; 
+            margin: 10px; 
+        }
+        .debug-info {
+            background: #eef;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #00f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Awesome Social Media Icons Diagnostic</h1>
+    
+    <div class="test-box">
+        <h2>Test 1: Large Icons (should be clearly visible)</h2>
+        <div class="icon-large">
+            <i class="fab fa-facebook-f" style="color: #1877f2;"></i>
+            <i class="fab fa-twitter" style="color: #1da1f2;"></i>
+            <i class="fab fa-instagram" style="color: #e4405f;"></i>
+            <i class="fab fa-pinterest-p" style="color: #bd081c;"></i>
+            <i class="fab fa-linkedin-in" style="color: #0077b5;"></i>
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 2: Exact Copy from About.html</h2>
+        <div class="col-md-3 socialm">
+            <h4>Connect with us</h4>
+            <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank">
+                <i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span>
+            </a>
+            <a href="https://twitter.com/themoonexports" target="_blank">
+                <i class="fab fa-twitter"></i><span style="display:none;">Twitter</span>
+            </a>
+            <a href="https://instagram.com/themoonexports/" target="_blank">
+                <i class="fab fa-instagram"></i><span style="display:none;">Instagram</span>
+            </a>
+            <a href="https://www.pinterest.com/themoonexports/" target="_blank">
+                <i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span>
+            </a>
+            <a href="https://www.linkedin.com/company/themoonexports/" target="_blank">
+                <i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 3: Alternative Icon Names</h2>
+        <div class="icon-large">
+            <i class="fab fa-facebook" style="color: #1877f2;"></i>
+            <i class="fab fa-twitter-square" style="color: #1da1f2;"></i>
+            <i class="fab fa-instagram-square" style="color: #e4405f;"></i>
+            <i class="fab fa-pinterest" style="color: #bd081c;"></i>
+            <i class="fab fa-linkedin" style="color: #0077b5;"></i>
+        </div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Diagnostic Information</h3>
+        <p id="fontCheck">Checking Font Awesome availability...</p>
+        <p id="cssCheck">Checking CSS loading...</p>
+        <p id="iconCheck">Checking icon rendering...</p>
+    </div>
+    
+    <script>
+        window.addEventListener('load', function() {
+            // Check Font Awesome availability
+            const testEl = document.createElement('i');
+            testEl.className = 'fab fa-facebook-f';
+            testEl.style.position = 'absolute';
+            testEl.style.left = '-9999px';
+            document.body.appendChild(testEl);
+            
+            const styles = window.getComputedStyle(testEl, ':before');
+            const fontFamily = styles.fontFamily;
+            const content = styles.content;
+            
+            document.getElementById('fontCheck').innerHTML = 
+                `Font Family: ${fontFamily}<br>Content: ${content}`;
+            
+            // Check if CSS loaded
+            const cssLoaded = document.styleSheets.length > 0;
+            document.getElementById('cssCheck').innerHTML = 
+                `CSS Stylesheets loaded: ${cssLoaded} (${document.styleSheets.length} total)`;
+            
+            // Check specific icon rendering
+            const rect = testEl.getBoundingClientRect();
+            document.getElementById('iconCheck').innerHTML = 
+                `Icon dimensions: ${rect.width}x${rect.height}`;
+            
+            document.body.removeChild(testEl);
+            
+            // List all loaded stylesheets
+            const stylesheets = Array.from(document.styleSheets).map(sheet => sheet.href || 'inline');
+            console.log('Loaded stylesheets:', stylesheets);
+        });
+    </script>
+</body>
+</html>
