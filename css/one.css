@@ -42,6 +42,8 @@ h4#myModalLabel {
 }
 .services .panel-body img {
 width:100%;
+max-width: 100%;
+height: auto;
 }
 .frontblock.serviceb {
   background-image: url("../images/services.jpg");
@@ -173,7 +175,7 @@ text-transform: uppercase;
 background-color:#EB3C00;
 }
 .navbar-default {
-background: #000; 
+background: #000;
 background-color: #000;
 border: 0px;
 border-radius: 0px;
@@ -184,7 +186,10 @@ min-height:110px;
 }
 a.navbar-brand img {
   max-width: 260px;
-    margin-top: -10px;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  margin-top: -10px;
 }
 .navbar-default .navbar-nav>li>a {
 color: #cbcbcb;
@@ -270,10 +275,22 @@ color: #5CA316;
 @media (max-width: 768px) {
 .col-md-6 img {
 width:100%;
+max-width: 100%;
+height: auto;
 }
 .masthead img {
 width:100px;
-  margin-bottom: 14px;
+max-width: 100px;
+height: auto;
+margin-bottom: 14px;
+}
+.modal-body img {
+width: 100% !important;
+max-width: 100% !important;
+height: auto !important;
+float: none !important;
+margin-bottom: 10px;
+}
 }
 .item h3 {
   font-size: 15px;
@@ -288,9 +305,9 @@ width:100px;
     margin-bottom: 0px;
 }
 body {
- 
+
   padding-top: 50px;
- 
+
 }
 .masthead {
   padding-top: 0px;
@@ -330,7 +347,7 @@ ul.dropdown-menu li:first-child {
 ul.dropdown-menu li:not(:first-child) {
   padding-left: 20px;
 }
- 
+
 
 }
 
@@ -344,7 +361,7 @@ figcaption {
   position: absolute;
   top: 0;
   opacity: 0;
-  
+
 }
 figure {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -360,12 +377,28 @@ color: #fff;
 .cf {
   position:relative;
   height:360px;
- 
+
   margin:0 auto;
    margin-bottom: 30px;
 }
 .col-md-4 img {
   width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal images should be responsive */
+.modal-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Ensure all images are responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
 }
 .cf img {
   position:absolute;
