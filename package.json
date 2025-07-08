@@ -4,6 +4,7 @@
   "description": "The Moon Exports - Official Website",
   "main": "index.html",
   "scripts": {
+    "dev": "firebase serve",
     "build": "echo 'Build process not implemented yet'",
     "test": "echo 'Tests not implemented yet'",
     "serve": "firebase serve",
@@ -16,7 +17,7 @@
   },
   "keywords": [
     "handicrafts",
-    "horn-crafts", 
+    "horn-crafts",
     "wooden-crafts",
     "export",
     "manufacturer"
