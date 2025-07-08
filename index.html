@@ -495,12 +495,8 @@
             }
         }
 
-        // Initialize everything when DOM is ready
-        domReady(function() {
-            updateCurrentYear();
-            initializeNewsletterForm();
-            
-            // Initialize dropdown hover effect
+        // Initialize dropdown hover effect
+        function initializeDropdowns() {
             const dropdowns = document.querySelectorAll('.navbar-default .navbar-nav > li.dropdown');
             dropdowns.forEach(function(dropdown) {
                 dropdown.addEventListener('mouseenter', function() {
@@ -519,6 +515,13 @@
                     }
                 });
             });
+        }
+
+        // Initialize everything when DOM is ready
+        domReady(function() {
+            updateCurrentYear();
+            initializeNewsletterForm();
+            initializeDropdowns();
         });
 
         // Load external scripts with fallbacks
@@ -543,4 +546,40 @@
         // Load Yandex Metrika
         loadScript('https://mc.yandex.ru/metrika/tag.js', initializeYandexMetrika);
 
-        // Service Worker
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+
+        // Initialize all components when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentYear();
+            initializeNewsletterForm();
+            initializeDropdowns();
+        });
+    </script>
+
+    <!-- Load jQuery first (required for Bootstrap 3) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" 
+            integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" 
+            crossorigin="anonymous"></script>
+    
+    <!-- Load Bootstrap JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Load Auto Year Update utility -->
+    <script src="js/auto-year-update.js"></script>
+    
+    <!-- Load LazyLoad for images -->
+    <script src="js/lazysizes.min.js" async></script>
+
+</body>
+</html>
