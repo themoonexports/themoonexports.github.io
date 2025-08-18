@@ -82,9 +82,14 @@ node_modules/
 
 # Data exports and temporary data
 *.csv
-/data/
-/temp/
-/backup/
+
+# Keep fruugo.csv tracked
+!data/fruugo.csv
+
+# Allow backup & data structure tracking (override previous)
+!backup/
+!data/
+!temp/
 
 # AI analysis output
 /tmp/ai-*.txt
@@ -109,3 +114,9 @@ Thumbs.db
 /dist/
 /build/
 /test-results/
+
+# Next.js build output (for future migration)
+.next/
+.vercel/
+
+# End of file
