@@ -119,4 +119,105 @@ Thumbs.db
 .next/
 .vercel/
 
-# End of file
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Secrets and API Keys
+secrets/
+config/secrets.js
+config/keys.js
+
+# Build outputs with embedded secrets
+dist/
+build/
+public/js/config.js
+
+# Backup files that might contain sensitive data
+backup/*.sql
+backup/*.json
+data/private/
+
+# IDE and editor files that might store sensitive project data
+.vscode/settings.json
+.idea/workspace.xml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs that might contain sensitive information
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Package manager directories
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file (keep templates)
+.env
+!.env.template
+!.env.development
+!.env.production
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
