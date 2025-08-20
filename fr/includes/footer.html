@@ -1,0 +1,101 @@
+<!-- The Moon Exports - Standard Footer Component (French) -->
+<!-- This footer component should be included in all French pages -->
+
+<footer class="footer-bottom" role="contentinfo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4>The Moon Exports</h4>
+                <nav aria-label="Navigation du pied de page">
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="https://www.themoonexports.com/about.html">À propos</a></li>
+                        <li><a href="https://www.themoonexports.com/contact.html">Contact</a></li>
+                        <li><a href="https://www.themoonexports.com/legal/privacy.html">Politique de confidentialité</a></li>
+                        <li><a href="https://www.themoonexports.com/legal/terms.html">Conditions générales</a></li>
+                        <li><a href="https://www.themoonexports.com/legal/imprint.html">Mentions légales</a></li>
+                        <li><a href="https://www.themoonexports.com/license.html" rel="license">Licence de contenu</a></li>
+                        <li><a href="https://www.themoonexports.com/faq.html">FAQ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-3">
+                <h4>Produits</h4>
+                <nav aria-label="Liens de produits">
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="https://www.themoonexports.com/horn-crafts.html">Artisanat en Corne</a></li>
+                        <li><a href="https://www.themoonexports.com/wooden-crafts.html">Artisanat en Bois</a></li>
+                        <li><a href="https://www.themoonexports.com/resin.html">Produits en Résine</a></li>
+                    </ul>
+                </nav>
+                <h4>Huile Essentielle</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="https://smellofmoon.com/" target="_blank" rel="noopener noreferrer">Huile essentielle diffuseur</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Contact</h4>
+                <address>
+                    <strong>Numéro de contact:</strong> <a href="tel:+918909070131">+91 8909070131</a><br>
+                    <strong>E-mail:</strong> <a href="mailto:info@themoonexports.com">info@themoonexports.com</a>
+                </address>
+            </div>
+            <div class="col-md-3 socialm">
+                <h4>Connectez-vous avec nous</h4>
+                <div class="social-links" role="group" aria-label="Liens de médias sociaux">
+                    <a href="https://www.facebook.com/themoonexports" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <a href="https://twitter.com/themoonexports" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <a href="https://instagram.com/themoonexports/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                    <a href="https://www.pinterest.com/themoonexports/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                        <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                        <span class="sr-only">Pinterest</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright" style="margin-top: 20px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+            <span>COPYRIGHT © <span id="current-year">2024</span> THEMOONEXPORTS.COM</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+    // Update current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Initialize dropdown hover effect
+    const dropdowns = document.querySelectorAll('.navbar-default .navbar-nav > li.dropdown');
+    dropdowns.forEach(function(dropdown) {
+        dropdown.addEventListener('mouseenter', function() {
+            const menu = this.querySelector('ul.dropdown-menu');
+            if (menu) {
+                menu.style.display = 'block';
+                this.classList.add('open');
+            }
+        });
+        
+        dropdown.addEventListener('mouseleave', function() {
+            const menu = this.querySelector('ul.dropdown-menu');
+            if (menu) {
+                menu.style.display = 'none';
+                this.classList.remove('open');
+            }
+        });
+    });
+</script>

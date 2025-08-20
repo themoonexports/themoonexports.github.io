@@ -215,4 +215,12 @@
   <mobile:mobile/>
 </url>
 
+<url>
+  <loc>https://www.themoonexports.com/license.html</loc>
+  <lastmod>2025-08-20</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.2</priority>
+  <mobile:mobile/>
+</url>
+
 </urlset>
