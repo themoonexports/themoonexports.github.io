@@ -7,7 +7,10 @@
 function loadComponent(elementId, filePath, callback) {
     const element = document.getElementById(elementId);
     if (!element) {
-        console.warn(`Element with ID '${elementId}' not found`);
+        // Only warn in development
+        if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+            console.warn(`Element with ID '${elementId}' not found`);
+        }
         if (callback) callback(false);
         return;
     }
@@ -21,11 +24,17 @@ function loadComponent(elementId, filePath, callback) {
         })
         .then(html => {
             element.innerHTML = html;
-            console.log(`Component loaded: ${filePath}`);
+            // Only log in development
+            if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+                console.log(`Component loaded: ${filePath}`);
+            }
             if (callback) callback(true);
         })
         .catch(error => {
-            console.error(`Error loading component ${filePath}:`, error);
+            // Always log errors but make them more production-friendly
+            if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+                console.error(`Error loading component ${filePath}:`, error);
+            }
             if (callback) callback(false);
         });
 }
