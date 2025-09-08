@@ -1,6 +1,6 @@
 # The Moon Exports Design System (Baseline v1)
 
-Purpose: Canonical reference of the current (2025) visual design so future refactors (e.g. Next.js) preserve look & feel.
+Purpose: Canonical reference of the current (2025) visual design so future refactors (e.g. React SPA) preserve look & feel.
 
 ## Core Principles
 - Dark handcrafted aesthetic (dark charcoal canvas + light neutral text)
@@ -169,7 +169,8 @@ ENHANCED (main css/one.css):
 + platform-specific backgrounds, hover transforms, advanced fallbacks
 ```
 
-### Future Migration Mapping (Next.js)
+### (Mild suggestion if not already defined)
+ Future Migration Mapping (React SPA)
 ```
 Layout Wrapper:  Navbar + Footer → components/Layout.tsx
 Hero Section(s):  frontblock.* → components/Hero.tsx (variant prop)

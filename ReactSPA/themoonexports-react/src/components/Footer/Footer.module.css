@@ -1,0 +1,77 @@
+.footer {
+  background-color: var(--footer-bg);
+  padding: var(--section-padding) 0 10px 0;
+  color: var(--footer-link-text);
+  border-top: 1px solid var(--navbar-border);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+}
+
+.companyInfo {
+  max-width: 400px;
+}
+
+.footerTitle {
+  color: #F2F2F2;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.footerDescription {
+  color: var(--footer-link-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerLinks li {
+  margin-bottom: 8px;
+}
+
+.footerLinks a {
+  color: var(--footer-link-text);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  font-size: 14px;
+}
+
+.footerLinks a:hover {
+  color: var(--dropdown-hover-text);
+}
+
+.copyright {
+  border-top: 1px solid var(--navbar-border);
+  padding-top: 20px;
+  text-align: center;
+}
+
+.copyright p {
+  color: var(--footer-link-text);
+  font-size: 14px;
+  margin: 0;
+}

@@ -1,0 +1,196 @@
+:root {
+  /* Colors from Design System */
+  --body-bg: #191919;
+  --global-text: #D3D3D3;
+  --headings-text: #FFFFFF;
+  --navbar-bg: #000000;
+  --navbar-border: #333333;
+  --footer-bg: #333333;
+  --footer-link-text: #B3B3B3;
+  --divider-border: rgba(255,255,255,0.13);
+  --panel-heading-bg: #f5f5f5;
+  --panel-heading-text: #333333;
+  --services-accent: #A17BB6;
+  --accent-green: #4F8E10;
+  --accent-green-hover: #447712;
+  --category-overlay-base: rgba(0,0,0,0.10);
+  --category-overlay-hover: rgba(0,0,0,0.51);
+  --figure-hover-overlay: rgba(0,0,0,0.60);
+  --dropdown-menu-bg: #333333;
+  --dropdown-item-text: #D2D2D2;
+  --dropdown-hover-text: #219521;
+  --status-green: #6AB520;
+  --error-red: #B54820;
+  
+  /* Utility Colors */
+  --green-block: #5CA316;
+  --blue-block: #007EE1;
+  --purple-block: #A17BB6;
+  --red-block: #EB3C00;
+  
+  /* Social Platform Colors */
+  --facebook: #1877f2;
+  --twitter: #1da1f2;
+  --pinterest: #bd081c;
+  --linkedin: #0077b5;
+  
+  /* Spacing & Layout */
+  --body-top-padding: 75px;
+  --body-top-padding-mobile: 50px;
+  --navbar-height: 110px;
+  --navbar-height-mobile: 50px;
+  --section-padding: 35px;
+  --hero-height: 400px;
+  --hero-height-alt: 300px;
+  --hero-height-small: 220px;
+  
+  /* Typography */
+  --hero-h1-desktop: 60px;
+  --hero-h1-mobile: 34px;
+  --hero-h2-desktop: 28px;
+  --section-h2: 46px;
+  --section-h2-mobile: 18px;
+  --nav-link-size: 16px;
+  
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.5s ease;
+  
+  /* Shadows */
+  --text-shadow-hero: 0 1px 2px rgba(0,0,0,0.98);
+  --text-shadow-title: 1px 1px 1px #000;
+  --box-shadow-subtle: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* Global Styles Following Design System */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--body-bg);
+  color: var(--global-text);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  padding-top: var(--body-top-padding);
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: var(--body-top-padding-mobile);
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--headings-text);
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--hero-h1-desktop);
+  font-weight: 700;
+  text-shadow: var(--text-shadow-title);
+}
+
+@media (max-width: 660px) {
+  h1 {
+    font-size: var(--hero-h1-mobile);
+  }
+}
+
+h2 {
+  font-size: var(--section-h2);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: var(--section-h2-mobile);
+  }
+}
+
+/* Links */
+a {
+  color: var(--global-text);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--headings-text);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-green);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-green-hover);
+  color: white;
+}
+
+/* Panels */
+.panel {
+  background: var(--body-bg);
+  border: 1px solid var(--divider-border);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.panel-heading {
+  background-color: var(--panel-heading-bg);
+  color: var(--panel-heading-text);
+  padding: 15px;
+  border-bottom: 1px solid var(--divider-border);
+  font-weight: 600;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+}

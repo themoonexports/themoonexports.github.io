@@ -1,0 +1,40 @@
+{
+  "welcome": "Bienvenue sur notre site!",
+  "header": {
+    "home": "Accueil",
+    "about": "À propos",
+    "products": "Produits",
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "Tous droits réservés © 2025",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  },
+  "home": {
+    "heroTitle": "Découvrez nos produits",
+    "heroSubtitle": "Qualité et excellence à votre portée"
+  },
+  "about": {
+    "title": "À propos de nous",
+    "description": "Nous sommes une entreprise dédiée à fournir les meilleurs produits."
+  },
+  "products": {
+    "title": "Nos Produits",
+    "noProducts": "Aucun produit disponible pour le moment."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Nous serions ravis de vous entendre!",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Envoyer"
+    }
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "message": "Désolé, la page que vous recherchez n'existe pas."
+  }
+}

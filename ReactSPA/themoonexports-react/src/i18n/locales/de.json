@@ -1,0 +1,26 @@
+{
+  "welcome": "Willkommen",
+  "home": {
+    "title": "Startseite",
+    "description": "Willkommen auf unserer Startseite!"
+  },
+  "about": {
+    "title": "Über uns",
+    "description": "Erfahren Sie mehr über unser Unternehmen."
+  },
+  "products": {
+    "title": "Produkte",
+    "description": "Entdecken Sie unsere Produktpalette."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Nehmen Sie Kontakt mit uns auf."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die von Ihnen gesuchte Seite existiert nicht."
+  },
+  "footer": {
+    "copyright": "© 2025 The Moon Exports. Alle Rechte vorbehalten."
+  }
+}
