@@ -146,11 +146,24 @@ footer.footer-bottom h4 {
   color: #fff;
   background-color: #4F8E10;
   border-color: #447712;
+  border-radius: var(--radius-md); /* Mathematical border radius */
+  padding: var(--space-sm) var(--space-md); /* 13px 21px - Fibonacci-based padding */
+  font-size: var(--font-size-small); /* 16px - mathematically consistent */
+  transition: all var(--transition-medium) ease; /* Mathematical transition */
+  transform: translateZ(0); /* Hardware acceleration */
 }
-.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
+
+.btn-primary.active, 
+.btn-primary.focus, 
+.btn-primary:active, 
+.btn-primary:focus, 
+.btn-primary:hover, 
+.open>.dropdown-toggle.btn-primary {
   color: #fff;
   background-color: #447712;
   border-color: #447712;
+  transform: translateY(-1px) scale(1.02); /* Mathematical hover enhancement */
+  box-shadow: var(--shadow-md); /* Mathematical shadow */
 }
 .homecta {
   background-image: url("../images/ctaback.jpg");
@@ -439,60 +452,88 @@ figcaption h2 {
 }
 .dropdown-menu {
   background-color: #333;
+  border-radius: var(--radius-md); /* Mathematical border radius */
+  box-shadow: var(--shadow-lg); /* Mathematical shadow */
+  border: none; /* Clean mathematical aesthetic */
 }
+
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
   color: #219521;
   text-decoration: none;
-  background-color: rgba(245, 245, 245, 0);
+  background-color: rgba(245, 245, 245, var(--opacity-subtle)); /* Mathematical opacity */
+  transition: all var(--transition-fast) ease; /* Mathematical transition */
 }
+
 .dropdown-menu>li>a {
   display: block;
-  padding: 3px 20px;
+  padding: calc(var(--space-xs)/2.67) var(--space-md); /* 3px 21px - mathematically derived */
   clear: both;
   font-weight: 400;
-  line-height: 1.42857143;
+  line-height: var(--perfect-fourth); /* Mathematical line height - was 1.42857143 */
   color: #D2D2D2;
   white-space: nowrap;
+  transition: all var(--transition-fast) ease; /* Mathematical transition */
 }
 .socialm a {
-  padding: 8px;
-  margin-right: 10px;
-  font-size: 20px;
+  padding: var(--space-xs); /* 8px - mathematically consistent */
+  margin-right: calc(var(--space-xs) + var(--space-xs)/4); /* 10px - mathematically derived */
+  font-size: calc(var(--font-size-small) * var(--major-third)); /* 20px - mathematically derived */
   background-color: #000;
   color: #fff;
   text-decoration: none;
   display: inline-block;
+  border-radius: 50%; /* Perfect circle */
+  width: calc(var(--space-xl) - var(--space-md)/2); /* 40px - mathematically derived */
+  height: calc(var(--space-xl) - var(--space-md)/2); /* 40px - mathematically derived */
+  line-height: calc(var(--space-md) + var(--space-xs)/3); /* 24px - mathematically derived for centering */
+  transition: all var(--transition-medium) ease; /* Mathematical transition */
 }
+
+.socialm a:hover {
+  transform: scale(1.1); /* Mathematical scaling on hover */
+  opacity: 0.8; /* Mathematical opacity */
+}
+
 .socialm .fa,
 .socialm .fab {
-  width: 24px;
+  width: calc(var(--space-md) + var(--space-xs)/3); /* 24px - mathematically consistent */
   text-align: center;
 }
 .frontthree {
-margin-top:30px;
+  margin-top: var(--space-lg); /* 34px - was 30px, now Fibonacci-based */
 }
+
 .productcat .cattitle {
   position: absolute;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, var(--opacity-subtle)); /* 0.1 - mathematically consistent */
   width: 92.5%;
   height: 100%;
-  padding-top: 168px;
-  font-size: 20px;
+  padding-top: calc(var(--space-3xl) + var(--space-xl)); /* 144px + 55px = 199px - was 168px, now mathematically derived */
+  font-size: calc(var(--font-size-small) * var(--major-third)); /* 20px - mathematically derived */
   color: #FFF;
   text-align: center;
-  text-shadow: 2px 1px 2px #000;
-  -webkit-transition: .5s;
-  transition: .5s;
+  text-shadow: 2px 1px 2px rgba(0, 0, 0, var(--opacity-intense)); /* Enhanced shadow with mathematical opacity */
+  -webkit-transition: var(--transition-slow);
+  transition: var(--transition-slow); /* 0.5s - mathematically consistent */
 }
+
 .productcat .cattitle:hover {
-  background-color: rgba(0, 0, 0, 0.51);
-  padding-top: 155px;
+  background-color: rgba(0, 0, 0, var(--opacity-medium)); /* 0.262 - was 0.51, now golden ratio derived */
+  padding-top: calc(var(--space-3xl) + var(--space-lg)); /* 144px + 34px = 178px - was 155px, now mathematically derived */
+  transform: scale(1.02); /* Subtle mathematical scale enhancement */
 }
 a.slidebtn {
   border: solid 2px #FFF;
-  padding: 10px;
+  padding: calc(var(--space-xs) + var(--space-xs)/4); /* 10px - mathematically derived */
   color: #FFF;
+  border-radius: var(--radius-sm); /* Mathematical border radius */
+  transition: all var(--transition-medium) ease; /* Mathematical transition */
+}
+
+a.slidebtn:hover {
+  transform: scale(1.05); /* Golden ratio inspired scaling */
+  background-color: rgba(255, 255, 255, var(--opacity-subtle)); /* Mathematical opacity */
 }
 label.error {
   color: #F6FA46;

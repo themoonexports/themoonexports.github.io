@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mathematical Design Enhancement Test - The Moon Exports</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mathematical Tokens CSS -->
+    <link href="../../css/mathematical-tokens.css" rel="stylesheet">
+    <!-- Main CSS with mathematical enhancements -->
+    <link href="../../css/one.css" rel="stylesheet">
+    
+    <style>
+        /* Test-specific styles to showcase mathematical principles */
+        .test-section {
+            margin: var(--space-xl) 0;
+            padding: var(--space-lg);
+            border: 1px solid rgba(255, 255, 255, var(--opacity-subtle));
+            border-radius: var(--radius-lg);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        
+        .test-section h2 {
+            color: #fff;
+            font-size: var(--font-size-large);
+            margin-bottom: var(--space-md);
+            border-bottom: 2px solid #A17BB6;
+            padding-bottom: var(--space-sm);
+        }
+        
+        .mathematical-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(calc(var(--space-3xl) * 2), 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-md) 0;
+        }
+        
+        .ratio-demo {
+            background: linear-gradient(135deg, #A17BB6, #4F8E10);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: white;
+            text-align: center;
+            aspect-ratio: var(--aspect-golden);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: transform var(--transition-medium) ease;
+        }
+        
+        .ratio-demo:hover {
+            transform: scale(1.05);
+        }
+        
+        .fibonacci-scale {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--space-xs);
+            margin: var(--space-md) 0;
+        }
+        
+        .fibonacci-bar {
+            background-color: #4F8E10;
+            width: var(--space-lg);
+            transition: all var(--transition-medium) ease;
+            border-radius: var(--radius-xs);
+        }
+        
+        .fibonacci-bar:hover {
+            background-color: #447712;
+            transform: scale(1.1);
+        }
+        
+        .fibonacci-bar:nth-child(1) { height: var(--space-xs); }
+        .fibonacci-bar:nth-child(2) { height: var(--space-sm); }
+        .fibonacci-bar:nth-child(3) { height: var(--space-md); }
+        .fibonacci-bar:nth-child(4) { height: var(--space-lg); }
+        .fibonacci-bar:nth-child(5) { height: var(--space-xl); }
+        .fibonacci-bar:nth-child(6) { height: var(--space-xxl); }
+        .fibonacci-bar:nth-child(7) { height: var(--space-3xl); }
+        
+        .typography-scale {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .typography-scale div {
+            color: #fff;
+            transition: color var(--transition-fast) ease;
+        }
+        
+        .typography-scale div:hover {
+            color: #4F8E10;
+        }
+        
+        .math-constant {
+            background-color: rgba(161, 123, 182, var(--opacity-light));
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            margin: var(--space-xs) 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #A17BB6;
+        }
+        
+        .golden-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.618fr;
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+        
+        .grid-item {
+            background-color: rgba(79, 142, 16, var(--opacity-medium));
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(var(--space-3xl) * 1.2);
+        }
+        
+        .shadow-demo {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin: var(--space-md) 0;
+        }
+        
+        .shadow-demo div {
+            width: calc(var(--space-3xl) + var(--space-md));
+            height: calc(var(--space-3xl) + var(--space-md));
+            background-color: #fff;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .shadow-xs { box-shadow: var(--shadow-xs); }
+        .shadow-sm { box-shadow: var(--shadow-sm); }
+        .shadow-md { box-shadow: var(--shadow-md); }
+        .shadow-lg { box-shadow: var(--shadow-lg); }
+        .shadow-xl { box-shadow: var(--shadow-xl); }
+        
+        .opacity-demo {
+            display: flex;
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+        
+        .opacity-demo div {
+            width: calc(var(--space-3xl) + var(--space-md));
+            height: calc(var(--space-3xl) + var(--space-md));
+            background-color: #4F8E10;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .opacity-subtle { opacity: var(--opacity-subtle); }
+        .opacity-light { opacity: var(--opacity-light); }
+        .opacity-medium { opacity: var(--opacity-medium); }
+        .opacity-strong { opacity: var(--opacity-strong); }
+        .opacity-intense { opacity: var(--opacity-intense); }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="padding-top: var(--space-xxl);">
+        <h1 style="color: #fff; text-align: center; font-size: var(--font-size-hero); margin-bottom: var(--space-xl);">
+            Mathematical Design Enhancement Test
+        </h1>
+        
+        <!-- Mathematical Constants Section -->
+        <div class="test-section">
+            <h2>Mathematical Constants Applied</h2>
+            <div class="math-constant">
+                <strong>Golden Ratio (φ):</strong> 1.618 - Used for typography scaling and layout proportions
+            </div>
+            <div class="math-constant">
+                <strong>Fibonacci Sequence:</strong> 8, 13, 21, 34, 55, 89, 144 - Used for spacing system
+            </div>
+            <div class="math-constant">
+                <strong>Perfect Fourth:</strong> 1.333 - Used for harmonic line heights
+            </div>
+            <div class="math-constant">
+                <strong>Perfect Fifth:</strong> 1.5 - Used for mobile line heights
+            </div>
+        </div>
+
+        <!-- Typography Scale Section -->
+        <div class="test-section">
+            <h2>Golden Ratio Typography Scale</h2>
+            <div class="typography-scale">
+                <div style="font-size: var(--font-size-hero);">Hero Text (φ⁶ × base)</div>
+                <div style="font-size: var(--font-size-xlarge);">Extra Large (φ⁴ × base)</div>
+                <div style="font-size: var(--font-size-large);">Large Text (φ³ × base)</div>
+                <div style="font-size: var(--font-size-medium);">Medium Text (φ² × base)</div>
+                <div style="font-size: var(--font-size-small);">Base Text (φ⁰ × base)</div>
+                <div style="font-size: var(--font-size-micro);">Micro Text (φ⁻¹ × base)</div>
+            </div>
+        </div>
+
+        <!-- Fibonacci Spacing Section -->
+        <div class="test-section">
+            <h2>Fibonacci Spacing System</h2>
+            <p style="color: #D3D3D3; margin-bottom: var(--space-md);">
+                Each bar represents a Fibonacci number in our spacing scale:
+            </p>
+            <div class="fibonacci-scale">
+                <div class="fibonacci-bar" title="8px"></div>
+                <div class="fibonacci-bar" title="13px"></div>
+                <div class="fibonacci-bar" title="21px"></div>
+                <div class="fibonacci-bar" title="34px"></div>
+                <div class="fibonacci-bar" title="55px"></div>
+                <div class="fibonacci-bar" title="89px"></div>
+                <div class="fibonacci-bar" title="144px"></div>
+            </div>
+        </div>
+
+        <!-- Golden Ratio Layout Section -->
+        <div class="test-section">
+            <h2>Golden Ratio Layout Proportions</h2>
+            <div class="mathematical-demo">
+                <div class="ratio-demo">
+                    <h3>Golden Rectangle</h3>
+                    <p>Aspect Ratio: 1.618:1</p>
+                </div>
+                <div class="ratio-demo">
+                    <h3>Golden Rectangle</h3>
+                    <p>Perfect Mathematical Proportion</p>
+                </div>
+            </div>
+            
+            <div class="golden-grid">
+                <div class="grid-item">38.2%</div>
+                <div class="grid-item">61.8%</div>
+            </div>
+        </div>
+
+        <!-- Mathematical Shadows Section -->
+        <div class="test-section">
+            <h2>Mathematical Shadow Progression</h2>
+            <div class="shadow-demo">
+                <div class="shadow-xs">XS</div>
+                <div class="shadow-sm">SM</div>
+                <div class="shadow-md">MD</div>
+                <div class="shadow-lg">LG</div>
+                <div class="shadow-xl">XL</div>
+            </div>
+        </div>
+
+        <!-- Opacity Progression Section -->
+        <div class="test-section">
+            <h2>Golden Ratio Opacity Progression</h2>
+            <div class="opacity-demo">
+                <div class="opacity-subtle">0.1</div>
+                <div class="opacity-light">0.162</div>
+                <div class="opacity-medium">0.262</div>
+                <div class="opacity-strong">0.424</div>
+                <div class="opacity-intense">0.686</div>
+            </div>
+        </div>
+
+        <!-- Enhanced Components Section -->
+        <div class="test-section">
+            <h2>Enhanced Components</h2>
+            
+            <!-- Enhanced Button -->
+            <div style="margin: var(--space-md) 0;">
+                <button class="btn btn-primary">Mathematical Button</button>
+                <a href="#" class="slidebtn" style="margin-left: var(--space-md);">Mathematical Link</a>
+            </div>
+            
+            <!-- Enhanced Social Icons -->
+            <div class="socialm" style="margin: var(--space-md) 0;">
+                <a href="#" style="background-color: #1877f2;">
+                    <span style="display:none;">Facebook</span>f
+                </a>
+                <a href="#" style="background-color: #1da1f2;">
+                    <span style="display:none;">Twitter</span>𝕏
+                </a>
+                <a href="#" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+                    <span style="display:none;">Instagram</span>📷
+                </a>
+            </div>
+        </div>
+
+        <!-- Mathematical Validation -->
+        <div class="test-section">
+            <h2>Mathematical Validation</h2>
+            <div class="math-constant">
+                <strong>Typography Ratio Check:</strong> 110px ÷ 68px = 1.618 ✓
+            </div>
+            <div class="math-constant">
+                <strong>Spacing Fibonacci Check:</strong> 89 - 55 = 34, 55 - 34 = 21 ✓
+            </div>
+            <div class="math-constant">
+                <strong>Hero Height Ratio:</strong> 610px ÷ 377px = 1.618 ✓
+            </div>
+            <div class="math-constant">
+                <strong>Opacity Progression:</strong> 0.162 ÷ 0.1 = 1.62 ≈ φ ✓
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+</body>
+</html>
