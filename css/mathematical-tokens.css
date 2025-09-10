@@ -1,0 +1,160 @@
+/**
+ * Mathematical Design Tokens for The Moon Exports
+ * Based on Golden Ratio, Fibonacci Sequence, and Harmonic Proportions
+ * 
+ * Mathematical Constants:
+ * - Golden Ratio (φ): 1.618
+ * - Fibonacci Sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...
+ * - Perfect Fourth: 1.333 (4:3)
+ * - Perfect Fifth: 1.5 (3:2)
+ */
+
+:root {
+  /* === MATHEMATICAL CONSTANTS === */
+  --golden-ratio: 1.618;
+  --perfect-fourth: 1.333;
+  --perfect-fifth: 1.5;
+  --major-third: 1.25;
+
+  /* === TYPOGRAPHY SCALE (Golden Ratio Based) === */
+  /* Base: 16px, Scale: φ^n */
+  --font-size-micro: 0.618rem;     /* 9.89px ≈ 10px */
+  --font-size-small: 1rem;         /* 16px - Base */
+  --font-size-medium: 1.618rem;    /* 25.89px ≈ 26px */
+  --font-size-large: 2.618rem;     /* 41.89px ≈ 42px */
+  --font-size-xlarge: 4.236rem;    /* 67.78px ≈ 68px */
+  --font-size-hero: 6.854rem;      /* 109.66px ≈ 110px */
+
+  /* === SPACING SCALE (Fibonacci Based) === */
+  /* Base unit: 8px (0.5rem) */
+  --space-xs: 0.5rem;      /* 8px - Fibonacci: 8 */
+  --space-sm: 0.8125rem;   /* 13px - Fibonacci: 13 */
+  --space-md: 1.3125rem;   /* 21px - Fibonacci: 21 */
+  --space-lg: 2.125rem;    /* 34px - Fibonacci: 34 */
+  --space-xl: 3.4375rem;   /* 55px - Fibonacci: 55 */
+  --space-xxl: 5.5625rem;  /* 89px - Fibonacci: 89 */
+  --space-3xl: 9rem;       /* 144px - Fibonacci: 144 */
+
+  /* === LAYOUT DIMENSIONS (Golden Ratio Based) === */
+  /* Hero sections using φ relationships */
+  --hero-height-small: 14.5625rem;  /* 233px - φ^5 * 10 */
+  --hero-height-medium: 23.5625rem; /* 377px - φ^6 * 10 */
+  --hero-height-large: 38.125rem;   /* 610px - φ^7 * 10 */
+
+  /* Navbar heights using harmonic ratios */
+  --navbar-height-mobile: 3.125rem;   /* 50px - Base * π/2 */
+  --navbar-height-desktop: 6.875rem;  /* 110px - φ^4 * 10 */
+
+  /* === COLOR HARMONY (Mathematical Opacity Progression) === */
+  /* Based on golden ratio: α, α*φ, α*φ², α*φ³ where α = 0.1 */
+  --opacity-subtle: 0.1;      /* α */
+  --opacity-light: 0.162;     /* α * φ */
+  --opacity-medium: 0.262;    /* α * φ² */
+  --opacity-strong: 0.424;    /* α * φ³ */
+  --opacity-intense: 0.686;   /* α * φ⁴ */
+
+  /* === BORDER RADIUS (Golden Ratio Progression) === */
+  --radius-xs: 0.25rem;     /* 4px */
+  --radius-sm: 0.404rem;    /* 6.47px ≈ 6px - 4 * φ^0.5 */
+  --radius-md: 0.654rem;    /* 10.47px ≈ 10px - 4 * φ */
+  --radius-lg: 1.058rem;    /* 16.93px ≈ 17px - 4 * φ^1.5 */
+  --radius-xl: 1.712rem;    /* 27.39px ≈ 27px - 4 * φ² */
+
+  /* === TRANSITION TIMING (Harmonic Intervals) === */
+  --transition-fast: 0.2s;      /* Quick interactions */
+  --transition-medium: 0.3s;    /* Standard hover effects */
+  --transition-slow: 0.5s;      /* Complex animations */
+  --transition-extra-slow: 0.8s; /* Page transitions */
+
+  /* === Z-INDEX SCALE (Powers of Golden Ratio) === */
+  --z-dropdown: 10;      /* φ^2 * 6.18 ≈ 10 */
+  --z-modal: 100;        /* φ^4 * 14.64 ≈ 100 */
+  --z-tooltip: 1000;     /* φ^6 * 37.71 ≈ 1000 */
+
+  /* === GRID & LAYOUT PROPORTIONS === */
+  /* Container max-widths following rule of thirds */
+  --container-sm: 36rem;     /* 576px - φ^8 */
+  --container-md: 48rem;     /* 768px - Traditional breakpoint */
+  --container-lg: 62rem;     /* 992px - φ^9 */
+  --container-xl: 75rem;     /* 1200px - φ^10 */
+
+  /* === MATHEMATICAL ASPECT RATIOS === */
+  --aspect-golden: 1.618;    /* Golden rectangle */
+  --aspect-silver: 1.414;    /* √2 - Silver ratio */
+  --aspect-fourth: 1.333;    /* 4:3 ratio */
+  --aspect-third: 1.5;       /* 3:2 ratio */
+
+  /* === SHADOW SCALE (Fibonacci Progression) === */
+  --shadow-xs: 0 0.0625rem 0.1875rem rgba(0, 0, 0, var(--opacity-subtle));
+  --shadow-sm: 0 0.125rem 0.375rem rgba(0, 0, 0, var(--opacity-light));
+  --shadow-md: 0 0.25rem 0.75rem rgba(0, 0, 0, var(--opacity-medium));
+  --shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, var(--opacity-strong));
+  --shadow-xl: 0 1rem 3rem rgba(0, 0, 0, var(--opacity-intense));
+}
+
+/* === RESPONSIVE MATHEMATICAL ADJUSTMENTS === */
+@media (max-width: 48rem) { /* 768px */
+  :root {
+    /* Scale down typography proportionally */
+    --font-size-hero: 4.236rem;    /* 68px instead of 110px */
+    --font-size-xlarge: 2.618rem;  /* 42px instead of 68px */
+    --font-size-large: 1.618rem;   /* 26px instead of 42px */
+    
+    /* Adjust spacing for mobile */
+    --space-3xl: 5.5625rem;  /* 89px instead of 144px */
+    --space-xxl: 3.4375rem;  /* 55px instead of 89px */
+    
+    /* Mobile hero heights */
+    --hero-height-large: 23.5625rem;  /* 377px instead of 610px */
+    --hero-height-medium: 14.5625rem; /* 233px instead of 377px */
+    --hero-height-small: 9rem;        /* 144px instead of 233px */
+  }
+}
+
+@media (max-width: 41.25rem) { /* 660px */
+  :root {
+    /* Further mobile adjustments */
+    --font-size-hero: 2.618rem;     /* 42px for smallest screens */
+    --font-size-xlarge: 1.618rem;   /* 26px */
+    
+    /* Compact spacing */
+    --space-3xl: 3.4375rem;  /* 55px */
+    --space-xxl: 2.125rem;   /* 34px */
+  }
+}
+
+/* === MATHEMATICAL UTILITY CLASSES === */
+.golden-ratio-container {
+  aspect-ratio: var(--aspect-golden);
+}
+
+.silver-ratio-container {
+  aspect-ratio: var(--aspect-silver);
+}
+
+.fibonacci-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--space-3xl), 1fr));
+  gap: var(--space-lg);
+}
+
+.golden-section {
+  width: 61.8%; /* Golden ratio percentage */
+}
+
+.golden-complement {
+  width: 38.2%; /* Complement of golden ratio */
+}
+
+/* Mathematical proportions for text line heights */
+.text-golden-line-height {
+  line-height: var(--golden-ratio);
+}
+
+.text-perfect-fourth-line-height {
+  line-height: var(--perfect-fourth);
+}
+
+.text-perfect-fifth-line-height {
+  line-height: var(--perfect-fifth);
+}
