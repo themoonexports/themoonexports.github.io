@@ -26,6 +26,308 @@ font-family: sans-serif;
   --tmx-transition-sculpted: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --tmx-drop-shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
+
+/* ===== Crafts-Themed Navigation Dropdown ===== */
+
+/* Dropdown Container */
+.navbar-nav .dropdown {
+  position: relative;
+}
+
+/* Dropdown Toggle - Sophisticated Link Style */
+.navbar-nav .dropdown > .dropdown-toggle {
+  position: relative;
+  padding: 15px 20px;
+  color: var(--tmx-ink-100);
+  transition: all var(--tmx-transition-ease);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.navbar-nav .dropdown > .dropdown-toggle:hover,
+.navbar-nav .dropdown > .dropdown-toggle:focus {
+  color: var(--tmx-brand-green-soft);
+  background-color: rgba(92, 163, 22, 0.08);
+}
+
+/* Active/Open State */
+.navbar-nav .dropdown.open > .dropdown-toggle,
+.navbar-nav .dropdown > .dropdown-toggle[aria-expanded="true"] {
+  color: var(--tmx-brand-green);
+  background-color: rgba(92, 163, 22, 0.12);
+}
+
+/* Caret Enhancement - Artisan Touch */
+.navbar-nav .dropdown .caret {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform var(--tmx-transition-ease);
+  border: none;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+}
+
+.navbar-nav .dropdown.open .caret,
+.navbar-nav .dropdown .dropdown-toggle[aria-expanded="true"] .caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu - Crafts Aesthetic */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 320px;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(135deg, var(--tmx-ink-800) 0%, var(--tmx-ink-700) 100%);
+  border: 1px solid rgba(92, 163, 22, 0.2);
+  border-radius: var(--tmx-radius-md);
+  box-shadow: var(--tmx-drop-shadow-soft);
+  overflow: hidden;
+  animation: dropdownSlideIn var(--tmx-transition-sculpted);
+}
+
+/* Dropdown visible states */
+.navbar-nav .dropdown.open .dropdown-menu,
+.navbar-nav .dropdown-menu[style*="display: block"] {
+  display: block;
+}
+
+/* Smooth entrance animation */
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown Hero Section - Featured Image */
+.dropdown-hero {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to bottom, var(--tmx-ink-900), var(--tmx-ink-800));
+  border-bottom: 2px solid var(--tmx-brand-green);
+  overflow: hidden;
+}
+
+.dropdown-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(92, 163, 22, 0.15) 0%, 
+    rgba(181, 138, 85, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--tmx-transition-ease);
+  pointer-events: none;
+}
+
+.dropdown-hero:hover::before {
+  opacity: 1;
+}
+
+.dropdown-hero-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--tmx-transition-ease);
+}
+
+.dropdown-hero-link:hover {
+  transform: scale(1.02);
+}
+
+.dropdown-hero-figure {
+  margin: 0;
+  padding: var(--tmx-spacing-md);
+  position: relative;
+}
+
+.dropdown-hero-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--tmx-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all var(--tmx-transition-ease);
+}
+
+.dropdown-hero:hover .dropdown-hero-figure img {
+  box-shadow: 0 6px 20px rgba(92, 163, 22, 0.4);
+}
+
+.dropdown-hero-caption {
+  margin-top: var(--tmx-spacing-sm);
+  padding: 0 var(--tmx-spacing-xs);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tmx-ink-100);
+  text-align: center;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* Dropdown Menu Items - Artisan Typography */
+.dropdown-menu > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(92, 163, 22, 0.1);
+  transition: background-color var(--tmx-transition-ease);
+}
+
+.dropdown-menu > li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: var(--tmx-spacing-sm) var(--tmx-spacing-lg);
+  color: var(--tmx-ink-100);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: all var(--tmx-transition-ease);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle accent bar on hover */
+.dropdown-menu > li > a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--tmx-brand-green);
+  transform: translateX(-4px);
+  transition: transform var(--tmx-transition-ease);
+}
+
+.dropdown-menu > li > a:hover::before,
+.dropdown-menu > li > a:focus::before {
+  transform: translateX(0);
+}
+
+/* Hover State - Crafted Elegance */
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: var(--tmx-brand-green-soft);
+  background: linear-gradient(90deg, 
+    rgba(92, 163, 22, 0.15) 0%, 
+    rgba(92, 163, 22, 0.05) 100%
+  );
+  padding-left: calc(var(--tmx-spacing-lg) + var(--tmx-spacing-xs));
+}
+
+/* Active/Current Page Indicator */
+.dropdown-menu > li.active > a,
+.dropdown-menu > li > a[aria-current="page"] {
+  color: var(--tmx-brand-green);
+  background-color: rgba(92, 163, 22, 0.1);
+  font-weight: 500;
+}
+
+/* Keyboard Focus States - Accessibility */
+.dropdown-menu > li > a:focus {
+  outline: 2px solid var(--tmx-brand-green);
+  outline-offset: -2px;
+}
+
+.dropdown-toggle:focus {
+  outline: 2px solid var(--tmx-brand-green);
+  outline-offset: 2px;
+}
+
+/* Role-based styling for screen readers */
+.dropdown-menu[role="menu"] > li[role="presentation"] > a[role="menuitem"] {
+  cursor: pointer;
+}
+
+/* Mobile Responsive - Touch-Friendly */
+@media (max-width: 767px) {
+  .navbar-nav .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background: var(--tmx-ink-800);
+    border: none;
+    border-radius: 0;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-hero {
+    display: none; /* Hide hero image on mobile for cleaner experience */
+  }
+  
+  .dropdown-menu > li > a {
+    padding: var(--tmx-spacing-md) var(--tmx-spacing-lg);
+    font-size: 16px; /* Larger touch targets */
+  }
+}
+
+/* Desktop Hover Enhancement */
+@media (min-width: 768px) {
+  .navbar-nav .dropdown:hover > .dropdown-menu {
+    display: block;
+    animation: dropdownSlideIn var(--tmx-transition-sculpted);
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .navbar-nav .dropdown-menu {
+    border: 2px solid var(--tmx-brand-green);
+  }
+  
+  .dropdown-menu > li > a:focus {
+    outline: 3px solid var(--tmx-brand-green);
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-nav .dropdown-menu {
+    animation: none;
+    transition: none;
+  }
+  
+  .dropdown-menu > li > a,
+  .dropdown-toggle,
+  .dropdown-hero-link {
+    transition: none;
+  }
+  
+  .navbar-nav .dropdown .caret {
+    transition: none;
+  }
+}
+
+/* Print Styles - Dropdown */
+@media print {
+  .navbar-nav .dropdown-menu {
+    display: none !important;
+  }
+}
+
 .masthead {
 padding-top: 35px;
 }
@@ -370,24 +672,9 @@ float: left;
 div#navbar {
   margin-top: 50px;
 }
-.navbar-right .dropdown-menu {
 
-  width: 348px;
-height: 140px;
-}
-ul.dropdown-menu img {
-  position: static;
-  display: block;
-  margin: 10px auto;
-  width: 160px;
-}
-ul.dropdown-menu li:first-child {
-  text-align: center;
-  padding-left: 0;
-}
-ul.dropdown-menu li:not(:first-child) {
-  padding-left: 20px;
-}
+/* Legacy dropdown styles - superseded by crafts-themed styles above */
+/* Keeping minimal compatibility for transition period */
 
 
 }
@@ -475,23 +762,8 @@ figcaption h2 {
   color: #FFF;
   background-color: rgba(231, 231, 231, 0);
 }
-.dropdown-menu {
-  background-color: #333;
-}
-.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-  color: #219521;
-  text-decoration: none;
-  background-color: rgba(245, 245, 245, 0);
-}
-.dropdown-menu>li>a {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #D2D2D2;
-  white-space: nowrap;
-}
+
+/* Legacy dropdown menu styles - now handled by crafts theme above */
 /* Social Media Icons - Crafts Theme */
 .socialm {
   margin-top: 20px;
@@ -639,10 +911,7 @@ div#google_translate_element {
     right: 35%;
 }
 
-/* Fix dropdown hover behavior */
-.navbar-nav .dropdown:hover .dropdown-menu {
-    display: block;
-}
+/* Dropdown hover behavior is now handled in crafts-themed section above */
 
 /* ===== RELIABLE SOCIAL MEDIA ICONS (No External Dependencies) ===== */
 
