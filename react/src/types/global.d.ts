@@ -18,6 +18,10 @@ declare global {
         initContactForm?: () => void;
       };
     };
+    // Google Analytics
+    ga?: (command: string, ...args: unknown[]) => void;
+    // Yandex Metrica
+    ym?: (id: number, method: string, ...params: unknown[]) => void;
   }
 }
 

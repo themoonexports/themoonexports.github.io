@@ -132,7 +132,7 @@
                 </div>
                 
                 <!-- Language Switcher -->
-                <div class="usano">
+                <div class="usano" data-react="language-switcher">
                     <a href="/de" aria-label="Switch to German">
                         <img src="images/german.png" alt="DE" class="img-circle" width="25" height="25">
                     </a>
@@ -197,7 +197,7 @@
     <main id="main-content">
         
         <!-- Hero Carousel -->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" role="region" aria-label="Featured products">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-react="carousel" role="region" aria-label="Featured products">
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-label="Slide 1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1" aria-label="Slide 2"></li>
@@ -232,7 +232,7 @@
         </div>
         
         <!-- Product Categories -->
-        <section class="container frontthree" aria-label="Product categories">
+        <section class="container frontthree" data-react="product-grid" aria-label="Product categories">
             <div class="row">
                 <div class="col-md-4">
                     <article class="productcat">
@@ -265,7 +265,7 @@
     </main>
     
     <!-- Footer -->
-    <footer class="footer-bottom" role="contentinfo">
+    <footer class="footer-bottom" data-react="footer" role="contentinfo">
         <div class="container">
             <div class="row">
                 
@@ -314,7 +314,7 @@
                 <!-- Social Media -->
                 <div class="col-md-3 socialm">
                     <h4>Connect with us</h4>
-                    <div class="social-links">
+                    <div class="social-links" data-react="social-links">
                         <a href="https://www.facebook.com/themoonexports" target="_blank" rel="noopener" aria-label="Facebook">
                             <i class="fab fa-facebook-f" aria-hidden="true"></i>
                         </a>
@@ -369,7 +369,7 @@
             </section>
             
             <!-- Trust Badges -->
-            <section class="payment-info" aria-label="Trust and payment information">
+            <section class="payment-info" data-react="trust-badges" aria-label="Trust and payment information">
                 <div class="trust-badge">
                     <span class="badge-icon">🛡️</span>
                     <span class="badge-text">Trusted Exporter</span>
@@ -421,6 +421,12 @@
     <script type="module" src="js/dist/header.js" defer></script>
     <script type="module" src="js/dist/newsletter.js" defer></script>
     <script type="module" src="js/dist/consent.js" defer></script>
+    <script type="module" src="js/dist/language-switcher.js" defer></script>
+    <script type="module" src="js/dist/carousel.js" defer></script>
+    <script type="module" src="js/dist/product-grid.js" defer></script>
+    <script type="module" src="js/dist/social-links.js" defer></script>
+    <script type="module" src="js/dist/trust-badges.js" defer></script>
+    <script type="module" src="js/dist/footer.js" defer></script>
 
     <script>
         (function () {

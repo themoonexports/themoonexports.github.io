@@ -14,7 +14,13 @@ export default defineConfig({
       input: {
         header: resolve(__dirname, "src/entries/header.tsx"),
         consent: resolve(__dirname, "src/entries/consent.ts"),
-        newsletter: resolve(__dirname, "src/entries/newsletter.tsx")
+        newsletter: resolve(__dirname, "src/entries/newsletter.tsx"),
+        "social-links": resolve(__dirname, "src/entries/social-links.tsx"),
+        "language-switcher": resolve(__dirname, "src/entries/language-switcher.tsx"),
+        "trust-badges": resolve(__dirname, "src/entries/trust-badges.tsx"),
+        footer: resolve(__dirname, "src/entries/footer.tsx"),
+        "product-grid": resolve(__dirname, "src/entries/product-grid.tsx"),
+        carousel: resolve(__dirname, "src/entries/carousel.tsx")
       },
       output: {
         entryFileNames: "[name].js",
