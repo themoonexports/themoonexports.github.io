@@ -647,29 +647,54 @@ $(document).ready(function() {
     });
 });
 </script>
+<script src="js/consent.js"></script>
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-64284432-2', 'auto');
-ga('send', 'pageview');
+(function () {
+  'use strict';
+  const CONFIG = {
+    gaTrackingId: 'UA-64284432-2',
+    yandexMetrikaId: 52371760,
+    googleAdsId: 'AW-960616808'
+  };
+  const utilsNamespace = window.TheMoonExports && window.TheMoonExports.Utils;
+  const loadExternalScript = (utilsNamespace && typeof utilsNamespace.loadScript === 'function')
+      ? utilsNamespace.loadScript
+      : function fallbackLoader(src, options = {}) {
+          const { onLoad, onError, target = document.head } = options;
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          if (typeof onLoad === 'function') script.addEventListener('load', onLoad, { once: true });
+          if (typeof onError === 'function') {
+            script.addEventListener('error', onError, { once: true });
+          } else {
+            script.addEventListener('error', () => console.warn('Failed to load:', src), { once: true });
+          }
+          (target || document.head || document.body).appendChild(script);
+        };
+  function initializeAnalytics() { if (typeof ga === 'function') { ga('create', CONFIG.gaTrackingId, 'auto'); ga('send', 'pageview'); } }
+  function initializeYandex() { if (typeof ym === 'function') { ym(CONFIG.yandexMetrikaId, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } }
+  function initializeGtag() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', CONFIG.gaTrackingId);
+    gtag('config', CONFIG.googleAdsId);
+  }
+  function loadAnalyticsScripts() {
+    loadExternalScript('https://www.google-analytics.com/analytics.js', { onLoad: initializeAnalytics });
+    loadExternalScript('https://mc.yandex.ru/metrika/tag.js', { onLoad: initializeYandex });
+    loadExternalScript('https://www.googletagmanager.com/gtag/js?id=' + CONFIG.gaTrackingId, { onLoad: initializeGtag });
+  }
+  const consentApi = window.TheMoonExports && window.TheMoonExports.Consent;
+  if (consentApi && typeof consentApi.onReady === 'function') {
+    consentApi.onReady((state) => { if (state.analytics) loadAnalyticsScripts(); else console.info('Analytics scripts skipped - consent declined.'); });
+  } else {
+    console.warn('Consent API unavailable; analytics scripts not loaded.');
+  }
+}());
 </script>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-ym(52371760, "init", {
-    id:52371760,
-    clickmap:true,
-    trackLinks:true,
-    accurateTrackBounce:true,
-    webvisor:true
-});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/52371760" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 <script src="js/lazysizes.min.js" async></script>
 <script src="js/auto-year-update.js"></script>
 <!-- React Progressive Enhancement: Non-product components -->
