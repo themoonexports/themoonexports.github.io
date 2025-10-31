@@ -414,8 +414,8 @@ color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Ensure all images are responsive by default */
-img {
+/* Ensure images in content blocks are responsive */
+.content img {
   max-width: 100%;
   height: auto;
 }
