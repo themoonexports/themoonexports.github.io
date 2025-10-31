@@ -973,19 +973,53 @@ span.caret:before {
   filter: brightness(1.02) contrast(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-/* Trust Badge Styling */
-.payment-info::before {
-  content: '🛡️';
+/* Enhanced Trust Badge */
+.trust-badge {
   position: absolute;
   top: -15px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #5CA316 0%, #4a8d12 100%);
   color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow:
+    0 4px 12px rgba(92, 163, 22, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.badge-icon {
   font-size: 14px;
-  box-shadow: 0 4px 8px rgba(92, 163, 22, 0.3);
+}
+
+.badge-text {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Company Tagline */
+.company-tagline {
+  color: #B3B3B3;
+  font-size: 12px;
+  margin: 8px 0 0 0;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Payment Text */
+.payment-text {
+  color: #5CA316;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-align: center;
 }
 
 /* Mobile Responsive */
