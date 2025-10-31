@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ========================================
+         DOCUMENT META - Basic Configuration
+         ======================================== -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- SEO Meta Tags - Update description for better rankings -->
     <meta name="description" content="Handicrafts exporter The Moon Exports provides a large range of Vintage and Modern Handicrafts and Manufactures as per clients requirement from Horn, Bone, Wood and Resin. We are suppliers cum manufacturers located at Sambhal, Moradabad, India.">
     <meta name="keywords" content="handicrafts, horn crafts, wooden crafts, resin products, buffalo horn, vintage jewelry, moradabad, sambhal, india, export">
     <meta name="author" content="Kamran Khan">
     <meta name="robots" content="index, follow">
 
-    <!-- OpenGraph tags for social media -->
+    <!-- ========================================
+         SOCIAL MEDIA META - OpenGraph + Twitter
+         NOTE: Update og:image with high-res product photos
+         ======================================== -->
     <meta property="og:title" content="The Moon Exports - Buffalo Horn Crafts | Wooden Crafts | Resin Products">
     <meta property="og:description" content="Handicrafts exporter providing vintage and modern handicrafts from Horn, Bone, Wood and Resin.">
     <meta property="og:url" content="https://www.themoonexports.com">
@@ -23,44 +31,66 @@
     <meta name="twitter:description" content="Handicrafts exporter providing vintage and modern handicrafts from Horn, Bone, Wood and Resin.">
     <meta name="twitter:image" content="https://www.themoonexports.com/images/logoLSmall.jpg">
 
-    <!-- Verification meta tags -->
-    <!-- Google Search Console verification: Add your actual verification code when ready -->
+    <!-- ========================================
+         SEARCH ENGINE VERIFICATION
+         Google: Add verification code when available
+         Bing: 16BD6C369F5C625E1A4E42C9BE5BFB3F
+         Yandex: 7be55e5d79a93733
+         Pinterest: f760fac5120b861a6831cf1a338fec84
+         ======================================== -->
     <!-- <meta name="google-site-verification" content="your-actual-google-verification-code"> -->
     <meta name="msvalidate.01" content="16BD6C369F5C625E1A4E42C9BE5BFB3F">
     <meta name="yandex-verification" content="7be55e5d79a93733">
     <meta name="p:domain_verify" content="f760fac5120b861a6831cf1a338fec84">
 
-    <!-- Favicon -->
+    <!-- ========================================
+         FAVICON - Browser Tab Icon
+         ======================================== -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
-    <!-- Language alternatives -->
+    <!-- ========================================
+         INTERNATIONALIZATION - Language Versions
+         Add new language versions here using hreflang
+         ======================================== -->
     <link rel="alternate" hreflang="en" href="https://www.themoonexports.com/">
     <link rel="alternate" hreflang="de" href="https://www.themoonexports.com/de/">
     <link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/">
     <link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/">
     
-    <!-- Page title -->
+    <!-- ========================================
+         PAGE TITLE - Update for SEO optimization
+         ======================================== -->
     <title>The Moon Exports - Buffalo Horn Crafts | Wooden Crafts | Resin Products | Bone Handicrafts | Handmade Handcrafted | Manufacturer cum Exporter</title>
 
-    <!-- Preload critical resources -->
+    <!-- ========================================
+         PERFORMANCE OPTIMIZATION
+         Preload critical CSS for faster rendering
+         Note: Font Awesome excluded from preload due to integrity mismatch
+         ======================================== -->
     <link rel="preload" href="css/bootstrap.min.css" as="style">
     <link rel="preload" href="css/one.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style">
 
-    <!-- Bootstrap core CSS -->
+    <!-- ========================================
+         STYLESHEETS
+         1. Bootstrap 3.4.1 - Layout framework
+         2. one.css - Custom theme with crafts design tokens
+         3. Font Awesome 6.5.0 - Icon library
+         ======================================== -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/one.css" rel="stylesheet">
 
-    <!-- Font Awesome 6.5.0 - Single reliable source -->
+    <!-- Font Awesome - Icons (CDN with integrity check) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer">
 
-    <!-- Structured Data -->
+    <!-- ========================================
+         STRUCTURED DATA - JSON-LD for SEO
+         Helps Google understand business details
+         Update: contact info, social links, address
+         ======================================== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -92,7 +122,7 @@
     }
     </script>
 
-    <!-- WebSite structured data -->
+    <!-- WebSite Structured Data - Enables search box in Google results -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -108,15 +138,22 @@
     }
     </script>
 
-    <!-- DNS prefetch for external resources -->
+    <!-- ========================================
+         PERFORMANCE - DNS Prefetch
+         Resolves domain names early for faster loading
+         ======================================== -->
     <link rel="dns-prefetch" href="//translate.google.com">
     <link rel="dns-prefetch" href="//www.google-analytics.com">
     <link rel="dns-prefetch" href="//mc.yandex.ru">
     <link rel="dns-prefetch" href="//zc1.maillist-manage.in">
 
-    <!-- Cache control -->
+    <!-- Browser Caching - 1 hour cache -->
     <meta http-equiv="Cache-Control" content="public, max-age=3600">
 
+    <!-- ========================================
+         IE COMPATIBILITY - Legacy Browser Support
+         Polyfills for HTML5 and responsive design
+         ======================================== -->
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
             integrity="sha512-UDJtJXfzfsiPPgnI5S1000FPLBHMhvzAMX15I+qG2E2OAzC9P1JzUwJOfnypXiOH7MRPaqzhPbBGDNNj7zBfoA=="
@@ -127,14 +164,35 @@
     <![endif]-->
 </head>
 <body>
-    <!-- Skip to main content for accessibility -->
+    <!-- ========================================
+         ACCESSIBILITY - Skip Navigation Link
+         Allows keyboard users to jump to main content
+         ======================================== -->
     <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
 
-    <!-- Error boundary for JavaScript errors -->
+    <!-- ========================================
+         ERROR BOUNDARY - JavaScript Error Handler
+         Displays user-friendly message on JS errors
+         Controlled by inline script at bottom of page
+         ======================================== -->
     <div id="error-boundary" style="display: none;" role="alert" aria-live="polite">
         <p>An error occurred. Please refresh the page or contact support if the problem persists.</p>
     </div>
 
+    <!-- ========================================
+         NAVIGATION BAR - Fixed Top Header
+         Components:
+         - Logo (left)
+         - Language switcher (right, mobile center)
+         - Main menu with dropdown (right)
+         
+         DROPDOWN BEHAVIOR:
+         - Markup: Enhanced semantic HTML with ARIA roles
+         - CSS: Crafts-themed styles in css/one.css
+         - JS: Modern ES6+ modules in js/navigation.js
+         
+         TODO: Replace inline JS with navigation.js module
+         ======================================== -->
     <div class="masthead">
         <nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
             <div class="container">
@@ -147,11 +205,33 @@
                     </button>
                     <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="The Moon Exports" class="lazyload"/></a>
                 </div>
+                
+                <!-- Language Switcher - German & French versions -->
                 <p class="usano"><b><a href="/de"><img src="images/german.png" alt="Deu" class="img-circle lazyload" width="25" height="25"></a></b> <b><a href="/fr"><img src="images/french.png" alt="Fra" class="img-circle lazyload" width="25" height="25"></a></b> </p>
+                
+                <!-- Main Navigation Menu -->
                 <div id="navbar" class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
+                        
+                        <!-- ========================================
+                             DROPDOWN MENU - Handicrafts Products
+                             
+                             STRUCTURE:
+                             - dropdown-toggle: Main link with caret
+                             - dropdown-menu: Container with hero + items
+                             - dropdown-hero: Featured image section
+                             - menu items: Product category links
+                             
+                             ACCESSIBILITY:
+                             - ARIA roles for screen readers
+                             - Keyboard navigation support
+                             - Focus management
+                             
+                             STYLING: See css/one.css (crafts theme)
+                             BEHAVIOR: See js/navigation.js (modern ES6+)
+                             ======================================== -->
                         <li class="dropdown" data-nav="handicrafts">
                             <a href="products.html"
                                class="dropdown-toggle"
@@ -167,6 +247,8 @@
                                 id="nav-handicrafts-menu"
                                 role="menu"
                                 aria-labelledby="nav-handicrafts-toggle">
+                                
+                                <!-- Hero Image - Featured product showcase -->
                                 <li class="dropdown-hero" role="presentation">
                                     <a href="products.html" class="dropdown-hero-link" role="menuitem">
                                         <figure class="dropdown-hero-figure">
@@ -177,6 +259,8 @@
                                         </figure>
                                     </a>
                                 </li>
+                                
+                                <!-- Product Category Links -->
                                 <li role="presentation"><a href="horn-crafts.html" role="menuitem">Horn Crafts</a></li>
                                 <li role="presentation"><a href="buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
                                 <li role="presentation"><a href="wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
@@ -190,15 +274,31 @@
         </nav>
     </div>
 
+    <!-- ========================================
+         MAIN CONTENT AREA
+         Skip navigation link jumps here (#main-content)
+         ======================================== -->
     <main id="main-content" role="main">
+        
+        <!-- ========================================
+             HERO CAROUSEL - Homepage Slideshow
+             Bootstrap carousel with 2 slides
+             Auto-plays on page load
+             
+             TODO: Consider replacing with modern slider
+             ======================================== -->
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" role="region" aria-label="Featured content carousel">
-            <!-- Indicators -->
+            
+            <!-- Carousel Navigation Dots -->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-label="Slide 1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1" aria-label="Slide 2"></li>
             </ol>
-            <!-- Wrapper for slides -->
+            
+            <!-- Carousel Slides -->
             <div class="carousel-inner" role="listbox">
+                
+                <!-- Slide 1 - Main hero image with CTA -->
                 <div class="item active">
                     <img src="images/one.jpg" alt="The Moon Exports crafts showcase" loading="eager" width="1200" height="600">
                     <div class="carousel-caption">
@@ -207,6 +307,8 @@
                         <a class="slidebtn" href="contact.html" role="button" aria-label="Make an enquiry">Enquiry</a><br>
                     </div>
                 </div>
+                
+                <!-- Slide 2 - Secondary hero image -->
                 <div class="item">
                     <img src="images/two.jpg" alt="The Moon Exports product range" loading="lazy" width="1200" height="600">
                     <div class="carousel-caption">
@@ -216,7 +318,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Controls -->
+            
+            <!-- Carousel Navigation Arrows -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" aria-label="Previous slide">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -227,6 +330,11 @@
             </a>
         </div>
 
+        <!-- ========================================
+             PRODUCT CATEGORIES - Featured Grid
+             Three main product categories with images
+             Hover effect shows transform animation
+             ======================================== -->
         <section class="container frontthree" aria-label="Product categories">
             <div class="row">
                 <div class="col-md-4">
@@ -257,8 +365,21 @@
         </section>
     </main>
 
+    <!-- ========================================
+         FOOTER - Site-wide Navigation & Info
+         Sections:
+         1. Company links (about, contact, legal)
+         2. Product links
+         3. Contact information
+         4. Social media links
+         5. Newsletter signup
+         6. Payment/trust badges
+         7. Copyright
+         ======================================== -->
     <footer class="footer-bottom" role="contentinfo">
         <div class="container">
+            
+            <!-- Footer Navigation Columns -->
             <div class="row">
                 <div class="col-md-3">
                     <h4>The Moon Exports</h4>
@@ -322,7 +443,11 @@
                 </div>
             </div>
 
-            <!-- Newsletter signup section -->
+            <!-- ========================================
+                 NEWSLETTER SIGNUP - Zoho Integration
+                 Form submits to zc1.maillist-manage.in
+                 Inline validation handled by JS below
+                 ======================================== -->
             <section class="newsletter-section" aria-label="Newsletter signup">
                 <div class="newsletter-container" style="background-color: rgb(67, 67, 67); color: rgb(166, 166, 166); border: 1px solid rgb(67, 67, 67); overflow: hidden; margin: 20px auto; padding: 20px; max-width: 400px; font-size: 11px; font-family: Arial; text-align: center;">
                     <h4 style="color: rgb(166, 166, 166); font-weight: bold; font-size: 14px; font-family: Verdana; text-align: left; margin-bottom: 15px;">Join Our Newsletter</h4>
@@ -361,7 +486,10 @@
                 </div>
             </section>
 
-            <!-- Enhanced Payment and Company Info - Crafts Theme -->
+            <!-- ========================================
+                 TRUST BADGES - Company Logo & Payment
+                 Shows trust signals to visitors
+                 ======================================== -->
             <section class="payment-info" aria-label="Company and payment information">
                 <div class="trust-badge">
                     <span class="badge-icon">🛡️</span>
@@ -398,15 +526,38 @@
                 </div>
             </section>
 
+            <!-- Copyright Notice - Year auto-updates via JS -->
             <div class="copyright" style="margin-top: 20px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
                 <span>COPYRIGHT © <span id="current-year">2024</span> THEMOONEXPORTS.COM</span>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript section -->
+    <!-- ========================================
+         JAVASCRIPT - Inline Legacy Code
+         
+         CURRENT STATE: Vanilla JS with manual dropdown handling
+         
+         MODERNIZATION PLAN:
+         1. Replace inline code with modern ES6+ modules:
+            - js/utils.js (DOM helpers, date updates)
+            - js/navigation.js (dropdown with full accessibility)
+            - js/forms.js (form validation)
+            - js/main.js (app initialization)
+         
+         2. Keep external script loaders:
+            - Google Analytics
+            - Google Translate
+            - Yandex Metrika
+         
+         MODULES READY: See js-modernization.md for details
+         TODO: Add script tags and remove inline code below
+         ======================================== -->
     <script>
-        // Global error handler
+        // ========================================
+        // GLOBAL ERROR HANDLER
+        // Shows error boundary div on JavaScript errors
+        // ========================================
         window.addEventListener('error', function(e) {
             console.error('JavaScript error:', e.error);
             const errorBoundary = document.getElementById('error-boundary');
@@ -415,14 +566,21 @@
             }
         });
 
-        // Configuration object
+        // ========================================
+        // CONFIGURATION
+        // Centralized config for analytics & tracking
+        // ========================================
         const CONFIG = {
             gaTrackingId: 'UA-64284432-2',
             yandexMetrikaId: 52371760,
             currentYear: new Date().getFullYear()
         };
 
-        // Update current year
+        // ========================================
+        // COPYRIGHT YEAR AUTO-UPDATE
+        // Updates #current-year span with current year
+        // TODO: Move to js/utils.js updateCopyright()
+        // ========================================
         function updateCurrentYear() {
             const yearElement = document.getElementById('current-year');
             if (yearElement) {
@@ -430,7 +588,11 @@
             }
         }
 
-        // Newsletter form handling
+        // ========================================
+        // NEWSLETTER FORM VALIDATION
+        // Client-side email validation before Zoho submit
+        // TODO: Move to js/forms.js initNewsletterForm()
+        // ========================================
         function initializeNewsletterForm() {
             const form = document.getElementById('newsletter-form');
             const emailInput = document.getElementById('newsletter-email');
@@ -464,7 +626,10 @@
             }
         }
 
-        // Google Translate initialization
+        // ========================================
+        // GOOGLE TRANSLATE WIDGET
+        // Initializes floating translate dropdown
+        // ========================================
         function googleTranslateElementInit() {
             try {
                 if (typeof google !== 'undefined' && google.translate) {
@@ -478,7 +643,10 @@
             }
         }
 
-        // Initialize Google Analytics
+        // ========================================
+        // GOOGLE ANALYTICS TRACKER
+        // Sends pageview to GA property
+        // ========================================
         function initializeGA() {
             try {
                 if (typeof ga !== 'undefined') {
@@ -490,7 +658,10 @@
             }
         }
 
-        // Initialize Yandex Metrika
+        // ========================================
+        // YANDEX METRIKA TRACKER
+        // Russian analytics service with heatmaps
+        // ========================================
         function initializeYandexMetrika() {
             try {
                 if (typeof ym !== 'undefined') {
@@ -507,7 +678,11 @@
             }
         }
 
-        // DOM Ready function
+        // ========================================
+        // DOM READY HELPER
+        // Cross-browser document ready handler
+        // TODO: Use js/utils.js domReady() instead
+        // ========================================
         function domReady(fn) {
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', fn);
@@ -516,12 +691,27 @@
             }
         }
 
-        // Initialize everything when DOM is ready
+        // ========================================
+        // DOM INITIALIZATION
+        // Runs when page fully loaded
+        // ========================================
         domReady(function() {
             updateCurrentYear();
             initializeNewsletterForm();
 
-            // Initialize dropdown hover effect
+            // ========================================
+            // LEGACY DROPDOWN BEHAVIOR
+            // Manual mouseenter/mouseleave handlers
+            // 
+            // TODO: REMOVE THIS BLOCK
+            // Replace with: js/navigation.js module
+            // Which provides:
+            // - Keyboard navigation (Arrow keys, Enter, Esc)
+            // - Touch support with media queries
+            // - ARIA state management
+            // - Focus trapping
+            // - Configurable hover delay
+            // ========================================
             const dropdowns = document.querySelectorAll('.navbar-default .navbar-nav > li.dropdown');
             dropdowns.forEach(function(dropdown) {
                 dropdown.addEventListener('mouseenter', function() {
@@ -542,26 +732,37 @@
             });
         });
 
-        // Load external scripts with fallbacks
-        function loadScript(src, callback, fallback) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.async = true;
-            script.onload = callback;
-            script.onerror = function() {
-                console.warn('Failed to load script:', src);
-                if (fallback) fallback();
-            };
-            document.head.appendChild(script);
-        }
+        // ========================================
+        // DYNAMIC SCRIPT LOADER
+        // Loads external JS with error handling
+        // ========================================
+        const loadExternalScript =
+            (window.TheMoonExports && window.TheMoonExports.Utils && window.TheMoonExports.Utils.loadScript)
+                ? window.TheMoonExports.Utils.loadScript
+                : function fallbackLoadScript(src, callback, errorCallback) {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.async = true;
+                    if (callback) {
+                        script.onload = callback;
+                    }
+                    script.onerror = function onScriptError(error) {
+                        console.warn('Failed to load script:', src);
+                        if (typeof errorCallback === 'function') {
+                            errorCallback(error);
+                        }
+                    };
+                    document.head.appendChild(script);
+                };
 
-        // Load Google Analytics
-        loadScript('https://www.google-analytics.com/analytics.js', initializeGA);
+        const externalScripts = [
+            { src: 'https://www.google-analytics.com/analytics.js', onLoad: initializeGA },
+            { src: 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' },
+            { src: 'https://mc.yandex.ru/metrika/tag.js', onLoad: initializeYandexMetrika }
+        ];
 
-        // Load Google Translate
-        loadScript('https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
+        externalScripts.forEach(({ src, onLoad }) => {
+            loadExternalScript(src, onLoad);
+        });
 
-        // Load Yandex Metrika
-        loadScript('https://mc.yandex.ru/metrika/tag.js', initializeYandexMetrika);
-
-        // Service Worker
+        // Service Worker - Progressive Web App support (incomplete)
