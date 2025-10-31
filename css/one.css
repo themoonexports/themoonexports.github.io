@@ -42,6 +42,8 @@ h4#myModalLabel {
 }
 .services .panel-body img {
 width:100%;
+max-width: 100%;
+height: auto;
 }
 .frontblock.serviceb {
   background-image: url("../images/services.jpg");
@@ -173,7 +175,7 @@ text-transform: uppercase;
 background-color:#EB3C00;
 }
 .navbar-default {
-background: #000; 
+background: #000;
 background-color: #000;
 border: 0px;
 border-radius: 0px;
@@ -182,9 +184,33 @@ border-radius: 0px;
 .navbar {
 min-height:110px;
 }
+/* Enhanced Navbar Brand Logo - Crafts Theme */
+a.navbar-brand {
+  position: relative;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+a.navbar-brand:hover {
+  background: linear-gradient(135deg, rgba(92, 163, 22, 0.1) 0%, rgba(92, 163, 22, 0.05) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(92, 163, 22, 0.2);
+}
+
 a.navbar-brand img {
   max-width: 260px;
-    margin-top: -10px;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  margin-top: -10px;
+  transition: all 0.3s ease;
+  filter: brightness(1) contrast(1.1);
+}
+
+a.navbar-brand:hover img {
+  filter: brightness(1.05) contrast(1.15) drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  transform: scale(1.02);
 }
 .navbar-default .navbar-nav>li>a {
 color: #cbcbcb;
@@ -270,10 +296,22 @@ color: #5CA316;
 @media (max-width: 768px) {
 .col-md-6 img {
 width:100%;
+max-width: 100%;
+height: auto;
 }
 .masthead img {
 width:100px;
-  margin-bottom: 14px;
+max-width: 100px;
+height: auto;
+margin-bottom: 14px;
+}
+.modal-body img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  float: none;
+  margin-bottom: 10px;
+}
 }
 .item h3 {
   font-size: 15px;
@@ -288,17 +326,15 @@ width:100px;
     margin-bottom: 0px;
 }
 body {
- 
+
   padding-top: 50px;
- 
+
 }
 .masthead {
   padding-top: 0px;
 }
        p.usano {
     display: none;
-}
-
 }
 
 @media (min-width: 768px) {
@@ -330,7 +366,7 @@ ul.dropdown-menu li:first-child {
 ul.dropdown-menu li:not(:first-child) {
   padding-left: 20px;
 }
- 
+
 
 }
 
@@ -344,7 +380,7 @@ figcaption {
   position: absolute;
   top: 0;
   opacity: 0;
-  
+
 }
 figure {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -360,12 +396,28 @@ color: #fff;
 .cf {
   position:relative;
   height:360px;
- 
+
   margin:0 auto;
    margin-bottom: 30px;
 }
 .col-md-4 img {
   width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal images should be responsive */
+.modal-body img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* Ensure images in content blocks are responsive */
+.content img {
+  max-width: 100%;
+  height: auto;
 }
 .cf img {
   position:absolute;
@@ -418,19 +470,77 @@ figcaption h2 {
   color: #D2D2D2;
   white-space: nowrap;
 }
-.socialm a {
-  padding: 8px;
-  margin-right: 10px;
-  font-size: 20px;
-  background-color: #000;
-  color: #fff;
-  text-decoration: none;
+/* Social Media Icons - Crafts Theme */
+.socialm {
+  margin-top: 20px;
+}
+
+.socialm h4 {
+  color: #5CA316;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #5CA316;
+  padding-bottom: 8px;
   display: inline-block;
 }
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.socialm a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #B3B3B3;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.socialm a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(92, 163, 22, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.socialm a:hover::before {
+  left: 100%;
+}
+
+.socialm a:hover {
+  color: #fff;
+  border-color: #5CA316;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 8px 20px rgba(92, 163, 22, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
 .socialm .fa,
 .socialm .fab {
-  width: 24px;
+  width: auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 .frontthree {
 margin-top:30px;
@@ -595,51 +705,74 @@ div#google_translate_element {
     font-size: 14px;
 }
 
-/* Fallback for existing Font Awesome icons - make them work if FA loads */
-.socialm a {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 8px;
-    background-color: #333;
-    color: #fff !important;
-    text-decoration: none;
-    border-radius: 50%;
+/* Enhanced Social Media Icons - Crafts Theme Override */
+
+/* Platform-specific hover effects with crafts theme colors */
+.socialm a[href*="facebook"]:hover {
+  background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+  border-color: #1877f2;
+  box-shadow:
+    0 8px 20px rgba(24, 119, 242, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.socialm a[href*="twitter"]:hover {
+  background: linear-gradient(135deg, #1da1f2 0%, #1991db 100%);
+  border-color: #1da1f2;
+  box-shadow:
+    0 8px 20px rgba(29, 161, 242, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.socialm a[href*="instagram"]:hover {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: #e6683c;
+  box-shadow:
+    0 8px 20px rgba(225, 48, 108, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.socialm a[href*="pinterest"]:hover {
+  background: linear-gradient(135deg, #bd081c 0%, #a0071a 100%);
+  border-color: #bd081c;
+  box-shadow:
+    0 8px 20px rgba(189, 8, 28, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.socialm a[href*="linkedin"]:hover {
+  background: linear-gradient(135deg, #0077b5 0%, #006ba1 100%);
+  border-color: #0077b5;
+  box-shadow:
+    0 8px 20px rgba(0, 119, 181, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile responsive design for social icons */
+@media (max-width: 768px) {
+  .socialm a {
     width: 40px;
     height: 40px;
+    font-size: 16px;
+  }
+
+  .social-links {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .socialm h4 {
     text-align: center;
-    line-height: 24px;
-    transition: all 0.3s ease;
+    font-size: 16px;
+  }
 }
 
-.socialm a:hover {
-    color: #fff !important;
-    text-decoration: none;
-    transform: scale(1.1);
-    opacity: 0.8;
-}
-
-/* Platform-specific background colors for Font Awesome icons */
-.socialm a[href*="facebook"] {
-    background-color: #1877f2;
-}
-
-.socialm a[href*="twitter"] {
-    background-color: #1da1f2;
-}
-
-.socialm a[href*="instagram"] {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-}
-
-.socialm a[href*="pinterest"] {
-    background-color: #bd081c;
-}
-
-.socialm a[href*="linkedin"] {
-    background-color: #0077b5;
-}
-
-/* If Font Awesome fails to load, show text fallbacks */
+/* Font Awesome fallback styles with crafts theme integration */
 .socialm a[href*="facebook"] .fab:before,
 .socialm a[href*="facebook"] .fa:before {
     content: "f" !important;
@@ -749,3 +882,168 @@ span.caret:before {
 }
 
 /* ===== END BOOTSTRAP CARET FIX ===== */
+
+/* ===== ENHANCED LOGO STYLING - CRAFTS THEME ===== */
+
+/* Payment Info Section */
+.payment-info {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 30px 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Company Logo in Footer */
+.company-logo {
+  margin-bottom: 25px;
+}
+
+.company-logo a {
+  display: inline-block;
+  padding: 15px;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.company-logo a:hover {
+  border-color: #5CA316;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow:
+    0 12px 30px rgba(92, 163, 22, 0.3),
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.company-logo img {
+  width: 112px;
+  height: 112px;
+  transition: all 0.3s ease;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.company-logo a:hover img {
+  filter: brightness(1) contrast(1.2) drop-shadow(0 4px 8px rgba(92, 163, 22, 0.2));
+}
+
+/* PayPal Logo Styling */
+.payment-logo {
+  margin-top: 20px;
+}
+
+.payment-logo a {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.payment-logo a:hover {
+  border-color: #5CA316;
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 15px rgba(92, 163, 22, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.payment-logo img {
+  width: 150px;
+  height: 60px;
+  transition: all 0.3s ease;
+  filter: brightness(1) contrast(1.05);
+}
+
+.payment-logo a:hover img {
+  filter: brightness(1.02) contrast(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Enhanced Trust Badge */
+.trust-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #5CA316 0%, #4a8d12 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow:
+    0 4px 12px rgba(92, 163, 22, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.badge-icon {
+  font-size: 14px;
+}
+
+.badge-text {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Company Tagline */
+.company-tagline {
+  color: #B3B3B3;
+  font-size: 12px;
+  margin: 8px 0 0 0;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Payment Text */
+.payment-text {
+  color: #5CA316;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .payment-info {
+    margin: 15px auto;
+    padding: 20px 15px;
+    max-width: 90%;
+  }
+
+  .company-logo img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .payment-logo img {
+    width: 120px;
+    height: 48px;
+  }
+
+  a.navbar-brand img {
+    max-width: 180px;
+    max-height: 40px;
+  }
+}
+
+/* ===== END ENHANCED LOGO STYLING ===== */
