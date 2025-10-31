@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Design System Test - The Moon Exports</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Main CSS -->
+    <link href="../../css/one.css" rel="stylesheet">
+    
+    <!-- CSS Variables for Design Tokens -->
+    <style>
+        :root {
+            /* Color Tokens from Design System */
+            --color-body-bg: #191919;
+            --color-text-primary: #D3D3D3;
+            --color-text-heading: #FFFFFF;
+            --color-navbar-bg: #000000;
+            --color-navbar-border: #333333;
+            --color-footer-bg: #333333;
+            --color-footer-link: #B3B3B3;
+            --color-accent-green: #4F8E10;
+            --color-accent-green-hover: #447712;
+            --color-services-accent: #A17BB6;
+            --color-dropdown-bg: #333333;
+            --color-dropdown-text: #D2D2D2;
+            --color-dropdown-hover: #219521;
+            
+            /* Social Platform Colors */
+            --color-facebook: #1877f2;
+            --color-twitter: #1da1f2;
+            --color-pinterest: #bd081c;
+            --color-linkedin: #0077b5;
+            --color-instagram-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            
+            /* Spacing Tokens */
+            --spacing-navbar-height: 110px;
+            --spacing-navbar-height-mobile: 50px;
+            --spacing-section-padding: 35px;
+            --spacing-hero-height: 400px;
+            --spacing-hero-alt-height: 300px;
+            --spacing-icon-size: 40px;
+            
+            /* Typography Tokens */
+            --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --font-size-hero-large: 60px;
+            --font-size-hero-small: 34px;
+            --font-size-section-title: 46px;
+            --font-size-nav: 16px;
+            
+            /* Animation Tokens */
+            --transition-fast: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --scale-hover: 1.1;
+        }
+        
+        /* Inline SVG Icon System */
+        .icon {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        
+        /* SVG Social Icons - TRUE Legacy .socialm System (from de/css/one.css) */
+        .socialm-svg a {
+            padding: 8px;
+            margin-right: 10px;
+            font-size: 20px;
+            background-color: #000;
+            /* NO color, NO text-decoration, NO display specified in original */
+        }
+        
+        .socialm-svg .icon {
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Test-specific styles */
+        .test-section {
+            margin: 40px 0;
+            padding: 30px;
+            border: 1px solid var(--color-navbar-border);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        
+        .test-section h2 {
+            color: var(--color-text-heading);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-services-accent);
+            padding-bottom: 10px;
+        }
+        
+        .color-swatch {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            vertical-align: middle;
+        }
+        
+        .color-label {
+            color: var(--color-text-primary);
+            font-size: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Accessibility - prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .socialm-svg a {
+                transition: none;
+            }
+        }
+        
+        /* Component Examples */
+        .btn-test {
+            background-color: var(--color-accent-green);
+            border-color: var(--color-accent-green-hover);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-fast);
+        }
+        
+        .btn-test:hover {
+            background-color: var(--color-accent-green-hover);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .dropdown-test {
+            background-color: var(--color-dropdown-bg);
+            color: var(--color-dropdown-text);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .caret-test {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: 8px;
+            vertical-align: middle;
+            border-top: 4px solid;
+            border-right: 4px solid transparent;
+            border-left: 4px solid transparent;
+            border-bottom: 0;
+        }
+    </style>
+</head>
+
+<body style="background-color: var(--color-body-bg); color: var(--color-text-primary); font-family: var(--font-family-base); padding: 20px;">
+
+    <!-- Inline SVG Sprite -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <!-- Facebook Icon -->
+            <symbol id="icon-facebook" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </symbol>
+            
+            <!-- Twitter/X Icon -->
+            <symbol id="icon-twitter" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </symbol>
+            
+            <!-- Instagram Icon -->
+            <symbol id="icon-instagram" viewBox="0 0 24 24">
+                <path d="M12.017 0C8.396 0 7.989.013 7.041.048 6.021.088 5.347.222 4.73.42c-.668.258-1.267.598-1.847 1.178C2.304 2.178 1.964 2.777 1.706 3.445 1.508 4.062 1.374 4.736 1.334 5.756c-.035.948-.048 1.355-.048 4.976s.013 4.028.048 4.976c.04 1.02.174 1.694.372 2.311.258.668.598 1.267 1.178 1.847.58.58 1.179.92 1.847 1.178.617.198 1.291.332 2.311.372.948.035 1.355.048 4.976.048s4.028-.013 4.976-.048c1.02-.04 1.694-.174 2.311-.372.668-.258 1.267-.598 1.847-1.178.58-.58.92-1.179 1.178-1.847.198-.617.332-1.291.372-2.311.035-.948.048-1.355.048-4.976s-.013-4.028-.048-4.976c-.04-1.02-.174-1.694-.372-2.311-.258-.668-.598-1.267-1.178-1.847C20.822 1.304 20.223.964 19.555.706c-.617-.198-1.291-.332-2.311-.372C16.296.013 15.889 0 12.017 0zm0 2.158c3.301 0 3.683.013 4.947.048.754.035 1.23.161 1.518.267.381.148.652.326.94.615.289.288.467.559.615.94.106.288.232.764.267 1.518.035 1.264.048 1.646.048 4.947s-.013 3.683-.048 4.947c-.035.754-.161 1.23-.267 1.518-.148.381-.326.652-.615.94-.288.289-.559.467-.94.615-.288.106-.764.232-1.518.267-1.264.035-1.646.048-4.947.048s-3.683-.013-4.947-.048c-.754-.035-1.23-.161-1.518-.267-.381-.148-.652-.326-.94-.615-.289-.288-.467-.559-.615-.94-.106-.288-.232-.764-.267-1.518-.035-1.264-.048-1.646-.048-4.947s.013-3.683.048-4.947c.035-.754.161-1.23.267-1.518.148-.381.326-.652.615-.94.288-.289.559-.467.94-.615.288-.106.764-.232 1.518-.267 1.264-.035 1.646-.048 4.947-.048zm0 3.675c-2.985 0-5.408 2.423-5.408 5.408s2.423 5.408 5.408 5.408 5.408-2.423 5.408-5.408-2.423-5.408-5.408-5.408zm0 8.917c-1.937 0-3.509-1.572-3.509-3.509s1.572-3.509 3.509-3.509 3.509 1.572 3.509 3.509-1.572 3.509-3.509 3.509zm6.876-9.142c0 .696-.566 1.262-1.262 1.262s-1.262-.566-1.262-1.262.566-1.262 1.262-1.262 1.262.566 1.262 1.262z"/>
+            </symbol>
+            
+            <!-- Pinterest Icon -->
+            <symbol id="icon-pinterest" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.747 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.537.535 6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+            </symbol>
+            
+            <!-- LinkedIn Icon -->
+            <symbol id="icon-linkedin" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </symbol>
+            
+            <!-- Caret Down Icon -->
+            <symbol id="icon-caret-down" viewBox="0 0 24 24">
+                <path d="M7.41 8.84L12 13.42l4.59-4.58L18 10.25l-6 6-6-6z"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="container">
+        <h1 style="color: var(--color-text-heading); font-size: var(--font-size-hero-large); text-align: center; margin-bottom: 40px;">
+            Design System Test Page
+        </h1>
+
+        <!-- Color Tokens Test -->
+        <div class="test-section">
+            <h2>Color Tokens</h2>
+            <div style="margin: 20px 0;">
+                <div class="color-swatch" style="background-color: var(--color-accent-green);"></div>
+                <span class="color-label">Accent Green (#4F8E10)</span>
+            </div>
+            <div style="margin: 20px 0;">
+                <div class="color-swatch" style="background-color: var(--color-services-accent);"></div>
+                <span class="color-label">Services Accent (#A17BB6)</span>
+            </div>
+            <div style="margin: 20px 0;">
+                <div class="color-swatch" style="background-color: var(--color-facebook);"></div>
+                <span class="color-label">Facebook Blue (#1877f2)</span>
+            </div>
+            <div style="margin: 20px 0;">
+                <div class="color-swatch" style="background: var(--color-instagram-gradient);"></div>
+                <span class="color-label">Instagram Gradient</span>
+            </div>
+        </div>
+
+        <!-- SVG Social Icons Test -->
+        <div class="test-section">
+            <h2>Inline SVG Social Icons (Legacy .socialm Compatible)</h2>
+            <p style="color: var(--color-text-primary); margin-bottom: 20px;">
+                Dependency-free social media icons using inline SVG sprite, styled to match legacy .socialm system:
+            </p>
+            
+            <div class="socialm-svg" style="margin: 20px 0;">
+                <a href="https://www.facebook.com/themoonexports" target="_blank" aria-label="Facebook">
+                    <svg class="icon">
+                        <use href="#icon-facebook"></use>
+                    </svg>
+                    <span style="display:none;">Facebook</span>
+                </a>
+                
+                <a href="https://twitter.com/themoonexports" target="_blank" aria-label="Twitter/X">
+                    <svg class="icon">
+                        <use href="#icon-twitter"></use>
+                    </svg>
+                    <span style="display:none;">Twitter</span>
+                </a>
+                
+                <a href="https://instagram.com/themoonexports/" target="_blank" aria-label="Instagram">
+                    <svg class="icon">
+                        <use href="#icon-instagram"></use>
+                    </svg>
+                    <span style="display:none;">Instagram</span>
+                </a>
+                
+                <a href="https://www.pinterest.com/themoonexports/" target="_blank" aria-label="Pinterest">
+                    <svg class="icon">
+                        <use href="#icon-pinterest"></use>
+                    </svg>
+                    <span style="display:none;">Pinterest</span>
+                </a>
+                
+                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" aria-label="LinkedIn">
+                    <svg class="icon">
+                        <use href="#icon-linkedin"></use>
+                    </svg>
+                    <span style="display:none;">LinkedIn</span>
+                </a>
+            </div>
+            
+            <!-- Legacy Font Awesome Comparison -->
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--color-text-heading); font-size: 18px;">Legacy Font Awesome Comparison:</h3>
+                <div class="socialm" style="margin: 15px 0;">
+                    <a href="https://www.facebook.com/themoonexports" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                        <span style="display:none;">Facebook</span>
+                    </a>
+                    <a href="https://twitter.com/themoonexports" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        <span style="display:none;">Twitter</span>
+                    </a>
+                    <a href="https://instagram.com/themoonexports/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span style="display:none;">Instagram</span>
+                    </a>
+                    <a href="https://www.pinterest.com/themoonexports/" target="_blank">
+                        <i class="fab fa-pinterest-p"></i>
+                        <span style="display:none;">Pinterest</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/themoonexports/" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span style="display:none;">LinkedIn</span>
+                    </a>
+                </div>
+                <p style="color: var(--color-text-primary); font-size: 14px; font-style: italic;">
+                    ↑ Current Font Awesome system (for comparison) - should look identical to SVG version above
+                </p>
+            </div>
+        </div>
+
+        <!-- Component Tests -->
+        <div class="test-section">
+            <h2>Component Examples</h2>
+            
+            <div style="margin: 20px 0;">
+                <h3 style="color: var(--color-text-heading); font-size: 18px; margin-bottom: 15px;">Buttons</h3>
+                <a href="#" class="btn-test">Primary Button</a>
+                <span style="margin-left: 20px; color: var(--color-text-primary);">Hover to see transition</span>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <h3 style="color: var(--color-text-heading); font-size: 18px; margin-bottom: 15px;">Dropdown Example</h3>
+                <div class="dropdown-test">
+                    <span style="color: var(--color-dropdown-text);">
+                        Dropdown Item
+                        <span class="caret-test" style="color: var(--color-dropdown-text);"></span>
+                    </span>
+                </div>
+                <p style="color: var(--color-text-primary); font-size: 14px; margin-top: 10px;">
+                    CSS-only caret (no Font Awesome dependency)
+                </p>
+            </div>
+        </div>
+
+        <!-- Typography Test -->
+        <div class="test-section">
+            <h2>Typography Scale</h2>
+            <h1 style="color: var(--color-text-heading); font-size: var(--font-size-hero-large);">Hero H1 (60px)</h1>
+            <h2 style="color: var(--color-text-heading); font-size: var(--font-size-section-title);">Section H2 (46px)</h2>
+            <h3 style="color: var(--color-text-heading); font-size: 24px;">Subsection H3 (24px)</h3>
+            <p style="color: var(--color-text-primary);">Body text using system font stack with proper contrast</p>
+        </div>
+
+        <!-- Accessibility Test -->
+        <div class="test-section">
+            <h2>Accessibility Features</h2>
+            <ul style="color: var(--color-text-primary);">
+                <li>High contrast text (#D3D3D3 on #191919)</li>
+                <li>Proper ARIA labels on social icons</li>
+                <li>Respects prefers-reduced-motion for animations</li>
+                <li>Keyboard focusable elements</li>
+                <li>Semantic HTML structure</li>
+            </ul>
+            
+            <p style="color: var(--color-text-primary); margin-top: 20px;">
+                <strong>Test:</strong> Try enabling "Reduce motion" in your OS accessibility settings - 
+                the social icon hover animations will be disabled.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--color-navbar-border);">
+            <div style="text-align: center; color: var(--color-footer-link);">
+                <p>Design System Test Page - Following The Moon Exports Design Tokens</p>
+                <p style="font-size: 14px; margin-top: 10px;">
+                    This page demonstrates the design system implementation with CSS variables, 
+                    inline SVG icons, and accessibility considerations.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="../../js/bootstrap.min.js"></script>
+    
+    <script>
+        // Test accessibility: log if user prefers reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            console.log('User prefers reduced motion - animations disabled');
+        }
+        
+        // Simple interaction test
+        document.querySelectorAll('.socialm-svg a').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('SVG Social icon clicked:', this.getAttribute('aria-label'));
+            });
+        });
+    </script>
+</body>
+</html>

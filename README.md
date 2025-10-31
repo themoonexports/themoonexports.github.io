@@ -1,70 +1,106 @@
 # The Moon Exports
 
-This is the official website for The Moon Exports, a manufacturer and exporter of handicrafts, specializing in buffalo horn, wood, and resin products.
+Modern, performance‑optimized, trilingual (EN / DE / FR) handicrafts website showcasing premium buffalo horn, wood, resin and related artisan products.
 
-This repository contains the code for the The Moon Exports website, a platform dedicated to showcasing and selling exquisite handcrafted items. Our products range from unique jewelry pieces and decorative items to functional household goods, all meticulously crafted by skilled artisans.
+## 1. Overview
+The site provides:
+* Product category landing pages (horn, wood, resin, decor, plates, bowls, etc.)
+* Company, contact and FAQ information
+* Internationalized content (full German + French localized directories)
+* Technical & enterprise SEO foundation (sitemap, hreflang, robots, security headers)
 
-## About The Moon Exports
+## 2. Internationalization (i18n)
+Implemented language versions:
+* EN (root)
+* DE (`/de/`)
+* FR (`/fr/`)
 
-The Moon Exports is committed to promoting sustainable and ethical practices. We source our materials responsibly, ensuring that they are by-products of the food industry where applicable. Our artisans then transform these materials into beautiful and durable pieces, each with its own unique character and charm.
+Features:
+* Cross‑language navigation flags
+* Proper `<link rel="alternate" hreflang="...">` tags including `x-default`
+* Consistent translated meta titles / descriptions
 
-## Features
+## 3. SEO & Infrastructure
+Implemented (see `docs/` for detailed reports):
+* Enhanced `sitemap.xml` with hreflang + image metadata
+* Enterprise `robots.txt` (multi‑bot directives, crawl optimization, security exclusions)
+* Secure / performance `.htaccess` (HTTPS enforcement, compression, caching, security headers)
+* Structured data (Organization / WebSite JSON-LD seeds) – extensible for Product / Breadcrumb / FAQ
+* Canonicals + language alternates
+* Performance oriented lazy loading pattern (placeholder -> data-src)
 
-* **Product Showcase:** Browse our extensive collection of crafts, complete with detailed descriptions and high-quality images.
-* **Secure Online Shopping:** Enjoy a seamless and secure shopping experience with our integrated e-commerce platform.
-* **Artisan Profiles:** Learn more about the talented artisans behind our products and their traditional crafting techniques.
-* **Blog:** Stay updated on the latest trends in crafts, artisan spotlights, and sustainable practices through our blog.
+Planned / Pending:
+* Google Search Console & Bing verification rollout (tokens partially present)
+* Additional schema (Product, FAQ, ImageObject)
+* Core Web Vitals continuous monitoring automation
+* Replace placeholder French flag asset with finalized tricolor SVG
 
-## Project Structure
+## 4. Project Structure (High Level)
+Refer to [`docs/DIRECTORY_STRUCTURE.md`](docs/DIRECTORY_STRUCTURE.md) for exhaustive detail.
 
-The project is now organized into a clean, maintainable structure. For detailed information, see [`docs/DIRECTORY_STRUCTURE.md`](docs/DIRECTORY_STRUCTURE.md).
+Core Files (root): `index.html`, `about.html`, `products.html`, `contact.html`, product detail pages, `sitemap.xml`, `robots.txt`, `.htaccess`, `BingSiteAuth.xml`.
 
-### Production Files (Root Level)
-*   **`index.html`**: Main landing page - PRIMARY ENTRY POINT
-*   **`about.html`**: Company information
-*   **`products.html`**: Product catalog
-*   **`contact.html`**: Contact form and information
-*   **Product pages**: `horn-crafts.html`, `wooden-crafts.html`, `resin.html`, etc.
-*   **SEO files**: `sitemap.xml`, `robots.txt`, `BingSiteAuth.xml`
-*   **Configuration**: `firebase.json`, `.htaccess`, `package.json`
+Key Directories:
+* `css/`, `js/`, `images/`, `fonts/` – assets
+* `de/`, `fr/` – localized site trees (mirrored structure)
+* `docs/` – strategy, SEO, security, design, testing, organization reports
+* `tools/` – experimental & test utilities (e.g. future redesign prototypes)
+* `data/` – export/import data (e.g. marketplace feeds)
+* `backup/` & `temp/` – archival / transient workspaces
 
-### Content Directories
-*   **`css/`**: Stylesheets (Bootstrap + custom styles)
-*   **`js/`**: JavaScript files and libraries
-*   **`images/`**: Product photos, logos, and design elements
-*   **`fonts/`**: Web fonts and typography assets
-*   **`de/`**: German localization (complete translated site)
-*   **`legal/`**: Legal pages (privacy, terms, imprint)
+## 5. Development Workflow
+Lightweight static workflow.
+1. Edit / add HTML / assets
+2. Validate hreflang consistency across language mirrors
+3. Update `sitemap.xml` if new public URL introduced
+4. Run link + image path sanity checks (manual or planned script)
+5. Deploy (GitHub Pages / static host) – ensure `.htaccess` rules supported (if Apache)
 
-### Organizational Directories
-*   **`docs/`**: Documentation and development guides
-*   **`tools/`**: Development scripts and utilities
-*   **`data/`**: Data files and exports
-*   **`backup/`**: Archived files and backups
-*   **`temp/`**: Temporary development files
+Recommended Future Tooling:
+* Automated sitemap regeneration script
+* Lint script for hreflang + canonical integrity
+* Lighthouse CI (performance & SEO budget tracking)
 
-## Running the Website Locally
+## 6. Performance & Security Highlights
+* GZIP / deflate compression enabled
+* Cache control for static assets
+* Minimal blocking resources (legacy Bootstrap kept for compatibility; future migration path available)
+* Security headers: HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy (see `.htaccess`)
 
-To view the website, simply open the `index.html` file located in the root directory of this project in your preferred web browser.
+## 7. Roadmap (Next Iterations)
+| Priority | Item | Status |
+|----------|------|--------|
+| High | Search Console + Bing verification finalization | Pending |
+| High | Structured data: Product / FAQ / Breadcrumb | Pending |
+| Medium | Modern homepage redesign A/B test (`tools/`) | In progress |
+| Medium | SVG flag assets + accessibility alt improvements | Pending |
+| Medium | Automated sitemap + hreflang validator | Planned |
+| Low | Progressive image loading (native `loading=lazy`) migration | Planned |
+| Low | Lighthouse CI integration | Planned |
 
-## Technologies Used
+## 8. Running Locally
+Open `index.html` in a browser. No build step required. Optionally serve via a lightweight server for header testing (e.g. `python -m http.server`).
 
-This website is built using the following technologies:
+## 9. Technologies
+* HTML5 / CSS3 (Bootstrap legacy + custom)
+* Vanilla JavaScript (no heavy framework)
+* JSON-LD structured data blocks
+* Apache configuration via `.htaccess`
 
-*   **HTML:** For the basic structure and content of the web pages.
-*   **CSS:** For styling and presentation of the website.
-*   **JavaScript:** For client-side interactivity and dynamic features.
-*   **Bootstrap:** A front-end framework for developing responsive and mobile-first websites.
+## 10. Contributing
+1. Fork repository
+2. Create feature branch (`feat/<topic>`)
+3. Make focused commits (imperative style)
+4. Ensure hreflang + sitemap consistency if adding pages
+5. Open PR with summary + any SEO impact notes
 
-## Contributing
+## 11. License
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (see `LICENSE`). Commercial resale or direct cloning for commercial purposes is prohibited without consent.
 
-We welcome contributions to enhance the The Moon Exports website. If you have suggestions for new features, improvements, or bug fixes, please follow these steps:
+## 12. Contact
+* Author / Maintainer: Kamran Khan
+* Email: (GitHub no‑reply configured for commits)
+* Website: https://www.themoonexports.com/
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Make your modifications, ensuring clear and concise commit messages.
-4. Submit a pull request for review.
-
-## License
-
-This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. See the `LICENSE` file for more details.
+---
+Concise project summary: Trilingual, SEO‑hardened, security‑aware static commerce showcase with planned evolution toward richer schema, performance automation and modern UI refresh.

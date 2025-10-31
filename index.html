@@ -24,7 +24,8 @@
     <meta name="twitter:image" content="https://www.themoonexports.com/images/logoLSmall.jpg">
 
     <!-- Verification meta tags -->
-    <meta name="google-site-verification" content="your-actual-google-verification-code">
+    <!-- Google Search Console verification: Add your actual verification code when ready -->
+    <!-- <meta name="google-site-verification" content="your-actual-google-verification-code"> -->
     <meta name="msvalidate.01" content="16BD6C369F5C625E1A4E42C9BE5BFB3F">
     <meta name="yandex-verification" content="7be55e5d79a93733">
     <meta name="p:domain_verify" content="f760fac5120b861a6831cf1a338fec84">
@@ -32,7 +33,13 @@
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+    
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="en" href="https://www.themoonexports.com/">
+    <link rel="alternate" hreflang="de" href="https://www.themoonexports.com/de/">
+    <link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/">
+    <link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/">
+    
     <!-- Page title -->
     <title>The Moon Exports - Buffalo Horn Crafts | Wooden Crafts | Resin Products | Bone Handicrafts | Handmade Handcrafted | Manufacturer cum Exporter</title>
 
@@ -129,49 +136,32 @@
     </div>
 
     <div class="masthead">
-        <nav class="navbar navbar-default navbar-fixed-top" id="nav-main" role="navigation" aria-label="Main navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html" aria-label="The Moon Exports Home">
-                        <img src="images/logo.png" alt="The Moon Exports Logo" width="150" height="50" loading="eager">
-                    </a>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="The Moon Exports" class="lazyload"/></a>
                 </div>
-                <p class="usano">
-                    <strong>
-                        <a href="/de" aria-label="German version">
-                            <img src="images/german.png" alt="German flag" class="img-circle" width="25" height="25" loading="lazy">
-                        </a>
-                    </strong>
-                </p>
-                <div id="google_translate_element" class="visible-medium hidden-xs" aria-label="Google Translate"></div>
-                <div id="navbar" class="navbar-collapse navbar-right collapse" role="menubar">
+                <p class="usano"><b><a href="/de"><img src="images/german.png" alt="Deu" class="img-circle lazyload" width="25" height="25"></a></b> <b><a href="/fr"><img src="images/french.png" alt="Fra" class="img-circle lazyload" width="25" height="25"></a></b> </p>
+                <div id="navbar" class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
-                        <li role="menuitem"><a href="index.html">Home</a></li>
-                        <li role="menuitem"><a href="about.html">About Us</a></li>
-                        <li class="dropdown" role="menuitem">
-                            <a href="products.html" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Handicrafts menu">
-                                Handicrafts <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation">
-                                    <a href="products.html" role="menuitem">
-                                        <img class="hidden-xs" src="images/dropdown.jpg" alt="Handicrafts overview" width="200" height="100" loading="lazy">
-                                    </a>
-                                </li>
-                                <li role="presentation"><a href="horn-crafts.html" role="menuitem">Horn Crafts</a></li>
-                                <li role="presentation"><a href="buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
-                                <li role="presentation"><a href="wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
-                                <li role="presentation"><a href="resin.html" role="menuitem">Resin Products</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="products.html" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Handicrafts<span class="caret"></span></a>
+                            <ul class="dropdown-menu"><a href="products.html"><img class="hidden-xs lazyload" src="images/dropdown.jpg"/></a>
+                                <li><a href="horn-crafts.html">Horn Crafts</a></li>
+                                <li><a href="buffalo-horn-plates.html">Buffalo Horn Plates</a></li>
+                                <li><a href="wooden-crafts.html">Wooden Crafts</a></li>
+                                <li><a href="resin.html">Resin Products</a></li>
                             </ul>
                         </li>
-                        <li role="menuitem"><a href="contact.html">Contact Us</a></li>
-                        <li role="menuitem"><a href="/blog">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -254,10 +244,11 @@
                         <ul style="list-style: none; padding: 0;">
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="/legal/privacy.html">Privacy Policy</a></li>
-                            <li><a href="/legal/terms.html">Terms and Conditions</a></li>
-                            <li><a href="/legal/imprint.html">Impressum</a></li>
-                            <li><a href="/faq.html">FAQ</a></li>
+                            <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                            <li><a href="legal/terms.html">Terms and Conditions</a></li>
+                            <li><a href="legal/imprint.html">Impressum</a></li>
+                            <li><a href="license.html" rel="license">Content License</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
                         </ul>
                     </nav>
                 </div>

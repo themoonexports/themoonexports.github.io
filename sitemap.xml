@@ -4,151 +4,221 @@
         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-<!-- Homepage - Primary entry point -->
+<!-- MULTILINGUAL HOMEPAGE CLUSTER -->
+<!-- Primary Homepage - English (Default) -->
 <url>
-  <loc>https://themoonexports.com/</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <mobile:mobile/>
-  <xhtml:link rel="alternate" hreflang="en" href="https://themoonexports.com/"/>
-  <xhtml:link rel="alternate" hreflang="de" href="https://themoonexports.com/de/"/>
+  <xhtml:link rel="alternate" hreflang="en" href="https://www.themoonexports.com/"/>
+  <xhtml:link rel="alternate" hreflang="de" href="https://www.themoonexports.com/de/"/>
+  <xhtml:link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/"/>
 </url>
 
 <!-- German Homepage -->
 <url>
-  <loc>https://themoonexports.com/de/</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/de/</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
   <mobile:mobile/>
-  <xhtml:link rel="alternate" hreflang="de" href="https://themoonexports.com/de/"/>
-  <xhtml:link rel="alternate" hreflang="en" href="https://themoonexports.com/"/>
+  <xhtml:link rel="alternate" hreflang="en" href="https://www.themoonexports.com/"/>
+  <xhtml:link rel="alternate" hreflang="de" href="https://www.themoonexports.com/de/"/>
+  <xhtml:link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/"/>
 </url>
 
-<!-- Core Business Pages -->
+<!-- French Homepage -->
 <url>
-  <loc>https://themoonexports.com/about.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/fr/</loc>
+  <lastmod>2025-08-18</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+  <mobile:mobile/>
+  <xhtml:link rel="alternate" hreflang="en" href="https://www.themoonexports.com/"/>
+  <xhtml:link rel="alternate" hreflang="de" href="https://www.themoonexports.com/de/"/>
+  <xhtml:link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/"/>
+</url>
+
+<!-- CORE BUSINESS PAGES -->
+<url>
+  <loc>https://www.themoonexports.com/about.html</loc>
+  <lastmod>2025-08-18</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/logo.png</image:loc>
+    <image:title>About The Moon Exports - Handicrafts Manufacturer</image:title>
+    <image:caption>Professional handicrafts manufacturing and export company</image:caption>
+  </image:image>
+</url>
+
+<url>
+  <loc>https://www.themoonexports.com/contact.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
   <mobile:mobile/>
 </url>
 
+<!-- PRODUCT CATALOG HIERARCHY -->
+<!-- Main Product Catalog -->
 <url>
-  <loc>https://themoonexports.com/contact.html</loc>
-  <lastmod>2025-07-06</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
+  <loc>https://www.themoonexports.com/products.html</loc>
+  <lastmod>2025-08-18</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.95</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/dropdown.jpg</image:loc>
+    <image:title>Handicrafts Product Range Overview</image:title>
+    <image:caption>Complete range of buffalo horn, wooden and resin handicrafts</image:caption>
+  </image:image>
 </url>
 
-<!-- Product Catalog Pages -->
+<!-- PRIMARY PRODUCT CATEGORIES -->
+<!-- Buffalo Horn Crafts - Main Category -->
 <url>
-  <loc>https://themoonexports.com/products.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/horn-crafts.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/Horn-Crafts.JPG</image:loc>
+    <image:title>Buffalo Horn Crafts Collection</image:title>
+    <image:caption>Handcrafted buffalo horn products including jewelry, accessories and decor</image:caption>
+  </image:image>
 </url>
 
-<!-- Buffalo Horn Product Categories -->
+<!-- Buffalo Horn Subcategories -->
 <url>
-  <loc>https://themoonexports.com/horn-crafts.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/buffalo-horn-plates.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/black-with-white -buffalo-horn-plates.jpg</image:loc>
+    <image:title>Buffalo Horn Plates Collection</image:title>
+    <image:caption>Premium buffalo horn plates in various colors and finishes</image:caption>
+  </image:image>
 </url>
 
 <url>
-  <loc>https://themoonexports.com/buffalo-horn-plates.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/buffalo-horn-bowls.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/bowl.jpg</image:loc>
+    <image:title>Buffalo Horn Bowls Collection</image:title>
+    <image:caption>Handcrafted buffalo horn bowls for dining and decoration</image:caption>
+  </image:image>
 </url>
 
 <url>
-  <loc>https://themoonexports.com/buffalo-horn-bowls.html</loc>
-  <lastmod>2025-07-06</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.85</priority>
-  <mobile:mobile/>
-</url>
-
-<url>
-  <loc>https://themoonexports.com/horn-decor.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/horn-decor.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.75</priority>
-  <mobile:mobile/>
-</url>
-
-<!-- Other Product Categories -->
-<url>
-  <loc>https://themoonexports.com/wooden-crafts.html</loc>
-  <lastmod>2025-07-06</lastmod>
-  <changefreq>weekly</changefreq>
   <priority>0.8</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/decor.jpg</image:loc>
+    <image:title>Buffalo Horn Decorative Items</image:title>
+    <image:caption>Unique buffalo horn decorative pieces and home accessories</image:caption>
+  </image:image>
 </url>
 
+<!-- Wooden Crafts Category -->
 <url>
-  <loc>https://themoonexports.com/resin.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/wooden-crafts.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.85</priority>
   <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/pizza-cutter.jpg</image:loc>
+    <image:title>Wooden Handicrafts Collection</image:title>
+    <image:caption>Premium wooden crafts including kitchen utensils and decorative items</image:caption>
+  </image:image>
 </url>
 
-<!-- Support Pages -->
+<!-- Resin Products Category -->
 <url>
-  <loc>https://themoonexports.com/faq.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/resin.html</loc>
+  <lastmod>2025-08-18</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <mobile:mobile/>
+  <image:image>
+    <image:loc>https://www.themoonexports.com/images/resin-bangle.jpg</image:loc>
+    <image:title>Resin Handicrafts Collection</image:title>
+    <image:caption>Modern resin products including jewelry and accessories</image:caption>
+  </image:image>
+</url>
+
+<!-- SUPPORT & INFORMATION PAGES -->
+<url>
+  <loc>https://www.themoonexports.com/faq.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.6</priority>
   <mobile:mobile/>
 </url>
 
-<!-- Social Media Integration -->
+<!-- SOCIAL & ENGAGEMENT -->
 <url>
-  <loc>https://themoonexports.com/instago</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/instago</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>daily</changefreq>
   <priority>0.7</priority>
   <mobile:mobile/>
 </url>
 
-<!-- Legal Pages -->
+<!-- LEGAL & COMPLIANCE PAGES -->
 <url>
-  <loc>https://themoonexports.com/legal/</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/legal/</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.3</priority>
   <mobile:mobile/>
 </url>
 
 <url>
-  <loc>https://themoonexports.com/legal/privacy.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/legal/privacy.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.3</priority>
   <mobile:mobile/>
 </url>
 
 <url>
-  <loc>https://themoonexports.com/legal/terms.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/legal/terms.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.3</priority>
   <mobile:mobile/>
 </url>
 
 <url>
-  <loc>https://themoonexports.com/legal/imprint.html</loc>
-  <lastmod>2025-07-06</lastmod>
+  <loc>https://www.themoonexports.com/legal/imprint.html</loc>
+  <lastmod>2025-08-18</lastmod>
   <changefreq>never</changefreq>
+  <priority>0.2</priority>
+  <mobile:mobile/>
+</url>
+
+<url>
+  <loc>https://www.themoonexports.com/license.html</loc>
+  <lastmod>2025-08-20</lastmod>
+  <changefreq>yearly</changefreq>
   <priority>0.2</priority>
   <mobile:mobile/>
 </url>

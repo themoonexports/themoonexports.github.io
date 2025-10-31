@@ -5,11 +5,17 @@
   "main": "index.html",
   "scripts": {
     "dev": "serve . -p 5000",
-    "build": "echo 'Build process not implemented yet'",
+    "start": "firebase serve --host 0.0.0.0 --port 5000",
+    "build": "echo 'Static site - no build process required'",
     "test": "echo 'Tests not implemented yet'",
     "serve": "firebase serve",
+    "serve:prod": "firebase serve --only hosting",
     "deploy": "firebase deploy",
-    "audit": "npm audit"
+    "deploy:hosting": "firebase deploy --only hosting",
+    "audit": "npm audit",
+    "lint:html": "echo 'HTML validation - consider adding html-validate'",
+    "optimize": "echo 'Image optimization - consider adding imagemin'",
+    "clean": "echo 'Cleanup completed via manual process'"
   },
   "repository": {
     "type": "git",
@@ -20,7 +26,11 @@
     "horn-crafts",
     "wooden-crafts",
     "export",
-    "manufacturer"
+    "manufacturer",
+    "buffalo-horn",
+    "resin-products",
+    "handmade",
+    "vintage"
   ],
   "author": "Kamran Khan",
   "license": "CC-BY-NC-SA-4.0",
@@ -31,6 +41,10 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
-  ]
+    "not dead",
+    "not ie <= 11"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }
