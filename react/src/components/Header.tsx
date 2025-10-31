@@ -14,7 +14,7 @@ export function Header(): JSX.Element {
         <div className="navbar-header">
           <button
             type="button"
-            className="navbar-toggle collapsed"
+            className="navbar-toggle collapsed btn-icon-crafts"
             data-toggle="collapse"
             data-target="#navbar"
             aria-expanded="false"

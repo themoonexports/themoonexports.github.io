@@ -92,7 +92,7 @@ export function Carousel(): JSX.Element {
                 <strong>{slide.title}</strong>
               </h1>
               <h2>{slide.subtitle}</h2>
-              <a className="slidebtn" href="contact.html">
+              <a className="slidebtn btn-crafts" href="contact.html">
                 Enquiry
               </a>
             </div>

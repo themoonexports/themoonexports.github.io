@@ -34,8 +34,9 @@ export function NewsletterForm(): JSX.Element {
             placeholder="Email"
             required
             aria-describedby="newsletter-error"
+            className="input-crafts"
           />
-          <button type="submit">Join Now</button>
+          <button type="submit" className="btn-crafts">Join Now</button>
         </div>
         <input type="hidden" name="zc_trackCode" value="ZCFORMVIEW" />
         <input type="hidden" name="submitType" value="optinCustomView" />

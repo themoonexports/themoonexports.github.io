@@ -84,7 +84,7 @@ const ProductModal: React.FC = () => {
         <ul className="product-list">
           {featured.map((p, idx) => (
             <li key={p.productId}>
-              <button className="product-btn" onClick={() => setOpenIdx(idx)}>
+              <button className="product-btn btn-crafts" onClick={() => setOpenIdx(idx)}>
                 {localizedName(p, locale)}
               </button>
             </li>
@@ -94,8 +94,8 @@ const ProductModal: React.FC = () => {
 
       {currentProduct && (
         <div className="modal-overlay" role="dialog" aria-modal="true">
-          <div className="modal-content">
-            <button className="close-btn" onClick={() => setOpenIdx(null)} aria-label={locale === 'de' ? 'Schließen' : locale === 'fr' ? 'Fermer' : 'Close'}>×</button>
+          <div className="modal-content card-crafts">
+            <button className="close-btn btn-icon-crafts" onClick={() => setOpenIdx(null)} aria-label={locale === 'de' ? 'Schließen' : locale === 'fr' ? 'Fermer' : 'Close'}>×</button>
 
             <h3>{localizedName(currentProduct, locale)}</h3>
             <p>{localizedDescription(currentProduct, locale)}</p>
@@ -109,9 +109,9 @@ const ProductModal: React.FC = () => {
                   height={300}
                 />
                 <div className="lightbox-controls">
-                  <button onClick={prevImage} aria-label={locale === 'de' ? 'Vorheriges Bild' : locale === 'fr' ? 'Image précédent' : 'Previous image'}>&lsaquo;</button>
+                  <button onClick={prevImage} aria-label={locale === 'de' ? 'Vorheriges Bild' : locale === 'fr' ? 'Image précédent' : 'Previous image'} className="btn-icon-crafts">&lsaquo;</button>
                   <span className="lightbox-index">{Math.min(activeImageIdx, gallery.length - 1) + 1}/{gallery.length}</span>
-                  <button onClick={nextImage} aria-label={locale === 'de' ? 'Nächstes Bild' : locale === 'fr' ? 'Image suivant' : 'Next image'}>&rsaquo;</button>
+                  <button onClick={nextImage} aria-label={locale === 'de' ? 'Nächstes Bild' : locale === 'fr' ? 'Image suivant' : 'Next image'} className="btn-icon-crafts">&rsaquo;</button>
                 </div>
               </div>
               {gallery.length > 1 && (
@@ -138,7 +138,7 @@ const ProductModal: React.FC = () => {
                   {currentProduct.variants.map((v) => (
                     <li key={v.id}>
                       <button
-                        className={activeVariantImage === v.image ? 'variant active' : 'variant'}
+                        className={activeVariantImage === v.image ? 'variant chip-crafts active' : 'variant chip-crafts'}
                         onClick={() => setActiveVariantImage(v.image)}
                       >
                         {v.name}

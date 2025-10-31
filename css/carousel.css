@@ -1,0 +1,339 @@
+/* ===== Carousel Component Styles ===== */
+
+/* Carousel Container - Full Width, Positioned Below Header */
+.carousel {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Ensure carousel doesn't overlap with fixed header */
+.carousel.slide {
+  margin-top: 0;
+  z-index: 1;
+}
+
+/* Carousel Inner Container */
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner > .item {
+  position: relative;
+  display: none;
+  transition: 0.6s ease-in-out left;
+}
+
+.carousel-inner > .item.active {
+  display: block;
+}
+
+/* Carousel Images - Responsive & Centered */
+.carousel-inner > .item > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Mobile: Smaller max height for better proportions */
+@media (max-width: 767px) {
+  .carousel-inner > .item > img {
+    max-height: 400px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .carousel-inner > .item > img {
+    max-height: 500px;
+  }
+}
+
+/* Carousel Caption - Centered Text Overlay */
+.carousel-caption {
+  position: absolute;
+  right: 10%;
+  bottom: 40px;
+  left: 10%;
+  z-index: 10;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.carousel-caption h1,
+.carousel-caption h2,
+.carousel-caption h3 {
+  margin: 0 0 10px 0;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.carousel-caption h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.carousel-caption h2 {
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.carousel-caption h3 {
+  font-size: 2rem;
+}
+
+/* Mobile: Smaller caption text */
+@media (max-width: 767px) {
+  .carousel-caption {
+    right: 5%;
+    left: 5%;
+    bottom: 20px;
+    padding: 15px;
+  }
+  
+  .carousel-caption h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .carousel-caption h1 {
+    font-size: 2rem;
+  }
+  
+  .carousel-caption h2 {
+    font-size: 1.5rem;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Carousel Enquiry Button - Uses crafts-ui.css btn-crafts class */
+.carousel-caption .slidebtn {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+/* Carousel Controls - Previous/Next Arrows */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  z-index: 15;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-control:hover,
+.carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+  background-color: rgba(92, 163, 22, 0.8);
+}
+
+.carousel-control.left {
+  left: 20px;
+}
+
+.carousel-control.right {
+  right: 20px;
+}
+
+/* Mobile: Smaller controls */
+@media (max-width: 767px) {
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-control.left {
+    left: 10px;
+  }
+  
+  .carousel-control.right {
+    right: 10px;
+  }
+}
+
+/* Carousel Control Icons */
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: static;
+  display: inline-block;
+  margin-top: 0;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Mobile: Smaller icons */
+@media (max-width: 767px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right {
+    font-size: 20px;
+  }
+}
+
+/* Carousel Indicators - Dots at Bottom */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  z-index: 15;
+  width: auto;
+  padding-left: 0;
+  margin-left: -30%;
+  text-align: center;
+  list-style: none;
+  transform: translateX(-50%);
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  width: 14px;
+  height: 14px;
+  margin: 0 5px;
+  background-color: #5CA316;
+  border-color: #5CA316;
+}
+
+.carousel-indicators li:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile: Smaller indicators */
+@media (max-width: 767px) {
+  .carousel-indicators {
+    bottom: 10px;
+  }
+  
+  .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+  }
+  
+  .carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Animation for slide transitions */
+.carousel-inner > .item.next,
+.carousel-inner > .item.active.right {
+  transform: translate3d(100%, 0, 0);
+  left: 0;
+}
+
+.carousel-inner > .item.prev,
+.carousel-inner > .item.active.left {
+  transform: translate3d(-100%, 0, 0);
+  left: 0;
+}
+
+.carousel-inner > .item.next.left,
+.carousel-inner > .item.prev.right,
+.carousel-inner > .item.active {
+  transform: translate3d(0, 0, 0);
+  left: 0;
+}
+
+/* Ensure carousel is accessible */
+.carousel-control:focus {
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+.carousel-indicators li:focus {
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .carousel-control {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #fff;
+  }
+  
+  .carousel-indicators li {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-inner > .item {
+    transition: none;
+  }
+  
+  .carousel-control {
+    transition: none;
+  }
+}
+
+/* Print styles - hide carousel controls */
+@media print {
+  .carousel-control,
+  .carousel-indicators {
+    display: none !important;
+  }
+  
+  .carousel-caption {
+    position: static;
+    background: transparent;
+    color: #000;
+    text-shadow: none;
+  }
+}

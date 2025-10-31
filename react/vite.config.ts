@@ -20,11 +20,11 @@ export default defineConfig({
         "trust-badges": resolve(__dirname, "src/entries/trust-badges.tsx"),
         footer: resolve(__dirname, "src/entries/footer.tsx"),
         "product-grid": resolve(__dirname, "src/entries/product-grid.tsx"),
-        carousel: resolve(__dirname, "src/entries/carousel.tsx")
-          ,
-          "contact-form": resolve(__dirname, "src/entries/contact-form.tsx"),
-          faq: resolve(__dirname, "src/entries/faq.tsx"),
-          "product-modal": resolve(__dirname, "src/entries/product-modal.tsx")
+        carousel: resolve(__dirname, "src/entries/carousel.tsx"),
+        "contact-form": resolve(__dirname, "src/entries/contact-form.tsx"),
+        faq: resolve(__dirname, "src/entries/faq.tsx"),
+        "product-modal": resolve(__dirname, "src/entries/product-modal.tsx"),
+        background: resolve(__dirname, "src/entries/background.tsx")
       },
       output: {
         entryFileNames: "[name].js",

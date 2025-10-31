@@ -1,0 +1,66 @@
+/* ===== Z-Index Management System ===== */
+/* Proper layering to prevent overlapping issues */
+/* Last updated: 2025-11-01 */
+/* DO NOT OVERRIDE: These values establish the site's visual stacking hierarchy */
+
+:root {
+  --z-background: 0;
+  --z-content: 1;
+  --z-carousel: 1;
+  --z-carousel-caption: 10;
+  --z-product-overlay: 999;
+  --z-dropdown: 1000;
+  --z-header: 1030;
+  --z-modal: 1040;
+  --z-cookie-banner: 1050;
+  --z-google-translate: 1050;
+  --z-tooltip: 1060;
+}
+
+/* Apply z-index layers */
+.carousel,
+.carousel.slide {
+  position: relative;
+  z-index: var(--z-carousel);
+}
+
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  z-index: var(--z-header) !important;
+}
+
+.dropdown-menu {
+  z-index: var(--z-dropdown) !important;
+}
+
+/* Google Translate Widget */
+#google_translate_element,
+div#google_translate_element {
+  z-index: var(--z-google-translate) !important;
+}
+
+.goog-te-banner-frame {
+  z-index: var(--z-google-translate) !important;
+}
+
+/* Ensure modals are above everything */
+.modal,
+.modal-backdrop,
+.modal-overlay {
+  z-index: var(--z-modal) !important;
+}
+
+/* Cookie consent banner */
+.cookie-banner {
+  z-index: var(--z-cookie-banner) !important;
+}
+
+/* Carousel caption overlay */
+.carousel-caption {
+  z-index: var(--z-carousel-caption) !important;
+}
+
+/* Product category overlay */
+.productcat .cattitle {
+  z-index: var(--z-product-overlay) !important;
+}

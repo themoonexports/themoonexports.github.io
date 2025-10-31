@@ -32,13 +32,13 @@ const ContactForm: React.FC = () => {
       {error && <div className="alert-error" role="alert">{error}</div>}
       <div className="form-group">
         <label htmlFor="contact-email">Email address</label>
-        <input type="email" id="contact-email" name="CONTACT_EMAIL" required />
+        <input type="email" id="contact-email" name="CONTACT_EMAIL" required className="input-crafts" />
       </div>
       <div className="form-group">
         <label htmlFor="contact-message">Message</label>
-        <textarea id="contact-message" name="CONTACT_MESSAGE" required />
+        <textarea id="contact-message" name="CONTACT_MESSAGE" required className="textarea-crafts" />
       </div>
-      <button type="submit">Send</button>
+      <button type="submit" className="btn-crafts">Send</button>
     </form>
   );
 };

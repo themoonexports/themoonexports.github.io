@@ -25,7 +25,7 @@ const FAQAccordion: React.FC = () => {
         {faqs.map((faq, idx) => (
           <li key={idx} className="faq-item">
             <button
-              className="faq-question"
+              className="faq-question btn-crafts toggle-crafts"
               aria-expanded={openIndex === idx}
               aria-controls={`faq-answer-${idx}`}
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}

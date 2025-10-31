@@ -1,6 +1,6 @@
 export function TrustBadges(): JSX.Element {
   return (
-    <section className="payment-info" aria-label="Trust and payment information">
+    <section className="payment-info card-crafts" aria-label="Trust and payment information">
       <div className="trust-badge">
         <span className="badge-icon">🛡️</span>
         <span className="badge-text">Trusted Exporter</span>

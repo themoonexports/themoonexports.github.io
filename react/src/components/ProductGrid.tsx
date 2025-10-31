@@ -31,7 +31,7 @@ export function ProductGrid(): JSX.Element {
     <div className="row">
       {products.map((product) => (
         <div key={product.href} className="col-md-4">
-          <article className="productcat">
+          <article className="productcat card-crafts">
             <a href={product.href}>
               <h3 className="cattitle">{product.title}</h3>
               <img

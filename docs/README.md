@@ -1,7 +1,7 @@
 # Documentation Index
 ## The Moon Exports Website - Complete Documentation Guide
 
-**Last Updated:** October 31, 2025
+**Last Updated:** November 1, 2025
 
 This directory contains comprehensive documentation for The Moon Exports website project. Documents are organized by topic and cross-referenced for easy navigation.
 
@@ -12,7 +12,8 @@ This directory contains comprehensive documentation for The Moon Exports website
 **New to the project?** Read these first:
 1. [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) - Current project status
 2. [Directory Structure](DIRECTORY_STRUCTURE.md) - Understanding the codebase organization
-3. [Testing Plan](TESTING_PLAN.md) - Quality assurance approach
+3. [Modular Components](MODULAR_COMPONENTS.md) - React component architecture
+4. [Testing Plan](TESTING_PLAN.md) - Quality assurance approach
 
 ---
 
@@ -35,10 +36,11 @@ High-level project status and production deployment readiness.
 
 ### 🏗️ Architecture & Structure
 
-- **[Directory Structure](DIRECTORY_STRUCTURE.md)**
+- **[Directory Structure](DIRECTORY_STRUCTURE.md)** ⭐ *Updated*
   - Complete repository organization
-  - File categorization rules
-  - Maintenance guidelines
+  - React component structure
+  - Modular CSS architecture
+  - Build process and workflows
   - *See also: [Organization Report](ORGANIZATION_REPORT.md)*
 
 - **[Organization Report](ORGANIZATION_REPORT.md)**
@@ -52,20 +54,33 @@ High-level project status and production deployment readiness.
   - Test file organization
   - `.gitignore` refinements
 
-- **[Modular Components](MODULAR_COMPONENTS.md)**
+- **[Modular Components](MODULAR_COMPONENTS.md)** ⭐ *Essential*
   - Component system architecture
   - Header/footer modularization
   - Language detection and loading
   - SEO preservation strategy
   - *See also: [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md)*
 
-### ⚛️ React Migration
+### ⚛️ React Migration & Components
 
 - **[Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md)** ⭐ *React Latest*
   - 6 new React components delivered
   - Bundle sizes and optimization
   - Testing checklist
   - *See also: [Modular Components](MODULAR_COMPONENTS.md)*
+
+- **[Background Component](BACKGROUND_COMPONENT.md)** ⭐ *New*
+  - React background component usage guide
+  - Configuration via data attributes
+  - Variant options (default, gradient, image)
+  - API reference and examples
+  - *See also: [Background Refactoring Summary](BACKGROUND_REFACTORING_SUMMARY.md)*
+
+- **[Background Refactoring Summary](BACKGROUND_REFACTORING_SUMMARY.md)** ⭐ *New*
+  - Technical implementation details
+  - Architecture benefits
+  - Migration strategy
+  - Testing checklist
 
 - **[react-refactoring.md](../react-refactoring.md)** (root level)
   - React migration strategy and roadmap
@@ -95,6 +110,12 @@ High-level project status and production deployment readiness.
   - Component specifications
   - Responsive behavior
   - *See also: [Modular Components](MODULAR_COMPONENTS.md)*
+
+- **[Crafts UI System](BACKGROUND_REFACTORING_SUMMARY.md)** ⭐ *New CSS Architecture*
+  - Modular CSS: dropdown-social.css, crafts-ui.css
+  - Utility classes: btn-crafts, input-crafts, card-crafts, chip-crafts
+  - Dark gradient aesthetic with brand green accents
+  - Shine sweep animations and hover effects
 
 - **[Font Awesome & Bootstrap Fix](FONT_AWESOME_BOOTSTRAP_FIX_COMPLETE.md)**
   - Icon display issues resolved
@@ -179,12 +200,15 @@ High-level project status and production deployment readiness.
 | Document | Last Updated | Status | Priority |
 |----------|--------------|--------|----------|
 | Production Readiness Summary | Oct 31, 2025 | ✅ Current | High |
-| Production Readiness Assessment | June 28, 2024 | ⚠️ Historical | Medium |
-| Security Checklist | June 28, 2024 | ⚠️ Needs Update | High |
+| Directory Structure | Nov 1, 2025 | ✅ Current | High |
+| Background Component | Nov 1, 2025 | ✅ Current | High |
+| Background Refactoring Summary | Nov 1, 2025 | ✅ Current | High |
 | Testing Plan | Oct 31, 2025 | ✅ Current | High |
 | Phase 2 Implementation | Recent | ✅ Current | High |
 | Design System | 2025 | ✅ Current | Medium |
-| Directory Structure | Current | ✅ Current | Medium |
+| Modular Components | Current | ✅ Current | High |
+| Production Readiness Assessment | June 28, 2024 | ⚠️ Historical | Medium |
+| Security Checklist | June 28, 2024 | ⚠️ Needs Update | High |
 | Organization Report | July 6, 2025 | ⚠️ Future Date | Low |
 | All others | Various | ⚠️ Review Needed | Medium |
 
@@ -201,9 +225,11 @@ High-level project status and production deployment readiness.
 ### For New Developers
 1. [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md)
 2. [Directory Structure](DIRECTORY_STRUCTURE.md)
-3. [react-refactoring.md](../react-refactoring.md)
-4. [Design System](DESIGN_SYSTEM.md)
-5. [Testing Plan](TESTING_PLAN.md)
+3. [Modular Components](MODULAR_COMPONENTS.md)
+4. [Background Component](BACKGROUND_COMPONENT.md)
+5. [react-refactoring.md](../react-refactoring.md)
+6. [Design System](DESIGN_SYSTEM.md)
+7. [Testing Plan](TESTING_PLAN.md)
 
 ### For DevOps/Deployment
 1. [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md)
@@ -218,8 +244,10 @@ High-level project status and production deployment readiness.
 
 ### For UI/UX Designers
 1. [Design System](DESIGN_SYSTEM.md)
-2. [Modular Components](MODULAR_COMPONENTS.md)
-3. [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md)
+2. [Background Refactoring Summary](BACKGROUND_REFACTORING_SUMMARY.md) - CSS Architecture
+3. [Modular Components](MODULAR_COMPONENTS.md)
+4. [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md)
+5. [Background Component](BACKGROUND_COMPONENT.md)
 
 ### For AI Agents
 1. [AI Context Summary](AI_CONTEXT_SUMMARY.md)

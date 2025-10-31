@@ -82,7 +82,7 @@ font-family: sans-serif;
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  /* z-index managed by z-index.css */
   display: none;
   min-width: 320px;
   padding: 0;
@@ -337,7 +337,7 @@ font-family: sans-serif;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1050;
+  /* z-index managed by z-index.css */
   background: rgba(24, 24, 24, 0.95);
   color: #f4f1e6;
   padding: 16px;
@@ -420,8 +420,11 @@ font-family: sans-serif;
 }
 
 .masthead {
-padding-top: 35px;
+  padding-top: 35px;
+  position: relative;
+  z-index: var(--z-header);
 }
+
 h1 {
 margin-bottom: 30px;
   margin-top: 30px;
@@ -753,12 +756,22 @@ body {
 .masthead {
   padding-top: 0px;
 }
-       p.usano {
+
+/* Hide language switcher on mobile - takes up too much space */
+p.usano,
+div.usano {
     display: none;
 }
 
 @media (min-width: 768px) {
 :root { --header-height: 80px; }
+
+/* Show language switcher on desktop */
+div.usano,
+p.usano {
+    display: inline-flex !important;
+}
+
 .navbar-nav>li>a {
   /* Align nav links to header without extra padding */
   padding-top: 0;
@@ -934,14 +947,14 @@ figcaption h2 {
   width: auto;
   text-align: center;
   position: relative;
-  z-index: 1;
+  /* z-index managed by z-index.css */
 }
 .frontthree {
 margin-top:30px;
 }
 .productcat .cattitle {
   position: absolute;
-  z-index: 999;
+  /* z-index managed by z-index.css */
   background-color: rgba(0, 0, 0, 0.1);
   width: 92.5%;
   height: 100%;
@@ -994,7 +1007,7 @@ div#error span {
   right: 15%;
   bottom: 20px;
   left: 15%;
-  z-index: 10;
+  /* z-index managed by z-index.css */
   padding-top: 20px;
   padding-bottom: 20px;
   color: #fff;
@@ -1006,9 +1019,54 @@ p.usano {
     right: 8%;
     top: 10px;
 }
+
+/* Language Switcher Flags - Override masthead img sizing */
+.usano img,
+div.usano img {
+    width: 25px !important;
+    max-width: 25px !important;
+    height: 25px !important;
+    margin-bottom: 0 !important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.usano a {
+    display: inline-block;
+    margin: 0 4px;
+    line-height: 1;
+}
+
+.usano {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Google Translate Element - Proper Positioning */
 div#google_translate_element {
-    position: absolute;
-    right: 35%;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: var(--z-google-translate);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Hide Google Translate on mobile to avoid clutter */
+@media (max-width: 767px) {
+    div#google_translate_element {
+        display: none !important;
+    }
+}
+
+/* Desktop positioning - below header */
+@media (min-width: 768px) {
+    div#google_translate_element {
+        top: calc(var(--header-height) + 10px);
+        right: 20px;
+    }
 }
 
 /* Dropdown hover behavior is now handled in crafts-themed section above */
@@ -1456,7 +1514,7 @@ span.caret:before {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 1050;
+  /* z-index managed by z-index.css */
   display: flex;
   align-items: center;
   justify-content: center;
