@@ -19,7 +19,6 @@ production_critical:
   - contact.html                  # Contact form and information
   - sitemap.xml                   # SEO sitemap - SEARCH ENGINE CRITICAL
   - robots.txt                    # Search engine directives
-  - firebase.json                 # Hosting configuration with security headers
   - .htaccess                     # Server configuration
   - 404.html                      # Error page
   - CNAME                         # Domain configuration
