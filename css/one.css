@@ -408,10 +408,10 @@ color: #fff;
 
 /* Modal images should be responsive */
 .modal-body img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
 
 /* Ensure images in content blocks are responsive */
