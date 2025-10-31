@@ -981,6 +981,14 @@ For quotation contact us.
 
 
 
+  <!-- Featured Products Modal Mount (React hydrates this) -->
+  <section class="container" aria-label="Featured products">
+    <div class="product-modal" data-react="product-modal">
+      <h2>Featured Products</h2>
+      <p aria-live="polite">Loading…</p>
+    </div>
+  </section>
+
 <footer class="footer-bottom">
     <div class="container">
         <div class="row">
@@ -1109,5 +1117,7 @@ ym(52371760, "init", {
 <!-- /Yandex.Metrika counter -->
 <script src="js/lazysizes.min.js" async></script>
 <script src="js/auto-year-update.js"></script>
+<!-- React Progressive Enhancement: Product Modal -->
+<script type="module" src="js/dist/product-modal.js" defer></script>
 </body>
 </html>
