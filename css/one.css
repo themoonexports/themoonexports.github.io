@@ -684,21 +684,7 @@ div#google_translate_element {
     font-size: 14px;
 }
 
-/* Fallback for existing Font Awesome icons - make them work if FA loads */
-.socialm a {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 8px;
-    background-color: #333;
-    color: #fff !important;
-    text-decoration: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 24px;
-    transition: all 0.3s ease;
-}
+/* Enhanced Social Media Icons - Crafts Theme Override */
 
 .socialm a:hover {
     color: #fff !important;
