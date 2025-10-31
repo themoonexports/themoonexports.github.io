@@ -1,5 +1,14 @@
 # Directory Structure - The Moon Exports Website
 
+**Last Updated:** October 31, 2025
+
+**Related Documents:**
+- [Organization Report](ORGANIZATION_REPORT.md) - Reorganization details and metrics
+- [Declutter Changelog](DECLUTTER_CHANGELOG.md) - Historical cleanup actions
+- [AI Context Summary](AI_CONTEXT_SUMMARY.md) - AI-optimized file organization
+
+---
+
 ## Overview
 This document describes the organized directory structure for The Moon Exports website project.
 
@@ -143,3 +152,15 @@ The `.gitignore` file is configured to:
 - Prevent accidental commit of sensitive data
 
 This structure maintains all dependencies while providing a clean, organized workspace for both human developers and AI agents.
+
+---
+
+## See Also
+
+- [Organization Report](ORGANIZATION_REPORT.md) - Reorganization results and benefits
+- [AI Context Summary](AI_CONTEXT_SUMMARY.md) - AI agent file navigation
+- [Declutter Changelog](DECLUTTER_CHANGELOG.md) - Historical cleanup actions
+
+---
+
+*Last Updated: October 31, 2025*
