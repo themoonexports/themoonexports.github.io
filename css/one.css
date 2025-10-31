@@ -348,114 +348,23 @@ float: left;
 div#navbar {
   margin-top: 50px;
 }
-/* ===== SOPHISTICATED CRAFTS THEME DROPDOWN ===== */
-
 .navbar-right .dropdown-menu {
-  width: 380px;
-  height: auto;
-  min-height: 140px;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border: 2px solid #5CA316;
-  border-radius: 12px;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(92, 163, 22, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  padding: 15px 0;
-  margin-top: 8px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
 
-/* Decorative border accent */
-.navbar-right .dropdown-menu::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    #5CA316 20%, 
-    #7BC428 50%, 
-    #5CA316 80%, 
-    transparent
-  );
-  animation: shimmer 3s infinite linear;
+  width: 348px;
+height: 140px;
 }
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-/* Dropdown image showcase */
 ul.dropdown-menu img {
   position: static;
   display: block;
-  margin: 15px auto 20px;
-  width: 180px;
-  height: auto;
-  border-radius: 8px;
-  border: 2px solid rgba(92, 163, 22, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  filter: brightness(0.95) contrast(1.1);
+  margin: 10px auto;
+  width: 160px;
 }
-
-ul.dropdown-menu img:hover {
-  transform: scale(1.05);
-  border-color: #5CA316;
-  box-shadow: 0 6px 20px rgba(92, 163, 22, 0.4);
-  filter: brightness(1) contrast(1.15);
-}
-
 ul.dropdown-menu li:first-child {
   text-align: center;
   padding-left: 0;
-  margin-bottom: 10px;
-  position: relative;
 }
-
-/* Divider after first item */
-ul.dropdown-menu li:first-child::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(92, 163, 22, 0.5), 
-    transparent
-  );
-}
-
 ul.dropdown-menu li:not(:first-child) {
   padding-left: 20px;
-  padding-right: 20px;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-/* Crafted item indicator */
-ul.dropdown-menu li:not(:first-child)::before {
-  content: '✦';
-  position: absolute;
-  left: 8px;
-  color: #5CA316;
-  font-size: 10px;
-  opacity: 0;
-  transition: all 0.3s ease;
-  transform: translateX(-5px);
-}
-
-ul.dropdown-menu li:not(:first-child):hover::before {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 
@@ -540,136 +449,26 @@ figcaption h2 {
 }
 
 
-/* ===== DROPDOWN TRIGGER - CRAFTS THEME ===== */
-.navbar-default .navbar-nav>.open>a, 
-.navbar-default .navbar-nav>.open>a:focus, 
-.navbar-default .navbar-nav>.open>a:hover {
-  color: #7BC428;
-  background: linear-gradient(180deg, 
-    rgba(92, 163, 22, 0.15) 0%, 
-    rgba(92, 163, 22, 0.05) 100%
-  );
-  border-bottom: 2px solid #5CA316;
-  position: relative;
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  color: #FFF;
+  background-color: rgba(231, 231, 231, 0);
 }
-
-/* Active dropdown indicator */
-.navbar-default .navbar-nav>.open>a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid #5CA316;
-}
-
-/* Dropdown parent hover state */
-.navbar-default .navbar-nav>li.dropdown:hover>a {
-  color: #7BC428;
-  transition: color 0.3s ease;
-}
-
-.navbar-default .navbar-nav>li.dropdown>a {
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-/* Subtle underline animation for dropdown trigger */
-.navbar-default .navbar-nav>li.dropdown>a::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #5CA316, transparent);
-  transition: width 0.3s ease;
-}
-
-.navbar-default .navbar-nav>li.dropdown:hover>a::before,
-.navbar-default .navbar-nav>li.dropdown.open>a::before {
-  width: 80%;
-}
-/* ===== SOPHISTICATED DROPDOWN MENU STYLING ===== */
-
 .dropdown-menu {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border: 2px solid #5CA316;
-  border-radius: 12px;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(92, 163, 22, 0.2);
-  padding: 8px 0;
+  background-color: #333;
 }
-
-/* Dropdown menu items - Crafts theme */
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  color: #219521;
+  text-decoration: none;
+  background-color: rgba(245, 245, 245, 0);
+}
 .dropdown-menu>li>a {
   display: block;
-  padding: 10px 25px;
+  padding: 3px 20px;
   clear: both;
-  font-weight: 500;
-  line-height: 1.6;
-  color: #E5E5E5;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #D2D2D2;
   white-space: nowrap;
-  text-transform: capitalize;
-  letter-spacing: 0.3px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-  font-family: 'Georgia', serif;
-}
-
-/* Elegant hover effect */
-.dropdown-menu>li>a::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 0;
-  background: linear-gradient(180deg, #5CA316, #7BC428);
-  transition: height 0.3s ease;
-  border-radius: 0 2px 2px 0;
-}
-
-.dropdown-menu>li>a:hover::before,
-.dropdown-menu>li>a:focus::before {
-  height: 60%;
-}
-
-.dropdown-menu>li>a:focus, 
-.dropdown-menu>li>a:hover {
-  color: #7BC428;
-  text-decoration: none;
-  background: linear-gradient(90deg, 
-    rgba(92, 163, 22, 0.15) 0%, 
-    rgba(92, 163, 22, 0.05) 100%
-  );
-  padding-left: 30px;
-  text-shadow: 0 0 10px rgba(123, 196, 40, 0.3);
-}
-
-/* Subtle separator between items */
-.dropdown-menu>li+li {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Active/selected state */
-.dropdown-menu>.active>a,
-.dropdown-menu>.active>a:focus,
-.dropdown-menu>.active>a:hover {
-  background: linear-gradient(90deg, 
-    rgba(92, 163, 22, 0.25) 0%, 
-    rgba(92, 163, 22, 0.1) 100%
-  );
-  color: #7BC428;
-  border-left: 4px solid #5CA316;
 }
 /* Social Media Icons - Crafts Theme */
 .socialm {
@@ -818,66 +617,9 @@ div#google_translate_element {
     right: 35%;
 }
 
-/* ===== DROPDOWN HOVER & ANIMATION - CRAFTS THEME ===== */
-
-/* Smooth dropdown appearance */
+/* Fix dropdown hover behavior */
 .navbar-nav .dropdown:hover .dropdown-menu {
     display: block;
-    animation: dropdownSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Dropdown entrance animation */
-@keyframes dropdownSlideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Add subtle texture to dropdown background */
-.dropdown-menu::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.01) 10px,
-            rgba(255, 255, 255, 0.01) 20px
-        );
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-/* Crafts-themed corner accent */
-.dropdown-menu::before {
-    content: '✦';
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: rgba(92, 163, 22, 0.3);
-    font-size: 16px;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { 
-        opacity: 0.3; 
-        transform: scale(1);
-    }
-    50% { 
-        opacity: 0.6; 
-        transform: scale(1.1);
-    }
 }
 
 /* ===== RELIABLE SOCIAL MEDIA ICONS (No External Dependencies) ===== */
