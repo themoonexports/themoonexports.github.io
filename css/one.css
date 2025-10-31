@@ -1,12 +1,15 @@
 body {
 font-family: sans-serif;
-  padding-top: 90px; /* Increased to ensure content clears fixed header across breakpoints */
+  /* Use a CSS variable for consistent header offset across breakpoints */
+  padding-top: var(--header-height, 64px);
     background-color: #191919;
 	   color: #D3D3D3;
 }
 
 /* ===== Design Tokens: Navigation Dropdown ===== */
 :root {
+  /* Header height used to offset fixed navbar */
+  --header-height: 64px;
   --tmx-brand-green: #5CA316;
   --tmx-brand-green-soft: #7BC428;
   --tmx-ink-900: #0F0F0F;
@@ -594,7 +597,7 @@ border-radius: 0px;
   border-bottom: solid 1px #333;
 }
 .navbar {
-min-height:110px;
+  min-height: var(--header-height);
 }
 /* Enhanced Navbar Brand Logo - Crafts Theme */
 a.navbar-brand {
@@ -611,11 +614,11 @@ a.navbar-brand:hover {
 }
 
 a.navbar-brand img {
-  max-width: 260px;
-  max-height: 50px;
+  max-width: 220px;
+  max-height: calc(var(--header-height) - 14px);
   width: auto;
   height: auto;
-  margin-top: -10px;
+  margin-top: -6px;
   transition: all 0.3s ease;
   filter: brightness(1) contrast(1.1);
 }
@@ -734,13 +737,11 @@ margin-bottom: 14px;
   font-weight: bold;
 }
 .navbar {
-  min-height: 50px;
-    margin-bottom: 0px;
+  min-height: var(--header-height);
+  margin-bottom: 0px;
 }
 body {
-
-  padding-top: 50px;
-
+  padding-top: var(--header-height);
 }
 .masthead {
   padding-top: 0px;
@@ -750,6 +751,7 @@ body {
 }
 
 @media (min-width: 768px) {
+:root { --header-height: 80px; }
 .navbar-nav>li>a {
 padding-top: 20px;
 padding-bottom: 20px;
@@ -1461,6 +1463,8 @@ span.caret:before {
   width: 100%;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   padding: 16px;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 .close-btn {
