@@ -686,32 +686,69 @@ div#google_translate_element {
 
 /* Enhanced Social Media Icons - Crafts Theme Override */
 
-.socialm a:hover {
-    color: #fff !important;
-    text-decoration: none;
-    transform: scale(1.1);
-    opacity: 0.8;
+/* Platform-specific hover effects with crafts theme colors */
+.socialm a[href*="facebook"]:hover {
+  background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+  border-color: #1877f2;
+  box-shadow:
+    0 8px 20px rgba(24, 119, 242, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Platform-specific background colors for Font Awesome icons */
-.socialm a[href*="facebook"] {
-    background-color: #1877f2;
+.socialm a[href*="twitter"]:hover {
+  background: linear-gradient(135deg, #1da1f2 0%, #1991db 100%);
+  border-color: #1da1f2;
+  box-shadow:
+    0 8px 20px rgba(29, 161, 242, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.socialm a[href*="twitter"] {
-    background-color: #1da1f2;
+.socialm a[href*="instagram"]:hover {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: #e6683c;
+  box-shadow:
+    0 8px 20px rgba(225, 48, 108, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.socialm a[href*="instagram"] {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+.socialm a[href*="pinterest"]:hover {
+  background: linear-gradient(135deg, #bd081c 0%, #a0071a 100%);
+  border-color: #bd081c;
+  box-shadow:
+    0 8px 20px rgba(189, 8, 28, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.socialm a[href*="pinterest"] {
-    background-color: #bd081c;
+.socialm a[href*="linkedin"]:hover {
+  background: linear-gradient(135deg, #0077b5 0%, #006ba1 100%);
+  border-color: #0077b5;
+  box-shadow:
+    0 8px 20px rgba(0, 119, 181, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.socialm a[href*="linkedin"] {
-    background-color: #0077b5;
+/* Mobile responsive design for social icons */
+@media (max-width: 768px) {
+  .socialm a {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .social-links {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .socialm h4 {
+    text-align: center;
+    font-size: 16px;
+  }
 }
 
 /* If Font Awesome fails to load, show text fallbacks */
