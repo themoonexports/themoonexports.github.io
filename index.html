@@ -414,7 +414,8 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    
+    <script src="js/consent.js"></script>
+
     <script>
         (function () {
             'use strict';
@@ -547,20 +548,35 @@
                 initLegacyDropdownHover();
             });
 
-            const vendorScripts = [
-                {
-                    src: 'https://www.google-analytics.com/analytics.js',
-                    onLoad: initializeAnalytics
-                },
-                {
-                    src: 'https://mc.yandex.ru/metrika/tag.js',
-                    onLoad: initializeYandex
-                }
-            ];
+            function loadAnalyticsScripts() {
+                const vendorScripts = [
+                    {
+                        src: 'https://www.google-analytics.com/analytics.js',
+                        onLoad: initializeAnalytics
+                    },
+                    {
+                        src: 'https://mc.yandex.ru/metrika/tag.js',
+                        onLoad: initializeYandex
+                    }
+                ];
 
-            vendorScripts.forEach(({ src, onLoad }) => {
-                loadExternalScript(src, { onLoad });
-            });
+                vendorScripts.forEach(({ src, onLoad }) => {
+                    loadExternalScript(src, { onLoad });
+                });
+            }
+
+            const consentApi = window.TheMoonExports && window.TheMoonExports.Consent;
+            if (consentApi && typeof consentApi.onReady === 'function') {
+                consentApi.onReady((state) => {
+                    if (state.analytics) {
+                        loadAnalyticsScripts();
+                    } else {
+                        console.info('Analytics scripts skipped - consent declined.');
+                    }
+                });
+            } else {
+                console.warn('Consent API unavailable; analytics scripts not loaded.');
+            }
 
             loadExternalScript('https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
         }());
