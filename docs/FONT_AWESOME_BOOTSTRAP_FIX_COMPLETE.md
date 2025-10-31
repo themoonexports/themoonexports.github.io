@@ -1,5 +1,14 @@
 # Font Awesome & Bootstrap Integration Fix - Complete Solution
 
+**Last Updated:** October 31, 2025
+
+**Related Documents:**
+- [Design System](DESIGN_SYSTEM.md) - Icon system specifications
+- [Social Media Icons Fix Report](SOCIAL_MEDIA_ICONS_FIX_REPORT.md) - Related icon fixes
+- [Social Icons Troubleshooting](SOCIAL_ICONS_TROUBLESHOOTING.md) - Diagnostic procedures
+
+---
+
 ## Problem Summary
 
 **Original Issue**: Social media icons and dropdown menu carets on The Moon Exports website were displaying as squares/boxes instead of proper symbols, indicating a Font Awesome loading conflict with Bootstrap.
@@ -198,3 +207,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer"
 ## Implementation Complete
 
 The Font Awesome and Bootstrap integration issue has been comprehensively resolved with multiple layers of protection, fallbacks, and validation. The solution addresses both the immediate display problems and provides long-term stability for the website's UI components.
+
+---
+
+## See Also
+
+- [Social Media Icons Fix Report](SOCIAL_MEDIA_ICONS_FIX_REPORT.md) - Comprehensive icon standardization
+- [Social Icons Troubleshooting](SOCIAL_ICONS_TROUBLESHOOTING.md) - Debug procedures
+- [Design System](DESIGN_SYSTEM.md) - Complete icon system documentation
+
+---
+
+*Last Updated: October 31, 2025*
