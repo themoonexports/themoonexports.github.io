@@ -4,6 +4,28 @@ font-family: sans-serif;
     background-color: #191919;
 	   color: #D3D3D3;
 }
+
+/* ===== Design Tokens: Navigation Dropdown ===== */
+:root {
+  --tmx-brand-green: #5CA316;
+  --tmx-brand-green-soft: #7BC428;
+  --tmx-ink-900: #0F0F0F;
+  --tmx-ink-800: #1A1A1A;
+  --tmx-ink-700: #232323;
+  --tmx-ink-100: #E5E5E5;
+  --tmx-ink-050: #F8F8F8;
+  --tmx-bronze-accent: #B58A55;
+  --tmx-radius-md: 12px;
+  --tmx-radius-sm: 8px;
+  --tmx-spacing-xxs: 4px;
+  --tmx-spacing-xs: 8px;
+  --tmx-spacing-sm: 12px;
+  --tmx-spacing-md: 16px;
+  --tmx-spacing-lg: 24px;
+  --tmx-transition-ease: 0.25s ease;
+  --tmx-transition-sculpted: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --tmx-drop-shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
 .masthead {
 padding-top: 35px;
 }
