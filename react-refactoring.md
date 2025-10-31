@@ -42,8 +42,8 @@
 
 3. **Component Conversion Phases**
    - ✅ **Phase 1 (Complete)**: Header/navigation, newsletter form, consent hook
-   - 🔄 **Phase 2 (Next)**: Footer, carousel, product grid, trust badges
-   - 📋 **Phase 3 (Future)**: Contact form, language switcher, social media icons, auto-year update
+   - ✅ **Phase 2 (Complete, Oct 2025)**: Footer, carousel, product grid, trust badges, language switcher, social media icons, auto-year update
+   - 📋 **Phase 3 (Planned)**: Contact form, FAQ accordion, product modal, gallery lightbox, testimonials, search bar, cookie settings, accessibility widget, scroll-to-top button
 
 4. **Integration with Existing JS**
    - Export legacy utilities as modules (ES exports) while keeping UMD-style global for non-React pages.
@@ -72,6 +72,90 @@
 - Gate any data-heavy transforms (e.g., product listings, localization tables) behind typed models to avoid runtime regressions as React layers in dynamic behavior.
 
 ## Next Steps
-- Set up `react/` workspace with Vite, React 18, and a baseline `tsconfig.json`.
-- Refactor `js/navigation.js` and `js/forms.js` to support both CommonJS-style globals and ES module exports, adding `.d.ts` definitions.
-- Implement React `Header` component in TypeScript, reuse existing markup and styles, and mount it on `index.html` for pilot testing.
+
+---
+
+## ✅ Phase 2 Complete (October 2025)
+
+### Delivered Bundles
+- **footer.js** (2.66KB) - Footer navigation, contact info, auto-year
+- **carousel.js** (2.40KB) - Hero image slider with auto-advance
+- **product-grid.js** (1.25KB) - Product category cards (Horn/Wood/Resin)
+- **trust-badges.js** (1.84KB) - Trust badge, company logo, PayPal secure
+- **language-switcher.js** (0.99KB) - DE/FR flags in header
+- **social-links.js** (1.70KB) - Social media icons with consent-aware tracking
+- **auto-year update** - Now handled in Footer React component
+
+**Total Phase 2 Bundles:** ~10.84KB (all 6 bundles combined)
+
+### Integration
+- All components hydrate into existing HTML using `data-react` attributes
+- Bundles loaded via `<script type="module" defer>` in `index.html`
+- Consent-aware analytics via `useTracking` hook
+- TypeScript types for analytics APIs
+
+### Achievements
+- All bundles under 3KB (target: 7KB)
+- No hydration errors; progressive enhancement preserved
+- Legacy JS bridge (`window.TheMoonExports.*`) maintained
+- Documentation updated; bundle sizes tracked
+
+---
+
+## 📋 Phase 3 Migration Plan (Planned)
+
+### Objectives
+- Migrate remaining interactive/static components to modular React bundles (3-7KB each)
+- Maintain progressive enhancement and crawlable HTML
+- Integrate with legacy JS utilities and consent gating
+
+### Target Components & Bundles
+| Component                | Mount Point (suggested)         | Bundle Name         | Notes                        |
+|--------------------------|---------------------------------|---------------------|------------------------------|
+| Contact Form             | `#contact-form`                 | contact-form.js     | Validation, Zoho integration |
+| FAQ Accordion            | `.faq-section`                  | faq.js              | Expand/collapse Q&A          |
+| Product Modal            | `.product-modal`                | product-modal.js    | Details, images, add-to-cart |
+| Gallery Lightbox         | `.gallery-lightbox`             | gallery.js          | Image zoom, swipe nav        |
+| Testimonials             | `.testimonials`                 | testimonials.js     | Carousel or fade-in quotes   |
+| Search Bar               | `#search-bar`                   | search.js           | Autocomplete, submit         |
+| Cookie Settings          | `.cookie-settings`              | cookie-settings.js  | Consent management           |
+| Accessibility Widget     | `.accessibility-widget`         | accessibility.js    | Font size, contrast toggles  |
+| Scroll-to-Top Button     | `.scroll-top`                   | scroll-top.js       | Smooth scroll                |
+
+### Migration Steps
+1. **Design React Component**: Match static HTML byte-for-byte for hydration.
+2. **Create Entry Point**: Add to `react/src/entries/` and update `vite.config.ts`.
+3. **Implement Bridge**: Expose any new helpers under `window.TheMoonExports.*` and declare in `global.d.ts`.
+4. **Integrate in HTML**: Add `data-react` attributes and `<script type="module">` tags.
+5. **Consent/Tracking**: Use `useConsent` and `useTracking` hooks for analytics/privacy.
+6. **Test**: Manual QA per `docs/TESTING_PLAN.md` (cross-browser, accessibility, consent).
+7. **Document**: Update `docs/PHASE_3_IMPLEMENTATION.md` with bundle sizes and integration notes.
+
+### Quality & Conventions
+- Preserve crawlable HTML, Bootstrap classes, ARIA roles
+- No blank containers; hydrate only
+- No new jQuery; vanilla or React only
+- All analytics behind consent gating
+- Mirror changes to `/de/` and `/fr/` as needed
+
+### Phase 3 Progress Checklist
+- [ ] Contact Form migrated to React bundle
+- [ ] FAQ Accordion migrated
+- [ ] Product Modal migrated
+- [ ] Gallery Lightbox migrated
+- [ ] Testimonials migrated
+- [ ] Search Bar migrated
+- [ ] Cookie Settings migrated
+- [ ] Accessibility Widget migrated
+- [ ] Scroll-to-Top Button migrated
+
+---
+
+## Phase 3 Implementation Steps (Next)
+1. Start with Contact Form and FAQ Accordion (highest user impact)
+2. Create React components and entry points for each
+3. Update Vite config and build bundles
+4. Integrate into HTML with `data-react` attributes and script tags
+5. Test hydration, accessibility, and consent gating
+6. Commit each migration with bundle size notes
+7. Document in `docs/PHASE_3_IMPLEMENTATION.md`

@@ -602,7 +602,11 @@ border-radius: 0px;
 /* Enhanced Navbar Brand Logo - Crafts Theme */
 a.navbar-brand {
   position: relative;
-  padding: 10px 15px;
+  /* Vertically center brand within header height */
+  height: var(--header-height);
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
   transition: all 0.3s ease;
   border-radius: 8px;
 }
@@ -614,11 +618,13 @@ a.navbar-brand:hover {
 }
 
 a.navbar-brand img {
-  max-width: 220px;
-  max-height: calc(var(--header-height) - 14px);
+  display: block;
+  /* Constrain by height for responsiveness; width scales automatically */
+  max-height: calc(var(--header-height) - 16px);
   width: auto;
   height: auto;
-  margin-top: -6px;
+  max-width: 100%;
+  margin: 0;
   transition: all 0.3s ease;
   filter: brightness(1) contrast(1.1);
 }
@@ -669,7 +675,8 @@ color: #5CA316;
   position: relative;
   float: right;
   padding: 9px 10px;
-  margin-top: 8px;
+  /* Center the hamburger within the header height */
+  margin-top: calc((var(--header-height) - 34px) / 2);
   margin-right: 15px;
   margin-bottom: 8px;
   background-color: transparent;
@@ -753,14 +760,17 @@ body {
 @media (min-width: 768px) {
 :root { --header-height: 80px; }
 .navbar-nav>li>a {
-padding-top: 20px;
-padding-bottom: 20px;
+  /* Align nav links to header without extra padding */
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: var(--header-height);
 }
 .navbar-nav>li {
 float: left;
 }
 div#navbar {
-  margin-top: 50px;
+  /* Remove legacy offset that caused misalignment */
+  margin-top: 0;
 }
 
 /* Legacy dropdown styles - superseded by crafts-themed styles above */

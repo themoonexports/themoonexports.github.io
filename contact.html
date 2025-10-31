@@ -169,7 +169,7 @@ Uttar Pradesh, India</span></p><br><br>
 	</div>
 </div>
 
-<footer class="footer-bottom">
+<footer class="footer-bottom" data-react="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -194,7 +194,7 @@ Uttar Pradesh, India</span></p><br><br>
                 <p><b>Contact No.:</b> +91 8909070131</p>
                 <p><b>Email:</b> info@themoonexports.com</p>
             </div>
-            <div class="col-md-3 socialm">
+                        <div class="col-md-3 socialm">
                 <h4>Connect with us</h4>
                 <script type="application/ld+json">
                 {
@@ -210,11 +210,13 @@ Uttar Pradesh, India</span></p><br><br>
                   ]
                 }
                 </script>
-                <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
-                <a href="https://twitter.com/themoonexports" target="_blank"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
-                <a href="https://instagram.com/themoonexports/" target="_blank"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
-                <a href="https://www.pinterest.com/themoonexports/" target="_blank"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
-                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+                                <div class="social-links" data-react="social-links">
+                                        <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
+                                        <a href="https://twitter.com/themoonexports" target="_blank"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
+                                        <a href="https://instagram.com/themoonexports/" target="_blank"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
+                                        <a href="https://www.pinterest.com/themoonexports/" target="_blank"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
+                                        <a href="https://www.linkedin.com/company/themoonexports/" target="_blank"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+                                </div>
             </div>
         </div>
         <!--Zoho Campaigns Web-Optin Form's Header Code Starts Here-->
@@ -303,5 +305,10 @@ $(document).ready(function() {
 </script>
 <script src="js/lazysizes.min.js" async></script>
 <script src="js/auto-year-update.js"></script>
+<!-- React Progressive Enhancement: Non-product components -->
+<script type="module" src="js/dist/header.js" defer></script>
+<script type="module" src="js/dist/language-switcher.js" defer></script>
+<script type="module" src="js/dist/social-links.js" defer></script>
+<script type="module" src="js/dist/footer.js" defer></script>
 </body>
 </html>

@@ -80,7 +80,7 @@
 <body cz-shortcut-listen="true">
 
 <div class="masthead" >
-	<nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-main" data-react="header">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -91,7 +91,7 @@
           </button>
           <a class="navbar-brand" href="index.html"><img src="images/placeholder.png" data-src="images/logo.png" alt="The Moon Exports" class="lazyload"/></a>
         </div>
-          <p class="usano"><b><a href="/de"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/german.png" alt="german" class="img-circle lazyload" width="25" height="25"></a></b></p>
+          <div class="usano" data-react="language-switcher"><b><a href="/de"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/german.png" alt="german" class="img-circle lazyload" width="25" height="25"></a></b></div>
           <div id="google_translate_element" class="visible-medium hidden-xs"></div><script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
@@ -99,7 +99,7 @@ function googleTranslateElementInit() {
 </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <div id="navbar" class="navbar-collapse navbar-right collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">Home</a></li>
+<footer class="footer-bottom" data-react="footer"> <div class="container">
             <li><a href="about.html">About Us</a></li>
   		 <li class="dropdown" data-nav="handicrafts">
            <a href="products.html"
@@ -188,22 +188,24 @@ function googleTranslateElementInit() {
                     "https://www.linkedin.com/company/themoonexports/"
                   ]
                 }
-                </script>
-                <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank" style="color: #fff; display: inline-block;">
-                    <i class="fab fa-facebook-f" aria-hidden="true"></i><span style="display:none;">Facebook</span>
-                </a>
-                <a href="https://twitter.com/themoonexports" target="_blank" style="color: #fff; display: inline-block;">
-                    <i class="fab fa-twitter" aria-hidden="true"></i><span style="display:none;">Twitter</span>
-                </a>
-                <a href="https://instagram.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
-                    <i class="fab fa-instagram" aria-hidden="true"></i><span style="display:none;">Instagram</span>
-                </a>
-                <a href="https://www.pinterest.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
-                    <i class="fab fa-pinterest-p" aria-hidden="true"></i><span style="display:none;">Pinterest</span>
-                </a>
-                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
-                    <i class="fab fa-linkedin-in" aria-hidden="true"></i><span style="display:none;">LinkedIn</span>
-                </a>
+        </script>
+        <div class="social-links" data-react="social-links">
+          <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank" style="color: #fff; display: inline-block;">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i><span style="display:none;">Facebook</span>
+          </a>
+          <a href="https://twitter.com/themoonexports" target="_blank" style="color: #fff; display: inline-block;">
+            <i class="fab fa-twitter" aria-hidden="true"></i><span style="display:none;">Twitter</span>
+          </a>
+          <a href="https://instagram.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+            <i class="fab fa-instagram" aria-hidden="true"></i><span style="display:none;">Instagram</span>
+          </a>
+          <a href="https://www.pinterest.com/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+            <i class="fab fa-pinterest-p" aria-hidden="true"></i><span style="display:none;">Pinterest</span>
+          </a>
+          <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" style="color: #fff; display: inline-block;">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i><span style="display:none;">LinkedIn</span>
+          </a>
+        </div>
             </div>
 </div>
 <!--Zoho Campaigns Web-Optin Form's Header Code Starts Here-->
@@ -411,6 +413,11 @@ $(document).ready(function() {
 </script>
 <script src="js/lazysizes.min.js" async></script>
 <script src="js/auto-year-update.js"></script>
+<!-- React Progressive Enhancement: Non-product components -->
+<script type="module" src="js/dist/header.js" defer></script>
+<script type="module" src="js/dist/language-switcher.js" defer></script>
+<script type="module" src="js/dist/social-links.js" defer></script>
+<script type="module" src="js/dist/footer.js" defer></script>
 </body>
 </html>
 
