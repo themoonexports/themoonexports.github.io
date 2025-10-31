@@ -1426,3 +1426,199 @@ span.caret:before {
 }
 
 /* ===== END ENHANCED LOGO STYLING ===== */
+
+/* ===== Product Modal & Gallery (React) ===== */
+.product-modal {
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+.product-modal h2,
+.product-modal h3,
+.product-modal h4 {
+  color: #EFEFEF;
+}
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* Modal content */
+.modal-content {
+  background: #111;
+  color: #EDEDED;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  max-width: 860px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  padding: 16px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  color: #ccc;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #fff;
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+/* Lightbox */
+.lightbox {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.lightbox-main {
+  position: relative;
+  text-align: center;
+}
+
+.lightbox-main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+.lightbox-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.lightbox-controls button {
+  background: #1c1c1c;
+  color: #e5e5e5;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.lightbox-controls button:hover,
+.lightbox-controls button:focus {
+  background: #232323;
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+.lightbox-index {
+  color: #bdbdbd;
+  font-size: 13px;
+}
+
+.lightbox-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thumb {
+  display: block;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 0;
+  background: #141414;
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.thumb.active,
+.thumb:focus,
+.thumb:hover {
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+/* Variants */
+.variants {
+  margin-top: 12px;
+}
+
+.variant-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.variant {
+  background: #121212;
+  color: #f0f0f0;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.variant:hover,
+.variant:focus {
+  background: #1b1b1b;
+  outline: 2px solid #5CA316;
+  outline-offset: 2px;
+}
+
+.variant.active {
+  background: #24341c;
+  border-color: #5CA316;
+}
+
+/* Responsive modal grid on wider screens */
+@media (min-width: 768px) {
+  .lightbox {
+    grid-template-columns: 1.25fr 0.75fr;
+    align-items: start;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-main img,
+  .thumb,
+  .variant,
+  .lightbox-controls button {
+    transition: none !important;
+  }
+}
+
+/* Print: hide overlay */
+@media print {
+  .modal-overlay {
+    display: none !important;
+  }
+}
+/* ===== End Product Modal & Gallery ===== */
