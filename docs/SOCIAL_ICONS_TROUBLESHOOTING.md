@@ -1,4 +1,13 @@
-# Social Media Icons Troubleshooting Guide
+# Social Icons Troubleshooting Guide
+
+**Last Updated:** October 31, 2025
+
+**Related Documents:**
+- [Social Media Icons Fix Report](SOCIAL_MEDIA_ICONS_FIX_REPORT.md) - Complete fix implementation
+- [Font Awesome Bootstrap Fix](FONT_AWESOME_BOOTSTRAP_FIX_COMPLETE.md) - Related icon system fixes
+- [Design System](DESIGN_SYSTEM.md) - Icon system specifications
+
+---
 
 ## Current Status
 I've implemented several fixes for the social media icons issue:
@@ -116,3 +125,15 @@ If icons still aren't working:
 4. Test in a different browser
 
 The implementation is now comprehensive with multiple fallback layers to ensure icons display correctly across all browsers and scenarios.
+
+---
+
+## See Also
+
+- [Social Media Icons Fix Report](SOCIAL_MEDIA_ICONS_FIX_REPORT.md) - Standardization completed
+- [Font Awesome Bootstrap Fix](FONT_AWESOME_BOOTSTRAP_FIX_COMPLETE.md) - Complete icon fix solution
+- [Design System](DESIGN_SYSTEM.md) - Icon design specifications
+
+---
+
+*Last Updated: October 31, 2025*

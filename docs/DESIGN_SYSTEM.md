@@ -1,6 +1,16 @@
 # The Moon Exports Design System (Baseline v1)
 
-Purpose: Canonical reference of the current (2025) visual design so future refactors (e.g. Next.js) preserve look & feel.
+**Last Updated:** October 31, 2025  
+**Version:** 1.0 (2025 Baseline)
+
+**Purpose:** Canonical reference of the current (2025) visual design so future refactors (e.g. Next.js) preserve look & feel.
+
+**Related Documents:**
+- [Modular Components](MODULAR_COMPONENTS.md) - Component architecture
+- [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md) - React component styling
+- [Font Awesome Bootstrap Fix](FONT_AWESOME_BOOTSTRAP_FIX_COMPLETE.md) - Icon system details
+
+---
 
 ## Core Principles
 - Dark handcrafted aesthetic (dark charcoal canvas + light neutral text)
@@ -203,4 +213,18 @@ Global Styles:    globals.css (dark theme base) + module CSS / styled system
 - Add prefers-reduced-motion respect (skip scale/opacity transitions)
 
 ---
+
 Source of truth: `css/one.css` (751 lines at capture). Keep this document as frontend standard to follow.
+
+---
+
+## See Also
+
+- [Modular Components](MODULAR_COMPONENTS.md) - Component system implementation
+- [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md) - React styling patterns
+- [Social Media Icons Fix Report](SOCIAL_MEDIA_ICONS_FIX_REPORT.md) - Icon system updates
+
+---
+
+*Design System Captured: 2025*  
+*Last Updated: October 31, 2025*

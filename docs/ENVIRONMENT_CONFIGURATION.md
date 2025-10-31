@@ -1,5 +1,14 @@
 # Environment Configuration Guide
 
+**Last Updated:** October 31, 2025
+
+**Related Documents:**
+- [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) - Deployment procedures
+- [Security Checklist](SECURITY_CHECKLIST.md) - Security configuration
+- [Testing Plan](TESTING_PLAN.md) - Environment testing procedures
+
+---
+
 ## Overview
 The Moon Exports project uses environment variables to manage configuration across different deployment environments while keeping sensitive information secure.
 
@@ -253,3 +262,14 @@ if (process.env.DEBUG_MODE === 'true') {
 - [ ] Update documentation
 
 This environment configuration system provides a secure, scalable way to manage configuration across development, staging, and production environments while protecting sensitive information.
+
+---
+
+## See Also
+
+- [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) - Deployment status
+- [Security Checklist](SECURITY_CHECKLIST.md) - Security best practices
+
+---
+
+*Last Updated: October 31, 2025*
