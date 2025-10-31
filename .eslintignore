@@ -1,0 +1,16 @@
+# Vendor/Third-party libraries
+js/bootstrap.js
+js/bootstrap.min.js
+js/lazysizes.min.js
+js/npm.js
+js/application.js
+
+# Build output
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# Firebase
+.firebase/

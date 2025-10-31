@@ -13,6 +13,8 @@
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "audit": "npm audit",
+    "lint": "eslint js/**/*.js",
+    "lint:fix": "eslint js/**/*.js --fix",
     "lint:html": "echo 'HTML validation - consider adding html-validate'",
     "optimize": "echo 'Image optimization - consider adding imagemin'",
     "clean": "echo 'Cleanup completed via manual process'"
@@ -35,6 +37,7 @@
   "author": "Kamran Khan",
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
+    "eslint": "^8.57.0",
     "firebase-tools": "^13.0.0",
     "serve": "^14.2.5"
   },
