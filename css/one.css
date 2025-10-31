@@ -887,6 +887,7 @@ span.caret:before {
 
 /* Payment Info Section */
 .payment-info {
+  position: relative;
   background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
   border: 1px solid #333;
   border-radius: 12px;
