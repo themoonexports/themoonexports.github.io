@@ -1,6 +1,6 @@
 body {
 font-family: sans-serif;
-  padding-top: 75px;
+  padding-top: 90px; /* Increased to ensure content clears fixed header across breakpoints */
     background-color: #191919;
 	   color: #D3D3D3;
 }
