@@ -751,7 +751,7 @@ div#google_translate_element {
   }
 }
 
-/* If Font Awesome fails to load, show text fallbacks */
+/* Font Awesome fallback styles with crafts theme integration */
 .socialm a[href*="facebook"] .fab:before,
 .socialm a[href*="facebook"] .fa:before {
     content: "f" !important;
