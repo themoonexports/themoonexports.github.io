@@ -56,7 +56,7 @@ We accept PayPal for our export orders and ships via Worldnet  Express delivery 
 <body cz-shortcut-listen="true">
 
 <div class="masthead">
-    <nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-main" data-react="header">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -67,7 +67,7 @@ We accept PayPal for our export orders and ships via Worldnet  Express delivery 
                 </button>
                 <a class="navbar-brand" href="index.html"><img src="images/placeholder.png" data-src="images/logo.png" alt="The Moon Exports" class="lazyload"/></a>
             </div>
-            <p class="usano"><b><a href="/de"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/german.png" alt="german" class="img-circle lazyload" width="25" height="25"></a></b></p>
+            <div class="usano" data-react="language-switcher"><b><a href="/de"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/german.png" alt="german" class="img-circle lazyload" width="25" height="25"></a></b></div>
             <div id="google_translate_element" class="visible-medium hidden-xs"></div>
             <script type="text/javascript">
             function googleTranslateElementInit() {
@@ -316,8 +316,8 @@ For more details contact us.</p>
     </div>
   </section>
 
-<footer class="footer-bottom">
-    <div class="container">
+<footer class="footer-bottom" data-react="footer">
+  <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <h4>The Moon Exports</h4>
@@ -357,11 +357,13 @@ For more details contact us.</p>
                   ]
                 }
                 </script>
-                <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
-                <a href="https://twitter.com/themoonexports" target="_blank"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
-                <a href="https://instagram.com/themoonexports/" target="_blank"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
-                <a href="https://www.pinterest.com/themoonexports/" target="_blank"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
-                <a href="https://www.linkedin.com/company/themoonexports/" target="_blank"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+                <div class="social-links" data-react="social-links">
+                    <a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
+                    <a href="https://twitter.com/themoonexports" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
+                    <a href="https://instagram.com/themoonexports/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
+                    <a href="https://www.pinterest.com/themoonexports/" target="_blank" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
+                    <a href="https://www.linkedin.com/company/themoonexports/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+                </div>
             </div>
         </div>
         <!--Zoho Campaigns Web-Optin Form's Header Code Starts Here-->
@@ -444,6 +446,11 @@ ym(52371760, "init", {
 <!-- /Yandex.Metrika counter -->
 <script src="js/lazysizes.min.js" async></script>
 <script src="js/auto-year-update.js"></script>
+<!-- React Progressive Enhancement: Non-product components -->
+<script type="module" src="js/dist/header.js" defer></script>
+<script type="module" src="js/dist/language-switcher.js" defer></script>
+<script type="module" src="js/dist/social-links.js" defer></script>
+<script type="module" src="js/dist/footer.js" defer></script>
 <!-- React Progressive Enhancement: Product Modal -->
 <script type="module" src="js/dist/product-modal.js" defer></script>
 </body>
