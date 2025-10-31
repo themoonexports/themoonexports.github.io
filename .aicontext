@@ -7,7 +7,7 @@
 project_name: "The Moon Exports"
 project_type: "Static Website - E-commerce Handicrafts"
 primary_language: "HTML/CSS/JavaScript"
-deployment: "Firebase Hosting + GitHub Pages"
+deployment: " GitHub Pages"
 domain: "themoonexports.com"
 
 ## Critical Production Files (Priority: CRITICAL)
@@ -50,7 +50,6 @@ configuration:
   - package.json                  # Node.js dependencies and scripts
   - package-lock.json             # Dependency lock file
   - database.rules.json           # Firebase database rules
-  - .firebaserc                   # Firebase project configuration
   - .gitignore                    # Git ignore rules
 
 ## Development Tools (Priority: MEDIUM)
@@ -126,7 +125,6 @@ performance_task_priorities:
 ### Security Enhancement Tasks
 security_task_priorities:
   critical:
-    - firebase.json               # Security headers configuration
     - .htaccess                   # Server-level security
     - package.json                # Dependency security
   high:

@@ -113,14 +113,24 @@ function gtag_report_conversion(url) {
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
-                    <li class="dropdown">
-                        <a href="products.html" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Handicrafts <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <a href="products.html"><img class="hidden-xs lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/dropdown.jpg" alt="Handicrafts"/></a>
-                            <li><a href="horn-crafts.html">Horn Crafts</a></li>
-                            <li><a href="buffalo-horn-plates.html">Buffalo Horn Plates</a></li>
-                            <li><a href="wooden-crafts.html">Wooden Crafts</a></li>
-                            <li><a href="resin.html">Resin Products</a></li>
+                    <li class="dropdown" data-nav="handicrafts">
+                        <a id="nav-handicrafts-toggle" href="products.html" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="nav-handicrafts-menu">
+                            <span class="dropdown-label">Handicrafts</span>
+                            <span class="caret" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="nav-handicrafts-menu" role="menu" aria-labelledby="nav-handicrafts-toggle">
+                            <li class="dropdown-hero" role="presentation">
+                                <a href="products.html" class="dropdown-hero-link" role="menuitem">
+                                    <figure class="dropdown-hero-figure">
+                                        <img class="hidden-xs lazyload" src="images/dropdown.jpg" alt="Overview of handcrafted horn, wood, and resin collections"/>
+                                        <figcaption class="dropdown-hero-caption">Discover handcrafted horn, wood, and resin collections.</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li role="presentation"><a href="horn-crafts.html" role="menuitem">Horn Crafts</a></li>
+                            <li role="presentation"><a href="buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
+                            <li role="presentation"><a href="wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
+                            <li role="presentation"><a href="resin.html" role="menuitem">Resin Products</a></li>
                         </ul>
                     </li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -138,15 +148,26 @@ function googleTranslateElementInit() {
           <ul class="nav navbar-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
-			 <li class="dropdown">
-         <a href="products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
-         <ul class="dropdown-menu"><a href="products.html"><img class="hidden-xs lazyload" src="images/placeholder.png" data-src="images/dropdown.jpg"alt="Handicrafts Products"/></a>
-            <li><a href="horn-crafts.html">Horn Crafts</a></li>
-            <li><a href="wooden-crafts.html">Wooden Crafts</a></li>
-            <li><a href="resin.html">Resin Products</a></li>
-           
-          </ul>
-        </li>
+    		 <li class="dropdown" data-nav="handicrafts">
+                     <a id="nav-handicrafts-toggle-alt" href="products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false" aria-controls="nav-handicrafts-menu-alt">
+                             <span class="dropdown-label">Handicrafts</span>
+                             <span class="caret" aria-hidden="true"></span>
+                     </a>
+                     <ul class="dropdown-menu" id="nav-handicrafts-menu-alt" role="menu" aria-labelledby="nav-handicrafts-toggle-alt">
+                            <li class="dropdown-hero" role="presentation">
+                                    <a href="products.html" class="dropdown-hero-link" role="menuitem">
+                                            <figure class="dropdown-hero-figure">
+                                                    <img class="hidden-xs lazyload" src="images/dropdown.jpg" alt="Overview of handcrafted horn, wood, and resin collections"/>
+                                                    <figcaption class="dropdown-hero-caption">Discover handcrafted horn, wood, and resin collections.</figcaption>
+                                            </figure>
+                                    </a>
+                            </li>
+                            <li role="presentation"><a href="horn-crafts.html" role="menuitem">Horn Crafts</a></li>
+                            <li role="presentation"><a href="buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
+                            <li role="presentation"><a href="wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
+                            <li role="presentation"><a href="resin.html" role="menuitem">Resin Products</a></li>
+                        </ul>
+                    </li>
 		
             <li><a href="contact.html">Contact Us</a></li>
           <li><a href="/blog">Blog</a></li>

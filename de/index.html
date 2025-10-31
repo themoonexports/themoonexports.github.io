@@ -70,14 +70,24 @@
           <ul class="nav navbar-nav">
             <li><a href="https://www.themoonexports.com/index.html">Startseite</a></li>
             <li><a href="https://www.themoonexports.com/about.html">Über uns</a></li>
-			 <li class="dropdown">
-          <a href="https://www.themoonexports.com/products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Kunsthandwerk<span class="caret"></span></a>
-          <ul class="dropdown-menu"><a href="https://www.themoonexports.com/products.html"><img class="hidden-xs lazyload" src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/dropdown.jpg"/></a>
-            <li><a href="https://www.themoonexports.com/horn-crafts.html">Büffelhorn-Kunsthandwerk</a></li>
-            <li><a href="https://www.themoonexports.com/buffalo-horn-plates.html">Büffelhorn Teller</a></li>
-            <li><a href="https://www.themoonexports.com/wooden-crafts.html">Holzhandwerk</a></li>
-            <li><a href="https://www.themoonexports.com/resin.html">Harzprodukte</a></li>
-           
+			 <li class="dropdown" data-nav="handicrafts">
+          <a id="nav-handicrafts-toggle" href="https://www.themoonexports.com/products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false" aria-controls="nav-handicrafts-menu">
+              <span class="dropdown-label">Kunsthandwerk</span>
+              <span class="caret" aria-hidden="true"></span>
+          </a>
+          <ul class="dropdown-menu" id="nav-handicrafts-menu" role="menu" aria-labelledby="nav-handicrafts-toggle">
+            <li class="dropdown-hero" role="presentation">
+              <a href="https://www.themoonexports.com/products.html" class="dropdown-hero-link" role="menuitem">
+                <figure class="dropdown-hero-figure">
+                  <img class="hidden-xs lazyload" src="https://www.themoonexports.com/images/dropdown.jpg" alt="Überblick über handgefertigte Horn-, Holz- und Harzkollektionen"/>
+                  <figcaption class="dropdown-hero-caption">Entdecken Sie handgefertigte Kollektionen aus Horn, Holz und Harz.</figcaption>
+                </figure>
+              </a>
+            </li>
+            <li role="presentation"><a href="https://www.themoonexports.com/horn-crafts.html" role="menuitem">Büffelhorn-Kunsthandwerk</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/buffalo-horn-plates.html" role="menuitem">Büffelhorn Teller</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/wooden-crafts.html" role="menuitem">Holzhandwerk</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/resin.html" role="menuitem">Harzprodukte</a></li>
           </ul>
         </li>
 		

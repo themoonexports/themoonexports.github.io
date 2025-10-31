@@ -82,16 +82,27 @@ function googleTranslateElementInit() {
           <ul class="nav navbar-nav">
             <li><a href="https://www.themoonexports.com/index.html">Home</a></li>
             <li><a href="https://www.themoonexports.com/about.html">About Us</a></li>
-			 <li class="dropdown">
-         <a href="https://www.themoonexports.com/products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
-         <ul class="dropdown-menu"><a href="https://www.themoonexports.com/products.html"><img class="hidden-xs lazyload" src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/dropdown.jpg"alt="Handicrafts Products"/></a>
-            <li><a href="https://www.themoonexports.com/horn-crafts.html">Horn Crafts</a></li>
-            <li><a href="https://www.themoonexports.com/wooden-crafts.html">Wooden Crafts</a></li>
-            <li><a href="https://www.themoonexports.com/resin.html">Resin Products</a></li>
-           
+		 <li class="dropdown" data-nav="handicrafts">
+         <a id="nav-handicrafts-toggle" href="https://www.themoonexports.com/products.html" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false" aria-controls="nav-handicrafts-menu">
+             <span class="dropdown-label">Handicrafts</span>
+             <span class="caret" aria-hidden="true"></span>
+         </a>
+         <ul class="dropdown-menu" id="nav-handicrafts-menu" role="menu" aria-labelledby="nav-handicrafts-toggle">
+            <li class="dropdown-hero" role="presentation">
+                <a href="https://www.themoonexports.com/products.html" class="dropdown-hero-link" role="menuitem">
+                    <figure class="dropdown-hero-figure">
+                        <img class="hidden-xs lazyload" src="https://www.themoonexports.com/images/dropdown.jpg" alt="Overview of handcrafted horn, wood, and resin collections"/>
+                        <figcaption class="dropdown-hero-caption">Discover handcrafted horn, wood, and resin collections.</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li role="presentation"><a href="https://www.themoonexports.com/horn-crafts.html" role="menuitem">Horn Crafts</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
+            <li role="presentation"><a href="https://www.themoonexports.com/resin.html" role="menuitem">Resin Products</a></li>
           </ul>
         </li>
-		
+	
             <li><a href="https://www.themoonexports.com/contact.html">Contact Us</a></li>
           <li><a href="/blog">Blog</a></li>
           </ul>
