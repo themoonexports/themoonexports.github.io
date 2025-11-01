@@ -9,17 +9,18 @@
   overflow: hidden;
 }
 
-/* Ensure carousel doesn't overlap with fixed header */
+/* Pull carousel up to remove gap, but ensure content starts below header */
 .carousel.slide {
   margin-top: calc(-1 * var(--header-height, 64px));
   z-index: 1;
 }
 
-/* Carousel Inner Container */
+/* Carousel Inner Container - Add padding to push content below header */
 .carousel-inner {
   position: relative;
   width: 100%;
   overflow: hidden;
+  padding-top: var(--header-height, 64px);
 }
 
 .carousel-inner > .item {
