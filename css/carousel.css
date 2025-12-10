@@ -11,7 +11,7 @@
 
 /* Pull carousel up to remove gap, but ensure content starts below header */
 .carousel.slide {
-  margin-top: calc(-1 * var(--header-height, 64px));
+  margin-top: calc(-1 * var(--header-height, 4rem));
   z-index: 1;
 }
 
@@ -20,7 +20,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: var(--header-height, 64px);
+  padding-top: var(--header-height, 4rem);
 }
 
 .carousel-inner > .item {
@@ -38,22 +38,22 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 37.5rem;
   object-fit: cover;
   object-position: center;
 }
 
 /* Mobile: Smaller max height for better proportions */
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
   .carousel-inner > .item > img {
-    max-height: 400px;
+    max-height: 25rem;
   }
 }
 
 /* Tablet */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 48rem) and (max-width: 61.9375rem) {
   .carousel-inner > .item > img {
-    max-height: 500px;
+    max-height: 31.25rem;
   }
 }
 
@@ -61,21 +61,21 @@
 .carousel-caption {
   position: absolute;
   right: 10%;
-  bottom: 40px;
+  bottom: 2.5rem;
   left: 10%;
   z-index: 10;
-  padding: 20px;
+  padding: 1.25rem;
   color: #fff;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
   background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .carousel-caption h1,
 .carousel-caption h2,
 .carousel-caption h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 0.625rem 0;
   color: #fff;
   font-weight: 700;
   line-height: 1.2;
@@ -83,12 +83,12 @@
 
 .carousel-caption h1 {
   font-size: 2.5rem;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 .carousel-caption h2 {
   font-size: 1.75rem;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   font-weight: 400;
 }
 
@@ -97,22 +97,22 @@
 }
 
 /* Mobile: Smaller caption text */
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
   .carousel-caption {
     right: 5%;
     left: 5%;
-    bottom: 20px;
-    padding: 15px;
+    bottom: 1.25rem;
+    padding: 0.9375rem;
   }
   
   .carousel-caption h1 {
     font-size: 1.5rem;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   
   .carousel-caption h2 {
     font-size: 1rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
   }
   
   .carousel-caption h3 {
@@ -121,7 +121,7 @@
 }
 
 /* Tablet */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 48rem) and (max-width: 61.9375rem) {
   .carousel-caption h1 {
     font-size: 2rem;
   }
@@ -138,7 +138,7 @@
 /* Carousel Enquiry Button - Uses crafts-ui.css btn-crafts class */
 .carousel-caption .slidebtn {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   text-decoration: none;
 }
 
@@ -149,8 +149,8 @@
   bottom: auto;
   transform: translateY(-50%);
   z-index: 15;
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,26 +172,26 @@
 }
 
 .carousel-control.left {
-  left: 20px;
+  left: 1.25rem;
 }
 
 .carousel-control.right {
-  right: 20px;
+  right: 1.25rem;
 }
 
 /* Mobile: Smaller controls */
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
   .carousel-control {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
   }
   
   .carousel-control.left {
-    left: 10px;
+    left: 0.625rem;
   }
   
   .carousel-control.right {
-    right: 10px;
+    right: 0.625rem;
   }
 }
 
@@ -201,22 +201,22 @@
   position: static;
   display: inline-block;
   margin-top: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
 /* Mobile: Smaller icons */
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
   .carousel-control .glyphicon-chevron-left,
   .carousel-control .glyphicon-chevron-right {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 }
 
 /* Carousel Indicators - Dots at Bottom */
 .carousel-indicators {
   position: absolute;
-  bottom: 15px;
+  bottom: 0.9375rem;
   left: 50%;
   z-index: 15;
   width: auto;
@@ -229,21 +229,21 @@
 
 .carousel-indicators li {
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin: 0 5px;
-  text-indent: -999px;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin: 0 0.3125rem;
+  text-indent: -999rem;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .carousel-indicators .active {
-  width: 14px;
-  height: 14px;
-  margin: 0 5px;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: 0 0.3125rem;
   background-color: #5CA316;
   border-color: #5CA316;
 }
@@ -253,20 +253,20 @@
 }
 
 /* Mobile: Smaller indicators */
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
   .carousel-indicators {
-    bottom: 10px;
+    bottom: 0.625rem;
   }
   
   .carousel-indicators li {
-    width: 10px;
-    height: 10px;
-    margin: 0 4px;
+    width: 0.625rem;
+    height: 0.625rem;
+    margin: 0 0.25rem;
   }
   
   .carousel-indicators .active {
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
   }
 }
 
@@ -292,24 +292,24 @@
 
 /* Ensure carousel is accessible */
 .carousel-control:focus {
-  outline: 2px solid #5CA316;
-  outline-offset: 2px;
+  outline: 0.125rem solid #5CA316;
+  outline-offset: 0.125rem;
 }
 
 .carousel-indicators li:focus {
-  outline: 2px solid #5CA316;
-  outline-offset: 2px;
+  outline: 0.125rem solid #5CA316;
+  outline-offset: 0.125rem;
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .carousel-control {
     background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid #fff;
+    border: 0.125rem solid #fff;
   }
   
   .carousel-indicators li {
-    border-width: 2px;
+    border-width: 0.125rem;
   }
 }
 
