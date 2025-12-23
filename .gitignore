@@ -134,6 +134,9 @@ dist/
 build/
 public/js/config.js
 
+# Exception: js/dist/ contains React build outputs that should be committed
+!js/dist/
+
 # Backup files that might contain sensitive data
 backup/*.sql
 backup/*.json
