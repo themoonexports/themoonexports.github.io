@@ -166,6 +166,7 @@
 /* ===== Phase 3 Component Styles ===== */
 
 /* Cookie Settings */
+.cookie-settings-fixed { position: fixed; bottom: 2rem; right: 6rem; z-index: 1040; }
 .cookie-settings-trigger { cursor: pointer; }
 .cookie-settings-panel { padding: 1.25rem; max-width: 25rem; }
 .cookie-settings-panel h3 { color: #E0E0E0; margin: 0 0 0.5rem; font-size: 1.125rem; }
@@ -202,14 +203,17 @@
 
 /* High contrast mode */
 .high-contrast body, .high-contrast .card-crafts, .high-contrast .cookie-settings-panel, .high-contrast .accessibility-panel {
-  background: #000 !important;
-  color: #fff !important;
-  border-color: #fff !important;
+  background: #0a0a0a !important;
+  color: #f5f5f5 !important;
+  border-color: #f5f5f5 !important;
 }
 .high-contrast a { color: #FFD700 !important; }
 
 /* Reduced motion class */
-.reduced-motion * { animation: none !important; transition: none !important; }
+.reduced-motion, .reduced-motion .btn-crafts, .reduced-motion .btn-icon-crafts, .reduced-motion .chip-crafts, .reduced-motion .social-links a, .reduced-motion .testimonial-dot {
+  animation: none !important;
+  transition: none !important;
+}
 
 /* Testimonials */
 .testimonials { text-align: center; padding: 2rem 0; }

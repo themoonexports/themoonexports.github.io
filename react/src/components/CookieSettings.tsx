@@ -16,7 +16,7 @@ function loadPreferences(): ConsentPreferences | null {
     return {
       essential: true,
       analytics: Boolean(parsed.analytics),
-      marketing: Boolean(parsed.marketing ?? false),
+      marketing: Boolean(parsed.marketing),
     };
   } catch {
     return null;

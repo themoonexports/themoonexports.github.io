@@ -4,8 +4,6 @@ const ScrollToTop: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     const handleScroll = () => {
       setVisible(window.scrollY > window.innerHeight);
     };
