@@ -140,16 +140,16 @@
 - Mirror changes to `/de/` and `/fr/` as needed
 
 ### Phase 3 Progress Checklist
-- [x] Contact Form — React bundle built (1.52 KB), pending HTML integration
-- [x] FAQ Accordion — React bundle built (1.15 KB), pending HTML integration
-- [x] Product Modal — React bundle built (4.49 KB), partial HTML integration
+- [x] Contact Form — React bundle built (1.52 KB), integrated in contact.html
+- [x] FAQ Accordion — React bundle built (1.15 KB), integrated in faq.html
+- [x] Product Modal — React bundle built (4.49 KB), integrated in index.html, products.html
 - [x] Background — React bundle built (1.93 KB), integrated in index.html
-- [ ] Gallery Lightbox — evaluate need (ProductModal has built-in lightbox)
-- [ ] Testimonials — component to build
-- [ ] Search Bar — component to build
-- [ ] Cookie Settings — component to build (high priority, privacy compliance)
-- [ ] Accessibility Widget — component to build
-- [ ] Scroll-to-Top Button — component to build
+- [x] Cookie Settings — React bundle built (2.71 KB), integrated across all pages
+- [x] Testimonials — React bundle built (1.86 KB), integrated in index.html
+- [x] Accessibility Widget — React bundle built (2.39 KB), integrated across all pages
+- [x] Scroll-to-Top Button — React bundle built (0.85 KB), integrated across all pages
+- [ ] Gallery Lightbox — deferred (ProductModal lightbox sufficient)
+- [ ] Search Bar — deferred (requires product data indexing)
 
 ---
 
