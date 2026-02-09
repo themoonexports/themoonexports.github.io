@@ -162,3 +162,78 @@
 @media (prefers-reduced-motion: reduce) {
   .btn-crafts, .btn-icon-crafts, .chip-crafts, .social-links a { transition: none !important; }
 }
+
+/* ===== Phase 3 Component Styles ===== */
+
+/* Cookie Settings */
+.cookie-settings-trigger { cursor: pointer; }
+.cookie-settings-panel { padding: 1.25rem; max-width: 25rem; }
+.cookie-settings-panel h3 { color: #E0E0E0; margin: 0 0 0.5rem; font-size: 1.125rem; }
+.cookie-settings-panel p { color: #B3B3B3; font-size: 0.875rem; margin-bottom: 1rem; }
+.cookie-settings-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+.cookie-settings-item { padding: 0.5rem 0; border-bottom: 0.0625rem solid #2a2a2a; }
+.cookie-settings-label { display: flex; align-items: flex-start; gap: 0.625rem; cursor: pointer; color: #E0E0E0; font-size: 0.875rem; }
+.cookie-settings-label input[type="checkbox"] { margin-top: 0.25rem; accent-color: #5CA316; }
+.cookie-settings-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* Scroll-to-Top */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1050;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  font-size: 1.125rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.4);
+}
+
+/* Accessibility Widget */
+.accessibility-widget { position: fixed; bottom: 2rem; left: 2rem; z-index: 1050; }
+.accessibility-toggle { border-radius: 50%; width: 2.75rem; height: 2.75rem; font-size: 1.25rem; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.4); }
+.accessibility-panel { position: absolute; bottom: 3.5rem; left: 0; padding: 1rem; min-width: 14rem; }
+.accessibility-panel h4 { color: #E0E0E0; margin: 0 0 0.75rem; font-size: 1rem; }
+.a11y-controls { display: flex; flex-direction: column; gap: 0.625rem; }
+.a11y-group { display: flex; align-items: center; justify-content: space-between; color: #E0E0E0; font-size: 0.875rem; }
+.a11y-buttons { display: flex; gap: 0.25rem; }
+.a11y-toggle-label { display: flex; align-items: center; gap: 0.5rem; color: #E0E0E0; font-size: 0.875rem; cursor: pointer; }
+.a11y-toggle-label input[type="checkbox"] { accent-color: #5CA316; }
+
+/* High contrast mode */
+.high-contrast body, .high-contrast .card-crafts, .high-contrast .cookie-settings-panel, .high-contrast .accessibility-panel {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+.high-contrast a { color: #FFD700 !important; }
+
+/* Reduced motion class */
+.reduced-motion * { animation: none !important; transition: none !important; }
+
+/* Testimonials */
+.testimonials { text-align: center; padding: 2rem 0; }
+.testimonials h2 { color: #E0E0E0; margin-bottom: 1.25rem; }
+.testimonial-carousel { max-width: 37.5rem; margin: 0 auto; }
+.testimonial-card { padding: 1.5rem; margin: 0 auto; }
+.testimonial-quote { color: #E0E0E0; font-size: 1rem; line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+.testimonial-author { display: flex; flex-direction: column; gap: 0.125rem; color: #B3B3B3; font-size: 0.875rem; }
+.testimonial-author strong { color: #5CA316; }
+.testimonial-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+.testimonial-dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #333; border: none; cursor: pointer; transition: background 0.2s ease; }
+.testimonial-dot.active { background: #5CA316; }
+.testimonial-dot:hover { background: #4a8a14; }
+
+/* FAQ Accordion */
+.faq-section { padding: 1rem 0; }
+.faq-section h2 { color: #E0E0E0; margin-bottom: 1rem; }
+.faq-list { list-style: none; padding: 0; margin: 0; }
+.faq-item { border-bottom: 0.0625rem solid #2a2a2a; }
+.faq-question { width: 100%; text-align: left; padding: 0.75rem 1rem; }
+.faq-answer { padding: 0.5rem 1rem 1rem; color: #B3B3B3; line-height: 1.6; }
+
+/* Contact Form */
+.alert-success { color: #5CA316; background: rgba(92, 163, 22, 0.1); border: 0.0625rem solid #5CA316; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+.alert-error { color: #e74c3c; background: rgba(231, 76, 60, 0.1); border: 0.0625rem solid #e74c3c; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; color: #E0E0E0; margin-bottom: 0.375rem; font-size: 0.875rem; }
