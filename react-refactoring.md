@@ -72,6 +72,7 @@
 - Gate any data-heavy transforms (e.g., product listings, localization tables) behind typed models to avoid runtime regressions as React layers in dynamic behavior.
 
 ## Next Steps
+- See [docs/PHASE_3_IMPLEMENTATION.md](docs/PHASE_3_IMPLEMENTATION.md) for the detailed Phase 3 plan
 
 ---
 
@@ -139,23 +140,27 @@
 - Mirror changes to `/de/` and `/fr/` as needed
 
 ### Phase 3 Progress Checklist
-- [ ] Contact Form migrated to React bundle
-- [ ] FAQ Accordion migrated
-- [ ] Product Modal migrated
-- [ ] Gallery Lightbox migrated
-- [ ] Testimonials migrated
-- [ ] Search Bar migrated
-- [ ] Cookie Settings migrated
-- [ ] Accessibility Widget migrated
-- [ ] Scroll-to-Top Button migrated
+- [x] Contact Form — React bundle built (1.52 KB), pending HTML integration
+- [x] FAQ Accordion — React bundle built (1.15 KB), pending HTML integration
+- [x] Product Modal — React bundle built (4.49 KB), partial HTML integration
+- [x] Background — React bundle built (1.93 KB), integrated in index.html
+- [ ] Gallery Lightbox — evaluate need (ProductModal has built-in lightbox)
+- [ ] Testimonials — component to build
+- [ ] Search Bar — component to build
+- [ ] Cookie Settings — component to build (high priority, privacy compliance)
+- [ ] Accessibility Widget — component to build
+- [ ] Scroll-to-Top Button — component to build
 
 ---
 
 ## Phase 3 Implementation Steps (Next)
-1. Start with Contact Form and FAQ Accordion (highest user impact)
-2. Create React components and entry points for each
-3. Update Vite config and build bundles
-4. Integrate into HTML with `data-react` attributes and script tags
-5. Test hydration, accessibility, and consent gating
-6. Commit each migration with bundle size notes
-7. Document in `docs/PHASE_3_IMPLEMENTATION.md`
+1. Integrate existing Contact Form and FAQ Accordion into HTML pages (highest user impact)
+2. Build Cookie Settings component (privacy compliance priority)
+3. Complete Product Modal integration across product pages
+4. Build remaining components: Testimonials, Accessibility Widget, Scroll-to-Top, Search Bar
+5. Evaluate standalone Gallery Lightbox need vs ProductModal built-in lightbox
+6. Update Vite config and build bundles for each new component
+7. Replicate integration to `/de/` and `/fr/` pages
+8. Test hydration, accessibility, and consent gating
+9. Commit each migration with bundle size notes
+10. Full documentation in [docs/PHASE_3_IMPLEMENTATION.md](docs/PHASE_3_IMPLEMENTATION.md)
