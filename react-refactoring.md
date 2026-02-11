@@ -43,7 +43,8 @@
 3. **Component Conversion Phases**
    - ✅ **Phase 1 (Complete)**: Header/navigation, newsletter form, consent hook
    - ✅ **Phase 2 (Complete, Oct 2025)**: Footer, carousel, product grid, trust badges, language switcher, social media icons, auto-year update
-   - 📋 **Phase 3 (Planned)**: Contact form, FAQ accordion, product modal, gallery lightbox, testimonials, search bar, cookie settings, accessibility widget, scroll-to-top button
+   - ✅ **Phase 3 (Complete, Feb 2026)**: Contact form, FAQ accordion, product modal, background, cookie settings, testimonials, accessibility widget, scroll-to-top button
+   - 📋 **Phase 4 (Planned)**: Legacy JS retirement, CI/CD pipeline, performance optimization, security hardening, i18n parity, product search, production monitoring
 
 4. **Integration with Existing JS**
    - Export legacy utilities as modules (ES exports) while keeping UMD-style global for non-React pages.
@@ -72,7 +73,7 @@
 - Gate any data-heavy transforms (e.g., product listings, localization tables) behind typed models to avoid runtime regressions as React layers in dynamic behavior.
 
 ## Next Steps
-- See [docs/PHASE_3_IMPLEMENTATION.md](docs/PHASE_3_IMPLEMENTATION.md) for the detailed Phase 3 plan
+- See [docs/PHASE_4_IMPLEMENTATION.md](docs/PHASE_4_IMPLEMENTATION.md) for the Phase 4 plan (hardening & operational maturity)
 
 ---
 
@@ -103,7 +104,7 @@
 
 ---
 
-## 📋 Phase 3 Migration Plan (Planned)
+## ✅ Phase 3 Complete (February 2026)
 
 ### Objectives
 - Migrate remaining interactive/static components to modular React bundles (3-7KB each)
@@ -153,14 +154,40 @@
 
 ---
 
-## Phase 3 Implementation Steps (Next)
-1. Integrate existing Contact Form and FAQ Accordion into HTML pages (highest user impact)
-2. Build Cookie Settings component (privacy compliance priority)
-3. Complete Product Modal integration across product pages
-4. Build remaining components: Testimonials, Accessibility Widget, Scroll-to-Top, Search Bar
-5. Evaluate standalone Gallery Lightbox need vs ProductModal built-in lightbox
-6. Update Vite config and build bundles for each new component
-7. Replicate integration to `/de/` and `/fr/` pages
-8. Test hydration, accessibility, and consent gating
-9. Commit each migration with bundle size notes
-10. Full documentation in [docs/PHASE_3_IMPLEMENTATION.md](docs/PHASE_3_IMPLEMENTATION.md)
+## Phase 3 Implementation Steps (Complete)
+1. ✅ Integrated Contact Form and FAQ Accordion into HTML pages
+2. ✅ Built Cookie Settings component (privacy compliance)
+3. ✅ Completed Product Modal integration across product pages
+4. ✅ Built remaining components: Testimonials, Accessibility Widget, Scroll-to-Top
+5. ✅ Evaluated Gallery Lightbox — deferred (ProductModal lightbox sufficient)
+6. ✅ Updated Vite config (17 entry points total)
+7. ✅ Replicated integration to product pages
+8. ✅ Full documentation in [docs/PHASE_3_IMPLEMENTATION.md](docs/PHASE_3_IMPLEMENTATION.md)
+
+---
+
+## 📋 Phase 4: Hardening & Operational Maturity (Planned)
+
+With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33.9 KB total), Phase 4 shifts focus from feature delivery to hardening, automation, and long-term maintainability.
+
+### Workstreams
+
+| # | Workstream | Priority | Key Deliverables |
+|---|-----------|----------|------------------|
+| 1 | Legacy JS Retirement | High | Remove superseded vanilla JS files, reduce dual-maintenance |
+| 2 | Automated CI/CD | High | Lint → build → bundle-check pipeline on every PR |
+| 3 | Performance Optimization | Medium | Image optimization (WebP), lazy loading, bundle analysis |
+| 4 | Security Hardening | High | CSP refinement, inline script migration, Bootstrap 5 plan |
+| 5 | i18n Parity | Medium | Full React integration in `/de/` and `/fr/` pages |
+| 6 | Product Search | Low | Client-side search using `products.json` (deferred from Phase 3) |
+| 7 | Production Monitoring | Medium | Error boundaries, Core Web Vitals tracking, uptime alerts |
+
+### Success Targets
+- Security score: 72% → 90%+
+- Lighthouse Performance: 90+
+- Legacy JS files: 12 → ≤ 6
+- Inline scripts: 25 → ≤ 10
+- Automated CI: Build + lint + bundle budget enforced
+
+### Details
+See [docs/PHASE_4_IMPLEMENTATION.md](docs/PHASE_4_IMPLEMENTATION.md) for full workstream breakdown, checklists, and sprint sequencing.
