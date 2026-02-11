@@ -57,6 +57,8 @@ development_tools:
   - check-production-readiness.sh # Automated validation script
   - .vscode/settings.json         # IDE configuration
   - .idx/dev.nix                  # Development environment setup
+  - react/                        # React + TypeScript workspace (Vite)
+  - react/vite.config.ts          # 17 entry points → js/dist/
 
 ## Content Directories (Priority: HIGH when working on specific features)
 # Organized by function - HIGH priority when working on related tasks
@@ -205,16 +207,26 @@ improved_structure:
 
 ## Integration with Development Tools
 development_integration:
-  linting: "No specific linter configured - use standard web linting tools"
-  building: "Static site - no build process required"
+  linting: "npm run lint (ESLint for React/TypeScript)"
+  building: "cd react && npm run build (Vite → js/dist/)"
   testing: "Manual testing recommended - see TESTING_PLAN.md"
-  deployment: "Firebase hosting via 'firebase deploy'"
+  deployment: "GitHub Pages auto-deploys on push to main; Firebase hosting via 'firebase deploy'"
+
+## React Migration Status
+react_status:
+  phase_1: "Complete (Oct 2025) — Header, Newsletter, Consent (3 bundles)"
+  phase_2: "Complete (Oct 2025) — Footer, Carousel, Product Grid, Trust Badges, Language Switcher, Social Links (6 bundles)"
+  phase_3: "Complete (Feb 2026) — Contact Form, FAQ, Product Modal, Background, Cookie Settings, Testimonials, Accessibility Widget, Scroll-to-Top (8 bundles)"
+  phase_4: "Planned — Legacy JS retirement, CI/CD, performance, security hardening, i18n parity"
+  total_bundles: 17
+  total_size: "~33.9 KB (15.1 KB gzipped)"
+  shared_runtime: "~141.7 KB (cached across all bundles)"
 
 ## Historical Context
 - **Created**: 2015 by Kamran Khan
 - **Purpose**: Handicrafts manufacturer and exporter website
-- **Recent Work**: Major security and performance improvements completed
-- **Production Status**: Ready for deployment with minor optimizations pending
+- **Recent Work**: React migration complete (Phases 1–3, 17 components). Phase 4 hardening planned.
+- **Production Status**: Ready for deployment; Phase 4 focuses on CI/CD, performance, and security hardening
 
 ---
 This file should be the first reference for any AI agent working on The Moon Exports website. 
