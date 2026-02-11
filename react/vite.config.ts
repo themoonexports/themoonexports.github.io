@@ -24,7 +24,11 @@ export default defineConfig({
         "contact-form": resolve(__dirname, "src/entries/contact-form.tsx"),
         faq: resolve(__dirname, "src/entries/faq.tsx"),
         "product-modal": resolve(__dirname, "src/entries/product-modal.tsx"),
-        background: resolve(__dirname, "src/entries/background.tsx")
+        background: resolve(__dirname, "src/entries/background.tsx"),
+        "cookie-settings": resolve(__dirname, "src/entries/cookie-settings.tsx"),
+        "scroll-top": resolve(__dirname, "src/entries/scroll-top.tsx"),
+        accessibility: resolve(__dirname, "src/entries/accessibility.tsx"),
+        testimonials: resolve(__dirname, "src/entries/testimonials.tsx")
       },
       output: {
         entryFileNames: "[name].js",
