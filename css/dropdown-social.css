@@ -59,8 +59,7 @@
   border-top-color: currentColor !important;
 }
 
-/* Hide the dropdown hero for a cleaner, icon-like menu */
-.dropdown-hero { display: none !important; }
+/* Dropdown hero hidden on mobile via one.css */
 
 /* Menu panel styled to match social theme */
 .navbar-nav .dropdown-menu {

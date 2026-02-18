@@ -33,7 +33,10 @@
     <link rel="alternate" hreflang="fr" href="https://www.themoonexports.com/fr/">
     <link rel="alternate" hreflang="x-default" href="https://www.themoonexports.com/">
     
-    <title>The Moon Exports | Buffalo Horn, Wood & Resin Handicrafts | India Exporter</title>
+    <title>The Moon Exports | Horn, Wood &amp; Resin Handicrafts</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.themoonexports.com/">
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="css/bootstrap.min.css" as="style">
@@ -53,7 +56,9 @@
     <link href="css/crafts-ui.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
           integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" 
-          crossorigin="anonymous">
+          crossorigin="anonymous"
+          media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -78,7 +83,7 @@
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Sambhal",
-        "addressRegion": "Moradabad",
+        "addressRegion": "Uttar Pradesh",
         "addressCountry": "IN"
       },
       "sameAs": [
@@ -96,12 +101,7 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "The Moon Exports",
-      "url": "https://www.themoonexports.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.themoonexports.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "url": "https://www.themoonexports.com"
     }
     </script>
 </head>
@@ -117,21 +117,22 @@
     
     <!-- Navigation -->
     <header class="masthead">
-        <nav class="navbar navbar-default navbar-fixed-top" id="nav-main" data-react="header">
+        <nav class="navbar navbar-default navbar-fixed-top" id="nav-main" role="navigation" aria-label="Main navigation" data-react="header">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" 
                             data-toggle="collapse" 
                             data-target="#navbar" 
                             aria-expanded="false" 
-                            aria-controls="navbar">
+                            aria-controls="navbar"
+                            aria-label="Toggle navigation menu">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.html">
-                        <img src="images/logo.png" alt="The Moon Exports" loading="eager">
+                        <img src="images/logo.png" alt="The Moon Exports - Home" loading="eager">
                     </a>
                 </div>
                 
@@ -144,6 +145,7 @@
                         <img src="images/french.png" alt="FR" class="img-circle" width="25" height="25">
                     </a>
                 </div>
+                <div id="google_translate_element" class="hidden-xs"></div>
                 
                 <!-- Main Menu -->
                 <div id="navbar" class="navbar-collapse navbar-right collapse">
@@ -156,7 +158,6 @@
                             <a href="products.html" 
                                class="dropdown-toggle" 
                                id="nav-handicrafts-toggle"
-                               data-toggle="dropdown"
                                role="button" 
                                aria-haspopup="true" 
                                aria-expanded="false">
@@ -199,6 +200,7 @@
     
     <!-- Main Content -->
     <main id="main-content">
+        <h1 class="sr-only">The Moon Exports — Premium Handcrafted Horn, Wood &amp; Resin Products from India</h1>
         
         <!-- Hero Carousel -->
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-react="carousel" role="region" aria-label="Featured products">
@@ -209,20 +211,21 @@
             
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="images/one.jpg" alt="The Moon Exports crafts showcase" loading="eager" width="1200" height="600">
+                    <img src="images/one.jpg" alt="Premium handcrafted horn, wood and resin products" loading="eager" width="1200" height="600">
                     <div class="carousel-caption">
-                        <h1><strong>The Truth is The Everlasting</strong></h1>
-                        <h2>The Moon Exports</h2>
-                        <a class="slidebtn" href="contact.html">Enquiry</a>
+                        <h2><strong>Premium Handcrafted Exports from India</strong></h2>
+                        <p class="carousel-subtitle">Custom horn, wood &amp; resin creations for artists and luxury brands</p>
+                        <a class="slidebtn btn-crafts" href="contact.html">Get a Quote</a>
+                        <a class="slidebtn btn-crafts" href="products.html">Explore Crafts</a>
                     </div>
                 </div>
                 
                 <div class="item">
-                    <img src="images/two.jpg" alt="Premium handicrafts collection" loading="lazy" width="1200" height="600">
+                    <img src="images/two.jpg" alt="Artisan craftsmanship shipped worldwide" loading="lazy" width="1200" height="600">
                     <div class="carousel-caption">
-                        <h3><strong>The Truth is The Everlasting</strong></h3>
-                        <h2>The Moon Exports</h2>
-                        <a class="slidebtn" href="contact.html">Enquiry</a>
+                        <h3><strong>Artisan Craftsmanship, Global Delivery</strong></h3>
+                        <p class="carousel-subtitle">Made in Sambhal, shipped worldwide</p>
+                        <a class="slidebtn btn-crafts" href="products.html">View Products</a>
                     </div>
                 </div>
             </div>
@@ -235,6 +238,15 @@
             </a>
         </div>
         
+        <!-- About Intro -->
+        <section class="about-intro" aria-label="About The Moon Exports">
+            <div class="container">
+                <h2>Crafting Excellence Since 2015</h2>
+                <p>The Moon Exports develops handmade horn and wooden crafts, enabling artists and luxury decor businesses to create custom products with timely fulfillment from Sambhal, India.</p>
+                <a href="about.html" class="about-intro-link">Learn more about us &rarr;</a>
+            </div>
+        </section>
+        
         <!-- Product Categories -->
         <section class="container frontthree" data-react="product-grid" aria-label="Product categories">
             <div class="row">
@@ -244,6 +256,7 @@
                             <h3 class="cattitle">Horn Crafts</h3>
                             <img src="images/Horn-Crafts.JPG" alt="Buffalo horn handicrafts" loading="lazy" width="300" height="200">
                         </a>
+                        <p class="productcat-desc">Bowls, plates, jewelry &amp; decor from ethically sourced buffalo horn</p>
                     </article>
                 </div>
                 
@@ -253,6 +266,7 @@
                             <h3 class="cattitle">Wooden Crafts</h3>
                             <img src="images/pizza-cutter.jpg" alt="Handcrafted wooden products" loading="lazy" width="300" height="200">
                         </a>
+                        <p class="productcat-desc">Cutting boards, utensils &amp; artisan woodwork from premium hardwoods</p>
                     </article>
                 </div>
                 
@@ -262,7 +276,80 @@
                             <h3 class="cattitle">Resin Products</h3>
                             <img src="images/resin-bangle.jpg" alt="Designer resin jewelry" loading="lazy" width="300" height="200">
                         </a>
+                        <p class="productcat-desc">Bangles, jewelry &amp; decorative pieces in vibrant resin designs</p>
                     </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Choose Us -->
+        <section class="why-choose-section" aria-label="Why choose The Moon Exports">
+            <div class="container">
+                <h2>Why Choose The Moon Exports</h2>
+                <p class="section-subtitle">What sets our handcrafted products apart</p>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card-crafts usp-card">
+                            <div class="usp-icon"><i class="fas fa-gem" aria-hidden="true"></i></div>
+                            <h3>Handcrafted Quality</h3>
+                            <p>Every piece is meticulously crafted by skilled artisans using traditional techniques passed down through generations.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card-crafts usp-card">
+                            <div class="usp-icon"><i class="fas fa-pencil-ruler" aria-hidden="true"></i></div>
+                            <h3>Custom Manufacturing</h3>
+                            <p>We bring your designs to life. From concept to creation, we work closely with you to deliver bespoke products.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card-crafts usp-card">
+                            <div class="usp-icon"><i class="fas fa-globe" aria-hidden="true"></i></div>
+                            <h3>Global Export</h3>
+                            <p>Reliable shipping to over 30 countries with proper export documentation and quality assurance.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card-crafts usp-card">
+                            <div class="usp-icon"><i class="fas fa-leaf" aria-hidden="true"></i></div>
+                            <h3>Sustainable Materials</h3>
+                            <p>We use ethically sourced buffalo horn, responsibly harvested wood, and eco-friendly resin in our products.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Process -->
+        <section class="process-section" aria-label="Our manufacturing process">
+            <div class="container">
+                <h2>From Concept to Delivery</h2>
+                <p class="section-subtitle">Our streamlined process ensures quality at every step</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-crafts process-step">
+                            <div class="step-number">Step 1</div>
+                            <div class="step-icon"><i class="fas fa-pencil-ruler" aria-hidden="true"></i></div>
+                            <h3>Design</h3>
+                            <p>Share your ideas or choose from our collections. We create detailed designs tailored to your vision.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-crafts process-step">
+                            <div class="step-number">Step 2</div>
+                            <div class="step-icon"><i class="fas fa-hands" aria-hidden="true"></i></div>
+                            <h3>Craft</h3>
+                            <p>Our skilled artisans handcraft each piece using traditional techniques and premium materials.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-crafts process-step">
+                            <div class="step-number">Step 3</div>
+                            <div class="step-icon"><i class="fas fa-shipping-fast" aria-hidden="true"></i></div>
+                            <h3>Deliver</h3>
+                            <p>Quality-checked and carefully packaged for safe international shipping to your doorstep.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -272,6 +359,15 @@
             <div class="product-modal" data-react="product-modal">
                 <h2>Featured Products</h2>
                 <p aria-live="polite">Loading…</p>
+            </div>
+        </section>
+        
+        <!-- CTA Banner -->
+        <section class="cta-banner" aria-label="Get in touch">
+            <div class="container">
+                <h2>Ready to Create Something Beautiful?</h2>
+                <p>Let&rsquo;s discuss your custom handicraft project</p>
+                <a href="contact.html" class="btn-crafts btn-crafts--lg">Contact Us</a>
             </div>
         </section>
     </main>
@@ -421,7 +517,7 @@
             
             <!-- Copyright -->
             <div class="copyright">
-                <span>COPYRIGHT © <span id="current-year">2024</span> THEMOONEXPORTS.COM</span>
+                <span>COPYRIGHT © <span id="current-year">2025</span> THEMOONEXPORTS.COM</span>
             </div>
         </div>
     </footer>
