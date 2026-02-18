@@ -6,22 +6,30 @@ interface CarouselSlide {
   title: string;
   subtitle: string;
   loading?: "eager" | "lazy";
+  ctas: { label: string; href: string }[];
 }
 
 const slides: CarouselSlide[] = [
   {
     image: "images/one.jpg",
-    alt: "The Moon Exports crafts showcase",
-    title: "The Truth is The Everlasting",
-    subtitle: "The Moon Exports",
-    loading: "eager"
+    alt: "Premium handcrafted horn, wood and resin products",
+    title: "Premium Handcrafted Exports from India",
+    subtitle: "Custom horn, wood & resin creations for artists and luxury brands",
+    loading: "eager",
+    ctas: [
+      { label: "Get a Quote", href: "contact.html" },
+      { label: "Explore Crafts", href: "products.html" }
+    ]
   },
   {
     image: "images/two.jpg",
-    alt: "Premium handicrafts collection",
-    title: "The Truth is The Everlasting",
-    subtitle: "The Moon Exports",
-    loading: "lazy"
+    alt: "Artisan craftsmanship shipped worldwide",
+    title: "Artisan Craftsmanship, Global Delivery",
+    subtitle: "Made in Sambhal, shipped worldwide",
+    loading: "lazy",
+    ctas: [
+      { label: "View Products", href: "products.html" }
+    ]
   }
 ];
 
@@ -77,7 +85,7 @@ export function Carousel(): JSX.Element {
       </ol>
 
       {/* Slides */}
-      <div className="carousel-inner" role="listbox">
+      <div className="carousel-inner" role="group" aria-live="polite">
         {slides.map((slide, index) => (
           <div key={index} className={`item ${index === activeIndex ? "active" : ""}`}>
             <img
@@ -88,13 +96,15 @@ export function Carousel(): JSX.Element {
               height={600}
             />
             <div className="carousel-caption">
-              <h1>
+              <h2>
                 <strong>{slide.title}</strong>
-              </h1>
-              <h2>{slide.subtitle}</h2>
-              <a className="slidebtn btn-crafts" href="contact.html">
-                Enquiry
-              </a>
+              </h2>
+              <p className="carousel-subtitle">{slide.subtitle}</p>
+              {slide.ctas.map((cta, i) => (
+                <a key={i} className="slidebtn btn-crafts" href={cta.href}>
+                  {cta.label}
+                </a>
+              ))}
             </div>
           </div>
         ))}

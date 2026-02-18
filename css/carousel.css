@@ -37,15 +37,16 @@
 .carousel-inner > .item > img {
   display: block;
   width: 100%;
-  height: auto;
+  min-height: 20rem;
   max-height: 37.5rem;
   object-fit: cover;
   object-position: center;
 }
 
-/* Mobile: Smaller max height for better proportions */
+/* Mobile: Smaller min/max height for better proportions */
 @media (max-width: 47.9375rem) {
   .carousel-inner > .item > img {
+    min-height: 14rem;
     max-height: 25rem;
   }
 }
@@ -53,6 +54,7 @@
 /* Tablet */
 @media (min-width: 48rem) and (max-width: 61.9375rem) {
   .carousel-inner > .item > img {
+    min-height: 18rem;
     max-height: 31.25rem;
   }
 }
