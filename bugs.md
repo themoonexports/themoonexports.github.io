@@ -9,33 +9,33 @@
 
 ## Navigation & Header
 
-| # | Severity | Bug | File(s) | Details |
-|---|----------|-----|---------|---------|
-| 1 | 🟠 | Language switcher hidden on mobile | `css/one.css` (L758–770) | `p.usano, div.usano { display: none; }` hides the DE/FR flags on all viewports below 768 px. Mobile users have no way to switch language. |
-| 2 | 🟡 | Language flags lack descriptive alt text | `contact.html` (L91), `about.html` (L97) | Alt text is `"german"` instead of `"Switch to German"`. Screen readers announce a meaningless word. |
-| 3 | 🟠 | French flag missing from contact & about pages | `contact.html` (L91), `about.html` (L97) | Only the German flag is shown; the French flag link is missing entirely, unlike `index.html` which includes both. |
-| 4 | 🟡 | Dropdown toggle has dual interaction patterns | `index.html` (L157–164) | The Handicrafts link is both a navigation link (`href="products.html"`) and a dropdown toggle. On mobile, tapping it navigates away instead of opening the submenu. |
-| 5 | 🟡 | Navbar brand hover lift may obscure dropdown | `css/one.css` (L614–618) | `transform: translateY(-0.125rem)` on `.navbar-brand:hover` causes subtle layout shift that can misalign the fixed navbar border. |
-| 6 | 🟠 | No active-page indicator in main nav | All pages | None of the `<li>` items in the main nav receive an `active` class or `aria-current="page"` attribute, so users cannot tell which page they are on. |
-| 7 | 🟡 | Skip-to-content link only on index.html | `index.html` (L111) vs. other pages | `contact.html`, `about.html`, product pages, and legal pages lack a skip-navigation link, a WCAG 2.1 requirement. |
-| 8 | 🟠 | Blog link present on some pages but not others | `contact.html` (L124), `about.html` (L141) vs. `index.html` | `index.html` has no Blog nav item, while `contact.html` and `about.html` include `<li><a href="/blog">Blog</a></li>`, creating inconsistent navigation. |
-| 9 | 🟡 | Hamburger icon bars lack visible color on dark bg | `css/one.css` (L674–687) | `.navbar-toggle` sets `color: #FFFFFF` but Bootstrap 3 `.icon-bar` background defaults may not inherit, leading to invisible bars on certain browsers. |
-| 10 | 🔴 | Dropdown menu not keyboard accessible on subpages | `contact.html`, `about.html` | These pages use jQuery `.hover()` for dropdown but provide no keyboard event handler. Tab/Enter cannot open the submenu. |
+| # | Severity | Bug | File(s) | Details | Status |
+|---|----------|-----|---------|---------|--------|
+| 1 | 🟠 | Language switcher hidden on mobile | `css/one.css` (L758–770) | `p.usano, div.usano { display: none; }` hides the DE/FR flags on all viewports below 768 px. Mobile users have no way to switch language. | Open |
+| 2 | 🟡 | Language flags lack descriptive alt text | `contact.html` (L91), `about.html` (L97) | Alt text is `"german"` instead of `"Switch to German"`. Screen readers announce a meaningless word. | Open |
+| 3 | 🟠 | French flag missing from contact & about pages | `contact.html` (L91), `about.html` (L97) | Only the German flag is shown; the French flag link is missing entirely, unlike `index.html` which includes both. | Open |
+| 4 | 🟡 | Dropdown toggle has dual interaction patterns | `index.html` (L157–164) | The Handicrafts link is both a navigation link (`href="products.html"`) and a dropdown toggle. On mobile, tapping it navigates away instead of opening the submenu. | Open |
+| 5 | 🟡 | Navbar brand hover lift may obscure dropdown | `css/one.css` (L614–618) | `transform: translateY(-0.125rem)` on `.navbar-brand:hover` causes subtle layout shift that can misalign the fixed navbar border. | Open |
+| 6 | 🟠 | No active-page indicator in main nav | All pages | None of the `<li>` items in the main nav receive an `active` class or `aria-current="page"` attribute, so users cannot tell which page they are on. | Open |
+| 7 | 🟡 | Skip-to-content link only on index.html | `index.html` (L111) vs. other pages | `contact.html`, `about.html`, product pages, and legal pages lack a skip-navigation link, a WCAG 2.1 requirement. | Open |
+| 8 | 🟠 | Blog link present on some pages but not others | `contact.html` (L124), `about.html` (L141) vs. `index.html` | `index.html` has no Blog nav item, while `contact.html` and `about.html` include `<li><a href="/blog">Blog</a></li>`, creating inconsistent navigation. | Open |
+| 9 | 🟡 | Hamburger icon bars lack visible color on dark bg | `css/one.css` (L674–687) | `.navbar-toggle` sets `color: #FFFFFF` but Bootstrap 3 `.icon-bar` background defaults may not inherit, leading to invisible bars on certain browsers. | Open |
+| 10 | 🔴 | Dropdown menu not keyboard accessible on subpages | `contact.html`, `about.html` | These pages use jQuery `.hover()` for dropdown but provide no keyboard event handler. Tab/Enter cannot open the submenu. | Open |
 
 ---
 
 ## Carousel / Hero Section
 
-| # | Severity | Bug | File(s) | Details |
-|---|----------|-----|---------|---------|
-| 11 | 🟠 | No swipe/touch support on carousel | `react/src/components/Carousel.tsx` | Only arrow-key and click interactions are implemented. Mobile users cannot swipe between slides. |
-| 12 | 🟡 | Carousel auto-advance lacks `aria-live` | `index.html` (L206–239) | Slide transitions are not announced to screen readers; the `role="listbox"` region has no `aria-live="polite"`. |
-| 13 | 🟡 | Carousel control touch targets too small | `css/carousel.css` | Left/right arrows use Bootstrap's default sizing (~30×60 px) which is below the 44×44 px WCAG 2.1 minimum for touch. |
-| 14 | 🟡 | Carousel images lack responsive `srcset` | `index.html` (L214, L224) | Fixed `width="1200" height="600"` images are served to all devices, wasting bandwidth on mobile. |
-| 15 | 🟠 | Carousel caption text unreadable on bright images | `index.html` (L215–219) | White text over light product photos has no semi-transparent overlay, failing WCAG AA contrast in some slides. |
-| 16 | 🟡 | Heading hierarchy broken in carousel | `index.html` (L216 vs. L226) | First slide uses `<h2>`, second slide uses `<h3>`, creating inconsistent heading levels within the same component. |
-| 17 | 🟡 | Carousel indicator dots lack focus styles | `index.html` (L207–210) | Indicator `<li>` elements have no visible `:focus` outline for keyboard users. |
-| 18 | 🟡 | No pause-on-hover for carousel | `index.html` (L206) | `data-ride="carousel"` auto-advances but there is no `data-pause="hover"` attribute, making it hard for users with motor impairments to interact. |
+| # | Severity | Bug | File(s) | Details | Status |
+|---|----------|-----|---------|---------|--------|
+| 11 | 🟠 | No swipe/touch support on carousel | `react/src/components/Carousel.tsx` | Only arrow-key and click interactions are implemented. Mobile users cannot swipe between slides. | Open |
+| 12 | 🟡 | Carousel auto-advance lacks `aria-live` | `index.html` (L206–239) | Slide transitions are not announced to screen readers; the `role="listbox"` region has no `aria-live="polite"`. | ✅ Fixed |
+| 13 | 🟡 | Carousel control touch targets too small | `css/carousel.css` | Left/right arrows use Bootstrap's default sizing (~30×60 px) which is below the 44×44 px WCAG 2.1 minimum for touch. | Open |
+| 14 | 🟡 | Carousel images lack responsive `srcset` | `index.html` (L214, L224) | Fixed `width="1200" height="600"` images are served to all devices, wasting bandwidth on mobile. | Open |
+| 15 | 🟠 | Carousel caption text unreadable on bright images | `index.html` (L215–219) | White text over light product photos has no semi-transparent overlay, failing WCAG AA contrast in some slides. | Open |
+| 16 | 🟡 | Heading hierarchy broken in carousel | `index.html` (L216 vs. L226) | First slide uses `<h2>`, second slide uses `<h3>`, creating inconsistent heading levels within the same component. | ✅ Fixed |
+| 17 | 🟡 | Carousel indicator dots lack focus styles | `index.html` (L207–210) | Indicator `<li>` elements have no visible `:focus` outline for keyboard users. | Open |
+| 18 | 🟡 | No pause-on-hover for carousel | `index.html` (L206) | `data-ride="carousel"` auto-advances but there is no `data-pause="hover"` attribute, making it hard for users with motor impairments to interact. | ✅ Fixed |
 
 ---
 
@@ -227,3 +227,29 @@
 3. **Bug #10** — Add keyboard support to dropdown on subpages
 4. **Bug #1** — Provide mobile language switching mechanism
 5. **Bug #37** — Fix copyright year template variable across all pages
+
+---
+
+## Homepage Malformed Rendering — Root Causes & Fixes
+
+> **Identified:** 2026-02-18
+> **Scope:** `index.html` homepage rendering issues visible in browser
+
+### Identified Rendering Issues
+
+| # | Bug Ref | Issue | Root Cause | Status |
+|---|---------|-------|------------|--------|
+| A | #16 | Carousel slide 2 uses `<h3>` while slide 1 uses `<h2>` — inconsistent heading levels within the same component | Static HTML had mismatched heading tags (`<h2>` vs `<h3>`) across slides | ✅ Fixed |
+| B | New | Carousel displays wrong content after React hydration — shows "The Truth is The Everlasting" instead of the static HTML content "Premium Handcrafted Exports from India" | `react/src/components/Carousel.tsx` slide data (title, subtitle, alt text, CTAs) did not match the static HTML in `index.html`, causing a hydration mismatch that replaced the correct content | ✅ Fixed |
+| C | New | Carousel shows single "Enquiry" button instead of "Get a Quote" + "Explore Crafts" | React `Carousel.tsx` hardcoded a single CTA link instead of per-slide CTA arrays matching the static HTML | ✅ Fixed |
+| D | #75 | `role="listbox"` on carousel-inner is semantically incorrect — slides are not selectable options | Incorrect ARIA role applied; should be `role="group"` | ✅ Fixed |
+| E | #12 | Carousel slide transitions not announced to screen readers | Missing `aria-live="polite"` on the carousel-inner container | ✅ Fixed |
+| F | #18 | Carousel auto-advances with no way to pause on hover, making it hard for users with motor impairments | Missing `data-pause="hover"` attribute on carousel container | ✅ Fixed |
+| G | #78 | Generic `figcaption` styles (absolute position, opacity:0) hide the dropdown hero caption | `css/one.css` applies `position: absolute; opacity: 0` to all `figcaption` elements, including `.dropdown-hero-caption` which should be visible | ✅ Fixed |
+| H | #57 | `.frontblock.homeb` text is 6px (0.375rem) on mobile — completely unreadable | `css/one.css` L712 sets `font-size: 0.375rem!important` inside a `max-width: 41.25rem` media query | ✅ Fixed |
+| I | #50 | Cookie banner buttons have no visible focus ring for keyboard users | `css/one.css` sets `outline: none` on `.cookie-banner__btn:focus`, removing the default browser focus indicator | ✅ Fixed |
+| J | #21 | Product category cards have no hover state feedback to indicate they are interactive | `.productcat` had no `:hover` styles (no transform, shadow, or color change) | ✅ Fixed |
+| K | #48 | Newsletter error `aria-describedby` references a hidden element, ignored by some screen readers | `aria-describedby="newsletter-error"` was statically set on the input while the error div used `display:none` | ✅ Fixed |
+| L | #46 | Newsletter email input placeholder is just "Email" with no format hint | Placeholder text did not indicate expected format | ✅ Fixed |
+| M | #98 | Testimonials section renders as empty gap when React fails to load | `<div class="testimonials" data-react="testimonials"></div>` had no fallback content | ✅ Fixed |
+| N | #99 | "Featured Products" section shows "Loading…" forever if React fails to mount | No fallback or timeout mechanism for the `product-modal` React mount point | ✅ Fixed |
