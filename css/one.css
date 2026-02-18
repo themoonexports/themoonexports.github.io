@@ -999,6 +999,24 @@ div#error span {
 .carousel-caption h2 {
   margin-top: 0rem;
 }
+.carousel-subtitle {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0 0 1.25rem 0;
+  color: #fff;
+  line-height: 1.2;
+}
+@media (max-width: 47.9375rem) {
+  .carousel-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+@media (min-width: 48rem) and (max-width: 61.9375rem) {
+  .carousel-subtitle {
+    font-size: 1.5rem;
+  }
+}
 .carousel-caption {
   position: absolute;
   right: 15%;
