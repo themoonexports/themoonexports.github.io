@@ -203,13 +203,13 @@
         <h1 class="sr-only">The Moon Exports — Premium Handcrafted Horn, Wood &amp; Resin Products from India</h1>
         
         <!-- Hero Carousel -->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-react="carousel" role="region" aria-label="Featured products">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-pause="hover" data-react="carousel" role="region" aria-label="Featured products">
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-label="Slide 1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1" aria-label="Slide 2"></li>
             </ol>
             
-            <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="group" aria-live="polite">
                 <div class="item active">
                     <img src="images/one.jpg" alt="Premium handcrafted horn, wood and resin products" loading="eager" width="1200" height="600">
                     <div class="carousel-caption">
@@ -223,7 +223,7 @@
                 <div class="item">
                     <img src="images/two.jpg" alt="Artisan craftsmanship shipped worldwide" loading="lazy" width="1200" height="600">
                     <div class="carousel-caption">
-                        <h3><strong>Artisan Craftsmanship, Global Delivery</strong></h3>
+                        <h2><strong>Artisan Craftsmanship, Global Delivery</strong></h2>
                         <p class="carousel-subtitle">Made in Sambhal, shipped worldwide</p>
                         <a class="slidebtn btn-crafts" href="products.html">View Products</a>
                     </div>
@@ -358,7 +358,8 @@
         <section class="container" aria-label="Featured products">
             <div class="product-modal" data-react="product-modal">
                 <h2>Featured Products</h2>
-                <p aria-live="polite">Loading…</p>
+                <p aria-live="polite" id="product-loading">Loading…</p>
+                <noscript><p>Enable JavaScript to browse our featured products, or <a href="products.html">view all products</a>.</p></noscript>
             </div>
         </section>
         
@@ -458,9 +459,8 @@
                             <input type="email" 
                                    id="newsletter-email" 
                                    name="CONTACT_EMAIL" 
-                                   placeholder="Email" 
-                                   required
-                                   aria-describedby="newsletter-error">
+                                   placeholder="you@example.com" 
+                                   required>
                             <button type="submit">Join Now</button>
                         </div>
                         <input type="hidden" name="zc_trackCode" value="ZCFORMVIEW">
@@ -477,7 +477,9 @@
             </section>
             
             <!-- Testimonials -->
-            <div class="testimonials" data-react="testimonials"></div>
+            <div class="testimonials" data-react="testimonials">
+                <noscript><p>Enable JavaScript to see customer testimonials.</p></noscript>
+            </div>
             
             <!-- Trust Badges -->
             <section class="payment-info" data-react="trust-badges" aria-label="Trust and payment information">
@@ -607,11 +609,13 @@
                         event.preventDefault();
                         error.style.display = 'block';
                         success.style.display = 'none';
+                        emailInput.setAttribute('aria-describedby', 'newsletter-error');
                         emailInput.focus();
                         return;
                     }
 
                     error.style.display = 'none';
+                    emailInput.removeAttribute('aria-describedby');
                     setTimeout(() => {
                         success.style.display = 'block';
                         form.reset();
@@ -620,6 +624,7 @@
 
                 emailInput.addEventListener('input', () => {
                     error.style.display = 'none';
+                    emailInput.removeAttribute('aria-describedby');
                 });
             }
 
