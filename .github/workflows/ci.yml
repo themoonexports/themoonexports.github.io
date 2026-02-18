@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Lint vanilla JS
+        run: npm run lint
+
+  build:
+    name: Build React bundles
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install React dependencies
+        working-directory: react
+        run: npm install
+
+      - name: TypeScript type check
+        working-directory: react
+        run: npx tsc --noEmit
+
+      - name: Build React bundles
+        working-directory: react
+        run: npm run build
+
+      - name: Check bundle sizes
+        working-directory: react
+        run: |
+          echo "Checking bundle sizes (limit: 7168 bytes per bundle)..."
+          FAILED=0
+          for bundle in ../js/dist/*.js; do
+            name=$(basename "$bundle")
+            size=$(wc -c < "$bundle")
+            kb=$(echo "scale=1; $size / 1024" | bc)
+            if [ "$size" -gt 7168 ]; then
+              echo "FAIL: $name is ${kb}KB (exceeds 7KB limit)"
+              FAILED=1
+            else
+              echo "OK:   $name is ${kb}KB"
+            fi
+          done
+          if [ "$FAILED" -eq 1 ]; then
+            echo "Bundle size check failed. Reduce bundle sizes to stay under 7KB."
+            exit 1
+          fi
+          echo "All bundles within size budget."
+
+      - name: Upload bundles as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-bundles
+          path: js/dist/
+          retention-days: 7
+
+  audit:
+    name: Security audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Audit root dependencies
+        run: npm audit --audit-level=high
+
+      - name: Set up Node.js for React
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install React dependencies
+        working-directory: react
+        run: npm install
+
+      - name: Audit React dependencies
+        working-directory: react
+        run: npm audit --audit-level=high

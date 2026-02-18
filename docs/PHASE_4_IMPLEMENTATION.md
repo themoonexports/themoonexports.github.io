@@ -1,7 +1,7 @@
 # Phase 4 Implementation Plan — Hardening & Operational Maturity
 
 **Created:** February 2026  
-**Status:** 📋 Planned  
+**Status:** 🚀 In Progress (Sprint 1 started February 2026)  
 **Previous Phase:** [Phase 3 Implementation](PHASE_3_IMPLEMENTATION.md) (Complete, February 2026)
 
 **Related Documents:**
@@ -46,14 +46,14 @@ Remove or reduce legacy vanilla JavaScript files that have been superseded by Re
 | `js/application.js` | React initialization | Audit — may be fully superseded |
 
 ### Checklist
-- [ ] Audit each legacy JS file for callers across all HTML pages
-- [ ] Remove `js/auto-year-update.js` (superseded by Footer.tsx)
+- [x] Audit each legacy JS file for callers across all HTML pages
+- [x] Remove `js/auto-year-update.js` from pages where Footer.tsx handles copyright year (9 product/content pages removed)
 - [ ] Remove dead code paths in `js/forms.js` covered by React forms
 - [ ] Unify consent state: `js/consent.js` ↔ `CookieSettings.tsx` share `localStorage['tme_cookie_consent_v1']`
 - [ ] Remove unused exports from `js/components.js`
 - [ ] Test site with legacy scripts removed — ensure React bundles cover all behavior
 - [ ] Update HTML pages to remove `<script>` tags for retired files
-- [ ] Document remaining legacy files and their purpose
+- [x] Document remaining legacy files and their purpose
 
 ---
 
@@ -74,11 +74,11 @@ Establish automated quality gates that run on every push and pull request to cat
 | HTML Validation | `html-validate` | Validate markup across all pages |
 
 ### Checklist
-- [ ] Create `.github/workflows/ci.yml` with lint → build → bundle-check pipeline
-- [ ] Add TypeScript strict mode check (`tsc --noEmit`) to CI
-- [ ] Add bundle size budget enforcement script (fail if any bundle > 7 KB)
+- [x] Create `.github/workflows/ci.yml` with lint → build → bundle-check pipeline
+- [x] Add TypeScript strict mode check (`tsc --noEmit`) to CI
+- [x] Add bundle size budget enforcement script (fail if any bundle > 7 KB)
 - [ ] Integrate Lighthouse CI with performance thresholds
-- [ ] Add `npm audit --audit-level=high` to CI pipeline
+- [x] Add `npm audit --audit-level=high` to CI pipeline
 - [ ] Add HTML validation for all pages
 - [ ] Configure PR status checks to require CI pass before merge
 - [ ] Add smoke test: verify all `data-react` mount points exist in built HTML
@@ -168,9 +168,9 @@ Ensure German (`/de/`) and French (`/fr/`) pages have the same React integration
 - No `/de/contact.html`, `/de/faq.html`, etc. — these pages don't exist yet
 
 ### Tasks
-- [ ] Audit `/de/index.html` for all `data-react` attributes matching `index.html`
-- [ ] Audit `/fr/index.html` for all `data-react` attributes matching `index.html`
-- [ ] Add missing Phase 3 script tags to `/de/index.html` and `/fr/index.html`
+- [x] Audit `/de/index.html` for all `data-react` attributes matching `index.html`
+- [x] Audit `/fr/index.html` for all `data-react` attributes matching `index.html`
+- [x] Add missing Phase 3 script tags to `/de/index.html` and `/fr/index.html` (consent, cookie-settings, scroll-top, accessibility)
 - [ ] Evaluate creating `/de/contact.html`, `/de/faq.html`, `/fr/contact.html`, `/fr/faq.html`
 - [ ] Verify React components render localized content correctly (locale detection via `lang` attribute)
 - [ ] Add `hreflang` verification to CI pipeline
