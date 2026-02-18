@@ -66,9 +66,6 @@ font-family: sans-serif;
   display: inline-block;
   margin-left: 0.375rem;
   transition: transform var(--tmx-transition-ease);
-  border: none;
-  width: 0;
-  height: 0;
   vertical-align: middle;
 }
 
