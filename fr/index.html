@@ -57,7 +57,7 @@
 <body cz-shortcut-listen="true">
 
 <div class="masthead" >
-	<nav class="navbar navbar-default navbar-fixed-top" id="nav-main">
+	<nav class="navbar navbar-default navbar-fixed-top" id="nav-main" role="navigation" aria-label="Main navigation" data-react="header">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -68,7 +68,7 @@
           </button>
           <a class="navbar-brand" href="index.html"><img src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/logo.png" alt="The Moon Exports" class="lazyload"/></a>
         </div>
-           <p class="usano"><b><a href="https://www.themoonexports.com/index.html"><img src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/english.png" alt="Switch to English" class="img-circle lazyload" width="25" height="25"></a></b> <b><a href="https://www.themoonexports.com/de/"><img src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/german.png" alt="Switch to German" class="img-circle lazyload" width="25" height="25"></a></b> </p>
+           <p class="usano" data-react="language-switcher"><b><a href="https://www.themoonexports.com/index.html"><img src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/english.png" alt="Switch to English" class="img-circle lazyload" width="25" height="25"></a></b> <b><a href="https://www.themoonexports.com/de/"><img src="../images/placeholder.png" data-src="https://www.themoonexports.com/images/german.png" alt="Switch to German" class="img-circle lazyload" width="25" height="25"></a></b> </p>
       
               <div id="navbar" class="navbar-collapse navbar-right collapse">
           <ul class="nav navbar-nav">
@@ -105,7 +105,7 @@
 
 </div>
 	   
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-pause="hover" data-react="carousel" role="region" aria-label="Featured products">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -144,7 +144,7 @@
     <span class="sr-only">Suivant</span>
   </a>
 </div>
-<div class="container frontthree">
+<div class="container frontthree" data-react="product-grid" aria-label="Catégories de produits">
 	<div class="row">
 		<div class="col-md-4">
 		<div class="productcat">
@@ -179,7 +179,7 @@
 
 
 
-<footer class="footer-bottom">
+<footer class="footer-bottom" data-react="footer" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
@@ -216,12 +216,13 @@
      "https://www.linkedin.com/company/themoonexports/"]
 }
 </script>
-
+				<div class="social-links" data-react="social-links">
 				<a href="https://www.facebook.com/themoonexports?__mref=message_bubble" target="_blank"><i class="fab fa-facebook-f"></i><span style="display:none;">Facebook</span></a>
 				<a href="https://twitter.com/themoonexports" target="_blank"><i class="fab fa-twitter"></i><span style="display:none;">Twitter</span></a>
 				<a href="https://instagram.com/themoonexports/" target="_blank"><i class="fab fa-instagram"></i><span style="display:none;">Instagram</span></a>
 				<a href="https://www.pinterest.com/themoonexports/" target="_blank"><i class="fab fa-pinterest-p"></i><span style="display:none;">Pinterest</span></a>
 				<a href="https://www.linkedin.com/company/themoonexports/" target="_blank"><i class="fab fa-linkedin-in"></i><span style="display:none;">LinkedIn</span></a>
+				</div>
 			</div>
 			
 
@@ -232,6 +233,27 @@
     <p aria-live="polite">Loading…</p>
         </div>
       </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter-section" aria-label="Inscription à la newsletter" data-react="newsletter">
+                <div class="newsletter-container">
+                    <h4>Abonnez-vous à notre newsletter</h4>
+                    <noscript><p>Activez JavaScript pour vous abonner à la newsletter.</p></noscript>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <div class="testimonials" data-react="testimonials">
+                <noscript><p>Activez JavaScript pour voir les témoignages clients.</p></noscript>
+            </div>
+
+            <!-- Trust Badges -->
+            <section class="payment-info" data-react="trust-badges" aria-label="Informations de confiance et de paiement">
+                <div class="trust-badge">
+                    <span class="badge-icon">🛡️</span>
+                    <span class="badge-text">Exportateur de confiance</span>
+                </div>
+            </section>
 
 		</div>
 		<div class="copyright">
@@ -289,11 +311,23 @@ $(this).removeClass('open');
 </script>
 <script src="../js/lazysizes.min.js" async></script>
     <!-- React Progressive Enhancement -->
+    <script type="module" src="../js/dist/header.js" defer></script>
+    <script type="module" src="../js/dist/newsletter.js" defer></script>
     <script type="module" src="../js/dist/consent.js" defer></script>
+    <script type="module" src="../js/dist/language-switcher.js" defer></script>
+    <script type="module" src="../js/dist/carousel.js" defer></script>
+    <script type="module" src="../js/dist/product-grid.js" defer></script>
+    <script type="module" src="../js/dist/social-links.js" defer></script>
+    <script type="module" src="../js/dist/trust-badges.js" defer></script>
+    <script type="module" src="../js/dist/footer.js" defer></script>
     <script type="module" src="../js/dist/product-modal.js" defer></script>
+    <script type="module" src="../js/dist/testimonials.js" defer></script>
     <script type="module" src="../js/dist/cookie-settings.js" defer></script>
     <script type="module" src="../js/dist/scroll-top.js" defer></script>
     <script type="module" src="../js/dist/accessibility.js" defer></script>
+    <!-- Background Component -->
+    <div data-react="background" data-variant="default" style="display: none;"></div>
+    <script type="module" src="../js/dist/background.js"></script>
     <!-- Utility Widget Mount Points -->
     <div data-react="cookie-settings" class="cookie-settings-fixed"></div>
     <div data-react="scroll-top"></div>
