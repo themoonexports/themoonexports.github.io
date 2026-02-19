@@ -166,7 +166,7 @@
 
 ---
 
-## 📋 Phase 4: Hardening & Operational Maturity (Planned)
+## 📋 Phase 4: Hardening & Operational Maturity (In Progress)
 
 With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33.9 KB total), Phase 4 shifts focus from feature delivery to hardening, automation, and long-term maintainability.
 
@@ -182,6 +182,13 @@ With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33
 | 6 | Product Search | Low | Client-side search using `products.json` (deferred from Phase 3) |
 | 7 | Production Monitoring | Medium | Error boundaries, Core Web Vitals tracking, uptime alerts |
 
+### Sprint Sequencing (5 Sprints, ~10 Weeks)
+- **Sprint 1** (Weeks 1–2): Legacy JS audit, CI foundation, i18n parity audit
+- **Sprint 2** (Weeks 3–4): Inline script migration, CSP refinement, dependency security
+- **Sprint 3** (Weeks 5–6): Image optimization, bundle analysis, Lighthouse CI
+- **Sprint 4** (Weeks 7–8): Product search, error tracking, analytics evaluation
+- **Sprint 5** (Weeks 9–10): Final cleanup, documentation, Phase 5 preparation
+
 ### Success Targets
 - Security score: 72% → 90%+
 - Lighthouse Performance: 90+
@@ -190,4 +197,32 @@ With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33
 - Automated CI: Build + lint + bundle budget enforced
 
 ### Details
-See [docs/PHASE_4_IMPLEMENTATION.md](docs/PHASE_4_IMPLEMENTATION.md) for full workstream breakdown, checklists, and sprint sequencing.
+- See [docs/PHASE_4_IMPLEMENTATION.md](docs/PHASE_4_IMPLEMENTATION.md) for full workstream breakdown and checklists
+- See [docs/NEXT_PHASE_DEVELOPMENT_PLAN.md](docs/NEXT_PHASE_DEVELOPMENT_PLAN.md) for detailed sprint execution plan, risk register, and metrics
+
+---
+
+## 🔮 Phase 5: Modern UI & Growth (Target: Q3–Q4 2026)
+
+With hardening complete, Phase 5 shifts focus to user experience modernization, conversion optimization, and scalable content management.
+
+### Key Initiatives
+
+| # | Initiative | Priority | Description |
+|---|-----------|----------|-------------|
+| 1 | Bootstrap 5 Migration | High | Migrate from Bootstrap 3.3.x to 5.3.x (page-by-page, compatibility shim) |
+| 2 | Homepage Redesign | High | Modern, conversion-optimized landing page with A/B testing |
+| 3 | Product Experience | Medium | Rich product detail pages, category filtering, wishlist |
+| 4 | Content Management | Medium | Evaluate headless CMS (Decap CMS/Contentful), expanded structured data |
+| 5 | Advanced Analytics | Medium | GA4 full migration, e-commerce tracking, custom dashboards |
+| 6 | PWA Exploration | Low | Service worker, web app manifest, offline catalog |
+
+### Prerequisites (from Phase 4)
+- ✅ Legacy JS cleanup complete (≤ 6 files)
+- ✅ CSP hardening in place (no `unsafe-inline`)
+- ✅ Performance baseline established (Lighthouse CI)
+- ✅ Error tracking deployed
+- ✅ Image optimization complete
+
+### Details
+See [docs/NEXT_PHASE_DEVELOPMENT_PLAN.md](docs/NEXT_PHASE_DEVELOPMENT_PLAN.md) for Phase 5 vision, architecture decisions, and dependency mapping.
