@@ -139,7 +139,7 @@ Close remaining security gaps from the [Security Checklist](SECURITY_CHECKLIST.m
 - [ ] Remove old Bootstrap 3 JS and CSS files
 
 #### Inline Script Migration
-- [ ] Identify all remaining inline `<script>` blocks (25 instances)
+- [ ] Identify all remaining inline `<script>` blocks (61 executable instances as measured Feb 2026)
 - [ ] Extract to external files or React components
 - [ ] Add SRI hashes to all external scripts
 - [ ] Validate with CSP after migration

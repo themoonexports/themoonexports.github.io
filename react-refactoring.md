@@ -193,7 +193,7 @@ With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33
 - Security score: 72% → 90%+
 - Lighthouse Performance: 90+
 - Legacy JS files: 12 → ≤ 6
-- Inline scripts: 25 → ≤ 10
+- Inline scripts: 61 executable → ≤ 15
 - Automated CI: Build + lint + bundle budget enforced
 
 ### Details

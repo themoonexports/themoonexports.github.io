@@ -132,10 +132,11 @@ Overall Score: 72% (PRODUCTION READY)
 - External design credit links
 - **Risk Level**: LOW (these are external links, not mixed content)
 
-### Inline Scripts (25 instances)
+### Inline Scripts (61 executable instances, measured Feb 2026)
 - Core form validation and bootstrap helpers remain inline
 - Analytics wrappers now gated behind consent utilities
-- **Risk Level**: MEDIUM (manageable with CSP nonces)
+- **Risk Level**: MEDIUM (manageable with extraction to external files + CSP)
+- See [Next Phase Development Plan](NEXT_PHASE_DEVELOPMENT_PLAN.md) for detailed breakdown by category
 
 ### Performance Optimizations (Future)
 - Image lazy loading implementation
