@@ -123,15 +123,14 @@ jobs:
       - name: Check jQuery version consistency
         run: |
           echo "Checking for jQuery version consistency..."
-          VERSIONS=$(grep -roh 'jquery[/-][0-9.]*' *.html de/*.html fr/*.html legal/*.html 2>/dev/null | sort -u)
-          COUNT=$(echo "$VERSIONS" | wc -l)
-          echo "jQuery versions found:"
-          echo "$VERSIONS"
+          VERSIONS=$(grep -roh 'jquery/[0-9.]*\|jquery-[0-9.]*\.min' *.html de/*.html fr/*.html legal/*.html 2>/dev/null | grep -oP '[0-9]+\.[0-9]+\.[0-9]+' | sort -u)
+          COUNT=$(echo "$VERSIONS" | grep -c '[0-9]' || true)
+          echo "jQuery versions found: $VERSIONS"
           if [ "$COUNT" -gt 1 ]; then
             echo "FAIL: Multiple jQuery versions detected"
             exit 1
           fi
-          echo "OK: Single jQuery version"
+          echo "OK: Single jQuery version ($VERSIONS)"
 
       - name: Check IE shims removed
         run: |
