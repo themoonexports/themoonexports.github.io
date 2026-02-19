@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { ConsentState } from "@types/consent";
+import type { ConsentState } from "../types/consent";
 
 const defaultState: ConsentState = {
   analytics: false,
