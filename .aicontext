@@ -41,6 +41,7 @@ documentation:
   - PRODUCTION_READINESS_ASSESSMENT.md  # Detailed assessment
   - TESTING_PLAN.md               # Testing strategy
   - SECURITY_CHECKLIST.md         # Security validation
+  - NEXT_PHASE_DEVELOPMENT_PLAN.md  # Phase 4 execution plan (first-principles, ground-truth based)
   - .aicontext                    # This file - AI agent guidance
 
 ## Configuration Files (Priority: MEDIUM)
@@ -217,16 +218,36 @@ react_status:
   phase_1: "Complete (Oct 2025) — Header, Newsletter, Consent (3 bundles)"
   phase_2: "Complete (Oct 2025) — Footer, Carousel, Product Grid, Trust Badges, Language Switcher, Social Links (6 bundles)"
   phase_3: "Complete (Feb 2026) — Contact Form, FAQ, Product Modal, Background, Cookie Settings, Testimonials, Accessibility Widget, Scroll-to-Top (8 bundles)"
-  phase_4: "Planned — Legacy JS retirement, CI/CD, performance, security hardening, i18n parity"
+  phase_4: "In Progress — See docs/NEXT_PHASE_DEVELOPMENT_PLAN.md for execution plan"
+  phase_4_milestones:
+    - "M1 (Week 1): Delete 5 unused JS files, fix jQuery version split, remove IE shims, CI baselines"
+    - "M2 (Week 2): Fix DE/FR mount parity (4/14 → 14/14), extract 61 inline scripts"
+    - "M3 (Weeks 3-4): Deploy CSP (currently missing), HSTS, SRI hashes, Dependabot"
+    - "M4 (Weeks 5-6): Image optimization, Lighthouse CI enforcement, ErrorBoundary"
+    - "M5 (Weeks 7-8): Documentation updates, final cleanup, Phase 4 retrospective"
   total_bundles: 17
   total_size: "~33.9 KB (15.1 KB gzipped)"
   shared_runtime: "~141.7 KB (cached across all bundles)"
 
+## Phase 4 Critical Findings (Measured Feb 2026)
+# These correct earlier documentation estimates with actual measurements
+ground_truth:
+  executable_inline_scripts: 61     # Docs said 25; actual is 61 (excluding 64 JSON-LD)
+  csp_deployed: false               # Docs said yes; no firebase.json, no CSP in .htaccess
+  hsts_deployed: false              # Not in .htaccess security headers block
+  jquery_versions: 2                # index.html: 3.6.0; all others: 3.7.1
+  ie_shims_present: 13              # html5shiv + respond.min.js in 13 files
+  de_fr_react_mounts: "4/14"        # DE/FR index pages have 4 of 14 EN mounts
+  unused_legacy_js: 5               # forms.js, main.js, application.js, npm.js, utils.js = 0 callers
+  sri_coverage: "partial"           # 1-3 per page; 9 external script domains
+  pages_with_hreflang: 1            # Only index.html; about, contact, faq, products missing
+
 ## Historical Context
 - **Created**: 2015 by Kamran Khan
 - **Purpose**: Handicrafts manufacturer and exporter website
-- **Recent Work**: React migration complete (Phases 1–3, 17 components). Phase 4 hardening planned.
-- **Production Status**: Ready for deployment; Phase 4 focuses on CI/CD, performance, and security hardening
+- **Recent Work**: React migration complete (Phases 1–3, 17 components). Phase 4 hardening in progress.
+- **Production Status**: Ready for deployment; Phase 4 focuses on measured security gaps, dead code removal, i18n parity, CI hardening
+- **Key Planning Doc**: docs/NEXT_PHASE_DEVELOPMENT_PLAN.md (first-principles analysis with ground-truth measurements)
 
 ---
 This file should be the first reference for any AI agent working on The Moon Exports website. 

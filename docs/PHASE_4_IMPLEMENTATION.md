@@ -6,6 +6,7 @@
 
 **Related Documents:**
 - [../react-refactoring.md](../react-refactoring.md) — Overall React migration strategy
+- [Next Phase Development Plan](NEXT_PHASE_DEVELOPMENT_PLAN.md) — **Detailed first-principles execution plan with ground-truth measurements**
 - [Phase 3 Implementation](PHASE_3_IMPLEMENTATION.md) — Completed Phase 3 reference
 - [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) — Production status
 - [Security Checklist](SECURITY_CHECKLIST.md) — Security remediation tracking
@@ -273,18 +274,24 @@ Establish observability for the production site to catch issues before users rep
 
 ## Success Criteria
 
-| Metric | Current | Phase 4 Target |
+> **Note:** Baselines below reflect ground-truth measurements taken in February 2026.
+> See [NEXT_PHASE_DEVELOPMENT_PLAN.md](NEXT_PHASE_DEVELOPMENT_PLAN.md) for full measurement methodology.
+
+| Metric | Current (Measured) | Phase 4 Target |
 |--------|---------|----------------|
-| Security Score | 72% | 90%+ |
-| Lighthouse Performance | TBD | 90+ |
-| Lighthouse Accessibility | TBD | 95+ |
-| Lighthouse SEO | TBD | 95+ |
+| Security Score | 72% (CSP not yet deployed) | 90%+ |
+| Lighthouse Performance | TBD | 85+ |
+| Lighthouse Accessibility | TBD | 90+ |
+| Lighthouse SEO | TBD | 90+ |
 | Bundle Budget Violations | 0 | 0 (enforced by CI) |
-| Legacy JS Files | 12 | ≤ 6 |
-| Automated Test Coverage | 0% | Build + lint + bundle check |
-| i18n Page Parity | Partial | Full (EN = DE = FR) |
-| Inline Scripts | 25 | ≤ 10 |
-| CSP Violations | Unknown | 0 (monitored) |
+| Legacy JS Files (custom, with callers) | 7 (5 have zero callers) | ≤ 4 |
+| Automated Test Coverage | 0% | Build + lint + bundle check + inline count + mount parity |
+| i18n Page Parity (DE/FR vs EN mounts) | 4/14 (28%) | 14/14 (100%) |
+| Executable Inline Scripts | 61 | ≤ 15 |
+| CSP Violations | No CSP deployed | 0 (enforced) |
+| jQuery Versions | 2 (3.6.0 + 3.7.1) | 1 |
+| IE Shims Present | 13 files | 0 |
+| SRI Hash Coverage | Partial | 100% external scripts |
 
 ---
 
@@ -303,6 +310,7 @@ Phase 4 continues to follow established project conventions:
 
 ## See Also
 
+- [Next Phase Development Plan](NEXT_PHASE_DEVELOPMENT_PLAN.md) — **Detailed first-principles execution plan (start here for Phase 4 work)**
 - [../react-refactoring.md](../react-refactoring.md) — Overall migration roadmap
 - [Phase 3 Implementation](PHASE_3_IMPLEMENTATION.md) — Completed Phase 3 reference
 - [Phase 2 Implementation](PHASE_2_IMPLEMENTATION.md) — Completed Phase 2 reference

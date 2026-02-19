@@ -1,586 +1,558 @@
-# Next Phase Development Plan
-## The Moon Exports — Phase 4 Execution & Phase 5 Vision
+# Next Phase Development Plan — First-Principles Engineering Analysis
+## The Moon Exports — Phase 4 Hardening & Operational Maturity
 
 **Created:** February 2026  
-**Status:** 📋 Active Planning Document  
-**Owner:** Development Team  
-**Review Cadence:** Biweekly sprint reviews
+**Methodology:** First-principles decomposition from measured ground truth  
+**Status:** 📋 Active — Sprint-ready execution plan
 
 **Related Documents:**
 - [Phase 4 Implementation](PHASE_4_IMPLEMENTATION.md) — Workstream-level checklists
-- [../react-refactoring.md](../react-refactoring.md) — Overall React migration roadmap
-- [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) — Current production status
+- [../react-refactoring.md](../react-refactoring.md) — React migration roadmap
 - [Security Checklist](SECURITY_CHECKLIST.md) — Security remediation tracking
 - [Testing Plan](TESTING_PLAN.md) — QA procedures and test matrix
 
 ---
 
-## Table of Contents
+## 0. Idea Intake
 
-1. [Current State Assessment](#1-current-state-assessment)
-2. [Phase 4 Sprint Execution Plan](#2-phase-4-sprint-execution-plan)
-3. [Phase 5 Vision & Roadmap](#3-phase-5-vision--roadmap)
-4. [Technical Debt Register](#4-technical-debt-register)
-5. [Risk Register & Mitigation](#5-risk-register--mitigation)
-6. [Architecture Decision Records](#6-architecture-decision-records)
-7. [Metrics & KPIs Dashboard](#7-metrics--kpis-dashboard)
-8. [Dependency Map](#8-dependency-map)
-9. [Release & Rollout Strategy](#9-release--rollout-strategy)
+**Core problem in one sentence:**
+
+> The React migration (Phases 1–3) delivered 17 modular bundles but left behind unmeasured security gaps, dead legacy code, broken i18n parity, and zero production observability — the codebase needs hardening before it can safely grow.
 
 ---
 
-## 1. Current State Assessment
+## 1. Crystallized Brief
 
-### What We Have (February 2026)
+### Target Users
 
-| Area | Status | Details |
-|------|--------|---------|
-| **React Migration** | ✅ Complete (Phases 1–3) | 17 bundles, ~33.9 KB total (15.1 KB gzipped) |
-| **Shared Runtime** | ✅ Cached | ~141.7 KB React runtime (cached across bundles) |
-| **Legacy JS** | ⚠️ 12 files remaining | 7 custom + 5 vendor files in `js/` |
-| **CI/CD Pipeline** | ⚠️ Partial | Lint + Build + Bundle check + npm audit; missing Lighthouse CI, HTML validation |
-| **Security Score** | ⚠️ 72% | 0 critical, 2 high-priority remaining (HTTP links, inline scripts) |
-| **i18n Coverage** | ⚠️ Partial | `/de/` and `/fr/` index pages updated; subpages missing |
-| **Performance** | ⚠️ Not measured | No Lighthouse CI baseline; images not optimized |
-| **Monitoring** | ❌ None | No error tracking, no RUM, no uptime monitoring |
-| **Testing** | ⚠️ Manual only | No automated functional/integration tests |
-| **Bootstrap** | ⚠️ v3.x | Migration to v5.3.x deferred |
+| User | Need | Impact of Doing Nothing |
+|------|------|-------------------------|
+| **Site visitors** (buyers, B2B) | Fast, secure, accessible product browsing in EN/DE/FR | Slow loads, broken i18n, no search |
+| **Site owner** (Kamran Khan) | Maintainable codebase, confidence in production stability | Silent failures, dual-maintenance cost, security risk |
+| **Developers / AI agents** | Clear architecture, automated quality gates, accurate docs | Docs diverge from truth, manual QA only |
 
-### Strengths to Build On
-- **Solid progressive enhancement architecture** — React hydrates existing HTML; site works without JS
-- **Modular bundle strategy** — 17 independent bundles under 7 KB each
-- **Established CI pipeline** — lint, build, bundle budget, security audit already automated
-- **Comprehensive documentation** — 25+ docs covering architecture, phases, security, testing
-- **TypeScript-first React** — Type-safe components with strict mode enabled
+### Desired Outcomes (Measurable)
 
-### Key Gaps to Address
-1. **No automated regression testing** — All QA is manual
-2. **No performance baseline** — Cannot detect regressions without Lighthouse CI
-3. **Legacy JS dual-maintenance** — Same behavior implemented in vanilla JS and React
-4. **No production observability** — Errors in production go undetected
-5. **Security hardening incomplete** — CSP uses `unsafe-inline`, 25 inline scripts remain
-6. **i18n incomplete** — `/de/` and `/fr/` lack subpages (contact, faq, product pages)
+| Outcome | Current | Target | How Verified |
+|---------|---------|--------|-------------|
+| Executable inline scripts | **61** | ≤ 15 | `grep` count in CI |
+| CSP header deployed | **None** (no CSP anywhere) | Enforced, zero violations | securityheaders.com + CI check |
+| Legacy JS with zero callers removed | **5 files unused** (forms, main, application, npm, utils) | 0 unused files | `grep -rl` caller audit |
+| DE/FR React mount parity with EN | **4/14** mounts on de/fr index | 14/14 | Automated diff in CI |
+| jQuery version consistency | **2 versions** (3.6.0 + 3.7.1) | Single version | `grep` check |
+| IE shims still in production HTML | **13 files** | 0 files | `grep html5shiv` count |
+| Pages with hreflang tags | **1** (index.html only) | All pages with locale variants | Automated scan |
+| SRI hashes on external scripts | **Partial** (1-3 per page, 9 domains) | 100% of external scripts | CI validation |
+| Lighthouse Performance baseline | **Not measured** | ≥ 85 (recorded) | Lighthouse CI |
+| Production error tracking | **None** | Errors captured and alerted | ErrorBoundary + handler verification |
 
----
+### Non-Goals (Phase 4 explicitly defers these)
 
-## 2. Phase 4 Sprint Execution Plan
-
-### Sprint 1: Foundation & Quick Wins (Weeks 1–2)
-
-**Theme:** Establish baselines, close quick gaps, reduce maintenance burden
-
-#### 1.1 Legacy JS Audit & Cleanup
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Remove `js/auto-year-update.js` references from remaining pages | High | No `<script>` tags reference this file; Footer.tsx handles all year updates | 2h |
-| Audit `js/forms.js` — identify dead code paths | High | Document which functions are still called vs. covered by React | 2h |
-| Remove form handlers in `js/forms.js` covered by `ContactForm.tsx` / `NewsletterForm.tsx` | High | No duplicate validation logic; React components are sole handlers on pages that use them | 3h |
-| Audit `js/components.js` for unused exports | Medium | List of used vs. unused exports documented | 1h |
-| Audit `js/application.js` and `js/npm.js` for necessity | Medium | Decision: keep, refactor, or remove each file | 1h |
-| Unify consent state: ensure `js/consent.js` and `CookieSettings.tsx` share single localStorage key | High | `tme_cookie_consent_v1` is sole source of truth; no race conditions | 3h |
-
-**Sprint 1 Target:** Legacy JS files reduced from 12 to ≤ 8
-
-#### 1.2 CI/CD Enhancements
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Add smoke test: verify all `data-react` mount points exist in HTML | High | CI fails if any mount point is missing or mismatched | 3h |
-| Configure PR status checks to require CI pass before merge | High | Branch protection rule enforces lint + build + audit pass | 1h |
-| Add HTML validation step using `html-validate` | Medium | CI catches malformed HTML; initial run documents existing issues | 3h |
-| Establish Lighthouse CI baseline (performance, accessibility, SEO scores) | Medium | Baseline scores recorded; CI runs Lighthouse on every PR | 4h |
-
-#### 1.3 i18n Parity Audit
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Verify `/de/index.html` and `/fr/index.html` have all 17 `data-react` script tags | High | Byte-for-byte parity of React integration between EN/DE/FR index pages | 2h |
-| Document missing `/de/` and `/fr/` subpages (contact, faq, products) | Medium | Gap analysis with prioritized creation list | 1h |
-| Verify `hreflang` tags are consistent across all existing pages | Medium | Every page with a translation has correct bidirectional hreflang | 2h |
-
-**Sprint 1 Definition of Done:**
-- [ ] Legacy audit complete with decisions documented
-- [ ] CI pipeline includes smoke test + HTML validation + Lighthouse baseline
-- [ ] i18n gap analysis complete
-- [ ] All sprint 1 tasks merged to main
+| Item | Why Deferred |
+|------|-------------|
+| Bootstrap 3 → 5 migration | Touches 30+ files; depends on Phase 4 cleanup landing first |
+| Homepage redesign | Needs Bootstrap 5 and image optimization as prerequisites |
+| Full DE/FR subpages (contact, faq, products) | Content translation is a business decision, not an engineering one |
+| Server-side rendering (SSR) | Premature for a static site with 23 products |
+| Headless CMS integration | Evaluate only after Phase 4 stabilizes the codebase |
 
 ---
 
-### Sprint 2: Security Hardening (Weeks 3–4)
+## 2. Grounded First-Principles Design
 
-**Theme:** Raise security score from 72% toward 90%, reduce attack surface
+### What the codebase actually looks like (measured February 2026)
 
-#### 2.1 Inline Script Migration
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Inventory all 25 inline `<script>` blocks across all HTML pages | High | Spreadsheet/table with file, line number, purpose, migration plan | 3h |
-| Extract analytics wrappers to external `js/analytics-loader.js` | High | Inline analytics code replaced with `<script src>` references; consent gating preserved | 4h |
-| Extract Bootstrap initialization scripts to external files | Medium | No inline Bootstrap JS; all loaded via external `<script>` tags | 3h |
-| Extract JSON-LD structured data to external data files or build-time injection | Low | Structured data remains valid; loaded from external source | 4h |
-| Reduce inline script count to ≤ 10 | High | Count verified via automated CI check | 2h |
+#### Inline Script Inventory (Ground Truth)
 
-#### 2.2 CSP Refinement
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Audit current CSP policy against actual resource usage | High | Document all required domains, scripts, styles | 2h |
-| Implement nonce-based CSP for remaining essential inline scripts | High | `unsafe-inline` removed from `script-src`; nonce applied | 4h |
-| Add CSP reporting endpoint (Report-URI or report-to) | Medium | CSP violations logged and reviewable | 3h |
-| Test CSP changes across all pages (EN/DE/FR) | High | Zero console CSP errors on any page | 3h |
-| Validate with securityheaders.com — target A+ rating | Medium | Screenshot of A+ score archived | 1h |
+Total inline `<script>` blocks: **125**
+- JSON-LD structured data (`type="application/ld+json"`): **64** — leave in place, these are data not code
+- **Executable inline scripts: 61** — these are the security/CSP problem
 
-#### 2.3 Dependency Security
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Add SRI hashes to all external CDN scripts | High | Every external `<script>` and `<link>` has `integrity` attribute | 3h |
-| Configure Dependabot for automated PR creation | High | `.github/dependabot.yml` configured for npm + GitHub Actions | 1h |
-| Pin critical dependencies to exact versions in `package-lock.json` | Medium | Lock file reviewed; no floating ranges for security-critical packages | 1h |
-| Add CSRF token support to contact form submissions | Medium | Form submissions include anti-CSRF token; server validates | 4h |
-| Add client-side input sanitization to all form fields | Medium | XSS payloads in form inputs are neutralized before submission | 3h |
+Breakdown of 61 executable scripts by function:
 
-**Sprint 2 Target:** Security score ≥ 85%
+| Category | Count | Files Affected | Migration Path |
+|----------|-------|---------------|----------------|
+| jQuery dropdown hover (`$(document).ready...slideDown`) | **15** | All pages except index.html, 404 | **Delete** — React `Header.tsx` handles dropdowns |
+| Analytics/consent IIFE (`CONFIG = { gaTrackingId... }`) | **16** | All pages | **Extract** → `js/analytics-loader.js` |
+| Google Translate init (`googleTranslateElementInit`) | **13** | EN pages + legal (not de/fr) | **Extract** → `js/google-translate-init.js` |
+| Zoho form hook (`runOnFormSubmit...`) | **9** | Pages with newsletter form | **Extract** → `js/zoho-form-hook.js` |
+| jQuery timer (legal pages) | **4** | legal/*.html | **Extract** → `js/legal-timer.js` or **delete** if unused |
+| gtag conversion | **2** | contact.html, buffalo-horn-plates.html | **Extract** → `js/gtag-conversions.js` |
+| memberfieo token | **1** | about.html | **Audit** — third-party trust seal; extract or remove |
+| Etsy redirect | **1** | buffalo-horn-bowls.html | **Convert** to server redirect in `.htaccess` |
 
-**Sprint 2 Definition of Done:**
-- [ ] Inline scripts reduced to ≤ 10
-- [ ] CSP policy updated; `unsafe-inline` removed for scripts
-- [ ] Dependabot configured and first PR created
-- [ ] SRI hashes on all external resources
-- [ ] Security score validated ≥ 85%
+#### Legacy JS Caller Map (Ground Truth)
 
----
+| File | Callers | React Replacement | Verdict |
+|------|---------|-------------------|---------|
+| `js/consent.js` (3.5 KB) | 16 pages | `useConsent` hook, `CookieSettings.tsx` | **Keep** — still needed as bridge; unify localStorage key |
+| `js/auto-year-update.js` (4.0 KB) | 6 pages | `Footer.tsx` auto-year | **Remove from 6 pages** — Footer handles it where loaded |
+| `js/navigation.js` (10.0 KB) | 1 page (index.html) | `Header.tsx` | **Audit** — likely removable from index.html since Header.tsx exists |
+| `js/components.js` (2.1 KB) | 1 page (license.html) | None | **Keep** — still used by license.html |
+| `js/forms.js` (10.2 KB) | **0 pages** | `ContactForm.tsx`, `NewsletterForm.tsx` | **Delete** — zero callers |
+| `js/main.js` (1.3 KB) | **0 pages** | React entry points | **Delete** — zero callers |
+| `js/application.js` (0.6 KB) | **0 pages** | N/A | **Delete** — zero callers |
+| `js/npm.js` (0.5 KB) | **0 pages** | N/A | **Delete** — zero callers |
+| `js/utils.js` (10.4 KB) | **0 pages** | React hooks/utilities | **Delete** — zero callers |
+| `js/bootstrap.js` (73.7 KB) | Vendor | Bootstrap CDN | **Keep** — local fallback for CDN failure |
+| `js/bootstrap.min.js` (38.8 KB) | Vendor | Bootstrap CDN | **Keep** — loaded via CDN, local is backup |
+| `js/lazysizes.min.js` (7.7 KB) | Unknown | Native `loading="lazy"` | **Audit** — check if any `lazyload` class usage remains |
 
-### Sprint 3: Performance Optimization (Weeks 5–6)
+**Immediate wins: Delete 5 files (forms.js, main.js, application.js, npm.js, utils.js) = −23 KB, zero risk.**
 
-**Theme:** Establish performance baselines, optimize critical rendering path
+#### Security Posture (Ground Truth)
 
-#### 3.1 Image Optimization
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Audit all images in `images/` — catalog size, format, dimensions | High | Inventory spreadsheet with optimization opportunities | 2h |
-| Convert hero/product images to WebP with JPEG fallback (`<picture>` element) | High | WebP served to supporting browsers; JPEG for Safari <14 | 6h |
-| Add `width` and `height` attributes to all `<img>` tags | High | Zero CLS from image loading; Lighthouse CLS score ≤ 0.1 | 3h |
-| Implement native `loading="lazy"` for all below-fold images | Medium | First-party lazy loading; `lazysizes.min.js` removed if redundant | 2h |
-| Create responsive image variants with `srcset` for product images | Medium | Appropriate image sizes served per viewport width | 4h |
+| Claim in Docs | Actual State |
+|---------------|-------------|
+| "CSP implemented via Firebase hosting" | **No firebase.json exists in repo. No CSP header in .htaccess. CSP is NOT deployed.** |
+| "Security headers implemented" | Only X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy in .htaccess. **No HSTS. No CSP.** |
+| "jQuery updated to single 3.7.1" | **Two versions: index.html loads 3.6.0 from code.jquery.com; all other pages load 3.7.1 from ajax.googleapis.com** |
+| "IE8/9 shims removed" | **html5shiv + respond.min.js still present in 13 HTML files** |
+| "Security score 72%" | **Cannot be verified without CSP. Actual score likely lower due to missing CSP and HSTS.** |
+| "Inline scripts: 25" | **61 executable inline scripts (docs undercounted by 2.4×)** |
 
-#### 3.2 Bundle & Loading Optimization
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Run Vite bundle analyzer (`rollup-plugin-visualizer`) | High | Visualization of shared chunk composition; optimization opportunities documented | 2h |
-| Add resource hints: `<link rel="preconnect">` for CDN domains | Medium | External resources load faster; verified in Network panel | 1h |
-| Add `<link rel="dns-prefetch">` for analytics/third-party domains | Low | DNS resolution parallelized | 1h |
-| Ensure `font-display: swap` on all web font declarations | Medium | No FOIT; text visible immediately with system font fallback | 1h |
-| Review and optimize Firebase hosting cache headers | Medium | Static assets cached for 1 year; HTML cached for 1 hour | 2h |
+#### i18n Parity (Ground Truth)
 
-#### 3.3 Core Web Vitals Baseline
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Run Lighthouse CI and record baseline scores | High | Scores documented: Performance, Accessibility, Best Practices, SEO | 1h |
-| Set Lighthouse CI thresholds in CI pipeline | High | CI fails if scores drop below: Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 | 2h |
-| Identify and fix top 3 Lighthouse performance opportunities | High | Performance score ≥ 90 | 4h |
+| Page | EN `data-react` mounts | DE mounts | FR mounts |
+|------|----------------------|-----------|-----------|
+| index.html | **14** | **4** | **4** |
+| about.html | Multiple | ❌ No page | ❌ No page |
+| contact.html | Multiple | ❌ No page | ❌ No page |
+| faq.html | Multiple | ❌ No page | ❌ No page |
+| products.html | Multiple | ❌ No page | ❌ No page |
+| All product pages | Multiple | ❌ No page | ❌ No page |
 
-**Sprint 3 Target:** Lighthouse Performance ≥ 90, Accessibility ≥ 95
-
-**Sprint 3 Definition of Done:**
-- [ ] Product images converted to WebP with fallbacks
-- [ ] CLS score ≤ 0.1 across all pages
-- [ ] Lighthouse CI integrated with score thresholds
-- [ ] Performance score ≥ 90 on homepage
+**DE/FR index pages are missing 10 React mount points and corresponding script tags.**
+**Only index.html has hreflang tags. No other page has hreflang.**
 
 ---
 
-### Sprint 4: Features & Monitoring (Weeks 7–8)
+## 3. Adversarial Review — Attacking the Design
 
-**Theme:** Add deferred features, establish production observability
+### Failure Mode Analysis
 
-#### 4.1 Product Search Implementation
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Evaluate search library: Fuse.js (~6 KB gzipped) vs custom filter | Medium | Decision documented with bundle size impact analysis | 2h |
-| Create `SearchBar.tsx` with autocomplete dropdown | Medium | Component renders search results as user types; keyboard navigable | 6h |
-| Create `react/src/entries/search.tsx` entry point | Medium | Bundle builds successfully; size ≤ 5 KB (excluding search lib) | 1h |
-| Add `data-react="search"` mount point to header in all HTML pages | Medium | Search bar appears in correct position across EN/DE/FR | 3h |
-| Support multi-language product names in search | Low | Search works in English, German, French product names | 2h |
-| Add search analytics tracking (consent-aware) | Low | Search queries logged via `useTracking` hook only after consent | 1h |
+| # | Failure Mode | Likelihood | Impact | Current Protection |
+|---|-------------|-----------|--------|-------------------|
+| F-1 | jQuery dropdown inline script removed before React Header.tsx covers all pages | High | High — broken navigation | **None** — Header.tsx only loaded on some pages; dropdown script is on all |
+| F-2 | CSP deployed without full inline script audit, breaks site | High | Critical — site unusable | **None** — no CSP exists to break, but this risk kicks in when we add CSP |
+| F-3 | Removing legacy JS files that are still loaded by `de/`/`fr/` subdirectories | Medium | Medium — broken locale pages | Need to check `de/js/` and `fr/js/` too |
+| F-4 | React bundle loads but mount point missing (de/fr pages) | Already happening | Low (degraded UX) | **None** — no CI check for mount point parity |
+| F-5 | Two jQuery versions cause subtle behavior differences | Low | Low — edge case bugs | Normalize to single version first |
+| F-6 | IE shim removal breaks fallback for users on old browsers | Very Low | Very Low — IE is dead | Safe to remove |
+| F-7 | Error tracking loads before consent, violating privacy | Medium | High — legal risk | Must gate behind consent from day one |
 
-#### 4.2 Error Tracking & Monitoring
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Evaluate error tracking: Sentry free tier vs custom `window.onerror` | High | Decision documented with privacy/consent implications | 2h |
-| Implement React `ErrorBoundary` component wrapping all mount points | High | React errors show graceful fallback UI; error logged | 3h |
-| Add global `window.onerror` / `window.onunhandledrejection` handlers | Medium | JS errors captured and reported (behind consent gate) | 2h |
-| Implement Core Web Vitals tracking using `web-vitals` library | Medium | LCP, FID/INP, CLS tracked in production; data reviewable | 3h |
-| Set up uptime monitoring for themoonexports.com | Medium | External monitor configured; alerts on downtime | 1h |
+### Hidden Risks
 
-#### 4.3 Analytics Migration
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Evaluate GA4 migration from Universal Analytics | Medium | Migration plan documented; consent integration verified | 2h |
-| Update `useTracking` hook for GA4 API if migrating | Medium | Analytics events fire correctly with GA4 format | 3h |
-| Update `legal/privacy.html` for any analytics changes | High | Privacy policy reflects current data collection practices | 2h |
+1. **`de/` and `fr/` directories have their own `js/` and `css/` copies** — legacy JS cleanup must audit these too, not just root `js/`
+2. **`buffalo-horn-bowls.html` is a redirect page** — contains only a location.replace script to Etsy. This should be a server-side 302 redirect, not client-side JS.
+3. **The `memberfieo` token in about.html** is a third-party trust seal that loads external JS from `cdn.ywxi.net` — potential supply chain risk
+4. **No `firebase.json`** means the claim of Firebase security headers is incorrect. The site runs on GitHub Pages with `.htaccess` only (and GitHub Pages ignores `.htaccess`).
+5. **GitHub Pages does not support `.htaccess`** — all security headers in `.htaccess` are ineffective unless Apache is the server. The actual deployment target needs verification.
 
-**Sprint 4 Target:** Product search live; Error tracking deployed; Analytics reviewed
+### Critical Question: Where is this site actually hosted?
 
-**Sprint 4 Definition of Done:**
-- [ ] Product search functional across all locales
-- [ ] Error boundaries catch and report React errors
-- [ ] Core Web Vitals tracked in production
-- [ ] Privacy policy updated for any new tracking
+The repo has:
+- `CNAME` file → GitHub Pages custom domain
+- `.htaccess` → Apache configuration (GitHub Pages ignores this)
+- Firebase hosting workflows → Firebase Hosting deployment
+
+**This means**: Security headers in `.htaccess` work ONLY if served via Apache/cPanel. On GitHub Pages, they are completely ignored. Firebase hosting needs `firebase.json` for headers, which doesn't exist.
+
+**Decision needed:** Identify the primary hosting target and implement headers there.
 
 ---
 
-### Sprint 5: Stabilization & Documentation (Weeks 9–10)
+## 4. Design Iteration — Refined Architecture
 
-**Theme:** Polish, document, prepare for Phase 5
+Based on adversarial review, the Phase 4 architecture must address:
 
-#### 5.1 Final Legacy JS Cleanup
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Execute deferred removals from Sprint 1 audit | High | Legacy JS files ≤ 6 | 4h |
-| Remove `lazysizes.min.js` if native lazy loading is sufficient | Medium | Native `loading="lazy"` covers all use cases | 1h |
-| Consolidate remaining utility functions | Medium | `js/utils.js` is sole utility source; no duplicates | 2h |
+### Revised Priority Order
 
-#### 5.2 Documentation Updates
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Update README.md with current architecture and React status | High | README reflects 17-bundle React architecture, CI/CD, deployment | 2h |
-| Update `.aicontext` with Phase 4 completion status and Phase 5 priorities | High | AI agents get accurate project context | 1h |
-| Archive Phase 4 results in `PRODUCTION_READINESS_SUMMARY.md` | Medium | Security score, Lighthouse scores, bundle metrics documented | 1h |
-| Create `docs/PHASE_4_RESULTS.md` with final outcomes and metrics | Medium | Retrospective with lessons learned | 2h |
-| Update `TESTING_PLAN.md` with Phase 4 test results | Medium | All automated and manual test outcomes recorded | 1h |
+1. **Measure first** — Cannot improve what we cannot measure (Lighthouse baseline, inline script count CI)
+2. **Delete dead code** — Zero-risk removal of 5 unused JS files (23 KB savings)
+3. **Normalize jQuery** — Fix the version split (index.html: 3.6.0 → 3.7.1)
+4. **Remove IE shims** — 13 files still carry dead code
+5. **Fix i18n mount parity** — DE/FR index pages missing 10 React mounts
+6. **Extract inline scripts** — 61 → ≤ 15 (keep JSON-LD as-is)
+7. **Determine hosting target** — Resolve .htaccess vs firebase.json vs GitHub Pages
+8. **Deploy CSP** — Only after inline scripts are extracted and hosting target is clear
+9. **Add SRI hashes** — After script landscape is stable
+10. **Production monitoring** — ErrorBoundary + basic error handler
 
-#### 5.3 i18n Subpage Creation (if prioritized)
-| Task | Priority | Acceptance Criteria | Est. |
-|------|----------|-------------------|------|
-| Create `/de/contact.html` with React integration | Low | German contact page with ContactForm.tsx hydration | 3h |
-| Create `/fr/contact.html` with React integration | Low | French contact page with ContactForm.tsx hydration | 3h |
-| Create `/de/faq.html` and `/fr/faq.html` | Low | Localized FAQ with accordion component | 4h |
-| Verify hreflang bidirectional links for new pages | Low | Sitemap updated; hreflang tags correct | 1h |
-
-**Sprint 5 Definition of Done:**
-- [ ] Legacy JS files ≤ 6
-- [ ] All documentation current
-- [ ] Phase 4 retrospective completed
-- [ ] Ready for Phase 5 kickoff
-
----
-
-## 3. Phase 5 Vision & Roadmap
-
-### Phase 5: Modern UI & Growth (Target: Q3–Q4 2026)
-
-With hardening complete, Phase 5 shifts focus to **user experience modernization, conversion optimization, and scalable content management**.
-
-#### 5.1 Bootstrap 5 Migration
-| Aspect | Details |
-|--------|---------|
-| **Scope** | Migrate from Bootstrap 3.3.x to Bootstrap 5.3.x |
-| **Approach** | Incremental page-by-page migration using compatibility layer |
-| **Risk** | High — grid system changes, component API differences, jQuery removal |
-| **Dependencies** | Phase 4 legacy JS cleanup must be complete |
-| **Est. Duration** | 4–6 weeks |
-| **Key Benefits** | Modern CSS Grid/Flexbox utilities, accessibility improvements, smaller CSS bundle, active maintenance |
-
-**Migration Steps:**
-1. Audit all Bootstrap 3 class usage across 30+ HTML files
-2. Create `css/bootstrap-compat.css` shim for transition period
-3. Migrate page-by-page starting with `index.html`
-4. Update React components that reference Bootstrap classes
-5. Remove Bootstrap 3 CSS and JS files
-6. Update all locale pages (`/de/`, `/fr/`)
-
-#### 5.2 Homepage Redesign
-| Aspect | Details |
-|--------|---------|
-| **Goal** | Modern, conversion-optimized landing page |
-| **Approach** | A/B test new design against current using Firebase A/B Testing |
-| **Key Changes** | Hero section refresh, product showcase grid, trust signals above fold, CTA optimization |
-| **Dependencies** | Bootstrap 5 migration, image optimization complete |
-
-#### 5.3 Product Experience Enhancement
-| Feature | Description | Priority |
-|---------|-------------|----------|
-| **Product detail pages** | Rich product pages with image gallery, specifications, variants | High |
-| **Category filtering** | Client-side filtering by material, category, price range | Medium |
-| **Wishlist/favorites** | LocalStorage-based product bookmarking | Medium |
-| **Related products** | Algorithmic product recommendations based on category | Low |
-| **Quick view** | Enhanced ProductModal with additional product data | Low |
-
-#### 5.4 Content Management
-| Feature | Description | Priority |
-|---------|-------------|----------|
-| **Headless CMS evaluation** | Evaluate Netlify CMS, Decap CMS, or Contentful for content management | Medium |
-| **Structured data expansion** | Product schema, FAQ schema, BreadcrumbList for all pages | High |
-| **Blog/news section** | Content marketing for SEO with React-powered article pages | Low |
-| **Automated sitemap** | Script to regenerate `sitemap.xml` from file system | Medium |
-
-#### 5.5 Advanced Analytics & Conversion Tracking
-| Feature | Description | Priority |
-|---------|-------------|----------|
-| **GA4 full migration** | Complete migration from Universal Analytics | High |
-| **E-commerce tracking** | Product views, add-to-cart, inquiry tracking | Medium |
-| **Heatmap integration** | Evaluate Hotjar/Clarity for UX insights (consent-gated) | Low |
-| **Custom dashboards** | Key metrics visible in GA4 or Looker Studio | Medium |
-
-#### 5.6 Progressive Web App (PWA) Exploration
-| Feature | Description | Priority |
-|---------|-------------|----------|
-| **Service Worker** | Offline support for catalog browsing | Low |
-| **Web App Manifest** | Installable on mobile devices | Low |
-| **Push notifications** | New product alerts for opted-in users | Low |
-
----
-
-## 4. Technical Debt Register
-
-Track known technical debt items with severity and planned resolution.
-
-| ID | Debt Item | Severity | Origin | Resolution Sprint | Status |
-|----|-----------|----------|--------|-------------------|--------|
-| TD-001 | Bootstrap 3.x — end of life, no security patches | High | Legacy | Phase 5 Sprint 1 | Planned |
-| TD-002 | 25 inline `<script>` blocks violate CSP best practices | High | Legacy | Phase 4 Sprint 2 | ⏳ |
-| TD-003 | 12 legacy JS files with partial overlap to React bundles | Medium | Migration | Phase 4 Sprint 1 | ⏳ |
-| TD-004 | 40 non-critical HTTP links (external/social) | Low | Legacy | Phase 4 Sprint 2 | ⏳ |
-| TD-005 | No automated functional/integration tests | High | Never built | Phase 5 Sprint 2 | Planned |
-| TD-006 | Images not optimized (no WebP, no srcset) | Medium | Legacy | Phase 4 Sprint 3 | ⏳ |
-| TD-007 | Missing `/de/` and `/fr/` subpages (contact, faq, products) | Medium | Incomplete i18n | Phase 4 Sprint 5 | ⏳ |
-| TD-008 | `lazysizes.min.js` potentially redundant with native lazy loading | Low | Legacy | Phase 4 Sprint 5 | ⏳ |
-| TD-009 | README.md does not reflect React architecture | Low | Outdated | Phase 4 Sprint 5 | ⏳ |
-| TD-010 | No error boundaries in React components | Medium | Phase 1-3 gap | Phase 4 Sprint 4 | ⏳ |
-| TD-011 | Firebase hosting config may have suboptimal cache headers | Low | Default config | Phase 4 Sprint 3 | ⏳ |
-| TD-012 | Shared React runtime (~142 KB) — evaluate optimization | Low | Phase 1 | Phase 4 Sprint 3 | ⏳ |
-
----
-
-## 5. Risk Register & Mitigation
-
-| ID | Risk | Probability | Impact | Mitigation Strategy |
-|----|------|-------------|--------|---------------------|
-| R-001 | Bootstrap 5 migration breaks visual layout | High | High | Page-by-page migration with visual regression screenshots; maintain compatibility shim |
-| R-002 | CSP changes block legitimate scripts | Medium | High | Implement CSP in report-only mode first; monitor violations before enforcing |
-| R-003 | Legacy JS removal causes functionality regression | Medium | Medium | Comprehensive manual QA checklist per page; shadow period where both legacy + React active |
-| R-004 | Image optimization degrades visual quality | Low | Medium | A/B compare original vs. optimized; maintain originals in backup |
-| R-005 | Search feature adds significant bundle weight | Medium | Low | Evaluate custom filter vs. Fuse.js; enforce 5 KB budget; lazy-load search bundle |
-| R-006 | GA4 migration loses historical analytics data | Medium | Medium | Dual-track GA3 + GA4 during transition; export historical data before cutoff |
-| R-007 | Dependabot creates noise with frequent PRs | Medium | Low | Configure weekly schedule; group minor updates; auto-merge patch versions |
-| R-008 | i18n subpage creation introduces content maintenance burden | Medium | Medium | Evaluate CMS solution before creating many new pages; template-based approach |
-| R-009 | Error tracking service affects page performance | Low | Medium | Choose lightweight option; load asynchronously; behind consent gate |
-| R-010 | CI pipeline becomes slow (>5 min) | Medium | Low | Parallelize jobs; cache dependencies; skip unchanged checks |
-
----
-
-## 6. Architecture Decision Records
-
-### ADR-001: Keep Hybrid Static + React Architecture
-
-**Status:** Accepted  
-**Context:** With 17 React bundles complete, we could migrate to a full React SPA.  
-**Decision:** Maintain the static HTML + progressive React hydration architecture.  
-**Rationale:**
-- GitHub Pages hosting is free and requires no server infrastructure
-- Static HTML ensures SEO crawlability without SSR complexity
-- Progressive enhancement means the site works without JavaScript
-- Bundle sizes remain small (33.9 KB total) because each page loads only what it needs
-
-### ADR-002: Defer Bootstrap 5 Migration to Phase 5
-
-**Status:** Accepted  
-**Context:** Bootstrap 3 is end-of-life and doesn't receive security patches.  
-**Decision:** Defer migration to Phase 5 after Phase 4 hardening is complete.  
-**Rationale:**
-- Bootstrap 5 migration touches every HTML file (30+ pages)
-- Phase 4 security hardening (CSP, inline scripts) should land first to avoid double-work
-- Current Bootstrap 3 has no known exploitable vulnerabilities in our usage
-- Migration risk is high and needs dedicated focus
-
-### ADR-003: Client-Side Search Over Server-Side
-
-**Status:** Accepted  
-**Context:** Product search was deferred from Phase 3; need to decide implementation approach.  
-**Decision:** Implement client-side search using the existing `products.json` (23 products).  
-**Rationale:**
-- 23 products easily searchable in-browser without server roundtrip
-- No backend infrastructure needed for a static site
-- Instant results improve UX
-- If product catalog grows beyond ~200, re-evaluate with server-side search
-
-### ADR-004: Sentry Free Tier for Error Tracking
-
-**Status:** Proposed (pending Phase 4 Sprint 4 evaluation)  
-**Context:** Need production error tracking without adding significant cost or complexity.  
-**Decision:** Evaluate Sentry free tier (10K events/month) vs. custom `window.onerror` logging.  
-**Rationale:**
-- Free tier sufficient for current traffic levels
-- Structured error reporting with stack traces and breadcrumbs
-- Must be loaded behind consent gate to respect privacy
-- Alternative: custom error logging to Firebase Realtime Database (already configured)
-
-### ADR-005: Nonce-Based CSP Over Hash-Based
-
-**Status:** Proposed (pending Phase 4 Sprint 2 implementation)  
-**Context:** Need to remove `unsafe-inline` from CSP `script-src` directive.  
-**Decision:** Use nonce-based CSP with server-generated nonces (via Firebase hosting headers or build-time injection).  
-**Rationale:**
-- Nonces are more flexible than hashes — no need to update hash on every script change
-- Firebase hosting can inject nonces via Cloud Functions or edge workers
-- If Firebase nonce injection is not feasible, fall back to hash-based CSP
-- Static site constraint: evaluate build-time nonce generation as alternative
-
----
-
-## 7. Metrics & KPIs Dashboard
-
-### Phase 4 Success Metrics
-
-| Metric | Baseline (Feb 2026) | Sprint 2 Target | Sprint 4 Target | Phase 4 Final |
-|--------|---------------------|-----------------|-----------------|---------------|
-| **Security Score** | 72% | 85% | 90%+ | 90%+ |
-| **Lighthouse Performance** | TBD (no baseline) | — | 90+ | 90+ |
-| **Lighthouse Accessibility** | TBD | — | 95+ | 95+ |
-| **Lighthouse SEO** | TBD | — | 95+ | 95+ |
-| **Lighthouse Best Practices** | TBD | — | 90+ | 90+ |
-| **Legacy JS Files** | 12 | 8 | 7 | ≤ 6 |
-| **Inline Scripts** | 25 | ≤ 10 | ≤ 10 | ≤ 10 |
-| **Bundle Budget Violations** | 0 | 0 | 0 | 0 |
-| **CSP Violations** | Unknown | 0 (report-only) | 0 (enforced) | 0 |
-| **CI Pipeline Duration** | ~2 min | ~3 min | ~4 min | ≤ 5 min |
-| **Total React Bundles** | 17 | 17 | 18 (search) | 18 |
-| **Total Bundle Size** | 33.9 KB | 33.9 KB | ~38 KB | ≤ 40 KB |
-| **i18n Parity** | Partial | Audited | Partial+ | Full (index) |
-
-### How to Measure
-
-| Metric | Tool / Method |
-|--------|---------------|
-| Security Score | securityheaders.com + manual checklist ratio |
-| Lighthouse Scores | `npx @lhci/cli autorun` in CI pipeline |
-| Legacy JS Files | `ls js/*.js \| wc -l` excluding `dist/` |
-| Inline Scripts | `grep -r '<script>' *.html \| grep -v 'src=' \| wc -l` |
-| CSP Violations | CSP report-to endpoint + browser console |
-| CI Duration | GitHub Actions workflow run time |
-| Bundle Size | CI bundle size check step output |
-
----
-
-## 8. Dependency Map
-
-Visualizes which Phase 4 workstreams depend on each other.
+### Modules That Can Be Built Simultaneously
 
 ```
-Sprint 1                Sprint 2              Sprint 3              Sprint 4           Sprint 5
-─────────────────────   ───────────────────   ───────────────────   ─────────────────  ─────────────────
-                                                                                       
-Legacy JS Audit ──────► Legacy JS Cleanup ──────────────────────► Final Cleanup ────► Documentation
-       │                       │                                                       
-       │                       │                                                       
-CI Foundation ─────────► CI + HTML Validate ──► Lighthouse CI ────► CI Polish          
-       │                       │                     │                                 
-       │                       │                     │                                 
-i18n Audit ────────────────────┼─────────────────────┼──────────► i18n Subpages        
-                               │                     │                                 
-                        Inline Script ─────► Image Optimization                        
-                        Migration                    │                                 
-                               │                     │                                 
-                        CSP Refinement              CWV Baseline                       
-                               │                                                       
-                        Dependency                                                     
-                        Security ──────────────────────────────► Product Search         
-                                                                       │               
-                                                    Error Tracking ────┤               
-                                                                       │               
-                                                    Analytics ─────────┘               
+PARALLEL TRACK A (Zero-Risk Cleanup)     PARALLEL TRACK B (CI/Measurement)
+─────────────────────────────────────     ─────────────────────────────────
+Delete 5 unused JS files                  Add inline script count to CI
+Normalize jQuery to single 3.7.1          Add mount-point parity check to CI
+Remove IE shims from 13 files             Establish Lighthouse CI baseline
+Remove auto-year-update from 6 pages      Add hreflang validation to CI
+
+PARALLEL TRACK C (i18n Fix)               PARALLEL TRACK D (Security Analysis)
+─────────────────────────────────         ─────────────────────────────────
+Add 10 missing mounts to de/index         Resolve hosting target question
+Add 10 missing mounts to fr/index         Audit external script domains
+Add missing script tags to de/fr          Inventory SRI hash gaps
+Add hreflang to pages beyond index        Evaluate CSP deployment path
+
+                    SEQUENTIAL (depends on A+B+C+D)
+                    ──────────────────────────────
+                    Extract inline scripts → external files
+                    Deploy CSP in report-only mode
+                    Monitor CSP violations for 1 week
+                    Enforce CSP
+                    Add SRI hashes
+                    Deploy ErrorBoundary
 ```
-
-**Critical Path:** Legacy JS Audit → Inline Script Migration → CSP Refinement → CSP Validation
-
-**Parallel Tracks:**
-- Image optimization can proceed independently in Sprint 3
-- Product search can start in Sprint 4 without Sprint 3 completion
-- Error tracking is independent of other Sprint 4 work
 
 ---
 
-## 9. Release & Rollout Strategy
+## 5. Atomic Planning — Task Breakdown
 
-### Deployment Model
+Every task below is:
+- **Atomic** — completable in ≤ 4 hours
+- **Verifiable** — has a concrete pass/fail check
+- **Assignable** — can be done independently
 
-| Aspect | Approach |
-|--------|----------|
-| **Hosting** | GitHub Pages (primary) + Firebase Hosting (staging/preview) |
-| **Branch Strategy** | `main` → production; feature branches → Firebase preview channels |
-| **PR Process** | Feature branch → PR → CI pass → Code review → Merge → Auto-deploy |
-| **Rollback** | `git revert` on `main` → immediate redeploy via GitHub Pages |
+### Milestone 1: Measure & Delete (Week 1)
 
-### Sprint Release Cadence
+> Theme: Establish CI baselines, remove zero-risk dead code
 
-| Sprint | Release Type | Rollout |
-|--------|-------------|---------|
-| Sprint 1 | Internal release — CI/audit improvements only | Merge to main; no user-facing changes |
-| Sprint 2 | Security release — CSP, inline scripts | Firebase preview → 24h soak → merge to main |
-| Sprint 3 | Performance release — images, Lighthouse | Firebase preview → visual QA → merge to main |
-| Sprint 4 | Feature release — search, monitoring | Firebase preview → functional QA → merge to main |
-| Sprint 5 | Polish release — cleanup, docs | Merge to main |
+| ID | Task | Verify | Est. | Depends On |
+|----|------|--------|------|------------|
+| M1-01 | Delete `js/forms.js` (0 callers) | `grep -rl 'forms.js' *.html **/*.html` returns nothing | 15m | — |
+| M1-02 | Delete `js/main.js` (0 callers) | `grep -rl 'main.js' *.html **/*.html` returns nothing | 15m | — |
+| M1-03 | Delete `js/application.js` (0 callers) | `grep -rl 'application.js' *.html **/*.html` returns nothing | 15m | — |
+| M1-04 | Delete `js/npm.js` (0 callers) | `grep -rl 'npm.js' *.html **/*.html` returns nothing | 15m | — |
+| M1-05 | Delete `js/utils.js` (0 callers) | `grep -rl 'utils.js' *.html **/*.html` returns nothing | 15m | — |
+| M1-06 | Update index.html jQuery from 3.6.0 → 3.7.1 (match all other pages) | `grep -r 'jquery-3.6' *.html` returns 0 results | 15m | — |
+| M1-07 | Remove html5shiv + respond.min.js from 13 HTML files | `grep -rl 'html5shiv\|respond.min' *.html **/*.html` returns 0 | 1h | — |
+| M1-08 | Remove `js/auto-year-update.js` script tag from 404.html, buffalo-horn-bowls.html, legal/*.html (6 pages) | `grep -rl 'auto-year-update' *.html **/*.html` returns 0 | 30m | — |
+| M1-09 | Audit `js/navigation.js` caller on index.html — is it needed given Header.tsx? | Document finding with decision | 30m | — |
+| M1-10 | Audit `de/js/` and `fr/js/` for legacy copies | Document what exists, plan removal | 30m | — |
+| M1-11 | Audit `lazysizes.min.js` — grep for `lazyload` class in HTML | Document: keep or remove | 30m | — |
+| M1-12 | Add CI step: count executable inline scripts, fail if > current (61) | CI job runs, count matches manual count | 2h | — |
+| M1-13 | Add CI step: diff `data-react` mounts between EN and DE/FR index pages | CI job runs, currently reports delta of 10 | 2h | — |
+| M1-14 | Run Lighthouse CI on index.html, record baseline scores | Scores recorded in PR/commit | 1h | — |
+| M1-15 | Determine actual hosting target: GitHub Pages vs Firebase vs Apache/cPanel | Decision documented with evidence | 1h | — |
 
-### Rollout Checklist (Per Sprint)
-
-- [ ] All CI checks pass (lint, build, bundle budget, audit)
-- [ ] Lighthouse scores meet sprint targets
-- [ ] Firebase preview deployed and manually tested
-- [ ] Cross-browser check (Chrome, Firefox, Safari, Edge)
-- [ ] Mobile responsiveness verified
-- [ ] `/de/` and `/fr/` pages verified
-- [ ] No console errors
-- [ ] Security headers validated (securityheaders.com)
-- [ ] Documentation updated
-- [ ] PR reviewed and approved
-
-### Incident Response
-
-| Severity | Response Time | Action |
-|----------|--------------|--------|
-| **Critical** (site down) | < 1 hour | Revert last deployment; investigate |
-| **High** (broken feature) | < 4 hours | Hotfix branch; expedited PR review |
-| **Medium** (visual issue) | < 24 hours | Normal PR process |
-| **Low** (minor bug) | Next sprint | Add to backlog |
+**Milestone 1 Exit Criteria:**
+- [ ] 5 dead JS files deleted (−23 KB)
+- [ ] Single jQuery version across all pages
+- [ ] IE shims removed from all pages
+- [ ] auto-year-update.js removed from pages with Footer.tsx
+- [ ] CI measures inline script count, mount parity, Lighthouse baseline
+- [ ] Hosting target resolved
 
 ---
 
-## Appendix A: Sprint Calendar
+### Milestone 2: i18n Parity & Script Extraction (Week 2)
 
-```
-February 2026
-  Week 1-2  ─── Sprint 1: Foundation & Quick Wins
-  
-March 2026
-  Week 3-4  ─── Sprint 2: Security Hardening
-  Week 5-6  ─── Sprint 3: Performance Optimization
-  
-April 2026
-  Week 7-8  ─── Sprint 4: Features & Monitoring
-  Week 9-10 ─── Sprint 5: Stabilization & Documentation
-  
-May 2026
-  Phase 4 retrospective & Phase 5 kickoff planning
+> Theme: Fix DE/FR pages, begin inline script consolidation
 
-Q3–Q4 2026
-  Phase 5: Modern UI & Growth (Bootstrap 5, Homepage Redesign, etc.)
-```
+| ID | Task | Verify | Est. | Depends On |
+|----|------|--------|------|------------|
+| M2-01 | Add 10 missing `data-react` mount attributes to `de/index.html` | Mount count matches `index.html` (14 total) | 2h | — |
+| M2-02 | Add 10 missing `data-react` mount attributes to `fr/index.html` | Mount count matches `index.html` (14 total) | 2h | — |
+| M2-03 | Add missing React bundle `<script>` tags to `de/index.html` | All 17 bundles loaded (or subset matching EN) | 1h | M2-01 |
+| M2-04 | Add missing React bundle `<script>` tags to `fr/index.html` | All 17 bundles loaded (or subset matching EN) | 1h | M2-02 |
+| M2-05 | Add `hreflang` tags to about.html, contact.html, faq.html, products.html (EN only, pointing to EN canonical) | `grep hreflang` returns results on all 4 pages | 1h | — |
+| M2-06 | Extract jQuery dropdown inline scripts (15 instances) → Delete them (React Header.tsx handles this) | `grep 'slideDown' *.html **/*.html` inside `<script>` tags returns 0 | 2h | M1-09 |
+| M2-07 | Extract analytics/consent IIFE (16 instances) → `js/analytics-loader.js` | New file exists; inline blocks replaced with `<script src>` | 3h | — |
+| M2-08 | Extract Google Translate init (13 instances) → `js/google-translate-init.js` | New file exists; inline blocks replaced with `<script src>` | 1h | — |
+| M2-09 | Extract Zoho form hook (9 instances) → `js/zoho-form-hook.js` | New file exists; inline blocks replaced with `<script src>` | 1h | — |
+| M2-10 | Convert buffalo-horn-bowls.html redirect → `.htaccess` 302 rule (or equivalent for hosting target) | Page serves HTTP redirect, not JS redirect | 30m | M1-15 |
+| M2-11 | Audit memberfieo trust seal in about.html — security risk assessment | Documented: keep with SRI, or remove | 30m | — |
+| M2-12 | Update CI inline script count threshold from 61 to new target | CI passes with reduced count | 15m | M2-06 through M2-09 |
+| M2-13 | Update CI mount parity check to pass (delta = 0) | CI passes | 15m | M2-01 through M2-04 |
 
-## Appendix B: Tools & Services
-
-| Tool | Purpose | Status |
-|------|---------|--------|
-| **Vite 5.4** | React bundle builder | ✅ In use |
-| **ESLint** | JavaScript/TypeScript linting | ✅ In use |
-| **TypeScript 5.6** | Type checking | ✅ In use |
-| **GitHub Actions** | CI/CD pipeline | ✅ In use (3 workflows) |
-| **Firebase Hosting** | Staging/preview deployments | ✅ In use |
-| **html-validate** | HTML validation | 📋 Planned (Sprint 1) |
-| **@lhci/cli** | Lighthouse CI | 📋 Planned (Sprint 3) |
-| **Fuse.js** | Client-side search | 📋 Planned (Sprint 4) |
-| **web-vitals** | Core Web Vitals tracking | 📋 Planned (Sprint 4) |
-| **Sentry** | Error tracking | 📋 Under evaluation (Sprint 4) |
-| **Dependabot** | Automated dependency PRs | 📋 Planned (Sprint 2) |
-| **securityheaders.com** | Security header validation | 🔧 Manual (automate in Sprint 2) |
+**Milestone 2 Exit Criteria:**
+- [ ] DE/FR index pages have full React mount parity with EN
+- [ ] Executable inline scripts reduced from 61 to ≤ 20
+- [ ] jQuery dropdown scripts deleted (React handles this)
+- [ ] 4 new extracted JS files replace 53+ inline blocks
+- [ ] CI mount parity check passes
 
 ---
 
-*This is a living document. Update after each sprint retrospective.*  
-*Last Updated: February 2026*  
-*Next Review: End of Sprint 1*
+### Milestone 3: Security Hardening (Week 3–4)
+
+> Theme: Deploy actual security headers, close SRI gaps
+
+| ID | Task | Verify | Est. | Depends On |
+|----|------|--------|------|------------|
+| M3-01 | Create `firebase.json` with security headers (if Firebase is hosting target) OR verify `.htaccess` headers work on actual host | Headers appear in `curl -I` response from production | 3h | M1-15 |
+| M3-02 | Add HSTS header (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) | Header present in `curl -I` response | 30m | M3-01 |
+| M3-03 | Deploy CSP in **report-only** mode (`Content-Security-Policy-Report-Only`) | Header present; no blocking; console shows reports | 2h | M2-06 through M2-09 |
+| M3-04 | Monitor CSP report-only violations for 1 week, document findings | Violation report with resolution plan | 1h (+ 1 week wait) | M3-03 |
+| M3-05 | Fix any legitimate CSP violations identified in M3-04 | Zero violations in report-only mode | 2h | M3-04 |
+| M3-06 | Switch CSP from report-only to enforced | `Content-Security-Policy` header active; site functions normally | 1h | M3-05 |
+| M3-07 | Add SRI hashes to jQuery CDN script (all pages) | `integrity=` attribute present on all jQuery `<script>` tags | 1h | M1-06 |
+| M3-08 | Add SRI hashes to Bootstrap CDN script (all pages) | `integrity=` attribute present on all Bootstrap `<script>` tags | 1h | — |
+| M3-09 | Add SRI hashes to remaining external scripts (Google Translate, Twitter, Zoho, TrustedSite) | All external `<script>` tags have `integrity=` | 2h | — |
+| M3-10 | Create `.github/dependabot.yml` for npm + GitHub Actions ecosystems | Dependabot creates first PR within 24 hours | 30m | — |
+| M3-11 | Validate with securityheaders.com — document score | Screenshot archived, score recorded | 30m | M3-06 |
+| M3-12 | Add CI step: validate no external `<script>` without `integrity` attribute | CI fails if SRI missing | 1h | M3-07 through M3-09 |
+
+**Milestone 3 Exit Criteria:**
+- [ ] CSP enforced with zero violations
+- [ ] HSTS deployed
+- [ ] SRI hashes on 100% of external scripts
+- [ ] Dependabot configured
+- [ ] securityheaders.com score documented (target: A or A+)
+
+---
+
+### Milestone 4: Performance & Monitoring (Week 5–6)
+
+> Theme: Image optimization, Core Web Vitals, error tracking
+
+| ID | Task | Verify | Est. | Depends On |
+|----|------|--------|------|------------|
+| M4-01 | Catalog all 197 images: format, size, dimensions, usage | Inventory table with optimization plan | 2h | — |
+| M4-02 | Convert 7 large images (>100 KB) to WebP with JPEG fallback using `<picture>` | `<picture>` elements serve WebP; JPEG fallback works | 3h | M4-01 |
+| M4-03 | Add `width` and `height` attributes to all `<img>` tags on index.html | Lighthouse CLS score ≤ 0.1 for index.html | 2h | — |
+| M4-04 | Add `loading="lazy"` to all below-fold images on index.html | Native lazy loading active; verified in Network tab | 1h | — |
+| M4-05 | Audit `lazysizes.min.js` usage — remove if native lazy loading suffices | Decision documented; file removed if unused | 1h | M4-04, M1-11 |
+| M4-06 | Add `<link rel="preconnect">` for `ajax.googleapis.com`, `cdn.jsdelivr.net` | Resource hints present in `<head>` | 30m | — |
+| M4-07 | Ensure `font-display: swap` in all `@font-face` declarations | No FOIT; text visible immediately | 30m | — |
+| M4-08 | Run Lighthouse CI post-optimization, compare to M1-14 baseline | Performance delta documented | 1h | M4-02 through M4-07 |
+| M4-09 | Set Lighthouse CI thresholds: Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 | CI fails if scores drop below thresholds | 1h | M4-08 |
+| M4-10 | Create React `ErrorBoundary` component in `react/src/components/ErrorBoundary.tsx` | Component catches render errors, shows fallback UI | 2h | — |
+| M4-11 | Wrap all React entry points with `ErrorBoundary` | Simulated error → fallback UI shown, error logged to console | 2h | M4-10 |
+| M4-12 | Add `window.onerror` + `window.onunhandledrejection` global handlers (consent-gated) | Errors captured; verify with deliberate `throw` | 1h | — |
+
+**Milestone 4 Exit Criteria:**
+- [ ] 7 largest images converted to WebP
+- [ ] Lighthouse Performance ≥ 85 (up from baseline)
+- [ ] Lighthouse CI thresholds enforced in CI
+- [ ] ErrorBoundary deployed on all React mount points
+- [ ] Global error handlers active (behind consent)
+
+---
+
+### Milestone 5: Stabilization & Documentation (Week 7–8)
+
+> Theme: Close remaining items, update all docs to match ground truth
+
+| ID | Task | Verify | Est. | Depends On |
+|----|------|--------|------|------------|
+| M5-01 | Delete `js/auto-year-update.js` file if all callers removed | File does not exist | 15m | M1-08 |
+| M5-02 | Delete empty/dead extracted JS files if consolidation is complete | `ls js/*.js` count ≤ 7 | 15m | All M1/M2 |
+| M5-03 | Update README.md: add React architecture section, correct deployment instructions | README reflects 17-bundle architecture | 1h | — |
+| M5-04 | Update `.aicontext`: correct inline script count, security posture, hosting target | AI agents get accurate context | 1h | All milestones |
+| M5-05 | Update `PRODUCTION_READINESS_SUMMARY.md`: actual security score, Lighthouse scores | Summary matches measured reality | 1h | M3-11, M4-08 |
+| M5-06 | Update `SECURITY_CHECKLIST.md`: mark completed items, correct counts | Checklist matches actual state | 1h | M3 complete |
+| M5-07 | Update `TESTING_PLAN.md`: add Phase 4 CI test descriptions and results | Testing plan covers all automated checks | 1h | All CI changes |
+| M5-08 | Archive Phase 4 results in new `docs/PHASE_4_RESULTS.md` | Retrospective with before/after metrics | 2h | All milestones |
+| M5-09 | Final Lighthouse CI run — record scores as Phase 4 exit metrics | Scores documented | 30m | All milestones |
+
+**Milestone 5 Exit Criteria:**
+- [ ] All documentation matches measured ground truth
+- [ ] No claims in docs that cannot be independently verified
+- [ ] Phase 4 metrics recorded for comparison with Phase 5
+
+---
+
+## 6. Build Validation — Success Criteria Per Module
+
+### Automated Checks (CI Pipeline)
+
+| Check | Tool | Threshold | Added In |
+|-------|------|-----------|----------|
+| ESLint (vanilla JS) | `npm run lint` | 0 errors | Existing |
+| TypeScript type check | `tsc --noEmit` | 0 errors | Existing |
+| React bundle build | `npm run build` | All 17 bundles compile | Existing |
+| Bundle size budget | Custom script | Each bundle < 7 KB | Existing |
+| npm audit (root + react) | `npm audit --audit-level=high` | 0 high/critical | Existing |
+| **Inline script count** | `grep` + count | **≤ 15 executable** | **Milestone 1** |
+| **Mount point parity** | `grep data-react` + diff | **EN = DE = FR** | **Milestone 1** |
+| **Lighthouse scores** | `@lhci/cli` | **Perf ≥ 85, A11y ≥ 90, SEO ≥ 90** | **Milestone 4** |
+| **SRI hash coverage** | `grep integrity=` | **100% external scripts** | **Milestone 3** |
+| **jQuery version check** | `grep jquery` | **Single version** | **Milestone 1** |
+| **IE shim check** | `grep html5shiv` | **0 matches** | **Milestone 1** |
+
+### Manual Checks (Per Milestone)
+
+| Check | Method | When |
+|-------|--------|------|
+| Navigation works on all pages | Browser test: hover, click, keyboard, mobile | After M2-06 |
+| Consent banner appears for new sessions | Clear localStorage, reload | After M2-07 |
+| DE/FR pages render correctly with React | Visual comparison EN vs DE vs FR | After M2-04 |
+| CSP does not block legitimate resources | Browser console: zero CSP errors | After M3-06 |
+| Images load correctly with WebP/fallback | Test in Chrome (WebP) and Safari <14 (JPEG) | After M4-02 |
+| Error boundary shows fallback UI | Simulate React error in dev tools | After M4-11 |
+
+---
+
+## 7. QA Pipeline
+
+### Pre-Release Checklist (Every Sprint Merge)
+
+```
+AUTOMATED (CI must pass):
+├── npm run lint                    → 0 errors
+├── npx tsc --noEmit                → 0 errors  
+├── npm run build                   → 17 bundles compile
+├── Bundle size check               → All < 7 KB
+├── npm audit                       → 0 high/critical
+├── Inline script count             → ≤ threshold
+├── Mount parity check              → EN = DE = FR
+├── jQuery version check            → Single version
+├── IE shim check                   → 0 matches
+├── SRI hash check                  → 100% coverage
+└── Lighthouse CI                   → Scores ≥ thresholds
+
+MANUAL (Developer verifies):
+├── Open index.html in Chrome, Firefox, Safari
+├── Test navigation (desktop hover, mobile tap, keyboard Tab/Enter/Escape)
+├── Test consent banner (new session, accept, decline, persist)
+├── Test DE and FR index pages (React mounts render)
+├── Check browser console for errors (zero JS errors)
+├── Check Network tab for failed requests (zero 4xx/5xx)
+├── Verify security headers with curl -I
+└── Test on mobile viewport (responsive layout, touch targets)
+```
+
+### Regression Test Matrix
+
+| Page | Navigation | Consent | React Mounts | Forms | Images | i18n |
+|------|-----------|---------|-------------|-------|--------|------|
+| index.html | ✓ | ✓ | 14 mounts | Newsletter | Hero + products | hreflang |
+| about.html | ✓ | ✓ | Header, Footer | — | Profile | — |
+| contact.html | ✓ | ✓ | ContactForm | Contact form | — | — |
+| products.html | ✓ | ✓ | ProductModal | — | Product grid | — |
+| de/index.html | ✓ | ✓ | **14 mounts** (after fix) | — | — | hreflang |
+| fr/index.html | ✓ | ✓ | **14 mounts** (after fix) | — | — | hreflang |
+| legal/privacy.html | ✓ | ✓ | Header, Footer | — | — | — |
+
+---
+
+## 8. Security Review — Threat Model
+
+### Attack Surface
+
+| Vector | Current Exposure | Phase 4 Mitigation |
+|--------|-----------------|-------------------|
+| **XSS via inline scripts** | 61 executable inline scripts; no CSP | Extract to external files; deploy CSP without `unsafe-inline` |
+| **Supply chain (CDN scripts)** | 9 external script domains; partial SRI | Add SRI hashes to 100% of external scripts |
+| **Supply chain (npm)** | Dependencies audited in CI | Add Dependabot for continuous monitoring |
+| **Clickjacking** | X-Frame-Options: DENY in .htaccess | Verify header is served by actual host |
+| **MITM** | HTTPS enforced via .htaccess (if Apache) | Add HSTS header; verify on actual host |
+| **Form injection** | Contact form submits to Zoho; basic validation | Client-side sanitization in React components |
+| **Third-party trust seal** | `cdn.ywxi.net` loaded in about.html | Audit necessity; add SRI or remove |
+| **Stale dependencies** | Bootstrap 3.x (EOL) | Defer to Phase 5; no known exploitable vulns in current usage |
+| **Open redirect** | buffalo-horn-bowls.html JS redirect to Etsy | Convert to server-side redirect |
+
+### Data Safety
+
+| Data Type | Storage | Protection |
+|-----------|---------|------------|
+| Cookie consent preference | `localStorage['tme_cookie_consent_v1']` | Client-side only; no PII |
+| Form submissions | Zoho third-party | HTTPS; Zoho security |
+| Analytics data | GA/Yandex (consent-gated) | Not collected until opt-in |
+| Error logs (Phase 4) | Console only (v1) | No PII in error messages |
+
+### Access Control
+
+| Resource | Current | Phase 4 |
+|----------|---------|---------|
+| GitHub repo | Authenticated contributors | No change |
+| Firebase hosting | Deploy via GitHub Actions (service account) | No change |
+| Production site | Public read-only | No change |
+| Admin/CMS | None | None (Phase 5 evaluation) |
+
+---
+
+## 9. Milestone Roadmap (Visual)
+
+```
+Week 1          Week 2          Week 3          Week 4          Week 5          Week 6          Week 7-8
+┌───────────┐   ┌───────────┐   ┌───────────┐   ┌───────────┐   ┌───────────┐   ┌───────────┐   ┌───────────┐
+│ MILESTONE 1│   │ MILESTONE 2│   │ MILESTONE 3│               │   │ MILESTONE 4│               │   │ MILESTONE 5│
+│            │   │            │   │            │               │   │            │               │   │            │
+│ Delete 5   │   │ Fix DE/FR  │   │ Create     │   │ CSP        │   │ Image      │   │ Lighthouse │   │ Docs       │
+│ dead JS    │   │ parity     │   │ firebase   │   │ report →   │   │ optimization│  │ CI + error │   │ cleanup    │
+│ files      │   │ (10 mounts)│   │ .json /    │   │ enforce    │   │ (WebP, lazy│   │ boundary   │   │ phase 4    │
+│            │   │            │   │ headers    │   │            │   │ loading)   │   │ deploy     │   │ results    │
+│ Fix jQuery │   │ Extract 53 │   │            │   │ SRI hashes │   │            │   │            │   │            │
+│ version    │   │ inline     │   │ HSTS       │   │ all scripts│   │ Preconnect │   │ Global     │   │ Update     │
+│            │   │ scripts    │   │            │   │            │   │ hints      │   │ error      │   │ README,    │
+│ Remove IE  │   │            │   │ CSP report │   │ Dependabot │   │            │   │ handlers   │   │ aicontext  │
+│ shims (13) │   │ hreflang   │   │ -only mode │   │ setup      │   │ font-      │   │            │   │            │
+│            │   │ on 4 pages │   │            │   │            │   │ display    │   │            │   │            │
+│ CI: inline │   │            │   │            │   │ Security   │   │            │   │            │   │ Final      │
+│ count +    │   │ CI: parity │   │            │   │ headers    │   │            │   │ Lighthouse │   │ Lighthouse │
+│ parity +   │   │ passes     │   │            │   │ score      │   │ Lighthouse │   │ thresholds │   │ run        │
+│ Lighthouse │   │            │   │            │   │ documented │   │ comparison │   │ in CI      │   │            │
+│ baseline   │   │            │   │            │   │            │   │            │   │            │   │            │
+│            │   │            │   │            │   │            │   │            │   │            │   │            │
+│ Hosting    │   │            │   │            │   │            │   │            │   │            │   │            │
+│ target     │   │            │   │            │   │            │   │            │   │            │   │            │
+│ resolved   │   │            │   │            │   │            │   │            │   │            │   │            │
+└───────────┘   └───────────┘   └───────────┘   └───────────┘   └───────────┘   └───────────┘   └───────────┘
+     15 tasks        13 tasks        12 tasks                         12 tasks                         9 tasks
+```
+
+---
+
+## 10. Phase 5 Forward Look
+
+Phase 5 planning begins after Milestone 5 retrospective. Current thinking:
+
+| Initiative | Prerequisite from Phase 4 | Est. Scope |
+|-----------|---------------------------|------------|
+| Bootstrap 3 → 5 migration | All inline scripts extracted; IE shims removed | 4–6 weeks, 30+ files |
+| Product search (SearchBar.tsx) | CI pipeline stable; mount parity proven | 1–2 weeks |
+| Homepage redesign | Bootstrap 5 complete; images optimized | 2–3 weeks |
+| GA4 migration | Privacy policy updated; consent hooks verified | 1 week |
+| Headless CMS evaluation | Phase 4 docs up to date; architecture stable | Research only |
+
+---
+
+## Appendix: Ground Truth Measurement Commands
+
+These commands reproduce the measurements in this document. Run from repo root.
+
+```bash
+# Executable inline scripts (excluding JSON-LD)
+python3 -c "
+import re, glob
+count = 0
+for f in glob.glob('**/*.html', recursive=True):
+    with open(f) as fh:
+        for m in re.finditer(r'<script([^>]*)>(.*?)</script>', fh.read(), re.DOTALL):
+            if 'src=' not in m.group(1) and m.group(2).strip() and 'application/ld+json' not in m.group(1):
+                count += 1
+print(f'Executable inline scripts: {count}')
+"
+
+# Data-react mount parity
+diff <(grep -o 'data-react=\"[^\"]*\"' index.html | sort) \
+     <(grep -o 'data-react=\"[^\"]*\"' de/index.html | sort)
+
+# jQuery version check
+grep -roh 'jquery[/-][0-9.]*' *.html de/*.html fr/*.html legal/*.html | sort -u
+
+# IE shim check
+grep -rl 'html5shiv\|respond.min' *.html de/*.html fr/*.html legal/*.html
+
+# SRI hash coverage
+for f in *.html de/*.html fr/*.html legal/*.html; do
+  external=$(grep -c 'src="https://' "$f" 2>/dev/null || echo 0)
+  sri=$(grep -c 'integrity=' "$f" 2>/dev/null || echo 0)
+  echo "$f: $sri/$external external scripts have SRI"
+done
+
+# Legacy JS callers
+for js in js/forms.js js/main.js js/application.js js/npm.js js/utils.js; do
+  echo "$(basename $js): $(grep -rl "$(basename $js)" *.html de/*.html fr/*.html legal/*.html 2>/dev/null | wc -l) callers"
+done
+```
+
+---
+
+*This document is grounded in measured codebase state, not prior documentation claims.*  
+*Every number was verified by automated analysis of the actual repository.*  
+*Last Measured: February 2026*
