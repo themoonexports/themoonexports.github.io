@@ -131,6 +131,36 @@
 
 **Next Priority**: Phase 4 Workstream 4 — CSP refinement, inline script migration, dependency maintenance
 
+### Ground Truth Security Posture (Measured February 2026)
+
+> The following measurements were taken directly from the codebase, correcting
+> earlier estimates that diverged from reality.
+
+| Metric | Previous Estimate | Measured Value | Gap |
+|--------|-------------------|---------------|-----|
+| Executable inline scripts | 25 | **61** | 2.4× undercount |
+| CSP deployed | Yes (Firebase) | **No** — no firebase.json, no CSP in .htaccess | Critical gap |
+| HSTS header | Yes | **No** — not in .htaccess security headers block | Missing |
+| jQuery versions | 1 (3.7.1) | **2** (3.6.0 on index.html, 3.7.1 elsewhere) | Version split |
+| IE shims removed | Yes | **13 files** still have html5shiv + respond.min.js | Not removed |
+| SRI hash coverage | All external scripts | **Partial** — 1-3 per page; 9 external domains | Incomplete |
+| External script domains | Unknown | **9 domains** (jQuery, Bootstrap, TrustedSite, Twitter, Zoho, Google) | Large surface |
+| DE/FR React mount parity | "Mostly complete" | **4/14** mounts on de/fr (28%) | Major gap |
+
+### Phase 4 Security Threat Model
+
+| Vector | Risk | Mitigation (Phase 4 Milestone) |
+|--------|------|--------------------------------|
+| XSS via inline scripts | High | Extract 61 inline scripts → external files (M2); deploy CSP (M3) |
+| Supply chain (CDN scripts) | Medium | SRI hashes on 100% external scripts (M3) |
+| Supply chain (npm) | Low | Dependabot config (M3); npm audit in CI (existing) |
+| Missing CSP | High | Create firebase.json or fix hosting headers (M3) |
+| Missing HSTS | Medium | Add to hosting config (M3) |
+| Open redirect (buffalo-horn-bowls) | Low | Convert JS redirect → server-side 302 (M2) |
+| Third-party trust seal (cdn.ywxi.net) | Low | Audit necessity; add SRI or remove (M2) |
+
+See [Next Phase Development Plan](NEXT_PHASE_DEVELOPMENT_PLAN.md) for full security review and task breakdown.
+
 **Related Status:**
 - See [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) for detailed security score
 - See [Cleanup Report](CLEANUP_REPORT.md) for dependency updates completed

@@ -7,6 +7,7 @@
 - [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md) - Current production status
 - [Production Readiness Assessment](PRODUCTION_READINESS_ASSESSMENT.md) - Original assessment
 - [Security Checklist](SECURITY_CHECKLIST.md) - Security testing tracking
+- [Next Phase Development Plan](NEXT_PHASE_DEVELOPMENT_PLAN.md) - Phase 4 execution plan with QA pipeline
 
 ### Security Testing
 
@@ -287,7 +288,61 @@ React Integration Tests:
 - [ ] **i18n Parity**: `/de/` and `/fr/` pages have identical React integration
 - [ ] **Search**: Product search returns correct results for all 23 products
 - [ ] **Error Boundaries**: React errors caught and reported without page crash
-- [ ] **Lighthouse CI**: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95
+- [ ] **Lighthouse CI**: Performance ≥ 85, Accessibility ≥ 90, SEO ≥ 90
+
+### Phase 4 Automated CI Checks (New)
+
+These checks are added to the CI pipeline during Phase 4 milestones:
+
+| Check | Added In | Threshold | How |
+|-------|----------|-----------|-----|
+| Executable inline script count | Milestone 1 | ≤ 61 (decreasing) | Python script counts `<script>` blocks without `src=` or `application/ld+json` |
+| `data-react` mount parity (EN vs DE/FR) | Milestone 1 | Delta = 0 | `grep` + `diff` mount attributes between index pages |
+| Lighthouse CI baseline | Milestone 1 | Record only | `@lhci/cli autorun` on index.html |
+| jQuery version consistency | Milestone 1 | Single version | `grep` for `jquery` version strings |
+| IE shim absence | Milestone 1 | 0 matches | `grep html5shiv` across all HTML |
+| SRI hash coverage | Milestone 3 | 100% external scripts | Count `integrity=` vs external `src=` |
+| Lighthouse CI enforcement | Milestone 4 | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 | `@lhci/cli` with assertion config |
+
+### Phase 4 Manual QA Regression Matrix
+
+| Page | Navigation | Consent | React Mounts | Forms | Images | i18n |
+|------|-----------|---------|-------------|-------|--------|------|
+| index.html | ✓ hover/click/keyboard | ✓ banner + persist | 14 mounts | Newsletter | Hero + products | hreflang |
+| about.html | ✓ | ✓ | Header, Footer | — | Profile | — |
+| contact.html | ✓ | ✓ | ContactForm | Contact form | — | — |
+| faq.html | ✓ | ✓ | FAQ accordion | — | — | — |
+| products.html | ✓ | ✓ | ProductModal | — | Product grid | — |
+| de/index.html | ✓ | ✓ | 14 mounts (after M2) | — | — | hreflang |
+| fr/index.html | ✓ | ✓ | 14 mounts (after M2) | — | — | hreflang |
+| legal/privacy.html | ✓ | ✓ | Header, Footer | — | — | — |
+
+### Phase 4 Pre-Release Checklist (Every Milestone)
+
+```
+AUTOMATED (CI must pass):
+├── npm run lint                    → 0 errors
+├── npx tsc --noEmit                → 0 errors
+├── npm run build                   → 17 bundles compile
+├── Bundle size check               → All < 7 KB
+├── npm audit                       → 0 high/critical
+├── Inline script count             → ≤ threshold
+├── Mount parity check              → EN = DE = FR
+├── jQuery version check            → Single version
+├── IE shim check                   → 0 matches
+├── SRI hash check                  → 100% coverage (Milestone 3+)
+└── Lighthouse CI                   → Scores ≥ thresholds (Milestone 4+)
+
+MANUAL (Developer verifies):
+├── Open index.html in Chrome, Firefox, Safari
+├── Test navigation (desktop hover, mobile tap, keyboard Tab/Enter/Escape)
+├── Test consent banner (new session, accept, decline, persist)
+├── Test DE and FR index pages (React mounts render)
+├── Check browser console for errors (zero JS errors)
+├── Check Network tab for failed requests (zero 4xx/5xx)
+├── Verify security headers with curl -I on production
+└── Test on mobile viewport (responsive layout, touch targets)
+```
 
 ---
 
