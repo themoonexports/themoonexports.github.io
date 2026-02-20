@@ -1,7 +1,7 @@
 # UX/UI Bugs — The Moon Exports
 
-> **Audit Date:** 2026-02-18
-> **Auditor Role:** Figma Designer / UX Reviewer
+> **Audit Date:** 2026-02-20 (updated)
+> **Auditor Role:** Figma Designer / UX Reviewer + Copilot Coding Agent
 > **Scope:** Full-site review across all pages, CSS, JS, React components, and localized versions (EN/DE/FR)
 > **Severity Legend:** 🔴 Critical · 🟠 Major · 🟡 Minor · ⚪ Enhancement
 
@@ -16,11 +16,12 @@
 | 3 | 🟠 | French flag missing from contact & about pages | `contact.html` (L91), `about.html` (L97) | Only the German flag is shown; the French flag link is missing entirely, unlike `index.html` which includes both. | Open |
 | 4 | 🟡 | Dropdown toggle has dual interaction patterns | `index.html` (L157–164) | The Handicrafts link is both a navigation link (`href="products.html"`) and a dropdown toggle. On mobile, tapping it navigates away instead of opening the submenu. | Open |
 | 5 | 🟡 | Navbar brand hover lift may obscure dropdown | `css/one.css` (L614–618) | `transform: translateY(-0.125rem)` on `.navbar-brand:hover` causes subtle layout shift that can misalign the fixed navbar border. | Open |
-| 6 | 🟠 | No active-page indicator in main nav | All pages | None of the `<li>` items in the main nav receive an `active` class or `aria-current="page"` attribute, so users cannot tell which page they are on. | Open |
+| 6 | 🟠 | No active-page indicator in main nav | `index.html` | `index.html` Home `<li>` now carries `class="active"` and `aria-current="page"`. Other pages still need the same treatment. | ✅ Fixed (index.html) |
 | 7 | 🟡 | Skip-to-content link only on index.html | `index.html` (L111) vs. other pages | `contact.html`, `about.html`, product pages, and legal pages lack a skip-navigation link, a WCAG 2.1 requirement. | Open |
 | 8 | 🟠 | Blog link present on some pages but not others | `contact.html` (L124), `about.html` (L141) vs. `index.html` | `index.html` has no Blog nav item, while `contact.html` and `about.html` include `<li><a href="/blog">Blog</a></li>`, creating inconsistent navigation. | Open |
 | 9 | 🟡 | Hamburger icon bars lack visible color on dark bg | `css/one.css` (L674–687) | `.navbar-toggle` sets `color: #FFFFFF` but Bootstrap 3 `.icon-bar` background defaults may not inherit, leading to invisible bars on certain browsers. | Open |
 | 10 | 🔴 | Dropdown menu not keyboard accessible on subpages | `contact.html`, `about.html` | These pages use jQuery `.hover()` for dropdown but provide no keyboard event handler. Tab/Enter cannot open the submenu. | Open |
+| 77 | 🟡 | Focusable elements inside hidden dropdown | `index.html`, `js/navigation.js` | Dropdown menu items were focusable via Tab even when `display:none`. Fixed: items now carry `tabindex="-1"` in static HTML; `navigation.js` removes/restores the attribute on open/close. | ✅ Fixed |
 
 ---
 
@@ -28,14 +29,14 @@
 
 | # | Severity | Bug | File(s) | Details | Status |
 |---|----------|-----|---------|---------|--------|
-| 11 | 🟠 | No swipe/touch support on carousel | `react/src/components/Carousel.tsx` | Only arrow-key and click interactions are implemented. Mobile users cannot swipe between slides. | Open |
+| 11 | 🟠 | No swipe/touch support on carousel | `react/src/components/Carousel.tsx` | Fixed: `onTouchStart`/`onTouchEnd` handlers added; swipe fires `goToNext`/`goToPrevious` when horizontal delta ≥ 50 px and horizontal movement dominates. | ✅ Fixed |
 | 12 | 🟡 | Carousel auto-advance lacks `aria-live` | `index.html` (L206–239) | Slide transitions are not announced to screen readers; the `role="listbox"` region has no `aria-live="polite"`. | ✅ Fixed |
-| 13 | 🟡 | Carousel control touch targets too small | `css/carousel.css` | Left/right arrows use Bootstrap's default sizing (~30×60 px) which is below the 44×44 px WCAG 2.1 minimum for touch. | Open |
+| 13 | 🟡 | Carousel control touch targets too small | `css/carousel.css` | Mobile breakpoint controls bumped from `2.5rem × 2.5rem` (40 px) to `2.75rem × 2.75rem` (44 px), meeting WCAG 2.1 SC 2.5.5. | ✅ Fixed |
 | 14 | 🟡 | Carousel images lack responsive `srcset` | `index.html` (L214, L224) | Fixed `width="1200" height="600"` images are served to all devices, wasting bandwidth on mobile. | Open |
-| 15 | 🟠 | Carousel caption text unreadable on bright images | `index.html` (L215–219) | White text over light product photos has no semi-transparent overlay, failing WCAG AA contrast in some slides. | Open |
+| 15 | 🟠 | Carousel caption text unreadable on bright images | `index.html` (L215–219) | Caption already has `background: rgba(0,0,0,0.3)` and `text-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.8)`. Overlay is present; flagged for monitoring with real photography. | Open |
 | 16 | 🟡 | Heading hierarchy broken in carousel | `index.html` (L216 vs. L226) | First slide uses `<h2>`, second slide uses `<h3>`, creating inconsistent heading levels within the same component. | ✅ Fixed |
-| 17 | 🟡 | Carousel indicator dots lack focus styles | `index.html` (L207–210) | Indicator `<li>` elements have no visible `:focus` outline for keyboard users. | Open |
-| 18 | 🟡 | No pause-on-hover for carousel | `index.html` (L206) | `data-ride="carousel"` auto-advances but there is no `data-pause="hover"` attribute, making it hard for users with motor impairments to interact. | ✅ Fixed |
+| 17 | 🟡 | Carousel indicator dots lack focus styles | `index.html`, `react/src/components/Carousel.tsx` | Static HTML indicators now carry `tabindex="0"` and `role="button"`; React indicators also receive `tabindex`, `role="button"`, `aria-current`, and `onKeyDown` handler. CSS focus ring already existed. | ✅ Fixed |
+| 18 | 🟡 | No pause-on-hover for carousel | `index.html` (L206) | `data-pause="hover"` attribute added. | ✅ Fixed |
 
 ---
 
@@ -48,9 +49,10 @@
 | 21 | 🟡 | Product category cards lack hover state feedback | `index.html` (L253–282) | `.productcat` articles have no `:hover` transform, shadow, or color change to indicate interactivity. | ✅ Fixed |
 | 22 | 🟠 | Modal images not responsive on small screens | `css/one.css` (L731–736) | The `@media (max-width: 48rem)` rule sets `float: none` but modal dialogs themselves lack `max-width: 100%` containment in their inner wrappers. | Open |
 | 23 | 🟡 | Product modal placeholder text stays visible | `index.html` (L361) | `<p aria-live="polite">Loading…</p>` remains visible if React hydration fails, showing perpetual "Loading…" text. | ✅ Fixed |
-| 24 | 🟡 | Missing `loading="lazy"` on footer images | `index.html` (L494–498) | Company logo in the trust badges section uses `loading="lazy"` but external PayPal badge uses it too — good. However, `contact.html` (L247, L254) lacks `loading` attributes entirely on footer images. | Open |
-| 25 | 🟡 | Product card descriptions truncated inconsistently | `index.html` (L259, L269, L279) | `.productcat-desc` has no `text-overflow: ellipsis` or line-clamp, so long text wraps differently across cards, breaking visual alignment. | Open |
-| 26 | 🟡 | `<article>` product cards lack `<time>` or metadata | `index.html` (L254–260) | Using `<article>` semantically implies standalone content but no structured metadata (date, author) is provided, misleading assistive tech. | Open |
+| 24 | 🟡 | Missing `loading="lazy"` on footer images | `contact.html` (L247, L254) | `contact.html` lacks `loading` attributes entirely on footer images. | Open |
+| 25 | 🟡 | Product card descriptions truncated inconsistently | `css/one.css` | `.productcat-desc` now uses `-webkit-line-clamp: 2` with `min-height: 2.45rem`, making all three cards align consistently regardless of text length. | ✅ Fixed |
+| 26 | 🟡 | `<article>` product cards lack structured metadata | `index.html` (L254–260) | Using `<article>` semantically implies standalone content but no structured metadata (date, author) is provided, misleading assistive tech. | Open |
+| 68 | 🟡 | Product category grid lacks `col-sm` breakpoint | `index.html` | `col-md-4` jumped from 3-column to 1-column with no 2-column tablet intermediate. Each column now also carries `col-sm-6`. | ✅ Fixed |
 
 ---
 
@@ -81,6 +83,7 @@
 | 40 | 🟡 | External link to smellofmoon.com not indicated | `index.html` (L409), `contact.html` (L194) | External links lack a visual indicator (icon or text) that they open in a new tab, surprising users. | Open |
 | 41 | 🟡 | Footer `<address>` tag used inconsistently | `index.html` (L416–419) uses `<address>`; `contact.html` (L198–199) uses `<p>`. Semantic inconsistency across pages. | Open |
 | 42 | 🟡 | Footer heading hierarchy jumps from `<h4>` | All pages | Footer sections use `<h4>` headings with no preceding `<h2>` or `<h3>` in the footer, breaking heading hierarchy (WCAG 1.3.1). | Open |
+| 64 | 🟡 | Footer columns stack without spacing on mobile | `css/one.css` | `col-md-3` columns stacked on mobile with no vertical margin. Fixed: `@media (max-width: 47.9375rem) { footer.footer-bottom .col-md-3 { margin-bottom: 1.5rem; } }` added. | ✅ Fixed |
 
 ---
 
@@ -101,9 +104,9 @@
 
 | # | Severity | Bug | File(s) | Details | Status |
 |---|----------|-----|---------|---------|--------|
-| 49 | 🟠 | Cookie banner "Decline" button low contrast | `css/one.css` (L384–393) | `.cookie-banner__btn--secondary` uses `color: #f4f1e6` on transparent background over `rgba(24,24,24,0.95)`. The text has poor contrast against the semi-transparent bar especially on bright page content beneath. | Open |
+| 49 | 🟠 | Cookie banner "Decline" button low contrast | `css/one.css` | `.cookie-banner__btn--secondary` border opacity raised from 0.4 → 0.7 and a faint background (`rgba(244,241,230,0.08)`) added to ensure the button shape is visible even over bright underlying content. | ✅ Fixed |
 | 50 | 🟡 | Cookie banner buttons have no focus ring | `css/one.css` (L378–382) | `:focus` state sets `outline: none`, removing the only keyboard focus indicator. Keyboard users cannot see which button is focused. | ✅ Fixed |
-| 51 | 🟡 | Cookie settings panel position conflicts with scroll-to-top | `css/crafts-ui.css` (L169, L181–191) | `.cookie-settings-fixed` is at `bottom: 2rem; right: 6rem` and `.scroll-top-btn` at `bottom: 2rem; right: 2rem`. On narrow screens these overlap. | Open |
+| 51 | 🟡 | Cookie settings panel position conflicts with scroll-to-top | `css/crafts-ui.css` | `.cookie-settings-fixed` was at `bottom: 2rem; right: 6rem` — on narrow screens this overlapped the scroll-to-top button at `bottom: 2rem; right: 2rem`. Fixed to `bottom: 5rem; right: 2rem` so both elements stack vertically without overlap. | ✅ Fixed |
 | 52 | 🟡 | Cookie settings panel max-width too narrow | `css/crafts-ui.css` (L171) | `max-width: 25rem` may clip checkbox labels on smaller screens, causing text truncation without ellipsis. | Open |
 
 ---
@@ -130,11 +133,9 @@
 | 61 | 🟠 | About page is a single wall of text | `about.html` (L148–151) | The entire page content is a single `<div class="content">` with no section breaks, images, or visual hierarchy. On desktop, lines exceed 120 characters — poor readability. | Open |
 | 62 | 🟡 | Max-width not set for content paragraphs | Multiple HTML files | No `max-width` on `.content` or `<main>` means text lines span the full container width (>1170 px on lg screens), exceeding the 45–75 character ideal line length. | Open |
 | 63 | 🟡 | `frontblock.homeb` has fixed height `25rem` | `css/one.css` (L487–491) | Fixed height crops content on small screens and leaves excessive whitespace on large screens. Should use `min-height` or `aspect-ratio`. | Open |
-| 64 | 🟡 | Footer columns stack without spacing on mobile | `index.html` footer (L377–443) | `col-md-3` columns stack on mobile with no vertical margin between them, causing content to run together. | Open |
 | 65 | 🟡 | `.cf` container fixed height `22.5rem` | `css/one.css` (L817) | Product image crossfade containers have fixed height, clipping images that don't match the exact aspect ratio. | Open |
 | 66 | 🟡 | Google Translate element hidden only on xs | `contact.html` (L92) | `class="visible-medium hidden-xs"` is not a valid Bootstrap 3 class. Should be `visible-md-block hidden-xs`. | ✅ Fixed |
 | 67 | 🟡 | Masthead padding-top conflicts with header height | `css/one.css` (L420–423, L753–754) | `.masthead { padding-top: 2.1875rem }` is later overridden to `padding-top: 0rem`. The earlier rule causes a brief flash of extra padding on page load. | Open |
-| 68 | 🟡 | Product category grid lacks `col-sm` breakpoint | `index.html` (L253) | `col-md-4` jumps from 3-column to 1-column with no 2-column tablet intermediate, causing awkward single-column stretch on medium screens. | Open |
 
 ---
 
@@ -157,7 +158,6 @@
 | 74 | 🟠 | Multiple `<h1>` elements on about page | `about.html` (L148) | The main content `<h1>` plus potential header-level headings create multiple `<h1>` tags — only one is recommended per page (WCAG 1.3.1). | Open |
 | 75 | 🟡 | `role="listbox"` on carousel-inner is incorrect | `index.html` (L212) | Carousel slides are not selectable options; `role="listbox"` is semantically wrong. Should be `role="group"` or omitted. | ✅ Fixed |
 | 76 | 🟡 | Images use `alt=""` inconsistently vs. decorative | Multiple pages | Some decorative images have descriptive alt text (noise), while meaningful images sometimes have empty or vague alt text. | Open |
-| 77 | 🟡 | Focusable elements inside hidden dropdown | `index.html` (L166–191) | Dropdown menu items are focusable via Tab even when menu is `display: none` in some browser/AT combinations. Links should have `tabindex="-1"` when hidden. | Open |
 | 78 | 🟡 | `figcaption` positioned absolute with opacity:0 | `css/one.css` (L794–813) | Generic `figcaption` styles make all `<figcaption>` elements invisible by default. This conflicts with `.dropdown-hero-caption` which should be visible. | ✅ Fixed |
 | 79 | 🟡 | Accessibility widget checkboxes lack labels | `react/src/components/AccessibilityWidget.tsx` | Checkboxes for high-contrast and reduced-motion toggling may lack associated `<label>` elements, making them inaccessible. | Open |
 | 80 | 🟡 | `body cz-shortcut-listen="true"` non-standard attr | `contact.html` (L77), `about.html` (L83) | Non-standard attribute from a browser extension left in source. Should be removed. | ✅ Fixed |
@@ -204,7 +204,7 @@
 
 | # | Severity | Bug | File(s) | Details | Status |
 |---|----------|-----|---------|---------|--------|
-| 96 | 🟡 | ScrollToTop button visibility flickers on scroll | `react/src/components/ScrollToTop.tsx` | No debounce on scroll listener — rapid show/hide toggling causes visual jitter on fast scrolling. | Open |
+| 96 | 🟡 | ScrollToTop button visibility flickers on scroll | `react/src/components/ScrollToTop.tsx` | Fixed: raw `setState` on every scroll event replaced with a `requestAnimationFrame`-gated update, eliminating rapid show/hide toggling during fast scrolling. | ✅ Fixed |
 | 97 | 🟡 | AccessibilityWidget font-size changes not announced | `react/src/components/AccessibilityWidget.tsx` | A+/A−/Reset buttons change `document.documentElement.style.fontSize` but provide no `aria-live` feedback to confirm the change. | Open |
 | 98 | 🟡 | Testimonials section empty without React | `index.html` (L480) | `<div class="testimonials" data-react="testimonials"></div>` renders as empty space if JS fails, leaving a confusing gap in the layout. | ✅ Fixed |
 | 99 | 🟡 | ProductGrid fallback shows "Loading…" forever | `index.html` (L361) | If the React `product-modal` component fails to mount, the static fallback `<p>Loading…</p>` persists indefinitely with no timeout or error state. | ✅ Fixed |
@@ -217,39 +217,64 @@
 | Severity | Total | Fixed | Open |
 |----------|-------|-------|------|
 | 🔴 Critical | 4 | 3 | 1 |
-| 🟠 Major | 18 | 3 | 15 |
-| 🟡 Minor | 78 | 23 | 55 |
-| **Total** | **100** | **29** | **71** |
+| 🟠 Major | 18 | 7 | 11 |
+| 🟡 Minor | 78 | 31 | 47 |
+| **Total** | **100** | **41** | **59** |
 
-### Top Priority Fixes
-1. **Bug #19** — Fix `viewport` meta on product pages to `width=device-width` (mobile-breaking)
-2. **Bug #27–28** — Make iframes responsive on contact page
-3. **Bug #10** — Add keyboard support to dropdown on subpages
-4. **Bug #1** — Provide mobile language switching mechanism
-5. **Bug #37** — Fix copyright year template variable across all pages
+### Fixes Applied in This Session (Homepage Focus)
+
+| Bug | File(s) Changed | Root Cause | Fix |
+|-----|-----------------|-----------|-----|
+| #6 — No active-page indicator | `index.html` | Missing `class="active"` and `aria-current` on Home `<li>` | Added `class="active"` to Home `<li>` and `aria-current="page"` to its `<a>` |
+| #11 — No swipe/touch on carousel | `react/src/components/Carousel.tsx` | No touch event handlers wired up | Added `onTouchStart`/`onTouchEnd` with `useRef` tracking; swipe fires when horizontal delta ≥ 50 px and dominates vertical delta |
+| #13 — Carousel touch targets too small | `css/carousel.css` | Mobile breakpoint controls were `2.5rem` (40 px) — below WCAG 44 px minimum | Bumped to `2.75rem` (44 px) |
+| #17 — Carousel indicators not keyboard-focusable | `index.html`, `Carousel.tsx` | `<li>` indicators had no `tabindex`, `role`, or keyboard handler | Added `tabindex="0"`, `role="button"`, `aria-current`, `aria-label`, and `onKeyDown` Enter/Space handler to each indicator |
+| #25 — Product desc truncated inconsistently | `css/one.css` | No overflow or clamp rule on `.productcat-desc` | Added `-webkit-line-clamp: 2`, `overflow: hidden`, and `min-height: 2.45rem` |
+| #49 — Decline button low contrast | `css/one.css` | Border `rgba(244,241,230,0.4)` too faint; `background: transparent` invisible over bright content below banner | Raised border opacity to `0.7`; added `rgba(244,241,230,0.08)` background tint |
+| #51 — Cookie settings overlaps scroll-to-top | `css/crafts-ui.css` | Both elements were anchored to `bottom: 2rem` on the right edge | Moved cookie settings to `bottom: 5rem; right: 2rem` — clear vertical gap above scroll-to-top |
+| #64 — Footer stacks with no spacing on mobile | `css/one.css` | No margin between stacked `col-md-3` columns below 768 px | Added `@media (max-width: 47.9375rem) { footer.footer-bottom .col-md-3 { margin-bottom: 1.5rem; } }` |
+| #68 — Product grid jumps 3→1 col on tablet | `index.html` | Only `col-md-4` applied to each product card | Added `col-sm-6` to each card column for 2-up tablet layout |
+| #77 — Hidden dropdown items keyboard-reachable | `index.html`, `js/navigation.js` | Menu item `<a>` tags had no `tabindex` when menu was `display:none` | Static HTML items get `tabindex="-1"`; `navigation.js` `open()` removes the attribute and `close()` re-adds it |
+| #96 — ScrollToTop flicker on fast scroll | `react/src/components/ScrollToTop.tsx` | `setState` called synchronously on every scroll event | Gated state update behind `requestAnimationFrame` using a `useRef` guard to coalesce rapid events |
+
+### Remaining Top Priorities
+
+1. **Bug #10** (🔴) — Add keyboard support to dropdown on `contact.html` / `about.html` (replace jQuery hover-only with `navigation.js`)
+2. **Bug #1** (🟠) — Make language switcher visible on mobile
+3. **Bug #3** (🟠) — Add French flag to `contact.html` and `about.html`; fix alt text
+4. **Bug #69** (🟠) — Disable ContactForm submit button while request is in-flight
+5. **Bug #83** (🟠) — Sync DE/FR footer with updated `index.html` structure
 
 ---
 
 ## Homepage Malformed Rendering — Root Causes & Fixes
 
-> **Identified:** 2026-02-18
+> **Identified:** 2026-02-18 · **Updated:** 2026-02-20
 > **Scope:** `index.html` homepage rendering issues visible in browser
-
-### Identified Rendering Issues
 
 | # | Bug Ref | Issue | Root Cause | Status |
 |---|---------|-------|------------|--------|
-| A | #16 | Carousel slide 2 uses `<h3>` while slide 1 uses `<h2>` — inconsistent heading levels within the same component | Static HTML had mismatched heading tags (`<h2>` vs `<h3>`) across slides | ✅ Fixed |
-| B | New | Carousel displays wrong content after React hydration — shows "The Truth is The Everlasting" instead of the static HTML content "Premium Handcrafted Exports from India" | `react/src/components/Carousel.tsx` slide data (title, subtitle, alt text, CTAs) did not match the static HTML in `index.html`, causing a hydration mismatch that replaced the correct content | ✅ Fixed |
-| C | New | Carousel shows single "Enquiry" button instead of "Get a Quote" + "Explore Crafts" | React `Carousel.tsx` hardcoded a single CTA link instead of per-slide CTA arrays matching the static HTML | ✅ Fixed |
-| D | #75 | `role="listbox"` on carousel-inner is semantically incorrect — slides are not selectable options | Incorrect ARIA role applied; should be `role="group"` | ✅ Fixed |
-| E | #12 | Carousel slide transitions not announced to screen readers | Missing `aria-live="polite"` on the carousel-inner container | ✅ Fixed |
-| F | #18 | Carousel auto-advances with no way to pause on hover, making it hard for users with motor impairments | Missing `data-pause="hover"` attribute on carousel container | ✅ Fixed |
-| G | #78 | Generic `figcaption` styles (absolute position, opacity:0) hide the dropdown hero caption | `css/one.css` applies `position: absolute; opacity: 0` to all `figcaption` elements, including `.dropdown-hero-caption` which should be visible | ✅ Fixed |
-| H | #57 | `.frontblock.homeb` text is 6px (0.375rem) on mobile — completely unreadable | `css/one.css` L712 sets `font-size: 0.375rem!important` inside a `max-width: 41.25rem` media query | ✅ Fixed |
-| I | #50 | Cookie banner buttons have no visible focus ring for keyboard users | `css/one.css` sets `outline: none` on `.cookie-banner__btn:focus`, removing the default browser focus indicator | ✅ Fixed |
-| J | #21 | Product category cards have no hover state feedback to indicate they are interactive | `.productcat` had no `:hover` styles (no transform, shadow, or color change) | ✅ Fixed |
-| K | #48 | Newsletter error `aria-describedby` references a hidden element, ignored by some screen readers | `aria-describedby="newsletter-error"` was statically set on the input while the error div used `display:none` | ✅ Fixed |
-| L | #46 | Newsletter email input placeholder is just "Email" with no format hint | Placeholder text did not indicate expected format | ✅ Fixed |
-| M | #98 | Testimonials section renders as empty gap when React fails to load | `<div class="testimonials" data-react="testimonials"></div>` had no fallback content | ✅ Fixed |
-| N | #99 | "Featured Products" section shows "Loading…" forever if React fails to mount | No fallback or timeout mechanism for the `product-modal` React mount point | ✅ Fixed |
+| A | #16 | Carousel slide 2 uses `<h3>` while slide 1 uses `<h2>` | Static HTML had mismatched heading tags across slides | ✅ Fixed |
+| B | New | Carousel shows "The Truth is The Everlasting" after React hydration | `Carousel.tsx` slide data did not match `index.html` static HTML — hydration mismatch | ✅ Fixed |
+| C | New | Carousel shows single "Enquiry" button instead of "Get a Quote" + "Explore Crafts" | React `Carousel.tsx` hardcoded a single CTA | ✅ Fixed |
+| D | #75 | `role="listbox"` on carousel-inner is semantically incorrect | Incorrect ARIA role; slides are not selectable options | ✅ Fixed |
+| E | #12 | Carousel slide transitions not announced to screen readers | Missing `aria-live="polite"` on `carousel-inner` | ✅ Fixed |
+| F | #18 | Carousel auto-advances with no pause on hover | Missing `data-pause="hover"` attribute | ✅ Fixed |
+| G | #78 | Generic `figcaption` styles hide dropdown hero caption | `css/one.css` applied `position: absolute; opacity: 0` to all `figcaption` | ✅ Fixed |
+| H | #57 | `.frontblock.homeb` text is 6 px on mobile — completely unreadable | `font-size: 0.375rem!important` inside mobile media query | ✅ Fixed |
+| I | #50 | Cookie banner buttons have no visible focus ring | `outline: none` on `.cookie-banner__btn:focus` | ✅ Fixed |
+| J | #21 | Product category cards have no hover state feedback | `.productcat` had no `:hover` styles | ✅ Fixed |
+| K | #48 | Newsletter `aria-describedby` references a hidden element | `aria-describedby="newsletter-error"` with static `display:none` error div | ✅ Fixed |
+| L | #46 | Newsletter email placeholder is just "Email" | Placeholder text gave no format hint | ✅ Fixed |
+| M | #98 | Testimonials section renders as an empty gap when React fails | `data-react="testimonials"` container had no fallback content | ✅ Fixed |
+| N | #99 | "Featured Products" shows "Loading…" forever if React fails | No timeout or error fallback on `product-modal` mount point | ✅ Fixed |
+| O | #11 | No swipe/touch support — mobile users cannot swipe between slides | `Carousel.tsx` had no touch event handlers | ✅ Fixed |
+| P | #13 | Carousel prev/next controls below 44 px touch target on mobile | Mobile breakpoint set controls to `2.5rem` (40 px) | ✅ Fixed |
+| Q | #17 | Carousel indicator dots not keyboard-focusable | `<li>` indicators had no `tabindex`, `role`, or `onKeyDown` | ✅ Fixed |
+| R | #25 | Product category card descriptions truncate inconsistently | No line-clamp or `min-height` on `.productcat-desc` | ✅ Fixed |
+| S | #49 | Cookie banner "Decline" button invisible over light content beneath banner | `background: transparent` + `border: rgba(…,0.4)` made button undetectable | ✅ Fixed |
+| T | #51 | Cookie settings gear button overlaps scroll-to-top on narrow screens | Both elements at `bottom: 2rem` on right edge | ✅ Fixed |
+| U | #64 | Footer columns run together with no gap when stacked on mobile | No vertical margin between `col-md-3` blocks below 768 px | ✅ Fixed |
+| V | #68 | Product grid jumps from 3 columns directly to 1 column on tablets | Missing `col-sm-6` intermediate breakpoint | ✅ Fixed |
+| W | #77 | Hidden dropdown menu items reachable via Tab | Menu item links had no `tabindex="-1"` when menu was closed | ✅ Fixed |
+| X | #96 | Scroll-to-top button flickers on fast scroll | `setState` called on every scroll event without coalescing | ✅ Fixed |

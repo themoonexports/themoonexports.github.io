@@ -264,6 +264,11 @@
             this.element.classList.add('open');
             this.menu.style.display = 'block';
             this.toggle.setAttribute('aria-expanded', 'true');
+
+            // Make menu items reachable by keyboard when open
+            this.menu.querySelectorAll('a[role="menuitem"]').forEach(item => {
+                item.removeAttribute('tabindex');
+            });
             
             this.manager.setActive(this);
         }
@@ -280,6 +285,11 @@
             this.element.classList.remove('open');
             this.menu.style.display = 'none';
             this.toggle.setAttribute('aria-expanded', 'false');
+
+            // Remove menu items from tab order when closed
+            this.menu.querySelectorAll('a[role="menuitem"]').forEach(item => {
+                item.setAttribute('tabindex', '-1');
+            });
             
             if (this.manager.activeDropdown === this) {
                 this.manager.activeDropdown = null;

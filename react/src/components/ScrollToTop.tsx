@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ScrollToTop: React.FC = () => {
   const [visible, setVisible] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > window.innerHeight);
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        setVisible(window.scrollY > window.innerHeight);
+        rafRef.current = null;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const scrollToTop = () => {

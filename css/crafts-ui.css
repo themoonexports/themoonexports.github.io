@@ -166,7 +166,7 @@
 /* ===== Phase 3 Component Styles ===== */
 
 /* Cookie Settings */
-.cookie-settings-fixed { position: fixed; bottom: 2rem; right: 6rem; z-index: 1040; }
+.cookie-settings-fixed { position: fixed; bottom: 5rem; right: 2rem; z-index: 1040; }
 .cookie-settings-trigger { cursor: pointer; }
 .cookie-settings-panel { padding: 1.25rem; max-width: 25rem; }
 .cookie-settings-panel h3 { color: #E0E0E0; margin: 0 0 0.5rem; font-size: 1.125rem; }
