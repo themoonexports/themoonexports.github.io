@@ -181,11 +181,11 @@
   right: 1.25rem;
 }
 
-/* Mobile: Smaller controls */
+/* Mobile: Controls meet 44×44 px WCAG touch target */
 @media (max-width: 47.9375rem) {
   .carousel-control {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
   
   .carousel-control.left {

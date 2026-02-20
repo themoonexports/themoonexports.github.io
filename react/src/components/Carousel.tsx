@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface CarouselSlide {
   image: string;
@@ -33,8 +33,13 @@ const slides: CarouselSlide[] = [
   }
 ];
 
+/** Minimum horizontal swipe distance (px) to trigger a slide change */
+const SWIPE_THRESHOLD = 50;
+
 export function Carousel(): JSX.Element {
   const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const goToSlide = useCallback((index: number) => {
     setActiveIndex(index);
@@ -54,7 +59,7 @@ export function Carousel(): JSX.Element {
     return () => clearInterval(interval);
   }, [goToNext]);
 
-  // Keyboard navigation
+  // Keyboard navigation (arrow keys)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") goToPrevious();
@@ -65,12 +70,44 @@ export function Carousel(): JSX.Element {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToPrevious, goToNext]);
 
+  // Touch swipe handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    // Only treat as a horizontal swipe when horizontal movement dominates
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) >= SWIPE_THRESHOLD) {
+      if (deltaX < 0) goToNext();
+      else goToPrevious();
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  }, [goToNext, goToPrevious]);
+
+  /** Activate a button-role element on Enter or Space, preventing default scroll. */
+  const makeKeyActivator = useCallback(
+    (action: () => void) => (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        action();
+      }
+    },
+    []
+  );
+
   return (
     <div
       className="carousel slide"
       data-ride="carousel"
       role="region"
       aria-label="Featured products"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Indicators */}
       <ol className="carousel-indicators">
@@ -79,7 +116,11 @@ export function Carousel(): JSX.Element {
             key={index}
             className={index === activeIndex ? "active" : ""}
             onClick={() => goToSlide(index)}
-            aria-label={`Slide ${index + 1}`}
+            onKeyDown={makeKeyActivator(() => goToSlide(index))}
+            tabIndex={0}
+            role="button"
+            aria-label={`Go to slide ${index + 1}`}
+            aria-current={index === activeIndex ? "true" : undefined}
           />
         ))}
       </ol>
@@ -115,6 +156,8 @@ export function Carousel(): JSX.Element {
         className="left carousel-control"
         onClick={goToPrevious}
         role="button"
+        tabIndex={0}
+        onKeyDown={makeKeyActivator(goToPrevious)}
         aria-label="Previous slide"
       >
         <span className="glyphicon glyphicon-chevron-left" aria-hidden="true" />
@@ -123,6 +166,8 @@ export function Carousel(): JSX.Element {
         className="right carousel-control"
         onClick={goToNext}
         role="button"
+        tabIndex={0}
+        onKeyDown={makeKeyActivator(goToNext)}
         aria-label="Next slide"
       >
         <span className="glyphicon glyphicon-chevron-right" aria-hidden="true" />

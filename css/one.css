@@ -381,9 +381,9 @@ font-family: sans-serif;
 }
 
 .cookie-banner__btn--secondary {
-  background: transparent;
+  background: rgba(244, 241, 230, 0.08);
   color: #f4f1e6;
-  border: 0.0625rem solid rgba(244, 241, 230, 0.4);
+  border: 0.0625rem solid rgba(244, 241, 230, 0.7);
 }
 
 .cookie-banner__btn--secondary:hover,
@@ -535,6 +535,13 @@ color: #B3B3B3;
 margin-top: 2.1875rem;
 padding-top: 2.1875rem;
 padding-bottom: 0.625rem;
+}
+
+/* Mobile: add vertical gap between stacked footer columns (47.9375rem = 767px, just below Bootstrap md breakpoint) */
+@media (max-width: 47.9375rem) {
+  footer.footer-bottom .col-md-3 {
+    margin-bottom: 1.5rem;
+  }
 }
 footer.footer-bottom h4 {
   color: #F2F2F2;
@@ -1771,6 +1778,11 @@ span.caret:before {
   margin-top: 0.5rem;
   padding: 0 0.5rem;
   text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.45rem;
 }
 
 /* Why Choose Us Section */

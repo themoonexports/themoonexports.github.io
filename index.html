@@ -150,7 +150,7 @@
                 <!-- Main Menu -->
                 <div id="navbar" class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="index.html" aria-current="page">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         
                         <!-- Products Dropdown -->
@@ -184,10 +184,10 @@
                                 </li>
                                 
                                 <!-- Product Links -->
-                                <li><a href="horn-crafts.html" role="menuitem">Horn Crafts</a></li>
-                                <li><a href="buffalo-horn-plates.html" role="menuitem">Buffalo Horn Plates</a></li>
-                                <li><a href="wooden-crafts.html" role="menuitem">Wooden Crafts</a></li>
-                                <li><a href="resin.html" role="menuitem">Resin Products</a></li>
+                                <li><a href="horn-crafts.html" role="menuitem" tabindex="-1">Horn Crafts</a></li>
+                                <li><a href="buffalo-horn-plates.html" role="menuitem" tabindex="-1">Buffalo Horn Plates</a></li>
+                                <li><a href="wooden-crafts.html" role="menuitem" tabindex="-1">Wooden Crafts</a></li>
+                                <li><a href="resin.html" role="menuitem" tabindex="-1">Resin Products</a></li>
                             </ul>
                         </li>
                         
@@ -205,8 +205,8 @@
         <!-- Hero Carousel -->
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-pause="hover" data-react="carousel" role="region" aria-label="Featured products">
             <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-label="Slide 1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1" aria-label="Slide 2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-label="Go to slide 1" tabindex="0" role="button" aria-current="true"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" aria-label="Go to slide 2" tabindex="0" role="button"></li>
             </ol>
             
             <div class="carousel-inner" role="group" aria-live="polite">
@@ -250,7 +250,7 @@
         <!-- Product Categories -->
         <section class="container frontthree" data-react="product-grid" aria-label="Product categories">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <article class="productcat">
                         <a href="horn-crafts.html">
                             <h3 class="cattitle">Horn Crafts</h3>
@@ -260,7 +260,7 @@
                     </article>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <article class="productcat">
                         <a href="wooden-crafts.html">
                             <h3 class="cattitle">Wooden Crafts</h3>
@@ -270,7 +270,7 @@
                     </article>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <article class="productcat">
                         <a href="resin.html">
                             <h3 class="cattitle">Resin Products</h3>
