@@ -42,6 +42,7 @@ documentation:
   - TESTING_PLAN.md               # Testing strategy
   - SECURITY_CHECKLIST.md         # Security validation
   - NEXT_PHASE_DEVELOPMENT_PLAN.md  # Phase 4 execution plan (first-principles, ground-truth based)
+  - UNIFIED_STACK_MIGRATION_PLAN.md  # Phase 5 plan: Laravel + React + Inertia.js + Tailwind + Vite + Python AI
   - .aicontext                    # This file - AI agent guidance
 
 ## Configuration Files (Priority: MEDIUM)
@@ -219,6 +220,7 @@ react_status:
   phase_2: "Complete (Oct 2025) — Footer, Carousel, Product Grid, Trust Badges, Language Switcher, Social Links (6 bundles)"
   phase_3: "Complete (Feb 2026) — Contact Form, FAQ, Product Modal, Background, Cookie Settings, Testimonials, Accessibility Widget, Scroll-to-Top (8 bundles)"
   phase_4: "In Progress — See docs/NEXT_PHASE_DEVELOPMENT_PLAN.md for execution plan"
+  phase_5: "Planned — Unified stack migration: Laravel + React + Inertia.js + Tailwind CSS + Vite + Python AI Service. See docs/UNIFIED_STACK_MIGRATION_PLAN.md"
   phase_4_milestones:
     - "M1 (Week 1): Delete 5 unused JS files, fix jQuery version split, remove IE shims, CI baselines"
     - "M2 (Week 2): Fix DE/FR mount parity (4/14 → 14/14), extract 61 inline scripts"
@@ -248,6 +250,7 @@ ground_truth:
 - **Recent Work**: React migration complete (Phases 1–3, 17 components). Phase 4 hardening in progress.
 - **Production Status**: Ready for deployment; Phase 4 focuses on measured security gaps, dead code removal, i18n parity, CI hardening
 - **Key Planning Doc**: docs/NEXT_PHASE_DEVELOPMENT_PLAN.md (first-principles analysis with ground-truth measurements)
+- **Phase 5 Plan**: docs/UNIFIED_STACK_MIGRATION_PLAN.md (Laravel + React + Inertia.js + Tailwind CSS + Vite + Python AI Service)
 
 ---
 This file should be the first reference for any AI agent working on The Moon Exports website. 
