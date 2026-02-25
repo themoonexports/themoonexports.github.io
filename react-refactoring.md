@@ -202,20 +202,20 @@ With all interactive components migrated to React (Phases 1–3, 17 bundles, ~33
 
 ---
 
-## 🔮 Phase 5: Modern UI & Growth (Target: Q3–Q4 2026)
+## 🔮 Phase 5: Unified Stack Migration (Target: Q3–Q4 2026)
 
-With hardening complete, Phase 5 shifts focus to user experience modernization, conversion optimization, and scalable content management.
+With hardening complete, Phase 5 supersedes the original Bootstrap 5 / CMS plan with a full-stack migration to **Laravel + React + Inertia.js + Tailwind CSS + Vite**, complemented by a **Python AI microservice** for product recommendations and search.
 
 ### Key Initiatives
 
 | # | Initiative | Priority | Description |
 |---|-----------|----------|-------------|
-| 1 | Bootstrap 5 Migration | High | Migrate from Bootstrap 3.3.x to 5.3.x (page-by-page, compatibility shim) |
-| 2 | Homepage Redesign | High | Modern, conversion-optimized landing page with A/B testing |
-| 3 | Product Experience | Medium | Rich product detail pages, category filtering, wishlist |
-| 4 | Content Management | Medium | Evaluate headless CMS (Decap CMS/Contentful), expanded structured data |
-| 5 | Advanced Analytics | Medium | GA4 full migration, e-commerce tracking, custom dashboards |
-| 6 | PWA Exploration | Low | Service worker, web app manifest, offline catalog |
+| 1 | Laravel + Inertia.js Backend | High | Server-side routing, controllers, Eloquent ORM, i18n, form handling |
+| 2 | Tailwind CSS Migration | High | Replace Bootstrap 3.3.x with utility-first Tailwind CSS |
+| 3 | Database-Driven Products | High | Migrate products.json to MySQL/PostgreSQL with admin panel |
+| 4 | Python AI Service | Medium | Product recommendations, semantic search, image analysis |
+| 5 | Unified i18n | Medium | Laravel localization replaces manual EN/DE/FR file duplication |
+| 6 | Full-Text Search | Medium | Meilisearch integration replacing deferred client-side search |
 
 ### Prerequisites (from Phase 4)
 - ✅ Legacy JS cleanup complete (≤ 6 files)
@@ -225,4 +225,4 @@ With hardening complete, Phase 5 shifts focus to user experience modernization, 
 - ✅ Image optimization complete
 
 ### Details
-See [docs/NEXT_PHASE_DEVELOPMENT_PLAN.md](docs/NEXT_PHASE_DEVELOPMENT_PLAN.md) for Phase 5 vision, architecture decisions, and dependency mapping.
+See [docs/UNIFIED_STACK_MIGRATION_PLAN.md](docs/UNIFIED_STACK_MIGRATION_PLAN.md) for the comprehensive migration plan including architecture, phase breakdown, component mapping, AI service design, and timeline.
