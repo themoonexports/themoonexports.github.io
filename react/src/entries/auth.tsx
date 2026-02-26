@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AuthButton } from "@components/AuthButton";
+import { authConfig } from "../config/auth";
 
 /**
  * Auth Entry Point
@@ -48,7 +49,7 @@ window.TheMoonExports.Auth = {
   isAuthenticated: () => {
     // Synchronous check – returns boolean
     try {
-      const raw = localStorage.getItem("tme_auth_tokens");
+      const raw = localStorage.getItem(authConfig.storageKeys.tokens);
       if (!raw) return false;
       const tokens = JSON.parse(raw);
       return tokens.expiresAt > Date.now();
