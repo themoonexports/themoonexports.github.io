@@ -17,6 +17,12 @@ declare global {
         initNewsletterForm?: () => void;
         initContactForm?: () => void;
       };
+      Auth?: {
+        login?: () => void;
+        loginWithGoogle?: () => void;
+        logout?: () => Promise<void>;
+        isAuthenticated?: () => boolean;
+      };
     };
     // Google Analytics
     ga?: (command: string, ...args: unknown[]) => void;

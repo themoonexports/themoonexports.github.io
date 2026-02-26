@@ -28,7 +28,8 @@ export default defineConfig({
         "cookie-settings": resolve(__dirname, "src/entries/cookie-settings.tsx"),
         "scroll-top": resolve(__dirname, "src/entries/scroll-top.tsx"),
         accessibility: resolve(__dirname, "src/entries/accessibility.tsx"),
-        testimonials: resolve(__dirname, "src/entries/testimonials.tsx")
+        testimonials: resolve(__dirname, "src/entries/testimonials.tsx"),
+        auth: resolve(__dirname, "src/entries/auth.tsx")
       },
       output: {
         entryFileNames: "[name].js",

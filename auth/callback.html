@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logging in… | The Moon Exports</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/one.css">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <div class="container" style="text-align:center; padding-top:100px;">
+        <p>Completing login…</p>
+    </div>
+
+    <!--
+        The auth.js entry handles the OAuth callback automatically:
+        it reads the ?code= parameter, exchanges it for tokens,
+        then redirects back to the home page.
+    -->
+    <script type="module" src="../js/dist/auth.js"></script>
+    <script type="module">
+        // After auth.js processes the code, redirect home
+        const params = new URLSearchParams(window.location.search);
+        if (!params.has("code")) {
+            // No code present – already processed or direct visit
+            window.location.replace("/");
+        }
+    </script>
+</body>
+</html>
