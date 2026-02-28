@@ -50,30 +50,30 @@ static void handle_contact_submit(http_request_t *req, http_response_t *res) {
     }
 
     /* Validate name length (1–100 chars) */
-    if (!input_validate_length(name_val->string_val, 1, 100)) {
+    if (!input_validate_length(name_val->data.string_val, 1, 100)) {
         json_value_free(parsed);
         send_error(res, HTTP_BAD_REQUEST, "Name must be between 1 and 100 characters");
         return;
     }
 
     /* Validate email format */
-    if (!input_validate_email(email_val->string_val)) {
+    if (!input_validate_email(email_val->data.string_val)) {
         json_value_free(parsed);
         send_error(res, HTTP_BAD_REQUEST, "Invalid email address");
         return;
     }
 
     /* Validate message length (1–2000 chars) */
-    if (!input_validate_length(message_val->string_val, 1, 2000)) {
+    if (!input_validate_length(message_val->data.string_val, 1, 2000)) {
         json_value_free(parsed);
         send_error(res, HTTP_BAD_REQUEST, "Message must be between 1 and 2000 characters");
         return;
     }
 
     /* Sanitize inputs against XSS and log injection */
-    char *safe_name = input_sanitize_html(name_val->string_val);
-    char *safe_email = input_sanitize_html(email_val->string_val);
-    char *safe_message = input_sanitize_html(message_val->string_val);
+    char *safe_name = input_sanitize_html(name_val->data.string_val);
+    char *safe_email = input_sanitize_html(email_val->data.string_val);
+    char *safe_message = input_sanitize_html(message_val->data.string_val);
 
     printf("[contact] Received submission from: %s <%s>\n",
            safe_name, safe_email);
