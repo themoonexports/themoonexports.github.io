@@ -60,14 +60,19 @@ curl -X POST http://localhost:3000/api/contact \
 ```
 backend/
 ├── CMakeLists.txt          # Build config; fetches modern-c-web-library via FetchContent
-├── Dockerfile              # Containerised build & run
+├── Dockerfile              # Multi-stage production build (non-root user)
+├── docker-compose.yml      # Backend + nginx reverse proxy
+├── nginx.conf              # Reverse proxy with security headers
 ├── include/
-│   └── config.h            # Port, CORS, rate-limit defaults
+│   └── config.h            # Port, CORS, rate-limit, version defaults
 ├── src/
-│   ├── main.c              # Server entry point
+│   ├── main.c              # Server entry point (middleware, signal handling)
 │   └── routes/
 │       ├── products.c / .h # /api/products endpoints
-│       └── contact.c  / .h # /api/contact endpoint
+│       └── contact.c  / .h # /api/contact endpoint (validated, sanitized)
+├── tests/
+│   ├── CMakeLists.txt      # CTest integration
+│   └── test_validation.c   # Input validation unit tests
 └── README.md               # ← you are here
 ```
 
@@ -77,13 +82,55 @@ Defaults are defined in `include/config.h`:
 
 | Constant               | Default                              | Purpose               |
 |------------------------|--------------------------------------|-----------------------|
+| `TME_VERSION`          | `"1.0.0"`                            | API version string    |
 | `TME_DEFAULT_PORT`     | `3000`                               | Listen port           |
+| `TME_LOG_LEVEL`        | `LOG_LEVEL_INFO`                     | Minimum log level     |
 | `TME_CORS_ORIGIN`      | `https://www.themoonexports.com`     | Production CORS       |
 | `TME_CORS_ORIGIN_DEV`  | `http://localhost:5000`              | Dev CORS              |
 | `TME_RATE_LIMIT_MAX`   | `100`                                | Requests per window   |
 | `TME_RATE_LIMIT_WINDOW`| `60`                                 | Window in seconds     |
 
 Override the port at runtime by passing it as a CLI argument (`./tme_backend 8080`).
+
+## Middleware Pipeline
+
+The server applies these middleware in order on every request:
+
+1. **CORS** — Allows configured origins (`themoonexports.com` + `localhost:5000`)
+2. **Rate Limiting** — Token-bucket: 100 req/60s, burst 200
+3. **Logging** — Structured request logging to stdout
+
+## Running Tests
+
+```bash
+cd backend/build
+ctest --output-on-failure
+```
+
+Tests include:
+- Library tests (WebLib, AsyncWebSocket, Stress) — upstream tests
+- `test_validation` — email format and string length validation
+
+## Deployment
+
+### Option 1 — Docker Compose (recommended)
+
+```bash
+cd backend
+docker compose up -d
+```
+
+This starts:
+- **backend** on port 3000 (internal), with healthcheck
+- **nginx** reverse proxy on port 80, with security headers and rate limiting
+
+### Option 2 — Standalone Docker
+
+```bash
+cd backend
+docker build -t tme-backend .
+docker run --rm -p 3000:3000 tme-backend
+```
 
 ## Dependency
 
@@ -95,7 +142,8 @@ Key library features used:
 - Flexible router with parameter extraction (`:id`)
 - Built-in JSON parser / serializer
 - Middleware pipeline (CORS, rate limiting, logging)
-- Health-check endpoint support
+- Input validation and HTML sanitization
+- Health-check and metrics endpoints
 
 ## Integration with the Frontend
 

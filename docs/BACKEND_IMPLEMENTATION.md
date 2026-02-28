@@ -1,7 +1,7 @@
 # Backend Implementation Plan
 
 **Created:** February 2026
-**Status:** 🚀 Initial scaffolding complete — API routes ready for extension
+**Status:** ✅ Milestones 1–2 complete, Milestone 5 partially complete — production-ready MVP
 **Dependency:** [modern-c-web-library v1.0.0](https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0)
 
 **Related Documents:**
@@ -60,14 +60,20 @@ The Moon Exports website is currently a static GitHub Pages site with a progress
 - [x] Add `backend/README.md` with quick-start and API docs
 - [x] Add configuration header (`include/config.h`)
 
-### Milestone 2 — Core API (Next)
+### Milestone 2 — Core API (✅ Complete)
 
-- [ ] Load product data from `products.json` at startup
-- [ ] Parse and validate contact-form JSON body (name, email, message)
-- [ ] Add input validation middleware (length, charset, email format)
-- [ ] Integrate CORS middleware using library's built-in support
-- [ ] Add rate-limiting middleware to protect public endpoints
-- [ ] Add request logging middleware
+- [x] Parse and validate contact-form JSON body (name, email, message)
+- [x] Add input validation (length, email format via library's `input_validate_*` API)
+- [x] Sanitize user input via `input_sanitize_html()` to prevent XSS
+- [x] Integrate CORS middleware using library's built-in `cors_middleware_create()`
+- [x] Add rate-limiting middleware via `ratelimit_middleware_create()` (100 req/60s)
+- [x] Add request logging middleware via `log_middleware_create()`
+- [x] Add health check endpoint via `health_check_register()`
+- [x] Add metrics endpoint via `metrics_register()`
+- [x] Add signal handling (SIGINT, SIGTERM) for graceful shutdown
+- [x] Add unit tests for validation (email, length) — CTest integration
+- [x] Add CI pipeline: backend-build job (cmake → build → test)
+- [ ] Load product data from `products.json` at startup (deferred — seed data sufficient for MVP)
 
 ### Milestone 3 — Authentication & Sessions
 
@@ -83,15 +89,18 @@ The Moon Exports website is currently a static GitHub Pages site with a progress
 - [ ] Add in-memory caching (LRU) for product listings
 - [ ] Add enquiry storage for contact submissions
 
-### Milestone 5 — Production Readiness
+### Milestone 5 — Production Readiness (✅ Partially Complete)
 
-- [ ] Enable response compression (gzip)
-- [ ] Add graceful shutdown handling
-- [ ] Set up structured JSON logging
-- [ ] Add metrics endpoint (`/metrics`)
-- [ ] Implement health-check with dependency status
+- [x] Add graceful shutdown handling (signal handler + `http_server_stop()`)
+- [x] Add structured logging via library's log middleware
+- [x] Add metrics endpoint (`/metrics`)
+- [x] Add health-check endpoint (`/healthz`)
+- [x] Multi-stage Dockerfile (builder → runtime, non-root user)
+- [x] Docker Compose with nginx reverse proxy
+- [x] nginx config with security headers, rate limiting, gzip
+- [x] Docker HEALTHCHECK instruction
+- [ ] Enable response compression (gzip) at application layer
 - [ ] Performance testing with library's benchmarking suite
-- [ ] Document deployment to VPS / container platform
 
 ### Milestone 6 — Advanced Features
 
@@ -212,12 +221,30 @@ backend-build:
 
 ## 7. Security Considerations
 
-- **CORS**: Restrict `Access-Control-Allow-Origin` to `https://www.themoonexports.com`
-- **Rate Limiting**: Token-bucket algorithm (100 req/min default)
-- **Input Validation**: Sanitise all user input (contact form fields)
-- **CSRF**: Double-submit cookie for POST endpoints
-- **TLS**: Terminate at reverse proxy; backend listens on localhost only
+- **CORS**: Restrict `Access-Control-Allow-Origin` to `https://www.themoonexports.com` (production) and `http://localhost:5000` (development)
+- **Rate Limiting**: Token-bucket algorithm (100 req/60s window, 200 burst) at application layer + nginx `limit_req_zone`
+- **Input Validation**: All contact form fields validated for length, email format; HTML sanitized via `input_sanitize_html()`
+- **CSRF**: Double-submit cookie for POST endpoints (Milestone 3)
+- **TLS**: Terminate at nginx reverse proxy; backend listens on localhost only
 - **No Secrets in Code**: API keys and credentials via environment variables, never compiled in
+- **Docker Security**: Runtime container uses non-root user (UID 1000), minimal attack surface
+- **Security Headers**: nginx adds X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, HSTS
+
+---
+
+## 8. Known Trade-offs & Technical Debt
+
+| Item | Status | Impact | Mitigation |
+|------|--------|--------|------------|
+| Product data is hardcoded (seed categories) | Deferred | No dynamic product management | Load from `products.json` in Milestone 2 follow-up |
+| Contact form submissions are logged but not stored | Deferred | Submissions lost on restart | Add persistence in Milestone 4 |
+| No authentication on any endpoints | Deferred | Admin endpoints will need auth | Planned for Milestone 3 (API key + JWT) |
+| CORS origins are compiled constants | Known | Requires rebuild to change origins | Move to env-var config in future |
+| Rate limiting is per-process (not shared) | Known | Multiple backend instances don't share limits | Acceptable for single-instance MVP |
+| No CSRF protection on POST endpoints | Deferred | Contact form relies on CORS only | Planned for Milestone 3 |
+| No response compression at application level | Deferred | Larger response payloads | nginx handles gzip; app-level compression planned |
+| Library tests (WebLib, Stress) run in CI but are upstream | Known | Failure would indicate library issue | Pin to v1.0.0 tag for stability |
+| No integration tests for full request/response cycle | Deferred | Route behaviour tested indirectly | Add HTTP-level integration tests in Milestone 2 follow-up |
 
 ---
 
