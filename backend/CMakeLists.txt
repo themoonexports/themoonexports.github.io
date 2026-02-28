@@ -6,29 +6,18 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # ── modern-c-web-library dependency ──────────────────────────────
 # The library is fetched at configure time via FetchContent.
-# Release: https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0
+# Pinned to commit that includes the FetchContent-compatible include fix (PR #59).
 include(FetchContent)
 FetchContent_Declare(
   modern_c_web_library
   GIT_REPOSITORY https://github.com/kamrankhan78694/modern-c-web-library.git
-  GIT_TAG        v1.0.0
+  GIT_TAG        eb67e79884949e1c2cdeb445b59cf4ad0efebf90
 )
 
 # Disable library sub-projects we don't need
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(modern_c_web_library)
-
-# Fix: library's CMakeLists uses CMAKE_SOURCE_DIR which doesn't work
-# with FetchContent. Add the correct include paths to both targets.
-target_include_directories(weblib PUBLIC
-  ${modern_c_web_library_SOURCE_DIR}/include
-  ${modern_c_web_library_SOURCE_DIR}/src
-)
-target_include_directories(weblib_shared PUBLIC
-  ${modern_c_web_library_SOURCE_DIR}/include
-  ${modern_c_web_library_SOURCE_DIR}/src
-)
 
 # ── Backend executable ───────────────────────────────────────────
 add_executable(tme_backend
