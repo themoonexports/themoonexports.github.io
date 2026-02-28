@@ -7,6 +7,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # ── modern-c-web-library dependency ──────────────────────────────
 # The library is fetched at configure time via FetchContent.
 # Pinned to commit that includes the FetchContent-compatible include fix (PR #59).
+# TODO: switch to a release tag (e.g. v1.1.0) once upstream publishes one.
 include(FetchContent)
 FetchContent_Declare(
   modern_c_web_library
