@@ -16,7 +16,7 @@ static void handle_list_products(http_request_t *req, http_response_t *res) {
         json_value_t *item = json_object_create();
         json_object_set(item, "id",       json_number_create(i + 1));
         json_object_set(item, "category", json_string_create(categories[i]));
-        json_array_push(items, item);
+        json_array_append(items, item);
     }
 
     json_object_set(root, "products", items);

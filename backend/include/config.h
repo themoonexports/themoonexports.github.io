@@ -1,9 +1,15 @@
 #ifndef TME_CONFIG_H
 #define TME_CONFIG_H
 
+/* ── Version ─────────────────────────────────────────────────── */
+#define TME_VERSION             "1.0.0"
+
 /* ── Server defaults ─────────────────────────────────────────── */
 #define TME_DEFAULT_PORT        3000
 #define TME_DEFAULT_HOST        "0.0.0.0"
+
+/* ── Logging ─────────────────────────────────────────────────── */
+#define TME_LOG_LEVEL           LOG_LEVEL_INFO
 
 /* ── CORS ────────────────────────────────────────────────────── */
 #define TME_CORS_ORIGIN         "https://www.themoonexports.com"
