@@ -70,13 +70,12 @@ static void handle_contact_submit(http_request_t *req, http_response_t *res) {
         return;
     }
 
-    /* Sanitize inputs against XSS and log injection */
+    /* Sanitize name and message against XSS; email is already format-validated */
     char *safe_name = input_sanitize_html(name_val->data.string_val);
-    char *safe_email = input_sanitize_html(email_val->data.string_val);
     char *safe_message = input_sanitize_html(message_val->data.string_val);
 
     printf("[contact] Received submission from: %s <%s>\n",
-           safe_name, safe_email);
+           safe_name, email_val->data.string_val);
 
     /* Build success response */
     json_value_t *ok = json_object_create();
@@ -86,7 +85,6 @@ static void handle_contact_submit(http_request_t *req, http_response_t *res) {
     json_value_free(ok);
 
     free(safe_name);
-    free(safe_email);
     free(safe_message);
     json_value_free(parsed);
 }

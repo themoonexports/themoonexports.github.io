@@ -92,7 +92,8 @@ int main(int argc, char *argv[]) {
            TME_VERSION, port);
     http_server_listen(server, port);
 
-    /* Cleanup (reached after graceful shutdown) */
+    /* Cleanup (reached after graceful shutdown).
+     * Library destroy functions are safe to call unconditionally. */
     cors_middleware_destroy();
     ratelimit_middleware_destroy();
     log_middleware_destroy();

@@ -12,6 +12,8 @@ COPY . .
 RUN mkdir -p out && cd out && \
     cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF .. && \
     make -j"$(nproc)"
+# Note: tests are disabled in production builds for smaller image size.
+# The CI pipeline (ci.yml backend-build job) runs the full test suite.
 
 # ── Stage 2: Runtime ────────────────────────────────────────────
 FROM ubuntu:22.04
