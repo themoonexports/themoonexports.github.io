@@ -2,7 +2,7 @@
 
 **Created:** February 2026
 **Status:** ✅ Milestones 1–2 complete, Milestone 5 partially complete — production-ready MVP
-**Dependency:** [modern-c-web-library v1.0.0](https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0)
+**Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
 
 **Related Documents:**
 - [Backend README](../backend/README.md) — Quick-start and API reference
@@ -52,7 +52,7 @@ The Moon Exports website is currently a static GitHub Pages site with a progress
 ### Milestone 1 — Scaffolding (✅ Complete)
 
 - [x] Create `backend/` directory with CMake build
-- [x] Add `FetchContent` for modern-c-web-library v1.0.0
+- [x] Add `FetchContent` for modern-c-web-library (tracks `main`)
 - [x] Implement `main.c` with server, router, and health check
 - [x] Add product listing routes (`GET /api/products`, `GET /api/products/:id`)
 - [x] Add contact form route (`POST /api/contact`)
@@ -251,6 +251,5 @@ backend-build:
 ## See Also
 
 - [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) — Library source and docs
-- [Release v1.0.0](https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0) — Release notes
 - [Backend README](../backend/README.md) — Quick-start guide
 - [Environment Configuration](ENVIRONMENT_CONFIGURATION.md) — API URL management

@@ -183,7 +183,7 @@ High-level project status and production deployment readiness.
   - Architecture and milestones for the C backend
   - API design (products, contact, health check)
   - Deployment strategy and security considerations
-  - Uses [modern-c-web-library v1.0.0](https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0)
+  - Uses [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
   - *See also: [Backend README](../backend/README.md)*
 
 ### 🛠️ Development & Operations

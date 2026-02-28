@@ -1,6 +1,6 @@
 # The Moon Exports — Backend API
 
-A lightweight C backend for The Moon Exports, built on top of [modern-c-web-library v1.0.0](https://github.com/kamrankhan78694/modern-c-web-library/releases/tag/v1.0.0).
+A lightweight C backend for The Moon Exports, built on top of [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks latest `main`).
 
 ## Prerequisites
 
@@ -134,7 +134,7 @@ docker run --rm -p 3000:3000 tme-backend
 
 ## Dependency
 
-This backend depends on **[modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library)** (MIT license, v1.0.0). CMake downloads and builds it automatically via `FetchContent`.
+This backend depends on **[modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library)** (MIT license, tracks `main` branch). CMake downloads and builds it automatically via `FetchContent`.
 
 Key library features used:
 
