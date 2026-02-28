@@ -216,6 +216,7 @@ With hardening complete, Phase 5 shifts focus to user experience modernization, 
 | 4 | Content Management | Medium | Evaluate headless CMS (Decap CMS/Contentful), expanded structured data |
 | 5 | Advanced Analytics | Medium | GA4 full migration, e-commerce tracking, custom dashboards |
 | 6 | PWA Exploration | Low | Service worker, web app manifest, offline catalog |
+| 7 | Backend API | Medium | C backend via [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) — see [Backend Implementation Plan](docs/BACKEND_IMPLEMENTATION.md) |
 
 ### Prerequisites (from Phase 4)
 - ✅ Legacy JS cleanup complete (≤ 6 files)

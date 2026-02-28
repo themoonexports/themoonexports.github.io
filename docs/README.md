@@ -177,6 +177,15 @@ High-level project status and production deployment readiness.
   - Translation completeness
   - SEO implementation verification
 
+### 🔧 Backend API
+
+- **[Backend Implementation Plan](BACKEND_IMPLEMENTATION.md)** ⭐ *New*
+  - Architecture and milestones for the C backend
+  - API design (products, contact, health check)
+  - Deployment strategy and security considerations
+  - Uses [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
+  - *See also: [Backend README](../backend/README.md)*
+
 ### 🛠️ Development & Operations
 
 - **[Testing Plan](TESTING_PLAN.md)**
@@ -211,6 +220,7 @@ High-level project status and production deployment readiness.
 
 | Document | Last Updated | Status | Priority |
 |----------|--------------|--------|----------|
+| Backend Implementation | Feb 2026 | ✅ Current | High |
 | Phase 3 Implementation | Feb 2026 | ✅ Current | High |
 | Production Readiness Summary | Oct 31, 2025 | ✅ Current | High |
 | Directory Structure | Nov 1, 2025 | ✅ Current | High |

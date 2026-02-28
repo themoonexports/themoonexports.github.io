@@ -224,3 +224,13 @@ jspm_packages/
 
 # DynamoDB Local files
 .dynamodb/
+
+# C/C++ build artifacts (backend/)
+backend/build/
+*.o
+*.so
+*.a
+*.dylib
+
+# CodeQL artifacts
+_codeql_detected_source_root
