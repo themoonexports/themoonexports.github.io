@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* ── Graceful shutdown ───────────────────────────────────────── */
 static http_server_t *s_server = NULL;
@@ -17,6 +18,12 @@ static void signal_handler(int sig) {
     }
 }
 
+/* ── Env-var helper (returns env value or compile-time default) ─ */
+static const char *env_or(const char *env_name, const char *fallback) {
+    const char *val = getenv(env_name);
+    return (val && val[0] != '\0') ? val : fallback;
+}
+
 /* ── Root welcome ────────────────────────────────────────────── */
 static void handle_root(http_request_t *req, http_response_t *res) {
     (void)req;
@@ -26,12 +33,17 @@ static void handle_root(http_request_t *req, http_response_t *res) {
 
 int main(int argc, char *argv[]) {
     int port = TME_DEFAULT_PORT;
+
+    /* Port: CLI arg > TME_PORT env var > config.h default */
     if (argc > 1) {
         port = atoi(argv[1]);
-        if (port <= 0 || port > 65535) {
-            fprintf(stderr, "Invalid port: %s\n", argv[1]);
-            return 1;
-        }
+    } else {
+        const char *env_port = getenv("TME_PORT");
+        if (env_port) port = atoi(env_port);
+    }
+    if (port <= 0 || port > 65535) {
+        fprintf(stderr, "Invalid port\n");
+        return 1;
     }
 
     /* Create server & router */
@@ -43,16 +55,18 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
 
-    /* ── CORS middleware ─────────────────────────────────────── */
+    /* ── CORS middleware (origins from env vars or defaults) ──── */
+    const char *cors_origin     = env_or("TME_CORS_ORIGIN",     TME_CORS_ORIGIN);
+    const char *cors_origin_dev = env_or("TME_CORS_ORIGIN_DEV", TME_CORS_ORIGIN_DEV);
     const char *allowed_origins[] = {
-        TME_CORS_ORIGIN,
-        TME_CORS_ORIGIN_DEV,
+        cors_origin,
+        cors_origin_dev,
         NULL
     };
     cors_options_t cors_opts = {
         .allowed_origins   = allowed_origins,
-        .allowed_methods   = "GET, POST, OPTIONS",
-        .allowed_headers   = "Content-Type, Authorization",
+        .allowed_methods   = "GET, POST, PUT, DELETE, OPTIONS",
+        .allowed_headers   = "Content-Type, Authorization, X-API-Key, X-CSRF-Token",
         .allow_credentials = true,
         .max_age           = 86400
     };
@@ -90,6 +104,7 @@ int main(int argc, char *argv[]) {
 
     printf("The Moon Exports backend v%s starting on port %d …\n",
            TME_VERSION, port);
+    printf("  CORS origins: %s, %s\n", cors_origin, cors_origin_dev);
     http_server_listen(server, port);
 
     /* Cleanup (reached after graceful shutdown).

@@ -2,8 +2,8 @@
 
 **Created:** March 2026  
 **Scope:** Backend Milestones 3–6 (Authentication, Persistence, Production Hardening, Advanced Features)  
-**Status:** 📋 Planning — Sprint-ready execution plan  
-**Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main`)
+**Status:** 🚀 Sprint 1 Complete — Sprint-ready execution plan  
+**Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (pinned to `90f0de91`)
 
 **Related Documents:**
 - [Backend Implementation Plan](BACKEND_IMPLEMENTATION.md) — Architecture overview and Milestone 1–2 record
@@ -261,12 +261,12 @@ Every task is:
 | S1-09 | Update `backend/README.md` — document env-var overrides, new test suite, pinned dependency | README is accurate | 30m | S1-01 through S1-08 |
 
 **Sprint 1 Exit Criteria:**
-- [ ] Library dependency pinned to specific commit SHA
-- [ ] CORS origins configurable via environment variables
-- [ ] Request body size limited to 64 KB
-- [ ] Integration tests cover all existing routes (≥ 10 test assertions)
-- [ ] CI runs expanded test suite
-- [ ] Configuration documented in `.env.backend.template`
+- [x] Library dependency pinned to specific commit SHA
+- [x] CORS origins configurable via environment variables
+- [x] Request body size limited to 64 KB
+- [x] Integration tests cover all existing routes (≥ 10 test assertions)
+- [x] CI runs expanded test suite
+- [x] Configuration documented in `.env.backend.template`
 
 ---
 

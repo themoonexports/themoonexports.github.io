@@ -6,12 +6,13 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # ── modern-c-web-library dependency ──────────────────────────────
 # The library is fetched at configure time via FetchContent.
-# Tracks the main branch so every fresh configure picks up the latest commit.
+# Pinned to a specific commit SHA for reproducible builds.
+# To upgrade: update GIT_TAG to a newer commit SHA after testing.
 include(FetchContent)
 FetchContent_Declare(
   modern_c_web_library
   GIT_REPOSITORY https://github.com/kamrankhan78694/modern-c-web-library.git
-  GIT_TAG        main
+  GIT_TAG        90f0de911f7d9cee97ab58861d156151d4853868
 )
 
 # Disable library sub-projects we don't need

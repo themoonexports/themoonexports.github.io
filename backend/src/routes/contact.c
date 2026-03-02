@@ -14,10 +14,15 @@ static void send_error(http_response_t *res, http_status_t status, const char *m
 
 /* ── POST /api/contact ───────────────────────────────────────── */
 static void handle_contact_submit(http_request_t *req, http_response_t *res) {
-    /* Body is a struct field, not a function */
+    /* Check request body size before parsing */
     const char *body = req->body;
     if (!body || body[0] == '\0') {
         send_error(res, HTTP_BAD_REQUEST, "Request body is empty");
+        return;
+    }
+    if (strlen(body) > TME_MAX_BODY_SIZE) {
+        send_error(res, HTTP_PAYLOAD_TOO_LARGE,
+                   "Request body exceeds maximum allowed size");
         return;
     }
 

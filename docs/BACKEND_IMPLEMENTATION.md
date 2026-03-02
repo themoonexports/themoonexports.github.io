@@ -1,8 +1,8 @@
 # Backend Implementation Plan
 
 **Created:** February 2026
-**Status:** ✅ Milestones 1–2 complete, Milestone 5 partially complete — production-ready MVP
-**Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
+**Status:** ✅ Milestones 1–2 complete, Sprint 1 hardening complete — production-ready MVP
+**Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (pinned to commit `90f0de91`)
 
 **Related Documents:**
 - [Backend Next Phase Plan](BACKEND_NEXT_PHASE_PLAN.md) — **First-principles plan for Milestones 3–6 (start here for next backend work)**
@@ -240,12 +240,13 @@ backend-build:
 | Product data is hardcoded (seed categories) | Deferred | No dynamic product management | Load from `products.json` in Milestone 2 follow-up |
 | Contact form submissions are logged but not stored | Deferred | Submissions lost on restart | Add persistence in Milestone 4 |
 | No authentication on any endpoints | Deferred | Admin endpoints will need auth | Planned for Milestone 3 (API key + JWT) |
-| CORS origins are compiled constants | Known | Requires rebuild to change origins | Move to env-var config in future |
+| CORS origins are compiled constants | ✅ Resolved | Requires rebuild to change origins | Now configurable via `TME_CORS_ORIGIN` env var |
 | Rate limiting is per-process (not shared) | Known | Multiple backend instances don't share limits | Acceptable for single-instance MVP |
 | No CSRF protection on POST endpoints | Deferred | Contact form relies on CORS only | Planned for Milestone 3 |
 | No response compression at application level | Deferred | Larger response payloads | nginx handles gzip; app-level compression planned |
-| Library tests (WebLib, Stress) run in CI but are upstream | Known | Failure would indicate library issue | Pin to v1.0.0 tag for stability |
-| No integration tests for full request/response cycle | Deferred | Route behaviour tested indirectly | Add HTTP-level integration tests in Milestone 2 follow-up |
+| Library tracks `main` branch | ✅ Resolved | Breaking upstream change could fail build | Pinned to commit `90f0de91` |
+| No integration tests for full request/response cycle | ✅ Resolved | Route behaviour tested indirectly | `test_routes.c` + `test_auth.c` added |
+| No request body size limit | ✅ Resolved | Large POST could exhaust memory | `TME_MAX_BODY_SIZE` (64 KB) enforced |
 
 ---
 
