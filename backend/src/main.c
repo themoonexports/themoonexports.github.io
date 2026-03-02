@@ -39,7 +39,9 @@ int main(int argc, char *argv[]) {
         port = atoi(argv[1]);
     } else {
         const char *env_port = getenv("TME_PORT");
-        if (env_port) port = atoi(env_port);
+        if (env_port && env_port[0] >= '1' && env_port[0] <= '9') {
+            port = atoi(env_port);
+        }
     }
     if (port <= 0 || port > 65535) {
         fprintf(stderr, "Invalid port\n");
