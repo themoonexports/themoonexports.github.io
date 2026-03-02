@@ -5,6 +5,7 @@
 **Dependency:** [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
 
 **Related Documents:**
+- [Backend Next Phase Plan](BACKEND_NEXT_PHASE_PLAN.md) — **First-principles plan for Milestones 3–6 (start here for next backend work)**
 - [Backend README](../backend/README.md) — Quick-start and API reference
 - [Environment Configuration](ENVIRONMENT_CONFIGURATION.md) — API URL management
 - [Phase 4 Implementation](PHASE_4_IMPLEMENTATION.md) — Current hardening phase
@@ -250,6 +251,7 @@ backend-build:
 
 ## See Also
 
+- [Backend Next Phase Plan](BACKEND_NEXT_PHASE_PLAN.md) — **First-principles plan for Milestones 3–6 (start here for next backend work)**
 - [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) — Library source and docs
 - [Backend README](../backend/README.md) — Quick-start guide
 - [Environment Configuration](ENVIRONMENT_CONFIGURATION.md) — API URL management
