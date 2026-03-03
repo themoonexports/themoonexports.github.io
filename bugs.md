@@ -217,9 +217,9 @@
 | Severity | Total | Fixed | Open |
 |----------|-------|-------|------|
 | 🔴 Critical | 4 | 3 | 1 |
-| 🟠 Major | 18 | 7 | 11 |
-| 🟡 Minor | 78 | 31 | 47 |
-| **Total** | **100** | **41** | **59** |
+| 🟠 Major | 22 | 7 | 15 |
+| 🟡 Minor | 83 | 31 | 52 |
+| **Total** | **109** | **41** | **68** |
 
 ### Fixes Applied in This Session (Homepage Focus)
 
@@ -278,3 +278,24 @@
 | V | #68 | Product grid jumps from 3 columns directly to 1 column on tablets | Missing `col-sm-6` intermediate breakpoint | ✅ Fixed |
 | W | #77 | Hidden dropdown menu items reachable via Tab | Menu item links had no `tabindex="-1"` when menu was closed | ✅ Fixed |
 | X | #96 | Scroll-to-top button flickers on fast scroll | `setState` called on every scroll event without coalescing | ✅ Fixed |
+
+---
+
+## Modern C Web Library — PR #61 Bug Audit
+
+> **Audit Date:** 2026-03-03
+> **Auditor:** kamran
+> **Scope:** [PR #61](https://github.com/kamrankhan78694/modern-c-web-library/pull/61) — Security utilities, security headers middleware, secure secret handling
+> **Files reviewed:** `src/env_config.c`, `src/security_utils.c`, `src/middleware_security_headers.c`, `src/middleware_auth.c`, `include/weblib.h`, `tests/test_weblib.c`
+
+| # | Severity | Bug | File(s) | Details | Status |
+|---|----------|-----|---------|---------|--------|
+| 101 | 🟠 | `env_config_redact` doc comment says `"***"` but code returns `"****"` | `include/weblib.h` | The doc comment reads `Short values (≤4 chars) become "***"` (3 asterisks) but the implementation in `env_config.c` returns `"****"` (4 asterisks). The test correctly asserts 4 asterisks, so the code is right but the documentation is wrong. Callers relying on the documented 3-char output will encounter a 4-char string. | Open |
+| 102 | 🟠 | Duplicated `_secure_wipe` in `env_config.c` — should use public `secure_zero` | `src/env_config.c`, `src/security_utils.c` | `env_config.c` defines a `static _secure_wipe()` that is functionally identical to the new public `secure_zero()` in `security_utils.c`. `env_secure_value_free()` calls the local copy instead of the public API. If `secure_zero()` is later improved (e.g., using `explicit_bzero`), the local duplicate won't receive the fix. The redundant function should be removed and replaced with calls to `secure_zero()`. | Open |
+| 103 | 🟠 | `security_headers_middleware_create` shallow-copies config string pointers | `src/middleware_security_headers.c` | `memcpy(g_sec_cfg, config, sizeof(*g_sec_cfg))` copies the struct including `const char *` pointer fields (`content_security_policy`, `frame_options`, `referrer_policy`, `permissions_policy`) without `strdup()`-ing them. If the caller frees or overwrites the original strings after calling `create()`, the middleware dereferences dangling pointers — use-after-free. | Open |
+| 104 | 🟠 | `middleware_auth.c` still wipes JWT secret with `memset` instead of `secure_zero` | `src/middleware_auth.c` | `jwt_auth_middleware_destroy()` calls `memset((void *)g_jwt_auth_config->secret, 0, g_jwt_auth_config->secret_len)` to wipe the secret before `free()`. The compiler is permitted to elide a `memset` immediately followed by `free` as a dead store. The PR introduces `secure_zero()` specifically to solve this, yet the existing `memset` call in `middleware_auth.c` was not updated to use the new primitive. | Open |
+| 105 | 🟡 | `env_secure_value_free` wipes `sv->len` bytes but buffer is `sv->len + 1` | `src/env_config.c` | The secret buffer is allocated as `malloc(len + 1)` (to hold the NUL terminator), but `_secure_wipe(sv->data, sv->len)` only wipes `len` bytes, leaving the final byte (the NUL terminator position) unzeroed. Should wipe `sv->len + 1` bytes to cover the full allocation. | Open |
+| 106 | 🟡 | `security_headers_middleware_destroy` does not wipe config before free | `src/middleware_security_headers.c` | The destroy function calls `free(g_sec_cfg)` directly without first zeroing the memory. The PR's own `env_secure_value_free()` sets the precedent of wiping before freeing, but the security headers config (which may contain security-sensitive policy strings) isn't treated with the same care. Should call `secure_zero(g_sec_cfg, sizeof(*g_sec_cfg))` before `free()`. | Open |
+| 107 | 🟡 | HSTS header value built in stack-local buffer | `src/middleware_security_headers.c` | `_security_headers_handler()` builds the `Strict-Transport-Security` value in a stack-local `char hsts_val[128]` and passes it to `http_response_set_header()`. If `http_response_set_header()` stores the pointer rather than copying the string, the header value becomes a dangling pointer after the function returns. This depends on the internal implementation of `http_response_set_header()` but is risky. | Open |
+| 108 | 🟡 | Global `g_sec_cfg` not thread-safe | `src/middleware_security_headers.c` | `security_headers_middleware_create()` and `_security_headers_handler()` read and write the global `g_sec_cfg` pointer without any mutex or atomic operations. Calling `create()` from one thread while the middleware handler runs on another thread is a data race (undefined behavior per C11 §5.1.2.4). The same pattern exists in CORS/CSRF middleware, but the PR description claims "All functions are safe to call from any thread" for the security utilities. | Open |
+| 109 | 🟡 | `secure_random_bytes` uses `fread` — no retry on signal interruption | `src/security_utils.c` | The POSIX path uses `fread(buf, 1, len, fp)` on `/dev/urandom`. stdio-buffered `fread` can return short on signal delivery (`EINTR`). While `/dev/urandom` reads are unlikely to be interrupted in practice, the robust approach is to use raw `read()` in a retry loop on `EINTR`, consistent with security-critical code expectations. | Open |
