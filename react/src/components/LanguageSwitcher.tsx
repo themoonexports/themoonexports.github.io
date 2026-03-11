@@ -17,7 +17,7 @@ export function LanguageSwitcher(): JSX.Element {
         <a key={lang.code} href={lang.path} aria-label={lang.label}>
           <img
             src={lang.flag}
-            alt={lang.code.toUpperCase()}
+            alt=""
             className="img-circle"
             width={25}
             height={25}
