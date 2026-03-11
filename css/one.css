@@ -760,10 +760,10 @@ body {
   padding-top: 0rem;
 }
 
-/* Hide language switcher on mobile - takes up too much space */
+/* Keep language switcher visible on mobile for locale accessibility */
 p.usano,
 div.usano {
-    display: none;
+    display: inline-flex;
 }
 
 @media (min-width: 48rem) {
