@@ -404,6 +404,7 @@ font-family: sans-serif;
     gap: 0.625rem;
   }
 
+  /* Reset the desktop flex-basis so the stacked mobile message can shrink to content height. */
   .cookie-banner__message {
     flex: 0 0 auto;
   }
@@ -548,6 +549,7 @@ color: #B3B3B3;
 margin-top: 2.1875rem;
 padding-top: 2.1875rem;
 padding-bottom: 0.625rem;
+overflow-x: hidden;
 }
 
 /* Mobile: add vertical gap between stacked footer columns (47.9375rem = 767px, just below Bootstrap md breakpoint) */
@@ -757,6 +759,7 @@ margin-bottom: 0.875rem;
 #nav-main > .container {
   position: relative;
 }
+/* Keep locale flags inside the mobile header without colliding with the hamburger toggle. */
 .usano,
 div.usano {
   position: absolute;
@@ -1942,6 +1945,7 @@ span.caret:before {
     font-size: 0.9375rem;
   }
 
+  /* Product cards */
   .frontthree {
     margin-top: 1.5rem;
   }
@@ -1957,6 +1961,7 @@ span.caret:before {
     font-size: 0.8125rem;
   }
 
+  /* USP and process cards */
   .usp-card,
   .process-step {
     padding: 1.25rem;
