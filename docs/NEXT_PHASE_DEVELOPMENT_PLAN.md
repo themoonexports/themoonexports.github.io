@@ -11,6 +11,16 @@
 - [Security Checklist](SECURITY_CHECKLIST.md) — Security remediation tracking
 - [Testing Plan](TESTING_PLAN.md) — QA procedures and test matrix
 
+## Execution Outputs (Build-Ready Artifacts)
+
+| Required Output | Where It Lives in This Plan |
+|-----------------|-----------------------------|
+| Architecture + reasoning | Sections **2** and **4** |
+| Milestone roadmap (1–2 week slices) | Sections **5** and **9** |
+| Task breakdown (atomic, assignable) | Section **5** |
+| Validation + QA checklist | Sections **6** and **7** |
+| Security + risk mitigation notes | Section **8** |
+
 ---
 
 ## 0. Idea Intake
