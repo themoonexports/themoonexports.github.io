@@ -49,6 +49,7 @@ Remove or reduce legacy vanilla JavaScript files that have been superseded by Re
 ### Checklist
 - [x] Audit each legacy JS file for callers across all HTML pages
 - [x] Remove `js/auto-year-update.js` from pages where Footer.tsx handles copyright year (9 product/content pages removed)
+- [x] Remove dead legacy JS from locale directories (`de/js/npm.js`, `de/js/application.js`, `fr/js/npm.js`, `fr/js/application.js`)
 - [ ] Remove dead code paths in `js/forms.js` covered by React forms
 - [ ] Unify consent state: `js/consent.js` ↔ `CookieSettings.tsx` share `localStorage['tme_cookie_consent_v1']`
 - [ ] Remove unused exports from `js/components.js`
@@ -82,7 +83,10 @@ Establish automated quality gates that run on every push and pull request to cat
 - [x] Add `npm audit --audit-level=high` to CI pipeline
 - [ ] Add HTML validation for all pages
 - [ ] Configure PR status checks to require CI pass before merge
-- [ ] Add smoke test: verify all `data-react` mount points exist in built HTML
+- [x] Add smoke test: verify all `data-react` mount points exist in built HTML (mount parity check in CI)
+- [x] Add locale CSS parity check to CI (crafts-ui.css in de/css/ and fr/css/)
+- [x] Add hreflang validation to CI (en, de, fr, x-default on index pages)
+- [x] Add dead legacy JS check for locale directories
 
 ---
 
@@ -215,8 +219,8 @@ Establish observability for the production site to catch issues before users rep
 ### Tasks
 
 #### Error Tracking
+- [x] Add global error handler for React components (`ErrorBoundary` + `mountComponent` utility)
 - [ ] Evaluate error tracking options (Sentry free tier, LogRocket, or custom)
-- [ ] Add global error handler for React components (`ErrorBoundary`)
 - [ ] Log hydration failures and React rendering errors
 - [ ] Set up alert thresholds for error rates
 
@@ -284,14 +288,15 @@ Establish observability for the production site to catch issues before users rep
 | Lighthouse Accessibility | TBD | 90+ |
 | Lighthouse SEO | TBD | 90+ |
 | Bundle Budget Violations | 0 | 0 (enforced by CI) |
-| Legacy JS Files (custom, with callers) | 7 (5 have zero callers) | ≤ 4 |
-| Automated Test Coverage | 0% | Build + lint + bundle check + inline count + mount parity |
-| i18n Page Parity (DE/FR vs EN mounts) | 4/14 (28%) | 14/14 (100%) |
+| Legacy JS Files (custom, with callers) | 4 (navigation, consent, auto-year-update, components) | ≤ 4 |
+| Automated Test Coverage | CI: lint + build + tsc + bundle + audit + validation | Build + lint + bundle check + inline count + mount parity |
+| i18n Page Parity (DE/FR vs EN mounts) | 14/14 (100%) | 14/14 (100%) |
 | Executable Inline Scripts | 61 | ≤ 15 |
 | CSP Violations | No CSP deployed | 0 (enforced) |
-| jQuery Versions | 2 (3.6.0 + 3.7.1) | 1 |
-| IE Shims Present | 13 files | 0 |
+| jQuery Versions | 1 (3.7.1) | 1 |
+| IE Shims Present | 0 in main pages | 0 |
 | SRI Hash Coverage | Partial | 100% external scripts |
+| ErrorBoundary Coverage | 16/17 entry points (all except consent.ts) | 100% |
 
 ---
 
@@ -321,4 +326,4 @@ Phase 4 continues to follow established project conventions:
 ---
 
 *Phase 4 Planning Date: February 2026*  
-*Last Updated: February 2026*
+*Last Updated: March 2026*
