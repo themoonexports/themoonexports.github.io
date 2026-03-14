@@ -20,6 +20,11 @@ export function mountComponent(name: string, element: ReactNode): void {
   );
 
   if (!container) {
+    // Container not present on this page — that's expected (not all pages
+    // mount every component). Log at debug level for development diagnostics.
+    if (typeof console !== 'undefined' && console.debug) {
+      console.debug(`[mount:${name}] No container found — skipping`);
+    }
     return;
   }
 

@@ -172,7 +172,10 @@ jobs:
           echo "FR mounts: $FR_COUNT"
           if [ "$EN_COUNT" != "$DE_COUNT" ] || [ "$EN_COUNT" != "$FR_COUNT" ]; then
             echo "FAIL: Mount count mismatch (EN=$EN_COUNT, DE=$DE_COUNT, FR=$FR_COUNT)"
+            echo "EN vs DE diff:"
             diff <(echo "$EN_MOUNTS") <(echo "$DE_MOUNTS") || true
+            echo "EN vs FR diff:"
+            diff <(echo "$EN_MOUNTS") <(echo "$FR_MOUNTS") || true
             exit 1
           fi
           echo "OK: All locales have matching mount counts"
