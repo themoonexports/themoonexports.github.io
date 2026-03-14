@@ -101,7 +101,7 @@ The main bug tracker (`bugs.md`) tracks **100 issues** total, with **41 fixed** 
 | 94 | Inline `<style>` blocks in HTML body | `about.html`, `contact.html` |
 | 95 | SRI hash mismatch on jQuery | `index.html` |
 | 97 | AccessibilityWidget font-size changes not announced | `AccessibilityWidget.tsx` |
-| 100 | No global React error boundary | All React entry points |
+| 100 | ~~No global React error boundary~~ | ~~All React entry points~~ | ✅ Fixed — ErrorBoundary + mountComponent utility wraps all 16 entry points |
 
 </details>
 
@@ -149,10 +149,8 @@ The claimed 72% security score cannot be independently verified since CSP and HS
 
 | File | Referenced By | Impact |
 |------|-------------|--------|
-| `de/css/crafts-ui.css` | `de/index.html` and other DE pages | 🔴 Broken styles on German pages — cookie settings, scroll-to-top, accessibility widget styles missing |
-| `fr/css/crafts-ui.css` | `fr/index.html` and other FR pages | 🔴 Same — broken styles on French pages |
-
-Root `css/crafts-ui.css` exists but the locale directories reference a locale-relative path that resolves to non-existent files.
+| ~~`de/css/crafts-ui.css`~~ | `de/index.html` and other DE pages | ✅ Fixed — copied from root `css/crafts-ui.css` |
+| ~~`fr/css/crafts-ui.css`~~ | `fr/index.html` and other FR pages | ✅ Fixed — copied from root `css/crafts-ui.css` |
 
 ### Missing Images
 
@@ -173,11 +171,11 @@ Root `css/crafts-ui.css` exists but the locale directories reference a locale-re
 
 | File | Reason |
 |------|--------|
-| `.htaccess.new` | Identical to `.htaccess` — serves no purpose |
+| ~~`.htaccess.new`~~ | ✅ Deleted — was identical to `.htaccess` |
 | `backup/about-horn-plates.htm` | Old product page backup — should not be in version control |
 | `backup/Buffalo Horn Plates filtered_files/` | Old image exports — should not be in version control |
-| `de/js/npm.js`, `de/js/application.js` | Legacy dead code — zero callers |
-| `fr/js/npm.js`, `fr/js/application.js` | Legacy dead code — zero callers |
+| ~~`de/js/npm.js`, `de/js/application.js`~~ | ✅ Deleted — legacy dead code with zero callers |
+| ~~`fr/js/npm.js`, `fr/js/application.js`~~ | ✅ Deleted — legacy dead code with zero callers |
 | `instago/js/npm.js`, `instago/js/application.js` | Legacy dead code — zero callers |
 
 ---
@@ -304,12 +302,11 @@ These should reference a single copy via absolute paths or CDN.
 
 ### Dead JavaScript Files in Locale Directories
 
-| File | Size | Callers |
-|------|------|---------|
-| `de/js/npm.js` | 484 B | 0 |
-| `de/js/application.js` | 576 B | 0 |
-| `fr/js/npm.js` | 484 B | 0 |
-| `fr/js/application.js` | 576 B | 0 |
+✅ **Fixed** — All dead locale JS files have been deleted:
+- ~~`de/js/npm.js`~~, ~~`de/js/application.js`~~
+- ~~`fr/js/npm.js`~~, ~~`fr/js/application.js`~~
+
+Remaining: `instago/js/npm.js`, `instago/js/application.js` (low priority, instago subsite)
 | `instago/js/npm.js` | 484 B | 0 |
 | `instago/js/application.js` | 576 B | 0 |
 

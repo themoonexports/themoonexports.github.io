@@ -171,12 +171,62 @@ jobs:
           echo "DE mounts: $DE_COUNT"
           echo "FR mounts: $FR_COUNT"
           if [ "$EN_COUNT" != "$DE_COUNT" ] || [ "$EN_COUNT" != "$FR_COUNT" ]; then
-            echo "WARN: Mount count mismatch (EN=$EN_COUNT, DE=$DE_COUNT, FR=$FR_COUNT)"
-            echo "EN-only mounts:"
+            echo "FAIL: Mount count mismatch (EN=$EN_COUNT, DE=$DE_COUNT, FR=$FR_COUNT)"
             diff <(echo "$EN_MOUNTS") <(echo "$DE_MOUNTS") || true
-          else
-            echo "OK: All locales have matching mount counts"
+            exit 1
           fi
+          echo "OK: All locales have matching mount counts"
+
+      - name: Check locale CSS parity (crafts-ui.css)
+        run: |
+          echo "Checking locale CSS parity..."
+          FAILED=0
+          for locale in de fr; do
+            if [ ! -f "$locale/css/crafts-ui.css" ]; then
+              echo "FAIL: $locale/css/crafts-ui.css is missing"
+              FAILED=1
+            fi
+          done
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "OK: crafts-ui.css present in all locale directories"
+
+      - name: Check dead legacy JS in locale directories
+        run: |
+          echo "Checking for dead legacy JS in locale directories..."
+          FAILED=0
+          for f in de/js/npm.js de/js/application.js fr/js/npm.js fr/js/application.js; do
+            if [ -f "$f" ]; then
+              echo "FAIL: $f should be deleted (zero callers)"
+              FAILED=1
+            fi
+          done
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "OK: No dead legacy JS in locale directories"
+
+      - name: Check hreflang tags on index pages
+        run: |
+          echo "Checking hreflang tags..."
+          FAILED=0
+          for page in index.html de/index.html fr/index.html; do
+            if [ ! -f "$page" ]; then
+              echo "WARN: $page not found (skipping)"
+              continue
+            fi
+            for lang in en de fr x-default; do
+              if ! grep -q "hreflang=\"$lang\"" "$page"; then
+                echo "FAIL: $page missing hreflang=\"$lang\""
+                FAILED=1
+              fi
+            done
+          done
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "OK: All index pages have complete hreflang tags"
 
   backend-build:
     name: Build & test backend
