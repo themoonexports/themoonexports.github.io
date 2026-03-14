@@ -28,6 +28,13 @@ High-level project status and production deployment readiness.
   - React migration progress
   - Outstanding items and roadmap
 
+- **[Outstanding Work & Bugs](OUTSTANDING_WORK_AND_BUGS.md)** ⭐ *New*
+  - Comprehensive audit of all open bugs (59 open from bugs.md)
+  - Documentation vs reality discrepancies
+  - Missing/broken assets, security issues, accessibility gaps
+  - Phase 4 implementation status and priority recommendations
+  - *See also: [bugs.md](../bugs.md), [Phase 4 Implementation](PHASE_4_IMPLEMENTATION.md)*
+
 - **[Production Readiness Assessment](PRODUCTION_READINESS_ASSESSMENT.md)**
   - Historical baseline assessment (June 2024)
   - Critical issues identified and resolved
@@ -220,6 +227,7 @@ High-level project status and production deployment readiness.
 
 | Document | Last Updated | Status | Priority |
 |----------|--------------|--------|----------|
+| Outstanding Work & Bugs | Mar 2026 | ✅ Current | High |
 | Backend Implementation | Feb 2026 | ✅ Current | High |
 | Phase 3 Implementation | Feb 2026 | ✅ Current | High |
 | Production Readiness Summary | Oct 31, 2025 | ✅ Current | High |
@@ -247,7 +255,8 @@ High-level project status and production deployment readiness.
 
 ### For New Developers
 1. [Production Readiness Summary](PRODUCTION_READINESS_SUMMARY.md)
-2. [Directory Structure](DIRECTORY_STRUCTURE.md)
+2. [Outstanding Work & Bugs](OUTSTANDING_WORK_AND_BUGS.md)
+3. [Directory Structure](DIRECTORY_STRUCTURE.md)
 3. [Modular Components](MODULAR_COMPONENTS.md)
 4. [Background Component](BACKGROUND_COMPONENT.md)
 5. [react-refactoring.md](../react-refactoring.md)
