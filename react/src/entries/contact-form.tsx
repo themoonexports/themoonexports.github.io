@@ -1,8 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { mountComponent } from '../utils/mountComponent';
 import ContactForm from '../components/ContactForm';
 
-const mount = document.querySelector('#contact-form[data-react="contact-form"]');
-if (mount) {
-  createRoot(mount).render(<ContactForm />);
-}
+mountComponent('contact-form', <ContactForm />);
