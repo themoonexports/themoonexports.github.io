@@ -124,7 +124,7 @@
 }
 .chip-crafts.active { background: #24341c; border-color: #5CA316; }
 
-/* Make SocialLinks anchors share socialm anchor styling */
+/* Make SocialLinks anchors share social anchor styling */
 .social-links a { all: unset; }
 .social-links a {
   position: relative;
