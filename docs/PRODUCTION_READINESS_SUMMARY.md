@@ -36,8 +36,8 @@ The Moon Exports website has undergone comprehensive security and production rea
 - ✅ **Mixed Content Vulnerabilities**: Fixed 85+ HTTP → HTTPS URLs
 - ✅ **jQuery Security**: Updated from vulnerable 1.11.2 to secure 3.7.1 LTS
 - ✅ **Font Awesome**: Updated from 4.3.0 to 6.5.0 with proper SRI hashes
-- ✅ **Security Headers**: Implemented CSP, HSTS, X-Frame-Options, X-XSS-Protection
-- ✅ **Firebase Configuration**: Added comprehensive security headers
+- ✅ **Security Headers**: Implemented X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy, HSTS, and CSP via `.htaccess`
+- ✅ **Firebase Configuration**: Database rules set to deny-all (read/write: false)
 - ✅ **Legacy Browser Code**: Removed IE8/9 compatibility scripts (security risk)
 - ✅ **Cookie Consent Controls**: Introduced consent banner with analytics gating to align with privacy expectations
 

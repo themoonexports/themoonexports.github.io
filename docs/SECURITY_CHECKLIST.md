@@ -23,12 +23,12 @@
 - [ ] Update social media links to HTTPS where applicable
 
 #### 🔄 Security Headers Implementation
-- [x] Added Content Security Policy (CSP) to Firebase hosting
+- [x] Added Content Security Policy (CSP) via `.htaccess`
 - [x] Added X-Content-Type-Options: nosniff
 - [x] Added X-Frame-Options: DENY
 - [x] Added X-XSS-Protection: 1; mode=block
 - [x] Added Referrer-Policy: strict-origin-when-cross-origin
-- [x] Added Strict-Transport-Security (HSTS)
+- [x] Added Strict-Transport-Security (HSTS) via `.htaccess`
 - [ ] Test and refine CSP policy based on actual usage
 - [ ] Add CSP reporting endpoint
 
