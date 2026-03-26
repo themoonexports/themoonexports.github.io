@@ -158,66 +158,173 @@ This document outlines the migration path from the current static HTML/CSS + Rea
 | **Search** | Meilisearch or Algolia | Full-text product search (replaces deferred client-side search) |
 | **Storage** | S3 / DigitalOcean Spaces | Product images, media uploads |
 
-### Performance & PHP's Upstream C Engine
+### Integration with modern-c-web-library
 
-PHP's core engine (Zend Engine) is **implemented in C**. This means Laravel already runs on a high-performance C backend — every PHP function call, array operation, string manipulation, and database driver ultimately executes compiled C code. The proposed stack fully leverages this upstream C implementation.
+The team maintains [**modern-c-web-library**](https://github.com/kamrankhan78694/modern-c-web-library) — a production-ready pure ISO C web framework (v1.0.0, 129/129 tests passing) with zero external dependencies. It provides a full HTTP server, WebSocket support, routing, middleware chain, JWT/Basic/API Key auth, rate limiting, session management, template engine, JSON parser, LRU cache, gzip compression, database connection pooling, and async I/O via epoll/kqueue.
 
-#### How PHP's C Backend Powers Laravel
+The migration plan must account for this existing C backend and define how it coexists with the proposed Laravel + Inertia.js stack.
+
+#### Feature Overlap: C Library vs. Laravel
+
+| Capability | modern-c-web-library | Laravel + Inertia.js | Strategy |
+|---|---|---|---|
+| HTTP server | ✅ Multi-threaded + async I/O (epoll/kqueue) | ✅ PHP-FPM or Octane (Swoole/FrankenPHP) | C handles raw performance; Laravel handles application logic |
+| Routing | ✅ Route params (`:id` syntax) | ✅ Named routes, resource controllers, middleware groups | Laravel for web pages; C for API/compute endpoints |
+| Middleware | ✅ CORS, rate limit, auth, CSRF, logging, metrics | ✅ Same, plus Inertia SSR, localization, consent | Laravel's middleware is richer for web apps |
+| Authentication | ✅ Basic Auth, API Key, JWT (HMAC-SHA256) | ✅ Laravel Sanctum/Passport, session auth, OAuth | Laravel for user-facing auth; C for service-to-service |
+| JSON handling | ✅ Built-in parser/serializer | ✅ Native PHP `json_encode`/`json_decode` (C extension) | Both fast; use context-appropriate |
+| WebSocket | ✅ RFC 6455 (threaded + async) | ⚠️ Requires Laravel Reverb or Soketi | C library has native advantage for real-time |
+| Sessions | ✅ Cookie-based, server-side | ✅ File/Redis/DB drivers, encrypted | Laravel for web sessions; C for stateless API |
+| Template engine | ✅ `{{ variable }}` syntax | ✅ Blade + Inertia.js SSR (React) | Laravel + React for full UI; C templates for simple responses |
+| Database | ✅ Connection pooling | ✅ Eloquent ORM, migrations, seeders | Laravel for CRUD/admin; C pool for bulk queries |
+| Caching | ✅ LRU (in-memory, TTL) | ✅ Redis/Memcached drivers | C for hot-path cache; Redis for distributed cache |
+| Rate limiting | ✅ Token bucket (IP-based) | ✅ Redis-backed, configurable | C at the edge; Laravel for application-level |
+| Compression | ✅ Pure C gzip (RFC 1952) | ✅ Nginx gzip / PHP zlib | Nginx/C library handles compression before Laravel |
+| Static files | ✅ MIME detection, ETag, path traversal prevention | ✅ Nginx or Laravel public/ | Nginx or C library for static assets |
+| i18n / Localization | ❌ Not built-in | ✅ Full localization system (lang files, pluralization) | Laravel handles all i18n |
+| ORM / Migrations | ❌ Raw SQL only | ✅ Eloquent ORM, schema builder, seeders | Laravel for data modeling |
+| Admin panels | ❌ Not applicable | ✅ Filament / Nova | Laravel for content management |
+| React SSR | ❌ Not applicable | ✅ Inertia.js server-side rendering | Laravel + Inertia for React pages |
+
+#### Recommended Architecture: C Library as Performance Layer
+
+Rather than choosing one stack over the other, they complement each other. The C library excels at raw throughput, WebSocket, and compute-heavy endpoints; Laravel + Inertia excels at application logic, i18n, admin, and React SSR.
 
 ```
-┌─────────────────────────────────────────────────┐
-│              Laravel Application                │
-│  (PHP userland: routes, controllers, Eloquent)  │
-├─────────────────────────────────────────────────┤
-│              Zend Engine (C)                     │
-│  ├── Bytecode compiler + executor               │
-│  ├── Memory manager (custom allocator)          │
-│  ├── JIT compiler (PHP 8.0+, LLVM-based)       │
-│  └── Type system + opcode optimizer             │
-├─────────────────────────────────────────────────┤
-│           C Extensions (loaded as .so)          │
-│  ├── OPcache — bytecode caching, no re-parse    │
-│  ├── PDO/MySQLnd — native C database drivers    │
-│  ├── cURL — HTTP client (libcurl)               │
-│  ├── mbstring, json, zlib — all native C        │
-│  └── php-redis — C extension for Redis          │
-├─────────────────────────────────────────────────┤
-│           Operating System (Linux)              │
-│  ├── epoll/kqueue — async I/O                   │
-│  └── TCP/Unix sockets — network layer           │
-└─────────────────────────────────────────────────┘
+                    ┌─────────────────┐
+   User Request ──▶ │   Nginx         │
+                    │  (reverse proxy) │
+                    └────────┬────────┘
+                             │
+                ┌────────────┴────────────┐
+                │                         │
+   ┌────────────▼────────────┐  ┌────────▼──────────────────┐
+   │  Laravel + Inertia.js   │  │  modern-c-web-library     │
+   │  (application layer)    │  │  (performance layer)      │
+   │                         │  │                           │
+   │  • Web pages (React SSR)│  │  • WebSocket connections  │
+   │  • Product catalog UI   │  │  • Real-time data feeds   │
+   │  • Contact forms        │  │  • High-throughput API    │
+   │  • Admin panel          │  │  • Compute endpoints      │
+   │  • i18n (EN/DE/FR)      │  │  • Health/metrics         │
+   │  • Auth (user-facing)   │  │  • Auth (service-level)   │
+   │  • Consent / GDPR       │  │  • Rate limiting (edge)   │
+   │                         │  │                           │
+   │  Port 8000              │  │  Port 9000                │
+   └────────────┬────────────┘  └────────┬──────────────────┘
+                │                         │
+                └────────────┬────────────┘
+                             │
+                    ┌────────▼────────┐
+                    │   Data Layer    │
+                    │  MySQL / Redis  │
+                    └─────────────────┘
 ```
 
-#### Performance Features Already in PHP's C Engine
+**Nginx routing rules:**
 
-| Feature | How It Works | Impact |
+| Path Pattern | Routed To | Rationale |
 |---|---|---|
-| **OPcache** | Compiles PHP to bytecode once, caches in shared memory — eliminates file parsing on every request | 2–3× throughput increase |
-| **JIT Compiler** (PHP 8.0+) | Compiles hot bytecode paths to native machine code at runtime via LLVM | Up to 3× for CPU-bound work |
-| **Preloading** (PHP 7.4+) | Loads framework classes into memory at server start — zero file I/O per request | Eliminates ~1000 file reads per Laravel request |
-| **Native C extensions** | Database drivers (MySQLnd, PDO), JSON encoding, string ops — all run as compiled C, not interpreted PHP | Near-native speed for I/O and data processing |
-| **Fibers** (PHP 8.1+) | Lightweight concurrency primitives (used by Laravel Octane) — C-level coroutine switching | High concurrency without threads |
+| `/` , `/products/*`, `/contact`, `/faq`, `/about`, `/legal/*` | Laravel (port 8000) | Web pages — need Inertia SSR, i18n, consent |
+| `/{locale}/*` (e.g. `/de/*`, `/fr/*`) | Laravel (port 8000) | Localized pages — Laravel i18n handles this |
+| `/ws/*` | C library (port 9000) | WebSocket — C library has native async support |
+| `/api/v1/*` | C library (port 9000) | High-throughput JSON API — C's raw speed |
+| `/healthz`, `/metrics` | C library (port 9000) | Built-in C library endpoints |
+| `/admin/*` | Laravel (port 8000) | Admin panel — Filament/Nova |
+| `/api/ai/*` | Python AI service (port 8001) | ML/recommendations — Python ecosystem |
 
-#### Benchmarks: Laravel with PHP's C Optimizations
+#### Performance Comparison
 
-| Configuration | Requests/sec | Notes |
-|---|---|---|
-| Laravel + PHP-FPM (OPcache) | ~500–1,500 | Standard production setup |
-| Laravel + Octane (Swoole) | ~3,000–8,000 | Application kept in memory between requests, C-based Swoole event loop |
-| Laravel + Octane (FrankenPHP) | ~2,000–6,000 | Written in Go, embeds PHP; HTTP/3, early hints |
-| Static site (current) | N/A (CDN-served) | No server processing; CDN latency only |
+| Metric | modern-c-web-library | Laravel + Octane | Notes |
+|---|---|---|---|
+| Raw HTTP throughput | ~50,000–100,000 req/s | ~3,000–8,000 req/s | C is 10–30× faster for raw HTTP |
+| WebSocket connections | Thousands (async epoll) | Requires Reverb/Soketi | C library has native advantage |
+| Memory per connection | ~KB range | ~MB range (PHP process) | C is significantly leaner |
+| Time to first response | < 0.1ms | ~1–5ms (framework boot) | C wins for latency-critical paths |
+| Development speed | Slower (manual C) | Fast (Eloquent, Blade, Artisan) | Laravel wins for feature velocity |
+| i18n / localization | Manual implementation needed | Built-in, battle-tested | Laravel wins for multi-language |
+| React SSR | Not applicable | Native via Inertia.js | Laravel required for React pages |
 
-**Key point:** With OPcache + JIT + Octane, Laravel running on PHP's upstream C engine handles thousands of requests per second — more than sufficient for an e-commerce catalog site. The C engine does the heavy lifting; PHP userland code is a thin orchestration layer on top.
+**Bottom line:** The C library handles performance-critical paths (WebSocket, high-throughput API, real-time feeds) at native speed. Laravel handles everything that benefits from a rich application framework (React SSR, i18n, ORM, admin panels, form validation, consent gating). Nginx routes each request to the right backend.
 
-#### Maximizing PHP's C Engine Performance
+#### Docker Compose: Both Services
 
-The migration plan includes these optimizations by default:
+```yaml
+# docker-compose.yml
+services:
+  # Laravel application (web pages, admin, i18n)
+  app:
+    build: .
+    ports: ["8000:8000"]
+    depends_on: [mysql, redis, ai-service]
+    volumes: [".:/var/www/html"]
 
-1. **OPcache enabled** with `opcache.jit=tracing` for JIT compilation
-2. **Preloading** configured to load Laravel's framework classes at startup
-3. **Laravel Octane** (Swoole or FrankenPHP) to keep the application in memory
-4. **Native C extensions** for all I/O: php-redis, MySQLnd, php-curl
-5. **Redis** for session/cache (C-based server + C PHP extension = minimal overhead)
+  # modern-c-web-library (high-perf API, WebSocket)
+  c-backend:
+    build:
+      context: ./c-backend              # Clone of modern-c-web-library
+      dockerfile: Dockerfile
+    ports: ["9000:9000"]
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
+
+  # Python AI service
+  ai-service:
+    build: ./ai-service
+    ports: ["8001:8001"]
+
+  # Nginx reverse proxy (routes traffic)
+  nginx:
+    image: nginx:alpine
+    ports: ["80:80", "443:443"]
+    volumes: ["./nginx.conf:/etc/nginx/nginx.conf"]
+    depends_on: [app, c-backend, ai-service]
+
+  mysql:
+    image: mysql:8
+    ports: ["3306:3306"]
+    environment:
+      MYSQL_DATABASE: themoonexports
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+```
+
+#### Laravel → C Library Communication
+
+When Laravel needs C-level performance for a specific operation, it can call the C backend internally:
+
+```php
+// app/Services/CBackendService.php
+class CBackendService
+{
+    public function __construct(
+        private HttpClient $http,
+        private string $baseUrl = 'http://c-backend:9000',
+    ) {}
+
+    /**
+     * Call the C backend for high-throughput operations.
+     * Laravel handles auth/i18n/rendering; C handles computation.
+     */
+    public function apiCall(string $endpoint, array $data = []): array
+    {
+        return $this->http
+            ->timeout(5)
+            ->post("{$this->baseUrl}/api/v1/{$endpoint}", $data)
+            ->json();
+    }
+
+    public function healthCheck(): array
+    {
+        return $this->http->get("{$this->baseUrl}/healthz")->json();
+    }
+}
+```
 
 ### Directory Structure (Target)
 
