@@ -18,12 +18,11 @@
 5. [Phase Breakdown](#5-phase-breakdown)
 6. [Component Mapping](#6-component-mapping)
 7. [Python AI Service](#7-python-ai-service)
-8. [C Backend Integration](#8-c-backend-integration)
-9. [Infrastructure & Deployment](#9-infrastructure--deployment)
-10. [Data Migration](#10-data-migration)
-11. [Risk Assessment](#11-risk-assessment)
-12. [Success Criteria](#12-success-criteria)
-13. [Timeline & Milestones](#13-timeline--milestones)
+8. [Infrastructure & Deployment](#8-infrastructure--deployment)
+9. [Data Migration](#9-data-migration)
+10. [Risk Assessment](#10-risk-assessment)
+11. [Success Criteria](#11-success-criteria)
+12. [Timeline & Milestones](#12-timeline--milestones)
 
 ---
 
@@ -111,37 +110,37 @@ This document outlines the migration path from the current static HTML/CSS + Rea
 ### High-Level Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                         Reverse Proxy (Nginx)                           │
-│                       SSL termination, routing                          │
-├──────────────────┬─────────────────────┬────────────────────────────────┤
-│                  │                     │                                │
-│  Laravel App     │  Python AI Service  │  C Backend Service (optional)  │
-│  (PHP 8.2+)     │  (FastAPI)          │  (existing high-perf service)  │
-│  ├── Routes      │  ├── /ai/recommend  │  ├── /api/compute/*           │
-│  ├── Controllers │  ├── /ai/search     │  ├── /api/bulk-process/*      │
-│  ├── Middleware   │  ├── /ai/image      │  └── /api/health              │
-│  ├── Eloquent    │  └── /ai/health     │                                │
-│  ├── Blade       │                     │  Exposed via internal HTTP     │
-│  └── Inertia SSR │  Internal HTTP      │  or Unix socket for speed      │
-│                  │                     │                                │
-├──────────────────┴─────────────────────┴────────────────────────────────┤
-│                                                                        │
-│  Frontend (Vite + React + Tailwind CSS)                                │
-│  ├── Inertia.js React adapter                                          │
-│  ├── Pages/ (one per route)                                            │
-│  ├── Components/ (migrated from react/src/components/)                 │
-│  ├── Layouts/ (replaces current HTML templates)                        │
-│  └── Tailwind CSS (replaces Bootstrap 3)                               │
-│                                                                        │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                        │
-│  Data Layer                                                            │
-│  ├── MySQL / PostgreSQL (products, orders, users, content)             │
-│  ├── Redis (sessions, cache, queues)                                   │
-│  └── S3-compatible storage (images, media)                             │
-│                                                                        │
-└────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                     Reverse Proxy (Nginx)                    │
+│                   SSL termination, routing                   │
+├──────────────────────┬───────────────────────────────────────┤
+│                      │                                       │
+│  Laravel Application │   Python AI Service                   │
+│  (PHP 8.2+)         │   (FastAPI / Flask)                   │
+│  ├── Routes          │   ├── /api/recommendations            │
+│  ├── Controllers     │   ├── /api/search                     │
+│  ├── Middleware       │   ├── /api/image-analysis             │
+│  ├── Eloquent Models │   └── /api/health                     │
+│  ├── Blade layouts   │                                       │
+│  └── Inertia.js SSR  │   Communicates via internal HTTP      │
+│                      │                                       │
+├──────────────────────┴───────────────────────────────────────┤
+│                                                              │
+│  Frontend (Vite + React + Tailwind CSS)                      │
+│  ├── Inertia.js React adapter                                │
+│  ├── Pages/ (one per route)                                  │
+│  ├── Components/ (migrated from react/src/components/)       │
+│  ├── Layouts/ (replaces current HTML templates)              │
+│  └── Tailwind CSS (replaces Bootstrap 3)                     │
+│                                                              │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Data Layer                                                  │
+│  ├── MySQL / PostgreSQL (products, orders, users, content)   │
+│  ├── Redis (sessions, cache, queues)                         │
+│  └── S3-compatible storage (images, media)                   │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### Technology Stack
@@ -158,6 +157,67 @@ This document outlines the migration path from the current static HTML/CSS + Rea
 | **Cache/Queue** | Redis | Session storage, cache, background job queues |
 | **Search** | Meilisearch or Algolia | Full-text product search (replaces deferred client-side search) |
 | **Storage** | S3 / DigitalOcean Spaces | Product images, media uploads |
+
+### Performance & PHP's Upstream C Engine
+
+PHP's core engine (Zend Engine) is **implemented in C**. This means Laravel already runs on a high-performance C backend — every PHP function call, array operation, string manipulation, and database driver ultimately executes compiled C code. The proposed stack fully leverages this upstream C implementation.
+
+#### How PHP's C Backend Powers Laravel
+
+```
+┌─────────────────────────────────────────────────┐
+│              Laravel Application                │
+│  (PHP userland: routes, controllers, Eloquent)  │
+├─────────────────────────────────────────────────┤
+│              Zend Engine (C)                     │
+│  ├── Bytecode compiler + executor               │
+│  ├── Memory manager (custom allocator)          │
+│  ├── JIT compiler (PHP 8.0+, LLVM-based)       │
+│  └── Type system + opcode optimizer             │
+├─────────────────────────────────────────────────┤
+│           C Extensions (loaded as .so)          │
+│  ├── OPcache — bytecode caching, no re-parse    │
+│  ├── PDO/MySQLnd — native C database drivers    │
+│  ├── cURL — HTTP client (libcurl)               │
+│  ├── mbstring, json, zlib — all native C        │
+│  └── php-redis — C extension for Redis          │
+├─────────────────────────────────────────────────┤
+│           Operating System (Linux)              │
+│  ├── epoll/kqueue — async I/O                   │
+│  └── TCP/Unix sockets — network layer           │
+└─────────────────────────────────────────────────┘
+```
+
+#### Performance Features Already in PHP's C Engine
+
+| Feature | How It Works | Impact |
+|---|---|---|
+| **OPcache** | Compiles PHP to bytecode once, caches in shared memory — eliminates file parsing on every request | 2–3× throughput increase |
+| **JIT Compiler** (PHP 8.0+) | Compiles hot bytecode paths to native machine code at runtime via LLVM | Up to 3× for CPU-bound work |
+| **Preloading** (PHP 7.4+) | Loads framework classes into memory at server start — zero file I/O per request | Eliminates ~1000 file reads per Laravel request |
+| **Native C extensions** | Database drivers (MySQLnd, PDO), JSON encoding, string ops — all run as compiled C, not interpreted PHP | Near-native speed for I/O and data processing |
+| **Fibers** (PHP 8.1+) | Lightweight concurrency primitives (used by Laravel Octane) — C-level coroutine switching | High concurrency without threads |
+
+#### Benchmarks: Laravel with PHP's C Optimizations
+
+| Configuration | Requests/sec | Notes |
+|---|---|---|
+| Laravel + PHP-FPM (OPcache) | ~500–1,500 | Standard production setup |
+| Laravel + Octane (Swoole) | ~3,000–8,000 | Application kept in memory between requests, C-based Swoole event loop |
+| Laravel + Octane (FrankenPHP) | ~2,000–6,000 | Written in Go, embeds PHP; HTTP/3, early hints |
+| Static site (current) | N/A (CDN-served) | No server processing; CDN latency only |
+
+**Key point:** With OPcache + JIT + Octane, Laravel running on PHP's upstream C engine handles thousands of requests per second — more than sufficient for an e-commerce catalog site. The C engine does the heavy lifting; PHP userland code is a thin orchestration layer on top.
+
+#### Maximizing PHP's C Engine Performance
+
+The migration plan includes these optimizations by default:
+
+1. **OPcache enabled** with `opcache.jit=tracing` for JIT compilation
+2. **Preloading** configured to load Laravel's framework classes at startup
+3. **Laravel Octane** (Swoole or FrankenPHP) to keep the application in memory
+4. **Native C extensions** for all I/O: php-redis, MySQLnd, php-curl
+5. **Redis** for session/cache (C-based server + C PHP extension = minimal overhead)
 
 ### Directory Structure (Target)
 
@@ -571,122 +631,7 @@ class AiService
 
 ---
 
-## 8. C Backend Integration
-
-If an existing high-performance C backend is in use, the microservice architecture is designed to accommodate it without compromise on speed.
-
-### How It Works
-
-Laravel does **not replace** the C backend — it sits alongside it. The architecture uses the same service-mesh pattern as the Python AI service: Laravel handles HTTP routing, authentication, templates, and database access, while **performance-critical workloads stay in C** and are called via internal service communication.
-
-```
-  Browser Request
-       │
-       ▼
-┌─────────────┐
-│    Nginx    │  Routes by URL path
-└──────┬──────┘
-       │
-  ┌────┴─────────────────────────┐
-  │                              │
-  ▼                              ▼
-┌──────────┐  internal call  ┌──────────────┐
-│  Laravel  │ ─────────────▶ │  C Backend   │
-│  (PHP)    │ ◀───────────── │  (native)    │
-└──────────┘   < 1ms RTT     └──────────────┘
-  │  Handles:                    Handles:
-  │  • Auth, sessions            • Bulk data processing
-  │  • Templates (Inertia)       • Compute-heavy operations
-  │  • Form validation           • Real-time data feeds
-  │  • i18n, SEO metadata        • Custom algorithms
-  │  • Admin panels
-  └──▶ Returns HTML/JSON to browser
-```
-
-### Communication Options (Fastest → Simplest)
-
-| Method | Latency | Best For |
-|---|---|---|
-| **Unix domain socket** | ~0.05ms | Co-located services on same server |
-| **Shared memory (mmap)** | ~0.01ms | Ultra-low-latency data exchange |
-| **HTTP over localhost** | ~0.2–1ms | Simple REST/JSON interface, easiest to implement |
-| **gRPC** | ~0.1–0.5ms | Typed contracts, streaming, binary protocol |
-| **FFI (PHP calling C directly)** | ~0.001ms | Tightest integration — PHP's FFI extension calls `.so` libraries |
-
-### Performance Comparison
-
-| Operation | C Backend | Laravel (PHP) | Strategy |
-|---|---|---|---|
-| Compute-heavy processing | **Native speed** | ~10–50× slower | Keep in C |
-| HTTP request handling | Fast but manual | Fast (OPcache, JIT) | Laravel routes, C computes |
-| Database queries | Manual SQL | Eloquent ORM | Laravel for CRUD, C for batch |
-| Template rendering | Not applicable | Blade/Inertia SSR | Laravel handles all rendering |
-| Auth / sessions / CSRF | Manual implementation | Built-in | Laravel handles all security |
-
-### Laravel ↔ C Backend Service (`app/Services/CBackendService.php`)
-
-```php
-class CBackendService
-{
-    public function __construct(
-        private HttpClient $http,
-        private string $baseUrl,  // e.g. 'http://localhost:9000' or 'unix:///var/run/c-backend.sock'
-    ) {}
-
-    /**
-     * Delegate compute-heavy work to the C backend.
-     * Laravel handles auth/validation; C handles the computation.
-     */
-    public function process(string $endpoint, array $data): array
-    {
-        $response = $this->http
-            ->timeout(5)
-            ->retry(2, 100)
-            ->post("{$this->baseUrl}/{$endpoint}", $data);
-
-        return $response->json();
-    }
-}
-```
-
-### Integration Pattern
-
-1. **Laravel receives the web request** — handles auth, CSRF, validation, session
-2. **Laravel calls C backend** for any compute-intensive operation via internal HTTP or socket
-3. **C backend processes and returns** results (JSON, binary, or Protocol Buffers)
-4. **Laravel formats the response** — passes data to Inertia/React for rendering or returns JSON API
-
-This means:
-- **C backend speed is fully preserved** — no PHP overhead on the critical compute path
-- **Laravel adds features C doesn't have** — auth, admin panels, i18n, Inertia SSR, form validation, CSRF protection
-- **Each service scales independently** — scale C backend separately from Laravel workers
-- **Zero rewrite of C code required** — just expose endpoints and Laravel calls them
-
-### Docker Compose Integration
-
-```yaml
-services:
-  app:
-    build: .                          # Laravel
-    depends_on: [mysql, redis, c-backend, ai-service]
-
-  c-backend:
-    build: ./c-backend                # Your existing C service
-    ports: ["9000:9000"]              # Internal only (not exposed to internet)
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'                 # Dedicate CPU cores for C performance
-          memory: 512M
-
-  ai-service:
-    build: ./ai-service               # Python AI
-    ports: ["8001:8001"]
-```
-
----
-
-## 9. Infrastructure & Deployment
+## 8. Infrastructure & Deployment
 
 ### Development Environment
 
@@ -751,7 +696,7 @@ Push to main
 
 ---
 
-## 10. Data Migration
+## 9. Data Migration
 
 ### Products (`products.json` → Database)
 
@@ -805,7 +750,7 @@ lang/fr/pages.php   # ['home.hero_title' => 'Artisanat Premium', ...]
 
 ---
 
-## 11. Risk Assessment
+## 10. Risk Assessment
 
 ### High Risk
 
@@ -833,7 +778,7 @@ lang/fr/pages.php   # ['home.hero_title' => 'Artisanat Premium', ...]
 
 ---
 
-## 12. Success Criteria
+## 11. Success Criteria
 
 ### Technical Metrics
 
@@ -868,7 +813,7 @@ lang/fr/pages.php   # ['home.hero_title' => 'Artisanat Premium', ...]
 
 ---
 
-## 13. Timeline & Milestones
+## 12. Timeline & Milestones
 
 ### Overview (22 Weeks)
 
