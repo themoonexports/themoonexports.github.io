@@ -186,6 +186,12 @@ High-level project status and production deployment readiness.
   - Uses [modern-c-web-library](https://github.com/kamrankhan78694/modern-c-web-library) (tracks `main` branch)
   - *See also: [Backend README](../backend/README.md)*
 
+- **[Backend Next Phase Plan](BACKEND_NEXT_PHASE_PLAN.md)** ⭐ *New*
+  - First-principles engineering plan for Milestones 3–6
+  - Authentication, persistence, production hardening, advanced features
+  - Sprint-level task breakdown with verification criteria
+  - Security threat model and QA pipeline
+
 ### 🛠️ Development & Operations
 
 - **[Testing Plan](TESTING_PLAN.md)**
