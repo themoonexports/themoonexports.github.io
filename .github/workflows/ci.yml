@@ -147,7 +147,10 @@ jobs:
         run: |
           echo "Checking for dead legacy JS files..."
           FAILED=0
-          for f in js/forms.js js/main.js js/application.js js/npm.js js/utils.js; do
+          for f in js/forms.js js/main.js js/application.js js/npm.js js/utils.js \
+                   de/js/application.js de/js/npm.js \
+                   fr/js/application.js fr/js/npm.js \
+                   instago/js/application.js instago/js/npm.js; do
             if [ -f "$f" ]; then
               echo "FAIL: $f should be deleted (zero callers)"
               FAILED=1
@@ -157,6 +160,23 @@ jobs:
             exit 1
           fi
           echo "OK: No dead legacy JS files"
+
+      - name: Check locale CSS parity
+        run: |
+          echo "Checking locale CSS parity..."
+          FAILED=0
+          for locale in de fr; do
+            for css in $(grep -oP 'href="css/[^"]+\.css"' "${locale}/index.html" 2>/dev/null | sed 's/href="//;s/"//'); do
+              if [ ! -f "${locale}/${css}" ]; then
+                echo "FAIL: ${locale}/${css} referenced in ${locale}/index.html but missing"
+                FAILED=1
+              fi
+            done
+          done
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "OK: All locale CSS files present"
 
       - name: Check data-react mount parity (EN vs DE/FR)
         run: |
